@@ -1,0 +1,24 @@
+##################
+###### TODO ######
+##################
+
+1. Få igång grafikbiblioteket och kunna rita ut texturer.
+
+2. Lägga till olika grafikfunktioner som kommer behövas:
+   - drawTexture(...)
+   - drawAnimation(...)
+   - drawText(...)
+
+3. Hantera inmatning från mus och tangentbord. (en global klass??)
+   - getPressedKey(...)
+   - getMousePos(...)
+
+4. Börja på "Objekt" hierakin.
+
+5. Lagring av alla Objekt, i någon form av level-klass
+
+6. Lägg till player och enkel styrning.
+
+7. Fysikmotorn
+   - Hoppa
+   - Kollision
