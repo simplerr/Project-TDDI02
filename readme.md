@@ -1,3 +1,4 @@
-instol gentoo evree DAY
+instol gentoo evree DAY << endl;
 readme
 mysigt
+
