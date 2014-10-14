@@ -98,7 +98,7 @@ void Player::moveLeft()
 
 void Player::moveUp()
 {
-    setY(getY()-7);
+    setY(getY()-15);
     clipFrame = 17;
 }
 
@@ -133,3 +133,5 @@ bool Player::Collision(vector<Object> v)
     }
     return false;
 }
+
+

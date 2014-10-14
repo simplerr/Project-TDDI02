@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
         vector<Object> collissionObjects;
         collissionObjects.push_back(box);
         collissionObjects.push_back(box2);
-        
+        SDL_Rect playerRec;
         while(!exit)
         {
             SDL_Event e;
@@ -95,31 +95,33 @@ int main(int argc, char* argv[])
                 handleEvent(e, exit);
             }
             
-            const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+            playerRec = player.getTextureRec();
             
-            if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
-            {
-                     player.moveRight();
-                     player.moveUp();
-            }
-            else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
-            {
-                    player.moveLeft();
-                    player.moveUp();
-            }
-            else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
-            {
-                    player.moveLeft();
-            }
-            else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
-            {
-                    player.moveRight();
-            }
-            else if( currentKeyStates[ SDL_SCANCODE_UP ] )
-            {
-                    player.moveUp();
-            }else
-                player.moveStand();
+                const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+                
+                if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
+                {
+                         player.moveRight();
+                         player.moveUp();
+                }
+                else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
+                {
+                        player.moveLeft();
+                        player.moveUp();
+                }
+                else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
+                {
+                        player.moveLeft();
+                }
+                else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
+                {
+                        player.moveRight();
+                }
+                else if( currentKeyStates[ SDL_SCANCODE_UP ] )
+                {
+                        player.moveUp();
+                }else
+                    player.moveStand();
             
 
             
@@ -131,21 +133,24 @@ int main(int argc, char* argv[])
             {
                 collissionObjects[i].render();
             }
-            player.render();
+            
             if (!(player.Collision(collissionObjects)))
             {
-                player.setY(player.getY()+2);
+                player.setY(player.getY()+5);
             }
-           
-           
-           
-           /* if (player.getY() > SCREEN_HEIGHT-50)
+            /*else
             {
-               player.setY(SCREEN_HEIGHT-50);
-            }else
-            {
-                player.setY(player.getY()+2);
+                player.setX(playerRec.x);
+                player.setY(playerRec.y);
             }*/
+           
+           
+           player.render();
+            if (player.getY() > SCREEN_HEIGHT)
+            {
+               player.setY(0);
+               player.setX(SCREEN_WIDTH/2);
+            }
             //Update screen
             SDL_RenderPresent( renderer );
             SDL_Delay(1000/60);
