@@ -5,12 +5,13 @@
 #include <string>
 #include <vector>
 using namespace std;
-
+int SCREEN_WIDTH = 600;
+int SCREEN_HEIGHT = 400;
+    
 bool init(SDL_Window*& window, SDL_Renderer*& renderer)
 {
     bool success{true};
-    int SCREEN_WIDTH = 600;
-    int SCREEN_HEIGHT = 400;
+
     
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -80,8 +81,8 @@ int main(int argc, char* argv[])
     {
         Object sky{0,0,600,400,renderer,"images/sky.png"};
         Player player(50,50,46,50,renderer,"images/player/player-spritemap-v9-redpants.png", "images/player/player-spritemap-v9-redpantsH.png");
-        Object box(30,170, 100, 50, renderer,"images/block.png");
-        Object box2(200,170, 100, 50, renderer,"images/block.png");
+        Object box(100,170, 100, 50, renderer,"images/block.png");
+        Object box2(400,170, 100, 50, renderer,"images/block.png");
         vector<Object> collissionObjects;
         collissionObjects.push_back(box);
         collissionObjects.push_back(box2);
@@ -131,7 +132,20 @@ int main(int argc, char* argv[])
                 collissionObjects[i].render();
             }
             player.render();
-            player.Collision(collissionObjects); //Vector om många
+            if (!(player.Collision(collissionObjects)))
+            {
+                player.setY(player.getY()+2);
+            }
+           
+           
+           
+           /* if (player.getY() > SCREEN_HEIGHT-50)
+            {
+               player.setY(SCREEN_HEIGHT-50);
+            }else
+            {
+                player.setY(player.getY()+2);
+            }*/
             //Update screen
             SDL_RenderPresent( renderer );
             SDL_Delay(1000/60);

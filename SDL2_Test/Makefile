@@ -15,4 +15,4 @@ clean:
 	@ \rm -rf *.o *.gch core
 
 zap: clean
-	@ \rm -f game *~
+	@ \rm -f main *~

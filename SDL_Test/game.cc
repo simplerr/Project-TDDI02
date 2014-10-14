@@ -84,6 +84,7 @@ int main( int argc, char* args[] )
     }
     
     Objects sky{ 0, 0, "assets/sky.png", screen};
+    //Objects tree{ 0, 0, "assets/tree.png", screen};
     
     Player player{200, 200, "assets/player/player-spritemap-v9-redpants.png", screen, "assets/player/player-spritemap-v9-redpantsH.png", 46, 50, 7};
     
@@ -112,7 +113,8 @@ int main( int argc, char* args[] )
                 sky.render();
             }
         }
-        
+
+        //tree.render();
         if (player.getX() <= 0)
             player.setX(0);
         else if(player.getX() >= screenWidth-50)
@@ -120,7 +122,7 @@ int main( int argc, char* args[] )
 
         if (jump > 0 || player.getY() < screenHeight-50)
 	  {
-	    player.setFrame(6);
+	    player.setFrame(7);
 	    if(jump > 0)
 	      {
 		jump -= 2;

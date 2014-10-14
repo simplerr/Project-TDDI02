@@ -113,22 +113,23 @@ void Player::addFrameForward()
         clipFrame = 25;
 }
 
-void Player::Collision(vector<Object> v)
+bool Player::Collision(vector<Object> v)
 {
     
     SDL_Rect A = getTextureRec();
     SDL_Rect B;
-    for (int i{}; i < v.size(); ++i)
+    for (int i{0}; i < v.size(); ++i)
     {
         B = v[i].getTextureRec();
-        if (A.y+A.w > B.y && A.x+A.h > B.x && A.x < B.x+B.h && A.y < B.y+B.w )
-        {
-           ;// break;
-        }else 
-        {
-            setY(getY()+2);
-        } 
+        
+            //  A.y+A.h > B.y - Uppifrån
+           // A.x+A.w > B.x - från vänster
+           // A.x < B.x+B.w -höger
+           //A.y < B.y+B.h - Underifrån 
+           if ((A.x < B.x+B.w && A.x+A.w > B.x && A.y+A.h > B.y && A.y < B.y+B.h))
+            {
+                return true;
+            }
     }
-    if (A.y+A.h >= 400)
-        setY(400);
+    return false;
 }
