@@ -134,7 +134,7 @@ int main(int argc, char* argv[])
                 collissionObjects[i].render();
             }
             
-            if (!(player.Collision(collissionObjects)))
+            if (!(player.collisionDetected(collissionObjects)))
             {
                 player.setY(player.getY()+5);
             }

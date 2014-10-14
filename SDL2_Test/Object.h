@@ -58,7 +58,7 @@ public:
     void moveStand();
     void addFrameForward();
     
-    bool Collision(vector<Object>);
+    bool collisionDetected(vector<Object>);
     
 private:
     SDL_Texture* textureRight;

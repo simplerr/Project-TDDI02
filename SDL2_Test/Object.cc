@@ -113,7 +113,7 @@ void Player::addFrameForward()
         clipFrame = 25;
 }
 
-bool Player::Collision(vector<Object> v)
+bool Player::collisionDetected(vector<Object> v)
 {
     
     SDL_Rect A = getTextureRec();
