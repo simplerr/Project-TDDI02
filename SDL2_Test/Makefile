@@ -9,7 +9,7 @@ all: main.cc Object.o
 	$(CCC) -o main main.cc Object.o $(LFLAGS)
 
 Object.o: Object.cc Object.h
-	$(CCC) -c Object.cc Object.h $(LFLAGS)
+	$(CCC) -c Object.cc $(LFLAGS)
 
 clean:
 	@ \rm -rf *.o *.gch core

@@ -83,9 +83,9 @@ int main(int argc, char* argv[])
         Player player(50,50,46,50,renderer,"images/player/player-spritemap-v9-redpants.png", "images/player/player-spritemap-v9-redpantsH.png");
         Object box(100,170, 100, 50, renderer,"images/block.png");
         Object box2(400,170, 100, 50, renderer,"images/block.png");
-        vector<Object> collissionObjects;
-        collissionObjects.push_back(box);
-        collissionObjects.push_back(box2);
+        vector<Object> objectList;
+        objectList.push_back(box);
+        objectList.push_back(box2);
         SDL_Rect playerRec;
         while(!exit)
         {
@@ -97,47 +97,23 @@ int main(int argc, char* argv[])
             
             playerRec = player.getTextureRec();
             
-                const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-                
-                if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
-                {
-                         player.moveRight();
-                         player.moveUp();
-                }
-                else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
-                {
-                        player.moveLeft();
-                        player.moveUp();
-                }
-                else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
-                {
-                        player.moveLeft();
-                }
-                else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
-                {
-                        player.moveRight();
-                }
-                else if( currentKeyStates[ SDL_SCANCODE_UP ] )
-                {
-                        player.moveUp();
-                }else
-                    player.moveStand();
-            
+            player.move();
 
             
             SDL_RenderClear(renderer);
             //Clear screen
             sky.render();
             //player.Collision(box2);
-            for (int i{}; i < collissionObjects.size(); ++i)
+            
+            for (int i{}; i < objectList.size(); ++i) //Render all objects in objectList
             {
-                collissionObjects[i].render();
+                objectList[i].render();
             }
             
-            if (!(player.collisionDetected(collissionObjects)))
+            /*if (!(player.collisionDetected(collissionObjects)))
             {
                 player.setY(player.getY()+5);
-            }
+            }*/
             /*else
             {
                 player.setX(playerRec.x);

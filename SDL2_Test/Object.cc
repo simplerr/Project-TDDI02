@@ -84,22 +84,24 @@ void Player::render()
 
 void Player::moveRight()
 {
-    setX(getX()+5);
+    setX(getX()+moveSpeed);
     playerDir = true;
     addFrameForward();
 }
 
 void Player::moveLeft()
 {
-    setX(getX()-5);
+    setX(getX()-moveSpeed);
     playerDir = false;
     addFrameForward();
 }
 
 void Player::moveUp()
 {
-    setY(getY()-15);
-    clipFrame = 17;
+    if (jumpCounter <= 0)
+    {
+        jumpCounter = jumpHeight;
+    }
 }
 
 void Player::moveStand()
@@ -113,6 +115,7 @@ void Player::addFrameForward()
         clipFrame = 25;
 }
 
+/*
 bool Player::collisionDetected(vector<Object> v)
 {
     
@@ -133,5 +136,49 @@ bool Player::collisionDetected(vector<Object> v)
     }
     return false;
 }
+*/
 
+void Player::move()
+{
+    const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+    
+    if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
+    {
+             moveRight();
+             moveUp();
+    }
+    else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
+    {
+            moveLeft();
+            moveUp();
+    }
+    else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
+    {
+            moveLeft();
+    }
+    else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
+    {
+            moveRight();
+    }
+    else if( currentKeyStates[ SDL_SCANCODE_UP ] )
+    {
+            moveUp();
+    }else
+    {
+            moveStand();
+    }
+    
+    if (jumpCounter >= jumpHeight/2) //Jump active
+    {
+            setY(getY()-moveSpeed);
+            jumpCounter -= moveSpeed;
+            clipFrame = 17;
+    }else if (jumpCounter > 0 && jumpCounter <= jumpHeight/2)
+    {
+        jumpCounter -= moveSpeed;
+        clipFrame = 17;
+    }else
+        setY(getY()+moveSpeed);
+    
+}
 
