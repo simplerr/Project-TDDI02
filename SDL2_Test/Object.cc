@@ -145,11 +145,11 @@ void Player::move()
     if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
     {
              moveRight();
-             moveUp();s
+             moveUp();
     }
     else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
     {
-            moveLeft();d
+            moveLeft();
             moveUp();
     }
     else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
