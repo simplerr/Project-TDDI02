@@ -67,8 +67,9 @@ private:
     SDL_Rect rectClipsLeft[32];
     int playerDir{true};
     int clipFrame{};
-    int moveSpeed{1};
-    int jumpHeight{60};
+    int moveSpeed{2};
+    float fallSpeed{4};
+    int jumpHeight{100};
     int jumpCounter{};
     
     void setupClips();

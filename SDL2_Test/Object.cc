@@ -169,16 +169,16 @@ void Player::move()
     }
     
     if (jumpCounter >= jumpHeight/2) //Jump active
-    {
-            setY(getY()-moveSpeed);
-            jumpCounter -= moveSpeed;
-            clipFrame = 17;
-    }else if (jumpCounter > 0 && jumpCounter <= jumpHeight/2)
-    {
-        jumpCounter -= moveSpeed;
+      {
+	setY(getY()-fallSpeed);
+	jumpCounter -= fallSpeed;
+	clipFrame = 17;
+      }else if (jumpCounter > 0 && jumpCounter <= jumpHeight/2)
+      {
+        jumpCounter -= fallSpeed;
         clipFrame = 17;
-    }else
-        setY(getY()+moveSpeed);
+      }else
+      setY(getY()+fallSpeed);
     
 }
 
