@@ -1,3 +1,4 @@
+#pragma once
 #include "BaseState.h"
 
 class Renderer;
@@ -7,8 +8,8 @@ class Texture;
 class PlayState : public BaseState
 {
 public:
-    PlayState() {};
-    ~PlayState() {};
+    PlayState();
+    ~PlayState();
 
     void init();
     void cleanup();

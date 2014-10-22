@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "PlayState.h"
+#include "Renderer.h"
+#include "BaseState.h"
 
 Game::Game()
 {

@@ -1,6 +1,7 @@
 #pragma once
-#include "Vec2,h"
+#include "Vec2.h"
 
+class Renderer;
 class Texture;
 
 class Object

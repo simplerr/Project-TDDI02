@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include "Vec2.h"
 
 class Texture;
 

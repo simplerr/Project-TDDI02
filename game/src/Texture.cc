@@ -9,12 +9,12 @@ Texture::Texture(SDL_Texture* texture)
     //mFilename = filename;
 }
 
-string getFilename()
+string Texture::getFilename()
 {
     return mFilename;
 }
 
-SDL_Texture* getData()
+SDL_Texture* Texture::getData()
 {
     return mTexture;
 }

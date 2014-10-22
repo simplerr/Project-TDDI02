@@ -1,5 +1,7 @@
+#include <SDL2/SDL.h>
 #include "Game.h"
 #include "PlayState.h"
+#include <iostream>
 
 void handleEvent(SDL_Event e, bool& exit)
 {
@@ -13,7 +15,7 @@ int main(int argc, char* argv[])
 
     if(!game->initWindow())
     {
-	cerr << "Game::initWindow() failed" << endl;
+	std::cerr << "Game::initWindow() failed" << std::endl;
 	return 1;
     }
 

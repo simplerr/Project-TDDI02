@@ -1,9 +1,9 @@
 #include "Level.h"
 #include "Object.h"
 
-Level::Level()
+Level::Level(string filename)
 {
-
+    loadLevel(filename);
 }
 
 Level::~Level()
@@ -22,13 +22,13 @@ void Level::update(float dt)
 	mObjects[i]->update(dt);
 }
 
-void draw(Renderer* renderer)
+void Level::draw(Renderer* renderer)
 {
     for(int i = 0; i < mObjects.size(); i++)
 	mObjects[i]->draw(renderer);
 }
 
-Object* getObjectAt(float x, float y)
+Object* Level::getObjectAt(float x, float y)
 {
     return nullptr;
 }

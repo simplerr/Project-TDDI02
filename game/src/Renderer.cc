@@ -1,4 +1,8 @@
+#include <iostream>
+#include <SDL2/SDL_image.h>
 #include "Renderer.h"
+#include "Texture.h"
+using namespace std;
 
 Renderer::Renderer()
 {
@@ -9,37 +13,40 @@ Renderer::Renderer()
 Renderer::~Renderer()
 {
     // cleanup SDL
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    window = NULL;
-    renderer = NULL;
+    SDL_DestroyRenderer(mRenderer);
+    SDL_DestroyWindow(mWindow);
+    mWindow = NULL;
+    mRenderer = NULL;
     SDL_QUIT;
 }
 
 bool Renderer::initSDL()
 {
-    bool failed = false;
+    bool success = true;
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
     {
 	cerr << "ERROR: Kunde inte initiera SDL\n";
-	failed = true;
+        success = false;
     }
     else
     {
+         int SCREEN_WIDTH = 640;
+         int SCREEN_HEIGHT = 480;
+
 	 // create window
         mWindow = SDL_CreateWindow("Rockblock II", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if(mWindow == NULL)
         {
             cerr << "ERROR: Kunde inte skapa fönster\n";
-            failed = true;;
+            success = false;;
         }else
         {
-            mRenderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
+            mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED );
             if(mRenderer == NULL)
             {
                 cerr << "ERROR: Kunde inte skapa renderer\n" << SDL_GetError();
-                failed = true;
+		success = false;
             }else
             {
                 // initialize renderer color
@@ -50,13 +57,13 @@ bool Renderer::initSDL()
                 if( !( IMG_Init( imgFlags ) & imgFlags ) )
                 {
                     printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-                    failed = true;
+                    success = false;
                 }
             }
         }
     }
 
-    return failed;
+    return success;
 }
 
 void Renderer::beginScene()
@@ -72,7 +79,10 @@ void Renderer::endScene()
 
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture)
 {
-    // todo
+SDL_Rect sdlRect{pos.x, pos.y, width, height};
+
+
+    SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &sdlRect);
 }
 
 Texture* Renderer::loadTexture(std::string filename)
@@ -83,14 +93,14 @@ Texture* Renderer::loadTexture(std::string filename)
     SDL_Surface* tmpSurface = IMG_Load(filename.c_str() );
     if(tmpSurface == NULL)
     {
-        cerr << "ERROR: Kunde inte öppna fil: " << str << IMG_GetError() << endl;
+        cerr << "ERROR: Kunde inte öppna fil: " << filename << IMG_GetError() << endl;
     }else
     {
         //Convertera surface till screen format
         newTexture = SDL_CreateTextureFromSurface(mRenderer, tmpSurface);
         if(newTexture == NULL)
         {
-            cerr << "ERROR: Misslyckades konvertera fil: " << str << SDL_GetError() << endl;
+            cerr << "ERROR: Misslyckades konvertera fil: " << filename << SDL_GetError() << endl;
         }
         SDL_FreeSurface(tmpSurface);
     }

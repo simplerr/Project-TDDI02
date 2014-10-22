@@ -20,7 +20,7 @@ public:
     void draw();
 
 private:
-    BaseState* mBaseState;
+    BaseState* mGameState;
     Renderer* mRenderer;
     Input* mInput;
 };

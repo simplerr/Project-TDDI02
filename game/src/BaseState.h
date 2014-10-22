@@ -13,4 +13,4 @@ public:
     virtual void update(float dt) = 0;
     virtual void draw(Renderer* renderer) = 0;
 private:
-}
+};

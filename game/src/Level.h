@@ -1,14 +1,16 @@
 #pragma once
 
 #include <string>
+#include <vector>
 using namespace std;
 
 class Object;
+class Renderer;
 
 class Level
 {
 public:
-  Level();
+  Level(string filename);
   ~Level();
 
   bool loadLevel(string filename);
@@ -20,6 +22,6 @@ public:
  
 private:
   vector<Object*> mObjects;
-}
+};
 
 
