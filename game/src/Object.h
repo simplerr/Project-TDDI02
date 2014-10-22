@@ -18,6 +18,10 @@ public:
     virtual void handleCollision(Object* collider) = 0;
     
     // add get/set
+    Vec2 getPosition();
+
+    void setPosition(Vec2 pos);
+    void setPosition(float x, float y);
 private:
     Texture* mTexture;
     Vec2 mPosition;

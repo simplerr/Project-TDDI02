@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Object.h"
+#include "Player.h"
 
 Level::Level(string filename)
 {
@@ -14,6 +15,13 @@ Level::~Level()
 void Level::addObject(Object* object)
 {
     mObjects.push_back(object);
+}
+
+Player* Level::addPlayer(int x, int y)
+{
+    Player* player = new Player(Vec2(x, y), 64, 64, "../imgs/player.jpg");
+    addObject(player);
+    return player;
 }
 
 bool Level::loadLevel(string filename)

@@ -24,3 +24,18 @@ void Object::draw(Renderer* renderer)
     else
 	mTexture = renderer->loadTexture(mFilename);
 }
+
+void Object::setPosition(Vec2 pos)
+{
+    mPosition = pos;
+}
+
+void Object::setPosition(float x, float y)
+{
+    mPosition = Vec2(x, y);
+}
+
+Vec2 Object::getPosition()
+{
+    return mPosition;
+}

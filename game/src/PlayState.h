@@ -3,7 +3,9 @@
 
 class Renderer;
 class Level;
+class Object;
 class Texture;
+class Player;
 
 class PlayState : public BaseState
 {
@@ -17,5 +19,6 @@ public:
     void draw(Renderer* renderer);
 private:
     Level* mLevel;
+    Player* mPlayer;
     Texture* mTestBkgd;
 };

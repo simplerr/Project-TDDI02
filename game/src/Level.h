@@ -6,6 +6,7 @@ using namespace std;
 
 class Object;
 class Renderer;
+class Player;
 
 class Level
 {
@@ -14,6 +15,8 @@ public:
   ~Level();
 
   void addObject(Object* object);
+  
+  Player* addPlayer(int x, int y);
 
   bool loadLevel(string filename);
   void update(float dt);
