@@ -1,6 +1,7 @@
 #include "PlayState.h"
 #include "Level.h"
 #include "Renderer.h"
+#include "Platform.h"
 
 PlayState::PlayState()
 {
@@ -15,6 +16,10 @@ PlayState::~PlayState()
 void PlayState::init()
 {
     mLevel = new Level("test.txt");
+
+    mLevel->addObject(new Platform(Vec2(100, 100), 100, 100, "../imgs/platform.jpg"));
+    mLevel->addObject(new Platform(Vec2(400, 100), 200, 100, "../imgs/platform.jpg"));
+    mLevel->addObject(new Platform(Vec2(200, 300), 100, 200, "../imgs/platform.jpg"));
 }
 
 void PlayState::cleanup()

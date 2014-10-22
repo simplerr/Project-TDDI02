@@ -11,6 +11,11 @@ Level::~Level()
 
 }
 
+void Level::addObject(Object* object)
+{
+    mObjects.push_back(object);
+}
+
 bool Level::loadLevel(string filename)
 {
     return true;

@@ -13,6 +13,8 @@ public:
   Level(string filename);
   ~Level();
 
+  void addObject(Object* object);
+
   bool loadLevel(string filename);
   void update(float dt);
   void draw(Renderer* renderer);
