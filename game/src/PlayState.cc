@@ -36,7 +36,7 @@ void PlayState::draw(Renderer* renderer)
 {
     // draw test bkgd
     if(mTestBkgd != nullptr)
-	renderer->drawTexture(Vec2(0, 0), 640, 480, mTestBkgd);
+	renderer->drawTexture(Vec2(0, 0), 1024, 768, mTestBkgd);
     else
 	mTestBkgd = renderer->loadTexture("../imgs/skygrad.jpg");
 
