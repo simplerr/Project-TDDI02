@@ -1,7 +1,5 @@
 #include "Object.h"
 
-
-
 void System::move( SDL_Rect& B )
 {
     //Move the dot left or right

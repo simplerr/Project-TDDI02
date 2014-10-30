@@ -73,8 +73,14 @@ private:
     SDL_Rect rectClipsLeft[32];
     int playerDir{true};
     int clipFrame{};
+<<<<<<< HEAD
     int moveSpeed{3};
     int jumpHeight{120};
+=======
+    int moveSpeed{2};
+    float fallSpeed{4};
+    int jumpHeight{100};
+>>>>>>> 9aede0badb0583606a7bc64eff4630fd9eb44754
     int jumpCounter{};
     int velX;
     int velY;
