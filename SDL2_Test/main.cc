@@ -79,6 +79,7 @@ int main(int argc, char* argv[])
         return 1;
     }else
     {
+        SDL_Event e;
         Object sky{0,0,600,400,renderer,"images/sky.png"};
         Player player(50,50,46,50,renderer,"images/player/player-spritemap-v9-redpants.png", "images/player/player-spritemap-v9-redpantsH.png");
         Object box(100,170, 100, 50, renderer,"images/block.png");
@@ -89,47 +90,37 @@ int main(int argc, char* argv[])
         SDL_Rect playerRec;
         while(!exit)
         {
-            SDL_Event e;
             while(SDL_PollEvent(&e) != 0)
             {
-                handleEvent(e, exit);
+                if(e.type == SDL_QUIT)
+                    exit = true;
+                    
+                player.handleEvent(e);
             }
-            
-            playerRec = player.getTextureRec();
-            
-            player.move();
-
-            
-            SDL_RenderClear(renderer);
             //Clear screen
+            SDL_RenderClear(renderer);
             sky.render();
-            //player.Collision(box2);
             
+            //player.systemRun(objectList);
+            SDL_Rect B = box.getTextureRec();
+            player.move(B);
             for (int i{}; i < objectList.size(); ++i) //Render all objects in objectList
             {
+                //SDL_Rect B = objectList[i].getTextureRec();
+                //player.move(B);
+                //player.move(* objectList[i].getTextureRec());
                 objectList[i].render();
             }
             
-            /*if (!(player.collisionDetected(collissionObjects)))
-            {
-                player.setY(player.getY()+5);
-            }*/
-            /*else
-            {
-                player.setX(playerRec.x);
-                player.setY(playerRec.y);
-            }*/
-           
-           
-           player.render();
-            if (player.getY() > SCREEN_HEIGHT)
+            player.render();
+            /*if (player.getY() > SCREEN_HEIGHT)
             {
                player.setY(0);
                player.setX(SCREEN_WIDTH/2);
-            }
+            }*/
             //Update screen
             SDL_RenderPresent( renderer );
-            SDL_Delay(1000/60);
+            //SDL_Delay(1000/60);
 
         }
     }

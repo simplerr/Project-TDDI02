@@ -66,7 +66,7 @@ class Dot
 		static const int DOT_HEIGHT = 20;
 
 		//Maximum axis velocity of the dot
-		static const int DOT_VEL = 10;
+		static const int DOT_VEL = 4;
 
 		//Initializes the variables
 		Dot();
@@ -396,7 +396,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load press texture
-	if( !gDotTexture.loadFromFile( "27_collision_detection/dot.bmp" ) )
+	if( !gDotTexture.loadFromFile( "dot.bmp" ) )
 	{
 		printf( "Failed to load dot texture!\n" );
 		success = false;

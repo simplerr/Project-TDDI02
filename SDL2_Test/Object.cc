@@ -91,17 +91,14 @@ void Player::moveRight()
 
 void Player::moveLeft()
 {
-    setX(getX()-moveSpeed);
+    velX -= moveSpeed;
     playerDir = false;
     addFrameForward();
 }
 
 void Player::moveUp()
 {
-    if (jumpCounter <= 0)
-    {
-        jumpCounter = jumpHeight;
-    }
+    ;
 }
 
 void Player::moveStand()
@@ -138,47 +135,107 @@ bool Player::collisionDetected(vector<Object> v)
 }
 */
 
-void Player::move()
+void Player::handleEvent( SDL_Event& e )
 {
-    const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+    //If a key was pressed
+	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: velY -= moveSpeed; break;
+            case SDLK_DOWN: velY += moveSpeed; break;
+            case SDLK_LEFT: moveLeft(); break;
+            case SDLK_RIGHT: velX += moveSpeed; break;
+        }
+    }
+    //If a key was released
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: velY += moveSpeed; break;
+            case SDLK_DOWN: velY -= moveSpeed; break;
+            case SDLK_LEFT: velX += moveSpeed; break;
+            case SDLK_RIGHT: velX -= moveSpeed; break;
+        }
+    }
+}
+
+
+
+
+void Player::move( SDL_Rect& B )
+{
+    SDL_Rect* PP = getRectPointer();
+    //Move the dot left or right
+    //PP->x += velX;
+    PP->x += velX;
+	//mCollider.x = mPosX;
+        
+    //If the dot collided or went too far to the left or right
+    if( checkCollision( *PP, B ) )
+    {
+        //Move back
+        PP->x -= velX;
+		//mCollider.x = mPosX;
+    }
+
+    //Move the dot up or down
+    //PP->x += velY;
+    PP->y += velY;
+	//mCollider.y = mPosY;
     
-    if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
+    //If the dot collided or went too far up or down
+    if( (checkCollision( *PP, B )) )
     {
-             moveRight();
-             moveUp();
+        //Move back
+        PP->y -= velY;
+		//mCollider.y = mPosY;
     }
-    else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
+    velY = 0;
+    velX = 0;
+}
+
+
+bool Player::checkCollision( SDL_Rect a, SDL_Rect b )
+{
+    //The sides of the rectangles
+    int leftA, leftB;
+    int rightA, rightB;
+    int topA, topB;
+    int bottomA, bottomB;
+
+    //Calculate the sides of rect A
+    leftA = a.x;
+    rightA = a.x + a.w;
+    topA = a.y;
+    bottomA = a.y + a.h;
+
+    //Calculate the sides of rect B
+    leftB = b.x;
+    rightB = b.x + b.w;
+    topB = b.y;
+    bottomB = b.y + b.h;
+
+    //If any of the sides from A are outside of B
+    if( bottomA <= topB && topA >= bottomB && rightA <= leftB && leftA >= rightB )
     {
-            moveLeft();
-            moveUp();
+        return false;
     }
-    else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
+
+    //If none of the sides from A are outside B
+    return true;
+}
+
+void Player::systemRun(vector<Object> v)
+{
+    SDL_Rect B;
+    for (auto i : v)
     {
-            moveLeft();
+	B = i.getTextureRec();
+	move(B);
     }
-    else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
-    {
-            moveRight();
-    }
-    else if( currentKeyStates[ SDL_SCANCODE_UP ] )
-    {
-            moveUp();
-    }else
-    {
-            moveStand();
-    }
-    
-    if (jumpCounter >= jumpHeight/2) //Jump active
-    {
-            setY(getY()-moveSpeed);
-            jumpCounter -= moveSpeed;
-            clipFrame = 17;
-    }else if (jumpCounter > 0 && jumpCounter <= jumpHeight/2)
-    {
-        jumpCounter -= moveSpeed;
-        clipFrame = 17;
-    }else
-        setY(getY()+moveSpeed);
-    
 }
 

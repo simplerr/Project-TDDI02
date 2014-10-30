@@ -24,7 +24,7 @@ public:
     SDL_Texture* loadTexture(string);
         
     virtual void render();
-    
+    SDL_Rect* getRectPointer(){ return & textureRec; }
     SDL_Rect getTextureRec(){ return textureRec; }
     int getX(){ return textureRec.x; }
     int getY(){ return textureRec.y; }
@@ -34,7 +34,6 @@ public:
     SDL_Renderer* getRenderer(){ return renderer; }
     
 private:
-    
     SDL_Rect textureRec; 
     SDL_Renderer* renderer = NULL;
     SDL_Texture* texture = NULL;
@@ -49,6 +48,8 @@ public:
             textureRight = loadTexture(_strImage);
             textureLeft = loadTexture(_strImage2);
             setupClips();
+            velX = _x;
+            velY = _y;
         }
         
     void render() override;
@@ -59,6 +60,11 @@ public:
     void addFrameForward();
     void move();
     
+    void systemRun(vector<Object> v);
+    bool checkCollision( SDL_Rect a, SDL_Rect b );
+    void move( SDL_Rect& B );
+    void handleEvent( SDL_Event& e );
+    
     
 private:
     SDL_Texture* textureRight;
@@ -67,10 +73,11 @@ private:
     SDL_Rect rectClipsLeft[32];
     int playerDir{true};
     int clipFrame{};
-    int moveSpeed{1};
-    int jumpHeight{60};
+    int moveSpeed{3};
+    int jumpHeight{120};
     int jumpCounter{};
-    
+    int velX;
+    int velY;
     void setupClips();
 };
 
