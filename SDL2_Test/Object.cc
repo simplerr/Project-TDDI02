@@ -224,7 +224,6 @@ bool Player::checkCollision( SDL_Rect a, SDL_Rect b )
     {
         return false;
     }
-<<<<<<< HEAD
 
     //If none of the sides from A are outside B
     return true;
@@ -238,7 +237,6 @@ void Player::systemRun(vector<Object> v)
 	B = i.getTextureRec();
 	move(B);
     }
-=======
     
     if (jumpCounter >= jumpHeight/2) //Jump active
       {
@@ -249,9 +247,8 @@ void Player::systemRun(vector<Object> v)
       {
         jumpCounter -= fallSpeed;
         clipFrame = 17;
-      }else
+      }
+    else
       setY(getY()+fallSpeed);
-    
->>>>>>> 9aede0badb0583606a7bc64eff4630fd9eb44754
 }
 
