@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_H
+#define GAME_H
 
 class BaseState;
 class Renderer;
@@ -24,3 +25,5 @@ private:
     Renderer* mRenderer;
     Input* mInput;
 };
+
+#endif

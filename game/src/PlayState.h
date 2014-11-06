@@ -1,12 +1,15 @@
-#pragma once
+#ifndef PLAYSTATE_H
+#define PLAYSTATE_H
 #include "BaseState.h"
-
+#include "Level.h"
+#include "Texture.h"
+/*
 class Renderer;
 class Level;
 class Object;
 class Texture;
 class Player;
-
+*/ 
 class PlayState : public BaseState
 {
 public:
@@ -22,3 +25,5 @@ private:
     Player* mPlayer;
     Texture* mTestBkgd;
 };
+
+#endif

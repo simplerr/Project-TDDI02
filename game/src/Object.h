@@ -1,6 +1,9 @@
-#pragma once
+#ifndef OBJECT_H
+#define OBJECT_H
+
 #include <string>
 #include "Vec2.h"
+#include "Texture.h"
 
 using namespace std;
 
@@ -29,3 +32,5 @@ private:
     int mWidth, mHeight;
     int mId;
 };
+
+#endif

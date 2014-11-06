@@ -11,7 +11,7 @@ Game::Game()
  
 Game::~Game()
 {
-    delete mGameState;
+  //delete mGameState;
     delete mRenderer;
 }
 
@@ -27,7 +27,8 @@ void Game::changeState(BaseState* state)
     if(mGameState != nullptr)
     {
 	mGameState->cleanup();
-	delete mGameState;
+	//delete mGameState
+    mRenderer = new Renderer;;
     }
 
     // init the new one
