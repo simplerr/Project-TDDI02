@@ -5,7 +5,7 @@
 CCC	= g++ -std=c++11 -Wall -pedantic 
 LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_ttf
 
-all: main.cc Game.o PlayState.o Game.o PlayState.o Renderer.o Level.o Object.o
+all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Object.o
 	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Object.o $(LFLAGS)
 
 Game.o: Game.cc Game.h
