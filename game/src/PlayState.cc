@@ -18,7 +18,7 @@ PlayState::~PlayState()
 
 void PlayState::init()
 {
-  mLevel = new Level("test.txt");
+	mLevel = new Level("test.txt");
 
     mLevel->addObject(new Platform(Vec2(100, 600), 100, 100, "../imgs/platforms/platform.jpg"));
     mLevel->addObject(new Platform(Vec2(400, 500), 200, 100, "../imgs/platforms/platform.jpg"));
@@ -42,33 +42,39 @@ void PlayState::update(float dt)
     float speed = 2.0f;
     if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
     {
-            
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
+		mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
     {
-           
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
+		mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
     {
-	mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
+		mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
     {
-	mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
+		mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_UP ] )
     {
-	
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
     }
+	else if ( currentKeyStates[ SDL_SCANCODE_DOWN ] )
+	{
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + speed);
+	}
 }
 
 void PlayState::draw(Renderer* renderer)
 {
     // draw test bkgd
     if(mTestBkgd != nullptr)
-	renderer->drawTexture(Vec2(0, 0), 1024, 768, mTestBkgd);
+		renderer->drawTexture(Vec2(0, 0), 1024, 768, mTestBkgd);
     else
-	mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
+		mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
 
     mLevel->draw(renderer);
 }
