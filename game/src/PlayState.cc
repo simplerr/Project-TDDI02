@@ -20,9 +20,9 @@ void PlayState::init()
 {
     mLevel = new Level("test.txt");
 
-    mLevel->addObject(new Platform(Vec2(100, 600), 100, 100, "../imgs/platform.jpg"));
-    mLevel->addObject(new Platform(Vec2(400, 500), 200, 100, "../imgs/platform.jpg"));
-    mLevel->addObject(new Platform(Vec2(900, 620), 100, 200, "../imgs/platform.jpg"));
+    mLevel->addObject(new Platform(Vec2(100, 600), 100, 100, "../imgs/platforms/platform.jpg"));
+    mLevel->addObject(new Platform(Vec2(400, 500), 200, 100, "../imgs/platforms/platform.jpg"));
+    mLevel->addObject(new Platform(Vec2(900, 620), 100, 200, "../imgs/platforms/platform.jpg"));
     
     mPlayer = mLevel->addPlayer(500, 400);
 }
@@ -68,7 +68,7 @@ void PlayState::draw(Renderer* renderer)
     if(mTestBkgd != nullptr)
 	renderer->drawTexture(Vec2(0, 0), 1024, 768, mTestBkgd);
     else
-	mTestBkgd = renderer->loadTexture("../imgs/skygrad.jpg");
+	mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
 
     mLevel->draw(renderer);
 }

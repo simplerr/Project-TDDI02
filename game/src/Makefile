@@ -17,7 +17,7 @@ PlayState.o: PlayState.cc PlayState.h
 Renderer.o: Renderer.cc Renderer.h
 	$(CCC) -c Renderer.cc
 
-Level.o: Level.cc Object.o
+Level.o: Level.cc Level.h
 	$(CCC) -c Level.cc 
 
 Object.o: Object.cc Object.h Texture.cc Texture.h Vec2.h Player.cc Player.h
