@@ -40,12 +40,12 @@ void PlayState::update(float dt)
     const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
     
     float speed = 2.0f;
-    if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ])
+    if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ]) // Replace with SDL_SCANCODE_SPACE?
     {
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
 		mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
     }
-    else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] )
+    else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] ) // Also here
     {
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
 		mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
