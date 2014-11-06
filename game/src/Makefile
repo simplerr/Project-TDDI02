@@ -5,8 +5,8 @@
 CCC	= g++ -std=c++11 -Wall -pedantic 
 LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_ttf
 
-all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Object.o
-	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Object.o $(LFLAGS)
+all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o
+	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o $(LFLAGS)
 
 Game.o: Game.cc Game.h
 	$(CCC) -c Game.cc 
@@ -18,10 +18,20 @@ Renderer.o: Renderer.cc Renderer.h
 	$(CCC) -c Renderer.cc
 
 Level.o: Level.cc Level.h
-	$(CCC) -c Level.cc 
+	$(CCC) -c Level.cc
 
-Object.o: Object.cc Object.h Texture.cc Texture.h Vec2.h Player.cc Player.h
-	$(CCC) -c Object.cc Texture.cc Player.cc
+Platform.o: Platform.cc Platform.h
+	$(CCC) -c Platform.cc
+
+Object.o: Object.cc Object.h Vec2.h
+	$(CCC) -c Object.cc
+	
+Player.o: Player.cc Player.h
+	$(CCC) -c Player.cc
+
+Texture.o: Texture.cc Texture.h
+	$(CCC) -c Texture.cc
+	
 
 clean:
 	@ \rm -rf *.o *.gch core

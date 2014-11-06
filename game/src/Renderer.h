@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RENDERER_H
+#define RENDERER_H
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -26,3 +27,5 @@ private:
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
 };
+
+#endif

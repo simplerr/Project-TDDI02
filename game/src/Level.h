@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LEVEL_H
+#define LEVEL_H
 
 #include <string>
 #include <vector>
@@ -29,4 +30,4 @@ private:
   vector<Object*> mObjects;
 };
 
-
+#endif

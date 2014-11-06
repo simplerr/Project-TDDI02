@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include "Renderer.h"
 #include "Texture.h"
+#include "Vec2.h"
 using namespace std;
 
 Renderer::Renderer()
@@ -79,10 +80,10 @@ void Renderer::endScene()
 
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture)
 {
-SDL_Rect sdlRect{pos.x, pos.y, width, height};
+    SDL_Rect SDLRect{pos.x, pos.y, width, height};
 
 
-    SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &sdlRect);
+    SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &SDLRect);
 }
 
 Texture* Renderer::loadTexture(std::string filename)

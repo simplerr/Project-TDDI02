@@ -31,13 +31,13 @@ bool Level::loadLevel(string filename)
 
 void Level::update(float dt)
 {
-    for(int i = 0; i < mObjects.size(); i++)
+    for(unsigned int i = 0; i < mObjects.size(); i++)
 	mObjects[i]->update(dt);
 }
 
 void Level::draw(Renderer* renderer)
 {
-    for(int i = 0; i < mObjects.size(); i++)
+    for(unsigned int i = 0; i < mObjects.size(); i++)
 	mObjects[i]->draw(renderer);
 }
 

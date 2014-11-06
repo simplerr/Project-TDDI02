@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VEC2_H
+#define VEC2_H
 
 // simple struct for representing positions
 struct Vec2
@@ -8,11 +9,13 @@ struct Vec2
 	x = y = 0;
     }
 
-    Vec2(float _x, float _y)
+    Vec2(int _x, int _y)
     {
 	x = _x;
 	y = _y;
     }
 
-    float x, y;
+    int x, y;
 };
+
+#endif

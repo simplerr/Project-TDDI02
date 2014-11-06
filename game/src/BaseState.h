@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BASESTATE_H
+#define BASESTATE_H
 
 class Renderer;
 
@@ -14,3 +15,5 @@ public:
     virtual void draw(Renderer* renderer) = 0;
 private:
 };
+
+#endif  
