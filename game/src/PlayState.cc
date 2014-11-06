@@ -66,6 +66,10 @@ void PlayState::update(float dt)
 	{
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + speed);
 	}
+	else if ( currentKeyStates [ SDL_SCANCODE_ESCAPE ] )
+	{
+		// Pause game, show pause menu
+	}
 }
 
 void PlayState::draw(Renderer* renderer)
