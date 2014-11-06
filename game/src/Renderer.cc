@@ -17,7 +17,7 @@ Renderer::~Renderer()
     SDL_DestroyWindow(mWindow);
     mWindow = NULL;
     mRenderer = NULL;
-    SDL_QUIT;
+    SDL_Quit();
 }
 
 bool Renderer::initSDL()
