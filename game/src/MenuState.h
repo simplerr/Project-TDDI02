@@ -3,6 +3,7 @@
 
 #include "BaseState.h"
 #include "Renderer.h"
+#include "Texture.h"
 
 class MenuState : public BaseState {
  public:
@@ -15,6 +16,7 @@ class MenuState : public BaseState {
 	void draw(Renderer* renderer);
  private:
 	Renderer *mRenderer;
+	Texture *mMenu;
 };
 
 #endif

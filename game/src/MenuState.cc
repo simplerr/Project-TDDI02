@@ -1,15 +1,13 @@
 #include "MenuState.h"
-#include <iostream>
 
 MenuState::MenuState()
 {
-	;
+	mRenderer = new Renderer();
+	mMenu = nullptr;
 }
 
 void MenuState::init()
 {
-	mRenderer = new Renderer();
-	
 	mRenderer->initSDL();
 }
 
