@@ -2,8 +2,7 @@
 #define MENUSTATE_H
 
 #include "BaseState.h"
-#include "Texture.h"
-#include "Level.h"
+#include "Renderer.h"
 
 class MenuState : public BaseState {
  public:
@@ -15,7 +14,7 @@ class MenuState : public BaseState {
 	void update(float dt);
 	void draw(Renderer* renderer);
  private:
-	
+	Renderer *mRenderer;
 };
 
 #endif
