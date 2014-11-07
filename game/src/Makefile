@@ -3,10 +3,10 @@
 #
 
 CCC	= g++ -std=c++11 -Wall -pedantic 
-LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_ttf
+LFLAGS	= -lSDL2 -lSDL2_image
 
-all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o
-	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o $(LFLAGS)
+all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o
+	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o $(LFLAGS)
 
 Game.o: Game.cc Game.h
 	$(CCC) -c Game.cc 
@@ -31,6 +31,10 @@ Player.o: Player.cc Player.h
 
 Texture.o: Texture.cc Texture.h
 	$(CCC) -c Texture.cc
+	
+
+MenuState.o: MenuState.cc MenuState.h
+	$(CCC) -c MenuState.cc
 	
 
 clean:
