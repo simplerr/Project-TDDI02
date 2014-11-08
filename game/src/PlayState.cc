@@ -39,37 +39,37 @@ void PlayState::update(float dt)
     // Player movement test
     const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
     
-    float speed = 2.0f;
+    float speed = 2.0;
     if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ]) // Replace with SDL_SCANCODE_SPACE?
     {
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
-		mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
+	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
+	mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] ) // Also here
     {
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
-		mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
+	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
+	mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
     {
-		mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
+	mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
     {
-		mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
+	mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
     }
     else if( currentKeyStates[ SDL_SCANCODE_UP ] )
     {
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
+	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
     }
-	else if ( currentKeyStates[ SDL_SCANCODE_DOWN ] )
-	{
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + speed);
-	}
-	else if ( currentKeyStates [ SDL_SCANCODE_ESCAPE ] )
-	{
-		// Pause game, show pause menu
-	}
+    else if ( currentKeyStates[ SDL_SCANCODE_DOWN ] )
+    {
+    	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + speed);
+    }
+    else if ( currentKeyStates [ SDL_SCANCODE_ESCAPE ] )
+    {
+    	// Pause game, show pause menu
+    }
 }
 
 void PlayState::draw(Renderer* renderer)

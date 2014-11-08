@@ -32,11 +32,9 @@ Player.o: Player.cc Player.h
 Texture.o: Texture.cc Texture.h
 	$(CCC) -c Texture.cc
 	
-
 MenuState.o: MenuState.cc MenuState.h
 	$(CCC) -c MenuState.cc
 	
-
 clean:
 	@ \rm -rf *.o *.gch core
 
