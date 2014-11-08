@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 	return 1;
     }
 
-    game->changeState(new PlayState);
+    game->changeState(new MenuState;
 
     // while(1)
     bool exit = false;
