@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include "Game.h"
 #include "PlayState.h"
+#include "MenuState.h"
 #include <iostream>
 
 void handleEvent(SDL_Event e, bool& exit)
@@ -19,8 +20,9 @@ int main(int argc, char* argv[])
 	return 1;
     }
 
-    game->changeState(new MenuState;
-
+    game->changeState(new MenuState);
+    //game->changeState(new PlayState);
+    
     // while(1)
     bool exit = false;
 

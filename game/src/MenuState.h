@@ -15,7 +15,7 @@ class MenuState : public BaseState {
 	void update(float dt);
 	void draw(Renderer* renderer);
  private:
-	Renderer *mRenderer;
+	//Renderer *mRenderer; Varför ett till renderer när Game har en?
 	Texture *mMenu;
 };
 

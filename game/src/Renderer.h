@@ -26,6 +26,7 @@ public:
 private:
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
+    //SDL_Texture mTexture; ???
 };
 
 #endif
