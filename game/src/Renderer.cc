@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include "Renderer.h"
 #include "Texture.h"
 #include "Vec2.h"
@@ -51,6 +52,13 @@ bool Renderer::initSDL()
                 // initialize renderer color
                 SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
                 
+				// initialize SDL_mixer
+				if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) 
+				{ 
+					cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << endl; 
+					success = false; 
+				}
+
                 // initialize PNG loading
                 int imgFlags = IMG_INIT_PNG;
                 if( !( IMG_Init( imgFlags ) & imgFlags ) )

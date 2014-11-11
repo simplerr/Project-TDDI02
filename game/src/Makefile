@@ -3,7 +3,7 @@
 #
 
 CCC	= g++ -std=c++11 -Wall -pedantic 
-LFLAGS	= -lSDL2 -lSDL2_image
+LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_mixer
 
 all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o
 	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o $(LFLAGS)

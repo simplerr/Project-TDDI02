@@ -4,6 +4,7 @@
 #include "BaseState.h"
 #include "Renderer.h"
 #include "Texture.h"
+#include "Level.h"
 
 class EditorState : public BaseState {
  public:
