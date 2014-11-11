@@ -17,7 +17,7 @@ public:
 
   void addObject(Object* object);
   
-  Player* addPlayer(int x, int y);
+  //Player* addPlayer(int x, int y);
 
   bool loadLevel(string filename);
   void update(float dt);
@@ -28,6 +28,7 @@ public:
  
 private:
   vector<Object*> mObjects;
+  Player* mplayer;
 };
 
 #endif
