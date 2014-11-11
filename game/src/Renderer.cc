@@ -32,8 +32,6 @@ bool Renderer::initSDL()
     }
     else
     {
-         int SCREEN_WIDTH = 1024;
-         int SCREEN_HEIGHT = 768;
 
 	 // create window
         mWindow = SDL_CreateWindow("Rockblock II", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);

@@ -21,11 +21,13 @@ public:
 
     void drawTexture(Vec2 pos, int width, int height, Texture* texture);
     Texture* loadTexture(std::string filename);
-
+    std::pair<int,int> getScreenSize(){ return std::pair<int,int>(SCREEN_WIDTH, SCREEN_HEIGHT); } //bra att ha??
     // drawAnimation(...)
 private:
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
+    const int SCREEN_WIDTH = 1024;
+    const int SCREEN_HEIGHT = 768;
     //SDL_Texture mTexture; ???
 };
 

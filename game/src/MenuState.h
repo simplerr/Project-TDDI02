@@ -18,6 +18,7 @@ class MenuState : public BaseState {
  private:
 	//Renderer *mRenderer; Varför ett till renderer när Game har en?
 	Texture *mMenu;
+        Texture *mPlayButton;
 };
 
 #endif

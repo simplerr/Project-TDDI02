@@ -73,8 +73,16 @@ void Game::handleEvent(SDL_Event e, bool& exit)
     const MenuState* ms = dynamic_cast<const MenuState*>(mGameState);
     if(ms)
     {
-	if(e.key.keysym.sym == SDLK_TAB)
-	    changeState(new PlayState);
+	if(e.type == SDL_MOUSEBUTTONDOWN)
+	{
+	    //Get mouse position
+	    int x, y;
+	    SDL_GetMouseState( &x, &y );
+	    if (x > 200 && x < 400 && y > 200 && y < 400)
+	    {
+		changeState(new PlayState);
+	    }
+	}   
     }
     
     const PlayState* ps = dynamic_cast<const PlayState*>(mGameState);
