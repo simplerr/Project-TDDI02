@@ -5,8 +5,8 @@
 CCC	= g++ -std=c++11 -Wall -pedantic 
 LFLAGS	= -lSDL2 -lSDL2_image
 
-all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o BaseState.h
-	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o $(LFLAGS)
+all: main.cc Game.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o
+	$(CCC) -o main main.cc Game.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o $(LFLAGS)
 
 Game.o: Game.cc Game.h
 	$(CCC) -c Game.cc 
@@ -35,6 +35,9 @@ Texture.o: Texture.cc Texture.h
 MenuState.o: MenuState.cc MenuState.h
 	$(CCC) -c MenuState.cc
 	
+PauseState.o: PauseState.cc PauseState.h
+	$(CCC) -c PauseState.cc
+
 clean:
 	@ \rm -rf *.o *.gch core
 
