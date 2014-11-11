@@ -17,6 +17,7 @@ class EditorState : public BaseState {
     void handleEvent(SDL_Event e);
  private:
 	Texture *mMenu;
+	Level *mLevel;
 };
 
 #endif
