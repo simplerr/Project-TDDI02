@@ -39,3 +39,13 @@ Vec2 Object::getPosition()
 {
     return mPosition;
 }
+
+int Object::getWidth()
+{
+    return mWidth;
+}
+
+int Object::getHeight()
+{
+    return mHeight;
+}
