@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "PlayState.h"
+#include "MenuState.h"
 #include "Renderer.h"
 #include "BaseState.h"
 
@@ -27,8 +28,6 @@ void Game::changeState(BaseState* state)
     if(mGameState != nullptr)
     {
 	mGameState->cleanup();
-	//delete mGameState;
-	//mRenderer = new Renderer;;
     }
 
     // init the new one
@@ -67,19 +66,23 @@ void Game::draw()
 
 void Game::handleEvent(SDL_Event e, bool& exit)
 {
-    if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+    if(e.type == SDL_QUIT)
         exit = true;
-	
-    if(e.key.keysym.sym == SDLK_KP_ENTER)
-        changeState(new PlayState);
-	
-    mGameState->handleEvent(e);
     
-    /*const PlayState* ps = dynamic_cast<const PlayState*>(mGameState);
+    const MenuState* ms = dynamic_cast<const MenuState*>(mGameState);
+    if(ms)
+    {
+	if(e.key.keysym.sym == SDLK_KP_ENTER)
+	    changeState(new PlayState);
+    }
     
+    const PlayState* ps = dynamic_cast<const PlayState*>(mGameState);
     if(ps)
     {
-	ps->draw(mRenderer, e);
-    } */
+	if(e.key.keysym.sym == SDLK_ESCAPE)
+	    changeState(new MenuState);
+    }
+    
+    mGameState->handleEvent(e);
     
 }
