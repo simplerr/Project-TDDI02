@@ -18,13 +18,14 @@ PlayState::~PlayState()
 
 void PlayState::init()
 {
-	mLevel = new Level("test.txt");
-
+	mLevel = new Level("Maptest.txt");
+/*
     mLevel->addObject(new Platform(Vec2(100, 600), 100, 100, "../imgs/platforms/platform.jpg"));
     mLevel->addObject(new Platform(Vec2(400, 500), 200, 100, "../imgs/platforms/platform.jpg"));
     mLevel->addObject(new Platform(Vec2(900, 620), 100, 200, "../imgs/platforms/platform.jpg"));
     
     mPlayer = mLevel->addPlayer(500, 400);
+    */
 }
 
 void PlayState::cleanup()
@@ -35,8 +36,6 @@ void PlayState::cleanup()
 void PlayState::update(float dt)
 {
     mLevel->update(dt);
-    
-    mPlayer->update(dt);
 }
 
 void PlayState::draw(Renderer* renderer)
