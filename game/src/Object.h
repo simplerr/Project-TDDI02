@@ -21,6 +21,8 @@ public:
     
     // add get/set
     Vec2 getPosition();
+    int getWidth();
+    int getHeight();
 
     void setPosition(Vec2 pos);
     void setPosition(float x, float y);
