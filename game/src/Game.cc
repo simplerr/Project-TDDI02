@@ -27,8 +27,8 @@ void Game::changeState(BaseState* state)
     if(mGameState != nullptr)
     {
 	mGameState->cleanup();
-	//delete mGameState
-    mRenderer = new Renderer;;
+	//delete mGameState;
+	//mRenderer = new Renderer;;
     }
 
     // init the new one
@@ -67,8 +67,11 @@ void Game::draw()
 
 void Game::handleEvent(SDL_Event e, bool& exit)
 {
-    if(e.type == SDL_QUIT)
+    if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
         exit = true;
+	
+    if(e.key.keysym.sym == SDLK_KP_ENTER)
+        changeState(new PlayState);
 	
     mGameState->handleEvent(e);
     
