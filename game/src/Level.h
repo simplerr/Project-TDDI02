@@ -15,10 +15,12 @@ public:
   Level(string filename);
   ~Level();
 
-  void addObject(Object* object);
+  void addObject(Object* object); // FOR EDITOR
+  void saveObjectList(); // FOR EDITOR
   
   //Player* addPlayer(int x, int y);
 
+  Player* findPlayer();
   bool loadLevel(string filename);
   void update(float dt);
   void draw(Renderer* renderer);
@@ -28,7 +30,7 @@ public:
  
 private:
   vector<Object*> mObjects;
-  Player* mplayer;
+  Player* mPlayer;
 };
 
 #endif

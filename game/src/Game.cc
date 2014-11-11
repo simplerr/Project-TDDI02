@@ -78,7 +78,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 	    //Get mouse position
 	    int x, y;
 	    SDL_GetMouseState( &x, &y );
-	    if (x > 200 && x < 400 && y > 200 && y < 400)
+	    if (x > 200 && x < 400 && y > 200 && y < 400) //Ska inte hårdkodas
 	    {
 		changeState(new PlayState);
 	    }

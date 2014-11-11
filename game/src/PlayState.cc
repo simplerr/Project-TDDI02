@@ -19,6 +19,7 @@ PlayState::~PlayState()
 void PlayState::init()
 {
 	mLevel = new Level("Maptest.txt");
+	mPlayer = mLevel->findPlayer();
 }
 
 void PlayState::cleanup()

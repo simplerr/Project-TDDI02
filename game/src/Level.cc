@@ -7,7 +7,10 @@
 
 Level::Level(string filename)
 {
-    loadLevel(filename);
+    if ( !loadLevel(filename) )
+    {
+	cerr << "ERROR: MAP FILE: " << filename << "\n";
+    };
 }
 
 Level::~Level()
@@ -36,32 +39,34 @@ bool Level::loadLevel(string filename)
     string path = "";
     if( input.is_open() )
     {
-	while (cin >> index) 
+	cout << "ppp" << endl;
+	while (input >> index) 
 	{
+	    cout << "fff" << endl;
 	    if (index == 0) // Player
 	    {
-		cin >> posx >> posy;
+		input >> posx >> posy >> width >> height;
+		input >> path;
 		mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
 	    }
 	    else if (index >= 1) // Platformar
 	    {
-		cin >> posx >> posy >> width >> height;
-		cin >> path;
+		input >> posx >> posy >> width >> height;
+		input >> path;
 		mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
 	    }
 	}
 	
 	input.close();
+	return true;
     }
     else
     {
 	cerr << "Error, kunde inte hitta eller öppna kartan." << filename << "\n";
+	return false;
     }
     //vector<Object> Creatures;
     //vector<Object> Platforms;
-    
-    
-    return true;
 }
 
 void Level::update(float dt)
@@ -122,4 +127,18 @@ void Level::draw(Renderer* renderer)
 Object* Level::getObjectAt(float x, float y)
 {
     return nullptr;
+}
+
+Player* Level::findPlayer()
+{
+    for(unsigned int i{}; i < mObjects.size(); ++i)
+    {
+	Player* pl = dynamic_cast<Player*>(mObjects[i]);
+	if (pl)
+	{
+	    mPlayer = pl;
+	    break;
+	}
+    }
+    return mPlayer;
 }
