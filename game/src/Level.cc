@@ -39,10 +39,8 @@ bool Level::loadLevel(string filename)
     string path = "";
     if( input.is_open() )
     {
-	cout << "ppp" << endl;
 	while (input >> index) 
 	{
-	    cout << "fff" << endl;
 	    if (index == 0) // Player
 	    {
 		input >> posx >> posy >> width >> height;
