@@ -22,7 +22,7 @@ public:
   bool loadLevel(string filename);
   void update(float dt);
   void draw(Renderer* renderer);
-  void collision();
+  bool collision(Object* objectA, Object* objectB, bool& x, bool& y);
 
   Object* getObjectAt(float x, float y);
  

@@ -34,3 +34,8 @@ void Player::addVel(int VelX, int VelY)
     mVelX += VelX;
     mVelY += VelY;
 }
+
+Vec2 Player::getVel()
+{
+    return Vec2(mVelX, mVelY);
+}

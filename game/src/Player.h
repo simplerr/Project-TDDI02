@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "Object.h"
+#include "Vec2.h"
 
 class Player : public Object
 {
@@ -13,6 +14,8 @@ public:
     void draw(Renderer* renderer);
     void handleCollision(Object* collider);
     void addVel(int VelX, int VelY);
+
+    Vec2 getVel();
 private:
     int mVelX;
     int mVelY;

@@ -18,13 +18,13 @@ PlayState::~PlayState()
 
 void PlayState::init()
 {
-	mLevel = new Level("test.txt");
+    mLevel = new Level("test.txt");
+
+    mPlayer = mLevel->addPlayer(500, 400);
 
     mLevel->addObject(new Platform(Vec2(100, 600), 100, 100, "../imgs/platforms/platform.jpg"));
     mLevel->addObject(new Platform(Vec2(400, 500), 200, 100, "../imgs/platforms/platform.jpg"));
     mLevel->addObject(new Platform(Vec2(900, 620), 100, 200, "../imgs/platforms/platform.jpg"));
-    
-    mPlayer = mLevel->addPlayer(500, 400);
 }
 
 void PlayState::cleanup()
