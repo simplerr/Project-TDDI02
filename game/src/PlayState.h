@@ -21,10 +21,12 @@ public:
     void cleanup();
     void update(float dt);
     void draw(Renderer* renderer);
+    void handleEvent(SDL_Event e);
 private:
     Level* mLevel;
     Player* mPlayer;
     Texture* mTestBkgd;
+    float speed = 2.0;
 };
 
 #endif

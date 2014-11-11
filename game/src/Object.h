@@ -4,11 +4,10 @@
 #include <string>
 #include "Vec2.h"
 #include "Texture.h"
+#include "Renderer.h"
 
 using namespace std;
 
-class Renderer;
-class Texture;
 
 class Object
 {

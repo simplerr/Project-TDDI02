@@ -12,7 +12,10 @@ public:
     void update(float dt);
     void draw(Renderer* renderer);
     void handleCollision(Object* collider);
+    void addVel(int VelX, int VelY);
 private:
+    int mVelX;
+    int mVelY;
 };
 
 #endif

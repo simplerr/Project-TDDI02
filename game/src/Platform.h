@@ -1,5 +1,6 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
+
 #include "Object.h"
 #include "Vec2.h"
 

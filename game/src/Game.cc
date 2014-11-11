@@ -63,3 +63,20 @@ void Game::draw()
 {
 
 }
+
+
+void Game::handleEvent(SDL_Event e, bool& exit)
+{
+    if(e.type == SDL_QUIT)
+        exit = true;
+	
+    mGameState->handleEvent(e);
+    
+    /*const PlayState* ps = dynamic_cast<const PlayState*>(mGameState);
+    
+    if(ps)
+    {
+	ps->draw(mRenderer, e);
+    } */
+    
+}

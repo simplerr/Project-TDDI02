@@ -35,41 +35,8 @@ void PlayState::cleanup()
 void PlayState::update(float dt)
 {
     mLevel->update(dt);
-
-    // Player movement test
-    const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
     
-    float speed = 2.0;
-    if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_RIGHT ]) // Replace with SDL_SCANCODE_SPACE?
-    {
-	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
-	mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
-    }
-    else if( currentKeyStates[ SDL_SCANCODE_UP ] &&  currentKeyStates[ SDL_SCANCODE_LEFT ] ) // Also here
-    {
-	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
-	mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
-    }
-    else if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
-    {
-	mPlayer->setPosition(mPlayer->getPosition().x - speed, mPlayer->getPosition().y);
-    }
-    else if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
-    {
-	mPlayer->setPosition(mPlayer->getPosition().x + speed, mPlayer->getPosition().y);
-    }
-    else if( currentKeyStates[ SDL_SCANCODE_UP ] )
-    {
-	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - speed);
-    }
-    else if ( currentKeyStates[ SDL_SCANCODE_DOWN ] )
-    {
-    	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + speed);
-    }
-    else if ( currentKeyStates [ SDL_SCANCODE_ESCAPE ] )
-    {
-    	// Pause game, show pause menu
-    }
+    mPlayer->update(dt);
 }
 
 void PlayState::draw(Renderer* renderer)
@@ -81,4 +48,33 @@ void PlayState::draw(Renderer* renderer)
 		mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
 
     mLevel->draw(renderer);
+}
+
+void PlayState::handleEvent(SDL_Event e)
+{
+	
+	//If a key was pressed
+	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: mPlayer->addVel(0, -speed); break;
+            case SDLK_DOWN: mPlayer->addVel(0, +speed); break;
+            case SDLK_LEFT: mPlayer->addVel(-speed, 0); break;
+            case SDLK_RIGHT: mPlayer->addVel(+speed, 0); break;
+        }
+    }
+    //If a key was released
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: mPlayer->addVel(0, +speed); break;
+            case SDLK_DOWN: mPlayer->addVel(0, -speed); break;
+            case SDLK_LEFT: mPlayer->addVel(+speed, 0); break;
+            case SDLK_RIGHT: mPlayer->addVel(-speed, 0); break;
+        }
+    }
 }

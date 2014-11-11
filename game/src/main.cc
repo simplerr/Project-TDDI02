@@ -4,11 +4,6 @@
 #include "MenuState.h"
 #include <iostream>
 
-void handleEvent(SDL_Event e, bool& exit)
-{
-    if(e.type == SDL_QUIT)
-        exit = true;
-}
 
 int main(int argc, char* argv[])
 {
@@ -20,8 +15,8 @@ int main(int argc, char* argv[])
 	return 1;
     }
 
-    game->changeState(new MenuState);
-    //game->changeState(new PlayState);
+    //game->changeState(new MenuState);
+    game->changeState(new PlayState);
     
     // while(1)
     bool exit = false;
@@ -32,7 +27,7 @@ int main(int argc, char* argv[])
 
 	// poll SDL event
 	while(SDL_PollEvent(&e) != 0)	
-	    handleEvent(e, exit);
+	    game->handleEvent(e, exit);
 
 	game->run();
     }
