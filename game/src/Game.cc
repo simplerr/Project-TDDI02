@@ -74,18 +74,6 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 	MenuState* ms = dynamic_cast<MenuState*>(mGameState);
     if(ms)
     {
-<<<<<<< HEAD
-	if(e.type == SDL_MOUSEBUTTONDOWN)
-	{
-	    //Get mouse position
-	    int x, y;
-	    SDL_GetMouseState( &x, &y );
-	    if (x > 200 && x < 400 && y > 200 && y < 400) //Ska inte hårdkodas
-	    {
-		changeState(new PlayState);
-	    }
-	}   
-=======
 		//credit 
 		if (e.key.keysym.sym == SDLK_c) {
 			ms->drawCred(mRenderer);
@@ -103,7 +91,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			}
 	
 		}   
->>>>>>> 1a871e93608a0a60869917e9b901c43beb0ec83f
+
     }
     
     const PlayState* ps = dynamic_cast<const PlayState*>(mGameState);

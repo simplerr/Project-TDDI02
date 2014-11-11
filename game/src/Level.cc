@@ -72,10 +72,10 @@ bool Level::loadLevel(string filename)
 void Level::update(float dt)
 {
     // collision
-    for(int i = 0; i < mObjects.size(); i++)
+    for(unsigned int i = 0; i < mObjects.size(); i++)
     {
 	Object* objectA = mObjects[i];
-	for(int j = i; j < mObjects.size(); j++)
+	for(unsigned int j = i; j < mObjects.size(); j++)
 	{
 	    Object* objectB = mObjects[j];
 
