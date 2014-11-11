@@ -1,12 +1,9 @@
 #include "Level.h"
 #include "Object.h"
 #include "Player.h"
-<<<<<<< HEAD
-#include <stream>
+#include <fstream>
 #include <iostream>
-=======
 #include "Platform.h"
->>>>>>> 84a33f16e53443eabccaf402969a899fae5745e4
 
 Level::Level(string filename)
 {
