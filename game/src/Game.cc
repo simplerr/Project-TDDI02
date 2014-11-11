@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "PlayState.h"
 #include "MenuState.h"
+#include "PauseState.h"
 #include "Renderer.h"
 #include "BaseState.h"
 
@@ -72,7 +73,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
     const MenuState* ms = dynamic_cast<const MenuState*>(mGameState);
     if(ms)
     {
-	if(e.key.keysym.sym == SDLK_KP_ENTER)
+	if(e.key.keysym.sym == SDLK_TAB)
 	    changeState(new PlayState);
     }
     
@@ -80,9 +81,18 @@ void Game::handleEvent(SDL_Event e, bool& exit)
     if(ps)
     {
 	if(e.key.keysym.sym == SDLK_ESCAPE)
-	    changeState(new MenuState);
+	    changeState(new PauseState);
     }
     
+	const PauseState* pas = dynamic_cast<const PauseState*>(mGameState);
+    if(pas)
+    {
+	if(e.key.keysym.sym == SDLK_DOWN)
+	    changeState(new PlayState);
+	else if (e.key.keysym.sym == SDLK_UP)
+		changeState(new MenuState);
+    }
+
     mGameState->handleEvent(e);
     
 }
