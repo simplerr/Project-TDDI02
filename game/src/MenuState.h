@@ -14,11 +14,14 @@ class MenuState : public BaseState {
 	void cleanup();
 	void update(float dt);
 	void draw(Renderer* renderer);
+	void drawCred(Renderer* renderer);
     void handleEvent(SDL_Event e);
  private:
-	//Renderer *mRenderer; Varför ett till renderer när Game har en?
 	Texture *mMenu;
-        Texture *mPlayButton;
+	Texture *mPlayButton;
+	Texture *mCredit;
 };
 
 #endif
+
+

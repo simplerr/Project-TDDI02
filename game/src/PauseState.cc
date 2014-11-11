@@ -2,8 +2,8 @@
 
 PauseState::PauseState()
 {
-	//mRenderer = new Renderer();
-	mMenu = nullptr;
+	currentGame = nullptr;
+	mPauseMenu = nullptr;
 }
 
 void PauseState::init()
@@ -23,7 +23,10 @@ void PauseState::update(float dt)
 
 void PauseState::draw(Renderer* renderer)
 {
-	;
+	if (mPauseMenu != nullptr)
+		;
+	else
+		;
 }
 
 void PauseState::handleEvent(SDL_Event e)

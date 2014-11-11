@@ -23,22 +23,30 @@ void MenuState::update(float dt)
 
 void MenuState::draw(Renderer* renderer)
 {
-	 // draw test bkgd
-    if(mMenu != nullptr && mPlayButton != nullptr)
-    {
-	renderer->drawTexture(Vec2(0, 0), 1024, 768, mMenu);
-	renderer->drawTexture(Vec2(200, 200), 200, 200, mPlayButton);
+	// draw test bkgd
+	if(mMenu != nullptr && mPlayButton != nullptr)
+	{
+		renderer->drawTexture(Vec2(0, 0), 1024, 768, mMenu);
+		renderer->drawTexture(Vec2(200, 200), 200, 200, mPlayButton);
 	
-    }
-    else
-    {
-	mMenu = renderer->loadTexture("../imgs/backgrounds/menu.jpg");
-	mPlayButton = renderer->loadTexture("../imgs/PLAY.png");
-    }
-		
+	}
+	else
+	{
+		mMenu = renderer->loadTexture("../imgs/backgrounds/menu.jpg");
+		mPlayButton = renderer->loadTexture("../imgs/PLAY.png");
+	}
+
+}
+
+void MenuState::drawCred(Renderer* renderer)
+{
+	if (mCredit != nullptr)
+		renderer->drawTexture(Vec2(0, 0), 1024, 768, mCredit);
+	else
+		mCredit = renderer->loadTexture("../imgs/backgrounds/credit.jpg");
 }
 
 void MenuState::handleEvent(SDL_Event e)
 {
-		;
+	;
 }
