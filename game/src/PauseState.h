@@ -6,7 +6,7 @@
 #include "Texture.h"
 #include "PlayState.h"
 
-class PauseState : public PlayState {
+class PauseState : public BaseState {
  public:
 	PauseState();
 	~PauseState();
@@ -17,7 +17,7 @@ class PauseState : public PlayState {
 	void draw(Renderer* renderer);
     void handleEvent(SDL_Event e);
  private:
-	PlayState *currentGame;
+	//PlayState *currentGame;
 	Texture *mPauseMenu;
 };
 

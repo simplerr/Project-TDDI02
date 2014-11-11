@@ -73,7 +73,7 @@ void Renderer::beginScene()
 void Renderer::endScene()
 {
      SDL_RenderPresent(mRenderer);
-     SDL_Delay(1000/60);
+     SDL_Delay(1000/60); // 60 FPS
 }
 
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture)

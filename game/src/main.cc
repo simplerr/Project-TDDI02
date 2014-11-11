@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 	return 1;
     }
 
-    game->changeState(new MenuState);
+    //game->changeState(new MenuState);
     //game->changeState(new PlayState);
     
     // while(1)
@@ -23,13 +23,13 @@ int main(int argc, char* argv[])
 
     while(!exit)
     {
-	SDL_Event e;
+		SDL_Event e;
 
-	// poll SDL event
-	while(SDL_PollEvent(&e) != 0)	
-	    game->handleEvent(e, exit);
+		// poll SDL event
+		while(SDL_PollEvent(&e) != 0)	
+			game->handleEvent(e, exit);
 
-	game->run();
+		game->run();
     }
    
 

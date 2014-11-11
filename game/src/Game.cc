@@ -8,7 +8,15 @@
 Game::Game()
 {
     mRenderer = new Renderer;
-    mGameState = nullptr;
+	
+    mGameState = new MenuState;
+	mGameState->init();
+	mPlayState = new PlayState;
+	mPlayState->init();
+	mMenuState = new MenuState;
+	mMenuState->init();
+	mPauseState = new PauseState;
+	mPauseState->init();
 }
  
 Game::~Game()
@@ -26,14 +34,14 @@ bool Game::initWindow()
 void Game::changeState(BaseState* state)
 {
     // cleanup the old one
-    if(mGameState != nullptr)
+    /*if(mGameState != nullptr)
     {
-	mGameState->cleanup();
-    }
+		mGameState->cleanup();
+    }*/
 
     // init the new one
     mGameState = state;
-    mGameState->init();
+    //mGameState->init();
 }
 
 void Game::run()
@@ -49,6 +57,7 @@ void Game::run()
     mRenderer->beginScene();
 
     // draw the current gamestate
+	mPlayState->draw(mRenderer);
     mGameState->draw(mRenderer);
 
     mRenderer->endScene();
@@ -69,15 +78,17 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 {
     if(e.type == SDL_QUIT)
         exit = true;
-    
-    //const MenuState* ms = dynamic_cast<const MenuState*>(mGameState);
-	MenuState* ms = dynamic_cast<MenuState*>(mGameState);
-    if(ms)
+		
+	MenuState* menu = dynamic_cast<MenuState*>(mGameState);
+	const PlayState* play = dynamic_cast<const PlayState*>(mGameState);
+	const PauseState* pause = dynamic_cast<const PauseState*>(mGameState);
+    if(menu)
     {
 		//credit 
-		if (e.key.keysym.sym == SDLK_c) {
-			ms->drawCred(mRenderer);
-			SDL_Delay(1000); // show 5 second
+		if (e.key.keysym.sym == SDLK_c)
+		{
+			menu->drawCred(mRenderer);
+			SDL_Delay(5000); // show 5 second
 		}
 
 		if(e.type == SDL_MOUSEBUTTONDOWN)
@@ -85,29 +96,32 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			//Get mouse position
 			int x, y;
 			SDL_GetMouseState( &x, &y );
-			if (x > 200 && x < 400 && y > 200 && y < 400)
+			
+			if (x > 200 && x < 400 && y > 200 && y < 400) //Klickområde
 			{
-				changeState(new PlayState);
+				changeState(mPlayState);
 			}
 	
-		}   
+		} 
 
     }
-    
-    const PlayState* ps = dynamic_cast<const PlayState*>(mGameState);
-    if(ps)
+    else if(play)
     {
 		if(e.key.keysym.sym == SDLK_ESCAPE)
-			changeState(new PauseState);
+		{
+			changeState(mPauseState);
+		}
     }
-    
-	const PauseState* pas = dynamic_cast<const PauseState*>(mGameState);
-    if(pas)
+    else if(pause)
     {
-		if(e.key.keysym.sym == SDLK_DOWN)
-			changeState(new PlayState);
-		else if (e.key.keysym.sym == SDLK_UP)
-			changeState(new MenuState);
+		if(e.key.keysym.sym == SDLK_UP)
+		{
+			changeState(mPlayState);
+		}
+		else if (e.key.keysym.sym == SDLK_DOWN)
+		{
+			changeState(mMenuState);
+		}
     }
 
     mGameState->handleEvent(e);

@@ -14,11 +14,13 @@ public:
     void draw(Renderer* renderer);
     void handleCollision(Object* collider);
     void addVel(int VelX, int VelY);
+    //void playerJump(int speed)
 
     Vec2 getVel();
 private:
     int mVelX;
     int mVelY;
+    bool jumpEnable;
 };
 
 #endif

@@ -41,7 +41,7 @@ void MenuState::draw(Renderer* renderer)
 void MenuState::drawCred(Renderer* renderer)
 {
 	if (mCredit != nullptr)
-		renderer->drawTexture(Vec2(0, 0), 1024, 768, mCredit);
+		renderer->drawTexture(Vec2(400, 400), 400, 200, mCredit);
 	else
 		mCredit = renderer->loadTexture("../imgs/backgrounds/credit.jpg");
 }

@@ -4,6 +4,10 @@
 #include <SDL2/SDL.h>
 #include "BaseState.h"
 #include "Renderer.h"
+//...
+#include "PlayState.h"
+#include "MenuState.h"
+#include "PauseState.h"
 class Input;
 
 class Game
@@ -25,6 +29,9 @@ public:
 
 private:
     BaseState* mGameState;
+    PlayState* mPlayState;
+    MenuState* mMenuState;
+    PauseState* mPauseState;
     Renderer* mRenderer;
     Input* mInput;
 };

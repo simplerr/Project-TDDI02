@@ -26,7 +26,8 @@ void Player::draw(Renderer* renderer)
 
 void Player::handleCollision(Object* object)
 {
-    ;
+    // if collisionX == false
+    //      mVelY + speed;
 }
 
 void Player::addVel(int VelX, int VelY)
@@ -34,6 +35,14 @@ void Player::addVel(int VelX, int VelY)
     mVelX += VelX;
     mVelY += VelY;
 }
+
+/*void Player::playerJump(int speed)
+{
+    if(jumpEnable)
+    {
+        
+    }
+}*/
 
 Vec2 Player::getVel()
 {
