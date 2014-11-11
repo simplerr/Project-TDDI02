@@ -4,8 +4,9 @@
 #include "BaseState.h"
 #include "Renderer.h"
 #include "Texture.h"
+#include "PlayState.h"
 
-class PauseState : public BaseState {
+class PauseState : public PlayState {
  public:
 	PauseState();
 	~PauseState();
@@ -16,8 +17,8 @@ class PauseState : public BaseState {
 	void draw(Renderer* renderer);
     void handleEvent(SDL_Event e);
  private:
-	//Renderer *mRenderer; Varför ett till renderer när Game har en?
-	Texture *mMenu;
+	PlayState *currentGame;
+	Texture *mPauseMenu;
 };
 
 #endif
