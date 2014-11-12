@@ -20,6 +20,8 @@ public:
 
     bool initWindow();
     void run();
+    void cleanup();
+
     
     // räcker det med run() egentligen?
     void update();
@@ -29,9 +31,9 @@ public:
 
 private:
     BaseState* mGameState;
-    PlayState* mPlayState;
-    MenuState* mMenuState;
-    PauseState* mPauseState;
+    PlayState* mPlayState = nullptr;
+    MenuState* mMenuState = nullptr;
+    PauseState* mPauseState = nullptr;
     Renderer* mRenderer;
     Input* mInput;
 };

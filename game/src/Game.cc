@@ -9,14 +9,9 @@ Game::Game()
 {
     mRenderer = new Renderer;
 	
-    mGameState = new MenuState;
-	mGameState->init();
-	mPlayState = new PlayState;
-	mPlayState->init();
 	mMenuState = new MenuState;
 	mMenuState->init();
-	mPauseState = new PauseState;
-	mPauseState->init();
+	mGameState = mMenuState;
 }
  
 Game::~Game()
@@ -31,17 +26,21 @@ bool Game::initWindow()
    return mRenderer->initSDL();
 }
 
+void Game::cleanup()
+{
+	// VET EJ OM DETTA ÄR RÄTT, MINNESLÄCKA VID AVSLUT AV PROGRAM KAN FÖREKOMMA
+	mPlayState->cleanup();
+	mPlayState = nullptr;
+	mMenuState->cleanup();
+	mMenuState = nullptr;
+	mPauseState->cleanup();
+	mPauseState = nullptr;
+	
+}
 void Game::changeState(BaseState* state)
 {
-    // cleanup the old one
-    /*if(mGameState != nullptr)
-    {
-		mGameState->cleanup();
-    }*/
-
     // init the new one
     mGameState = state;
-    //mGameState->init();
 }
 
 void Game::run()
@@ -56,10 +55,18 @@ void Game::run()
     // all rendering should happen between beginScene() and endScene()
     mRenderer->beginScene();
 
-    // draw the current gamestate
-	mPlayState->draw(mRenderer);
-    mGameState->draw(mRenderer);
 
+
+	// #########################
+	//Kom gärna på en bättre lösning om möjligt att rendra PlayState bakom PauseState
+	const PauseState* pause = dynamic_cast<const PauseState*>(mGameState);
+	if(pause)
+		mPlayState->draw(mRenderer);
+	// #########################
+	
+	// draw the current gamestate
+	mGameState->draw(mRenderer);
+	
     mRenderer->endScene();
 }
 
@@ -82,16 +89,16 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 	MenuState* menu = dynamic_cast<MenuState*>(mGameState);
 	const PlayState* play = dynamic_cast<const PlayState*>(mGameState);
 	const PauseState* pause = dynamic_cast<const PauseState*>(mGameState);
-    if(menu)
+    if(menu) // HUVUDMENYN
     {
 		//credit 
-		if (e.key.keysym.sym == SDLK_c)
+		if (e.key.keysym.sym == SDLK_c) // GÅ TILL CREDITS
 		{
 			menu->drawCred(mRenderer);
 			SDL_Delay(5000); // show 5 second
 		}
-
-		if(e.type == SDL_MOUSEBUTTONDOWN)
+		
+		if(e.type == SDL_MOUSEBUTTONDOWN) // SPELA KARTA
 		{
 			//Get mouse position
 			int x, y;
@@ -99,28 +106,39 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			
 			if (x > 200 && x < 400 && y > 200 && y < 400) //Klickområde
 			{
+				if (mPlayState == nullptr) //Om vi varit i menyn förr
+				{
+					mPlayState = new PlayState;
+					mPlayState->init();
+				}
 				changeState(mPlayState);
 			}
-	
 		} 
-
     }
-    else if(play)
+    else if(play) // SPELET
     {
+		// ENTER PAUSE MENU
 		if(e.key.keysym.sym == SDLK_ESCAPE)
 		{
+			if ( mPauseState == nullptr )
+			{
+				mPauseState = new PauseState;
+				mPauseState->init();
+			}
 			changeState(mPauseState);
 		}
     }
-    else if(pause)
+    else if(pause) // PAUSEMENYN
     {
-		if(e.key.keysym.sym == SDLK_UP)
+		if(e.key.keysym.sym == SDLK_UP) // GÅ TILLBAKA TILL SPELET
 		{
 			changeState(mPlayState);
 		}
-		else if (e.key.keysym.sym == SDLK_DOWN)
+		else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
 		{
 			changeState(mMenuState);
+			mPlayState->cleanup();
+			mPlayState = nullptr; // Kan någon intyga att det destruerar mPlayStates PlayState korrekt?
 		}
     }
 
