@@ -68,9 +68,9 @@ bool Object::collision(Object* objectA, Object* objectB)
     bottomA = posA.y + objectA->getHeight();
 
     // sides for B
-    leftB = posB.x;
-    rightB = posB.x + objectB->getWidth();
-    topB = posB.y;
+    leftB = posB.x+2; // ADDERING ÄR FÖR FINJUSTERING
+    rightB = posB.x + objectB->getWidth()-1;
+    topB = posB.y+2;
     bottomB = posB.y + objectB->getHeight();
 
     //If any of the sides from A are outside of B
