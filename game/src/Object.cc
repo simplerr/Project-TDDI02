@@ -49,3 +49,56 @@ int Object::getHeight()
 {
     return mHeight;
 }
+
+bool Object::collision(Object* objectA, Object* objectB)
+{
+    int leftA, leftB;
+    int rightA, rightB;
+    int topA, topB;
+    int bottomA, bottomB;
+
+
+    Vec2 posA = objectA->getPosition();
+    Vec2 posB = objectB->getPosition();
+
+    // sides for A
+    leftA = posA.x;
+    rightA = posA.x + objectA->getWidth();
+    topA = posA.y;
+    bottomA = posA.y + objectA->getHeight();
+
+    // sides for B
+    leftB = posB.x;
+    rightB = posB.x + objectB->getWidth();
+    topB = posB.y;
+    bottomB = posB.y + objectB->getHeight();
+
+    //If any of the sides from A are outside of B
+	
+	if( bottomA >= topB && topA <= bottomB && rightA >= leftB && leftA <= rightB )
+    {
+        return true;
+    }
+	/*
+    if( bottomA <= topB )
+    {
+        return false;
+    }
+
+    if( topA >= bottomB )
+    {
+        return false;
+    }
+
+    if( rightA <= leftB )
+    {
+        return false;
+    }
+
+    if( leftA >= rightB )
+    {
+        return false;
+    }
+*/
+    return false;
+}

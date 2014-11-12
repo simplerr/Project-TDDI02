@@ -15,7 +15,7 @@ Player::~Player()
 void Player::update(float dt)
 {
     //Updaterar pos efter mVel från PlayState
-    setPosition(getPosition().x + mVelX, getPosition().y + mVelY);
+    //setPosition(getPosition().x + mVelX, getPosition().y + mVelY);
     
 }
 
@@ -26,8 +26,32 @@ void Player::draw(Renderer* renderer)
 
 void Player::handleCollision(Object* object)
 {
-    // if collisionX == false
-    //      mVelY + speed;
+    /* 
+    //Move the dot left or right
+    setPosition(getPosition().x + mVelX, getPosition().y);
+	//mCollider.x = mPosX;
+
+    //If the dot collided or went too far to the left or right
+    if( collision(this, object) )
+    {
+        //Move back
+        setPosition(getPosition().x - mVelX, getPosition().y);
+		//mCollider.x = mPosX;
+    }
+
+    //Move the dot up or down
+    setPosition(getPosition().x, getPosition().y + mVelY);
+	//mCollider.y = mPosY;
+
+    //If the dot collided or went too far up or down
+    if( collision(this, object) )
+    {
+        //Move back
+        setPosition(getPosition().x, getPosition().y - mVelY);
+		//mCollider.y = mPosY;
+    }
+    
+    return cDetected; */
 }
 
 void Player::addVel(int VelX, int VelY)

@@ -23,15 +23,6 @@ void Level::addObject(Object* object)
     mObjects.push_back(object);
 }
 
-/*
-Player* Level::addPlayer(int x, int y)
-{
-    mplayer = new Player(Vec2(x, y), 64, 64, "../imgs/player.jpg");
-    addObject(mplayer);
-    return mplayer;
-}
-*/
-
 bool Level::loadLevel(string filename)
 {
     ifstream input (filename);
@@ -70,14 +61,35 @@ bool Level::loadLevel(string filename)
 void Level::update(float dt)
 {
     // collision
-    for(unsigned int i = 0; i < mObjects.size(); i++)
+	bool x, y = false;
+    for(unsigned int i = 1; i < mObjects.size(); i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
-	Object* objectA = mObjects[i];
-	for(unsigned int j = i; j < mObjects.size(); j++)
-	{
-	    Object* objectB = mObjects[j];
-
-	    const Platform* pl1 = dynamic_cast<Platform*>(objectA);
+		
+	//Object* objectA = mObjects[i];
+	//for(unsigned int j = i; j < mObjects.size(); j++)
+	//{
+	
+	    Object* objectB = mObjects[i];
+		
+		//##############
+		// KOLLA OM KOLLISION FÖR PLAYER X-LED
+		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
+		if ( mPlayer->collision(mPlayer, objectB) )
+		{
+			x = true;
+		}
+		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y);
+		
+		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
+		if ( mPlayer->collision(mPlayer, objectB) )
+		{
+			y = true;
+		}
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );
+		//##############
+	  
+	  /*  const Platform* pl1 = dynamic_cast<Platform*>(objectA);
 	    const Platform* pl2 = dynamic_cast<Platform*>(objectB);
 	    if(pl1 && pl2)
 		continue;
@@ -99,11 +111,16 @@ void Level::update(float dt)
 		    objectA->handleCollision(objectB);
 		    objectB->handleCollision(objectA);
 		}
-	    }	
-	}
+	    } */	
+	//}
     }
 
-
+	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
+		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
+	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
+		
+	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
 	mObjects[i]->update(dt);
@@ -111,6 +128,7 @@ void Level::update(float dt)
 	
 }
 
+/*
 bool Level::collision(Object* objectA, Object* objectB, bool& x, bool& y)
 {
     int leftA, leftB;
@@ -156,7 +174,7 @@ bool Level::collision(Object* objectA, Object* objectB, bool& x, bool& y)
     }
 
     return true;
-}
+} */
 
 void Level::draw(Renderer* renderer)
 {

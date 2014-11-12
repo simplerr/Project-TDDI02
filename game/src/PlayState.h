@@ -26,7 +26,7 @@ private:
     Level* mLevel;
     Player* mPlayer;
     Texture* mTestBkgd;
-    float speed = 2.0;
+    float speed = 3.0;
 };
 
 #endif

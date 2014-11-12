@@ -18,6 +18,7 @@ public:
     virtual void update(float dt) = 0;
     virtual void draw(Renderer* renderer);
     virtual void handleCollision(Object* collider) = 0;
+    virtual bool collision(Object* objectA, Object* objectB);
     
     // add get/set
     Vec2 getPosition();
