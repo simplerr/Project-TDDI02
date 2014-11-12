@@ -13,7 +13,9 @@ void MenuState::init()
 
 void MenuState::cleanup()
 {
-	//delete mRenderer;
+	delete mMenu;
+	delete mPlayButton;
+	delete mExitButton;
 }
 
 void MenuState::update(float dt)
@@ -27,13 +29,15 @@ void MenuState::draw(Renderer* renderer)
 	if(mMenu != nullptr && mPlayButton != nullptr)
 	{
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mMenu);
-		renderer->drawTexture(Vec2(200, 200), 200, 200, mPlayButton);
+		renderer->drawTexture(Vec2(512-100, 200), 200, 200, mPlayButton);
+		renderer->drawTexture(Vec2(512-100, 450), 200, 100, mExitButton);
 	
 	}
 	else
 	{
 		mMenu = renderer->loadTexture("../imgs/backgrounds/menu.jpg");
 		mPlayButton = renderer->loadTexture("../imgs/PLAY.png");
+		mExitButton = renderer->loadTexture("../imgs/EXIT.png");
 	}
 
 }

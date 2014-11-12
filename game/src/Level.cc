@@ -102,7 +102,7 @@ void Level::update(float dt)
 	    }	
 	}
     }
-    
+
 
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {

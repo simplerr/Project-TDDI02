@@ -20,6 +20,7 @@ class MenuState : public BaseState {
 	Texture *mMenu;
 	Texture *mPlayButton;
 	Texture *mCredit;
+    Texture *mExitButton;
 };
 
 #endif
