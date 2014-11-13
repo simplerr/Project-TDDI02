@@ -15,7 +15,10 @@ Level::Level(string filename)
 
 Level::~Level()
 {
-
+    for(unsigned int i{}; i < mObjects.size(); ++i)
+    {
+	delete mObjects[i];
+    }
 }
 
 void Level::addObject(Object* object)

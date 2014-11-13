@@ -5,6 +5,10 @@ EditorState::EditorState()
 	mMenu = nullptr;
 }
 
+EditorState::~EditorState()
+{
+}
+
 void EditorState::init()
 {
 	;

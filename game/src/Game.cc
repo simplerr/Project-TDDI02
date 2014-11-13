@@ -16,7 +16,9 @@ Game::Game()
  
 Game::~Game()
 {
-  //delete mGameState;
+    delete mPlayState;
+    delete mMenuState;
+    delete mPauseState;
     delete mRenderer;
 }
 
@@ -30,11 +32,8 @@ void Game::cleanup()
 {
 	// VET EJ OM DETTA ÄR RÄTT, MINNESLÄCKA VID AVSLUT AV PROGRAM KAN FÖREKOMMA
 	mPlayState->cleanup();
-	mPlayState = nullptr;
 	mMenuState->cleanup();
-	mMenuState = nullptr;
 	mPauseState->cleanup();
-	mPauseState = nullptr;
 	
 }
 void Game::changeState(BaseState* state)
@@ -139,7 +138,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 		else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
 		{
 			changeState(mMenuState);
-			mPlayState->cleanup();
+			delete mPlayState;
 			mPlayState = nullptr; // Kan någon intyga att det destruerar mPlayStates PlayState korrekt?
 		}
     }
