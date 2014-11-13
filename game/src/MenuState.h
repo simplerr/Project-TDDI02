@@ -6,20 +6,20 @@
 #include "Texture.h"
 
 class MenuState : public BaseState {
- public:
-	MenuState();
-	~MenuState();
+public:
+    MenuState();
+    ~MenuState();
 
-	void init();
-	void cleanup();
-	void update(float dt);
-	void draw(Renderer* renderer);
-	void drawCred(Renderer* renderer);
+    void init();
+    void cleanup();
+    void update(float dt);
+    void draw(Renderer* renderer);
+    void drawCred(Renderer* renderer);
     void handleEvent(SDL_Event e);
- private:
-	Texture *mMenu;
-	Texture *mPlayButton;
-	Texture *mCredit;
+private:
+    Texture *mMenu;
+    Texture *mPlayButton;
+    Texture *mCredit;
     Texture *mExitButton;
 };
 

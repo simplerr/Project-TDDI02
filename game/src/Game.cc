@@ -8,10 +8,9 @@
 Game::Game()
 {
     mRenderer = new Renderer;
-	
-	mMenuState = new MenuState;
-	mMenuState->init();
-	mGameState = mMenuState;
+    mMenuState = new MenuState;
+    mMenuState->init();
+    mGameState = mMenuState;
 }
  
 Game::~Game()
@@ -72,16 +71,6 @@ void Game::run()
     mRenderer->endScene();
 }
 
-void Game::update()
-{
-
-}
-
-void Game::draw()
-{
-
-}
-
 
 void Game::handleEvent(SDL_Event e, bool& exit)
 {
@@ -120,6 +109,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			}
 			if ( x > 512-100 && x < 512+100 && y > 450 && y < 650 ) // Klickområde AVSLUTA PROGRAMMET
 				exit = true;
+			//delete menu;
 		} 
     }
     else if(play) // SPELET
@@ -134,6 +124,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			}
 			changeState(mPauseState);
 		}
+	//delete play;
     }
     else if(pause) // PAUSEMENYN
     {
@@ -147,6 +138,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			delete mPlayState;
 			mPlayState = nullptr; // Kan någon intyga att det destruerar mPlayStates PlayState korrekt?
 		}
+	//delete pause;
     }
 
     mGameState->handleEvent(e); //Övriga "Special" inputs för specifika states

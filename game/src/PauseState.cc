@@ -8,7 +8,6 @@ PauseState::PauseState()
 
 PauseState::~PauseState()
 {
-	//currentGame = nullptr;
 	delete mPauseMenu;
 }
 
@@ -19,7 +18,7 @@ void PauseState::init()
 
 void PauseState::cleanup()
 {
-	//delete mRenderer;
+	;
 }
 
 void PauseState::update(float dt)
