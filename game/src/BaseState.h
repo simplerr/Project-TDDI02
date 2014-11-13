@@ -3,11 +3,14 @@
 
 #include <SDL2/SDL.h>
 
+
 class Renderer;
 
 class BaseState
 {
 public:
+    enum StateId {BASE_STATE, PLAY_STATE, MENU_STATE, PAUSE_STATE, EDITOR_STATE};
+
     BaseState() {};
     virtual ~BaseState() {};
 
@@ -16,7 +19,10 @@ public:
     virtual void update(float dt) = 0;
     virtual void draw(Renderer* renderer) = 0;
     virtual void handleEvent(SDL_Event e) = 0;  
+
+    virtual StateId getStateId() = 0;// { return BASE_STATE; }
 private:
+
 };
 
 #endif  

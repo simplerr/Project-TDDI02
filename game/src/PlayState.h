@@ -22,6 +22,8 @@ public:
     void update(float dt);
     void draw(Renderer* renderer);
     void handleEvent(SDL_Event e);
+
+    StateId getStateId() { return PLAY_STATE; }
 private:
     Level* mLevel;
     Player* mPlayer;
