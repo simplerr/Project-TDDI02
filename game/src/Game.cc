@@ -80,7 +80,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 	//const MenuState* menu = dynamic_cast<const MenuState*>(mGameState);
 	//const PlayState* play = dynamic_cast<const PlayState*>(mGameState);
 	//const PauseState* pause = dynamic_cast<const PauseState*>(mGameState);
-    if(mGameState->getStateId() == MENU_STATE) // HUVUDMENYN
+    if(mGameState->getStateId() == BaseState::MENU_STATE) // HUVUDMENYN
     {
 		//credit 
 		/*if (e.key.keysym.sym == SDLK_c) // GÅ TILL CREDITS
@@ -112,7 +112,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			//delete menu;
 		} 
     }
-    else if(mGameState->getStateId() == PLAY_STATE) // SPELET
+    else if(mGameState->getStateId() == BaseState::PLAY_STATE) // SPELET
     {
 		// ENTER PAUSE MENU
 		if(e.key.keysym.sym == SDLK_ESCAPE)
@@ -126,7 +126,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 		}
 	//delete play;
     }
-    else if(mGameState->getStateId() == PAUSE_STATE) // PAUSEMENYN
+    else if(mGameState->getStateId() == BaseState::PAUSE_STATE) // PAUSEMENYN
     {
 		if(e.key.keysym.sym == SDLK_UP) // GÅ TILLBAKA TILL SPELET
 		{
