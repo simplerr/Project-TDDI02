@@ -23,7 +23,10 @@ Game::~Game()
 bool Game::initWindow()
 {
     // init the window using SDL
-   return mRenderer->initSDL();
+	mMusic = Mix_LoadMUS("../sounds/Hits_from_the_bong.mp3");
+	if (!mMusic)
+		return false;
+	return mRenderer->initSDL();
 }
 
 void Game::cleanup()
@@ -112,6 +115,9 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 					mPlayState->init();
 				}
 				changeState(mPlayState);
+
+				if (Mix_PlayingMusic() == 0)
+					Mix_PlayMusic(mMusic, 1);
 			}
 			if ( x > 512-100 && x < 512+100 && y > 450 && y < 650 ) // Klickområde AVSLUTA PROGRAMMET
 				exit = true;

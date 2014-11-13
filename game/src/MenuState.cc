@@ -8,7 +8,8 @@ MenuState::MenuState()
 
 void MenuState::init()
 {
-	;
+
+	
 }
 
 void MenuState::cleanup()
@@ -52,5 +53,5 @@ void MenuState::drawCred(Renderer* renderer)
 
 void MenuState::handleEvent(SDL_Event e)
 {
-	;
+
 }

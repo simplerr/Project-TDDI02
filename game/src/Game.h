@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include "BaseState.h"
 #include "Renderer.h"
 //...
@@ -36,6 +37,7 @@ private:
     PauseState* mPauseState = nullptr;
     Renderer* mRenderer;
     Input* mInput;
+	Mix_Music *mMusic;
 };
 
 #endif
