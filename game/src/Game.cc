@@ -60,8 +60,7 @@ void Game::run()
 
 	// #########################
 	//Kom gärna på en bättre lösning om möjligt att rendra PlayState bakom PauseState
-	const PauseState* pause = dynamic_cast<const PauseState*>(mGameState);
-	if(pause)
+	if(mGameState->getStateId() == BaseState::PAUSE_STATE)
 		mPlayState->draw(mRenderer);
 	// #########################
 	
@@ -76,10 +75,7 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 {
     if(e.type == SDL_QUIT)
         exit = true;
-		
-	//const MenuState* menu = dynamic_cast<const MenuState*>(mGameState);
-	//const PlayState* play = dynamic_cast<const PlayState*>(mGameState);
-	//const PauseState* pause = dynamic_cast<const PauseState*>(mGameState);
+
     if(mGameState->getStateId() == BaseState::MENU_STATE) // HUVUDMENYN
     {
 		//credit 
@@ -109,7 +105,6 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			}
 			if ( x > 512-100 && x < 512+100 && y > 450 && y < 650 ) // Klickområde AVSLUTA PROGRAMMET
 				exit = true;
-			//delete menu;
 		} 
     }
     else if(mGameState->getStateId() == BaseState::PLAY_STATE) // SPELET
@@ -124,7 +119,6 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			}
 			changeState(mPauseState);
 		}
-	//delete play;
     }
     else if(mGameState->getStateId() == BaseState::PAUSE_STATE) // PAUSEMENYN
     {
@@ -138,7 +132,6 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 			delete mPlayState;
 			mPlayState = nullptr; // Kan någon intyga att det destruerar mPlayStates PlayState korrekt?
 		}
-	//delete pause;
     }
 
     mGameState->handleEvent(e); //Övriga "Special" inputs för specifika states
