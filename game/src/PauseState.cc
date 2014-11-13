@@ -6,6 +6,12 @@ PauseState::PauseState()
 	mPauseMenu = nullptr;
 }
 
+PauseState::~PauseState()
+{
+	//currentGame = nullptr;
+	delete mPauseMenu;
+}
+
 void PauseState::init()
 {
 	;

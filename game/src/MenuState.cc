@@ -6,6 +6,11 @@ MenuState::MenuState()
 	mMenu = nullptr;
 }
 
+MenuState::~MenuState()
+{
+	
+}
+
 void MenuState::init()
 {
 

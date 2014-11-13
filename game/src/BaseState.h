@@ -9,7 +9,7 @@ class BaseState
 {
 public:
     BaseState() {};
-    ~BaseState() {};
+    virtual ~BaseState() {};
 
     virtual void init() = 0;
     virtual void cleanup() = 0;
