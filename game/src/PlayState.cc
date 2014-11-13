@@ -26,8 +26,8 @@ void PlayState::init()
 void PlayState::cleanup()
 {
     delete mLevel;
-	delete mPlayer;
-	delete mTestBkgd;
+    delete mPlayer;
+    delete mTestBkgd;
 }
 
 void PlayState::update(float dt)
