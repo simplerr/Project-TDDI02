@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "Game.h"
 
+
 PlayState::PlayState()
 {
     mTestBkgd = nullptr;
@@ -33,6 +34,12 @@ void PlayState::cleanup()
 void PlayState::update(float dt)
 {
     mLevel->update(dt);
+	
+
+	Mix_Music *mMusic = Mix_LoadMUS("../sounds/Hits_from_the_bong.mp3");
+	if (mMusic)
+		if (Mix_PlayingMusic() == 0)
+			Mix_PlayMusic(mMusic, 1);
 }
 
 void PlayState::draw(Renderer* renderer)
@@ -48,6 +55,7 @@ void PlayState::draw(Renderer* renderer)
 
 void PlayState::handleEvent(SDL_Event e)
 {
+
 	//If a key was pressed
 	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
