@@ -34,7 +34,14 @@ void PauseState::draw(Renderer* renderer)
 		mPauseMenu = renderer->loadTexture("../imgs/backgrounds/pause.png");
 }
 
-void PauseState::handleEvent(SDL_Event e)
+void PauseState::handleEvent(SDL_Event e, bool& exit)
 {
-		;
+    if(e.key.keysym.sym == SDLK_UP) // GÅ TILLBAKA TILL SPELET
+    {
+	setNextState(BaseState::PLAY_STATE);
+    }
+    else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
+    {
+	setNextState(BaseState::MENU_STATE);
+    }
 }

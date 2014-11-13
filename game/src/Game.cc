@@ -76,64 +76,32 @@ void Game::handleEvent(SDL_Event e, bool& exit)
     if(e.type == SDL_QUIT)
         exit = true;
 
-    if(mGameState->getStateId() == BaseState::MENU_STATE) // HUVUDMENYN
-    {
-		//credit 
-		/*if (e.key.keysym.sym == SDLK_c) // GÅ TILL CREDITS
-		{
-			menu->drawCred(mRenderer);
-			SDL_Delay(5000); // show 5 second
-		}*/
-		
-		if(e.type == SDL_MOUSEBUTTONDOWN) // SPELA KARTA
-		{
-			//Get mouse position
-			int x, y;
-			SDL_GetMouseState( &x, &y );
-			
-			if (x > 512-100 && x < 512+100 && y > 200 && y < 400) //Klickområde STARTA SPELET
-			{
-				if (mPlayState == nullptr)
-				{
-					mPlayState = new PlayState;
-					mPlayState->init();
-				}
-				changeState(mPlayState);
+    BaseState::StateId changeStateTo = mGameState->changeStateTo();
 
-				if (Mix_PlayingMusic() == 0)
-					Mix_PlayMusic(mMusic, 1);
-			}
-			if ( x > 512-100 && x < 512+100 && y > 450 && y < 650 ) // Klickområde AVSLUTA PROGRAMMET
-				exit = true;
-		} 
-    }
-    else if(mGameState->getStateId() == BaseState::PLAY_STATE) // SPELET
+    if(changeStateTo == BaseState::PLAY_STATE)
     {
-		// ENTER PAUSE MENU
-		if(e.key.keysym.sym == SDLK_ESCAPE)
-		{
-			if ( mPauseState == nullptr )
-			{
-				mPauseState = new PauseState;
-				mPauseState->init();
-			}
-			changeState(mPauseState);
-		}
+	mPlayState = new PlayState;
+	mPlayState->init();
+	changeState(mPlayState);         	
     }
-    else if(mGameState->getStateId() == BaseState::PAUSE_STATE) // PAUSEMENYN
+    else if(changeStateTo == BaseState::MENU_STATE)
     {
-		if(e.key.keysym.sym == SDLK_UP) // GÅ TILLBAKA TILL SPELET
-		{
-			changeState(mPlayState);
-		}
-		else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
-		{
-			changeState(mMenuState);
-			delete mPlayState;
-			mPlayState = nullptr; // Kan någon intyga att det destruerar mPlayStates PlayState korrekt?
-		}
+	mMenuState = new MenuState;
+	mMenuState->init();
+	changeState(mMenuState);
+    }
+    else if(changeStateTo == BaseState::PAUSE_STATE)
+    {
+	mPauseState = new PauseState;
+	mPauseState->init();
+	changeState(mPauseState);
+    }
+    else if(changeStateTo == BaseState::EDITOR_STATE)
+    {
+	//mEditorState = new EditorState;
+	//mEditorState->init();
+	//changeState(mPauseState);
     }
 
-    mGameState->handleEvent(e); //Övriga "Special" inputs för specifika states
-    
+    mGameState->handleEvent(e, exit); //Övriga "Special" inputs för specifika states
 }

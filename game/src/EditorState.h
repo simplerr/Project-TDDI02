@@ -15,7 +15,7 @@ class EditorState : public BaseState {
 	void cleanup();
 	void update(float dt);
 	void draw(Renderer* renderer);
-	void handleEvent(SDL_Event e);
+	void handleEvent(SDL_Event e, bool& exit);
 
 	StateId getStateId() { return EDITOR_STATE; }
  private:

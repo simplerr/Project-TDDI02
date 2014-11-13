@@ -29,7 +29,7 @@ void EditorState::draw(Renderer* renderer)
 	;
 }
 
-void EditorState::handleEvent(SDL_Event e)
+void EditorState::handleEvent(SDL_Event e, bool& exit)
 {
 	;
 }

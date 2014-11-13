@@ -56,7 +56,19 @@ void MenuState::drawCred(Renderer* renderer)
 		mCredit = renderer->loadTexture("../imgs/backgrounds/credit.jpg");
 }
 
-void MenuState::handleEvent(SDL_Event e)
+void MenuState::handleEvent(SDL_Event e, bool& exit)
 {
-
+    if(e.type == SDL_MOUSEBUTTONDOWN) // SPELA KARTA
+    {
+	//Get mouse position
+	int x, y;
+	SDL_GetMouseState( &x, &y );
+			
+	if (x > 512-100 && x < 512+100 && y > 200 && y < 400) //Klickområde STARTA SPELET
+	{
+	    setNextState(BaseState::PLAY_STATE);
+	}
+	if ( x > 512-100 && x < 512+100 && y > 450 && y < 650 ) // Klickområde AVSLUTA PROGRAMMET
+	    exit = true;
+    } 
 }

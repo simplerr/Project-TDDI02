@@ -15,7 +15,7 @@ public:
     void update(float dt);
     void draw(Renderer* renderer);
     void drawCred(Renderer* renderer);
-    void handleEvent(SDL_Event e);
+    void handleEvent(SDL_Event e, bool& exit);
 
     StateId getStateId() { return MENU_STATE; }
 private:
