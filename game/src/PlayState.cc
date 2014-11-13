@@ -15,7 +15,9 @@ PlayState::PlayState()
 
 PlayState::~PlayState()
 {
-	
+	delete mLevel;
+    delete mPlayer;
+    delete mTestBkgd;
 }
 
 void PlayState::init()
@@ -26,16 +28,14 @@ void PlayState::init()
 
 void PlayState::cleanup()
 {
-    delete mLevel;
-    delete mPlayer;
-    delete mTestBkgd;
+    ;
 }
 
 void PlayState::update(float dt)
 {
     mLevel->update(dt);
 	
-
+    
 	Mix_Music *mMusic = Mix_LoadMUS("../sounds/Hits_from_the_bong.mp3");
 	if (mMusic)
 		if (Mix_PlayingMusic() == 0)

@@ -8,19 +8,18 @@
 
 class PauseState : public BaseState {
  public:
-	PauseState();
-	~PauseState();
+    PauseState();
+    ~PauseState();
 
-	void init();
-	void cleanup();
-	void update(float dt);
-	void draw(Renderer* renderer);
-	void handleEvent(SDL_Event e);
+    void init();
+    void cleanup();
+    void update(float dt);
+    void draw(Renderer* renderer);
+    void handleEvent(SDL_Event e);
 
-	StateId getStateId() { return PAUSE_STATE; }
+    StateId getStateId() { return PAUSE_STATE; }
  private:
-	//PlayState *currentGame;
-	Texture *mPauseMenu;
+    Texture *mPauseMenu;
 };
 
 #endif

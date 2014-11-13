@@ -28,7 +28,8 @@ int main(int argc, char* argv[])
 		game->run();
     }
 	
-   game->cleanup();
+   //game->cleanup();
+   delete game;
 
     return 0;
 }

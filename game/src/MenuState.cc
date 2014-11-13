@@ -8,20 +8,20 @@ MenuState::MenuState()
 
 MenuState::~MenuState()
 {
-	
+	delete mMenu;
+	delete mPlayButton;
+	delete mExitButton;
+	delete mCredit;
 }
 
 void MenuState::init()
 {
-
-	
+	;
 }
 
 void MenuState::cleanup()
 {
-	delete mMenu;
-	delete mPlayButton;
-	delete mExitButton;
+	;
 }
 
 void MenuState::update(float dt)
