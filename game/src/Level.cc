@@ -67,11 +67,6 @@ void Level::update(float dt)
 	bool x, y = false;
     for(unsigned int i = 1; i < mObjects.size(); i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
-		
-	//Object* objectA = mObjects[i];
-	//for(unsigned int j = i; j < mObjects.size(); j++)
-	//{
-	
 	    Object* objectB = mObjects[i];
 		
 		//##############
@@ -82,7 +77,6 @@ void Level::update(float dt)
 			x = true;
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y);
-		
 		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
 		if ( mPlayer->collision(mPlayer, objectB) )
@@ -91,33 +85,7 @@ void Level::update(float dt)
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );
 		//##############
-	  
-	  /*  const Platform* pl1 = dynamic_cast<Platform*>(objectA);
-	    const Platform* pl2 = dynamic_cast<Platform*>(objectB);
-	    if(pl1 && pl2)
-		continue;
-
-	    bool x_collision = false;
-	    bool y_collision = false;
-	    if(collision(objectA, objectB, x_collision, y_collision))
-	    {
-		// for now the moving object is in mObjectList[i] !!OBS!!
-		Player* player = dynamic_cast<Player*>(objectA);
-
-		if(player)
-		{
-		    if(x_collision)
-			player->addVel(-player->getVel().x, 0);
-		    if(y_collision)
-			player->addVel(0, -player->getVel().y);
-		    
-		    objectA->handleCollision(objectB);
-		    objectB->handleCollision(objectA);
-		}
-	    } */	
-	//}
     }
-
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED

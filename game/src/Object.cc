@@ -79,26 +79,5 @@ bool Object::collision(Object* objectA, Object* objectB)
     {
         return true;
     }
-	/*
-    if( bottomA <= topB )
-    {
-        return false;
-    }
-
-    if( topA >= bottomB )
-    {
-        return false;
-    }
-
-    if( rightA <= leftB )
-    {
-        return false;
-    }
-
-    if( leftA >= rightB )
-    {
-        return false;
-    }
-*/
     return false;
 }
