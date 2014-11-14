@@ -9,6 +9,7 @@
 #include "PlayState.h"
 #include "MenuState.h"
 #include "PauseState.h"
+#include "EditorState.h"
 
 class Game
 {
@@ -29,6 +30,7 @@ private:
     PlayState* mPlayState = nullptr;
     MenuState* mMenuState = nullptr;
     PauseState* mPauseState = nullptr;
+    EditorState* mEditorState= nullptr;
     Renderer* mRenderer;
     Mix_Music *mMusic;
 };

@@ -5,12 +5,13 @@
 #include "Renderer.h"
 #include "BaseState.h"
 
+
 Game::Game()
 {
     mRenderer = new Renderer;
-    mMenuState = new MenuState;
-    mMenuState->init();
-    mGameState = mMenuState;
+    mEditorState = new EditorState(mRenderer);
+    //mEditorState->init();
+    mGameState = mEditorState;
 }
  
 Game::~Game()
