@@ -25,6 +25,14 @@ void Object::draw(Renderer* renderer)
 	mTexture = renderer->loadTexture(mFilename);
 }
 
+void Object::draw(Renderer* renderer, Vec2 mousePos) //EDITORDRAW
+{
+    if(mTexture != nullptr)
+      renderer->drawTexture(mousePos, mWidth, mHeight, mTexture);
+    else
+      mTexture = renderer->loadTexture(mFilename);
+}
+
 void Object::setPosition(Vec2 pos)
 {
     mPosition = pos;

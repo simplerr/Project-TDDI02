@@ -4,20 +4,20 @@
 #include <fstream>
 #include <iostream>
 #include "Platform.h"
+#include "Background.h"
 
-Level::Level(string filename)
-{
-    if ( !loadLevel(filename) )
-    {
-	cerr << "ERROR: MAP FILE: " << filename << "\n";
-    };
-}
+Level::Level()
+{}
 
 Level::~Level()
 {
     for(unsigned int i{}; i < mObjects.size(); ++i)
     {
 	delete mObjects[i];
+    }
+	for(unsigned int i{}; i < mBackgrounds.size(); ++i)
+    {
+	delete mBackgrounds[i];
     }
 }
 
@@ -28,25 +28,25 @@ void Level::addObject(Object* object)
 
 bool Level::loadLevel(string filename)
 {
-    ifstream input (filename);
+	mFilename = filename;
+    ifstream input (mFilename);
     int index, posx, posy, width, height = 0;
     string path = "";
     if( input.is_open() )
     {
 	while (input >> index) 
 	{
+		input >> posx >> posy >> width >> height;
+		input >> path;
 	    if (index == 0) // Player
-	    {
-		input >> posx >> posy >> width >> height;
-		input >> path;
-		mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
-	    }
-	    else if (index >= 1) // Platformar
-	    {
-		input >> posx >> posy >> width >> height;
-		input >> path;
-		mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
-	    }
+			mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
+	    else if (index == 1) // Platformar
+			mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
+		else if (index == 4) // Backgrounds
+			mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
+		else
+			cerr << "FEL, objekt okänt\n";
+	    
 	}
 	
 	input.close();
@@ -54,21 +54,112 @@ bool Level::loadLevel(string filename)
     }
     else
     {
-	cerr << "Error, kunde inte hitta eller öppna kartan." << filename << "\n";
+	cerr << "Error, kunde inte hitta eller öppna kartan. Filnamn som söktes: " << mFilename << "\n";
 	return false;
     }
     //vector<Object> Creatures;
     //vector<Object> Platforms;
 }
 
+bool Level::saveLevel(string filename)
+{
+	mFilename = filename;
+    ofstream output (mFilename);
+    if( output.is_open() )
+    {
+		for(unsigned int i{}; i < mObjects.size(); ++i)
+		{
+			
+			if (mObjects[i]->getId() == 0)
+				output << "0 ";
+			else if (mObjects[i]->getId() == 1)
+				output << "1 ";
+			else if (mObjects[i]->getId() == 2)
+				output << "2 ";
+			else if (mObjects[i]->getId() == 3)
+				output << "3 ";
+			else if (mObjects[i]->getId() == 4)
+				output << "4 ";
+			
+			output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
+				<< mObjects[i]->getHeight() << " " << mObjects[i]->getFilename() << "\n"; 
+		}
+		output.close();
+		return true;
+    }
+    else
+    {
+		cerr << "Error, kunde inte öppna kartan vid save. Filnamn som söktes: " << mFilename << "\n";
+		return false;
+    }
+    //vector<Object> Creatures;
+    //vector<Object> Platforms;
+}
+
+Object* Level::findObjectByPos(Vec2 mousePos)
+{
+	int objectLeft, objectRight, objectUpper, objectBottom;
+	for(unsigned int i{}; i < mObjects.size(); ++i)
+    {
+		objectUpper = mObjects[i]->getPosition().y;
+		objectBottom = mObjects[i]->getPosition().y + mObjects[i]->getHeight();
+		objectLeft = mObjects[i]->getPosition().x;
+		objectRight = mObjects[i]->getPosition().x + mObjects[i]-> getWidth();
+		
+		if ( mousePos.y > objectUpper && mousePos.x > objectLeft && mousePos.y < objectBottom && mousePos.x < objectRight )
+		{
+			std::cout << mObjects.size() << std::endl; 
+			Object* found = mObjects[i]->clone();
+			
+			for(unsigned int j{i+1}; j < mObjects.size(); ++j)
+			{
+				std::swap(mObjects[j], mObjects[j-1]);
+			}
+				
+			mObjects.resize(mObjects.size()-1);
+			mObjects.shrink_to_fit();
+			return found;
+		}
+			
+    }
+	return nullptr;
+}
+
+bool Level::isListEmpty()
+{
+	if ( mObjects.size() == 0 )
+		return true;
+	return false;
+}
+
+void Level::insertion_sort()
+{
+	int length = mObjects.size();
+	int i, j;
+	Object* tmp;
+	for (i = 1; i < length; i++)
+	{
+		j = i;
+		while (j > 0 && mObjects[j - 1]->getId() < mObjects[j]->getId())
+		{
+			tmp = mObjects[j];
+			mObjects[j] = mObjects[j - 1];
+			mObjects[j - 1] = tmp;
+			j--;
+		}
+	}
+}
+
 void Level::update(float dt)
 {
     // collision
 	bool x, y = false;
-    for(unsigned int i = 1; i < mObjects.size(); i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
+    for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 	    Object* objectB = mObjects[i];
 		
+		if(mPlayer == mObjects[i]) //Så att den inte kollar kollision med sig själv...
+			continue;
 		//##############
 		// KOLLA OM KOLLISION FÖR PLAYER X-LED
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
@@ -99,56 +190,10 @@ void Level::update(float dt)
 	
 }
 
-/*
-bool Level::collision(Object* objectA, Object* objectB, bool& x, bool& y)
-{
-    int leftA, leftB;
-    int rightA, rightB;
-    int topA, topB;
-    int bottomA, bottomB;
-
-
-    Vec2 posA = objectA->getPosition();
-    Vec2 posB = objectB->getPosition();
-
-    // sides for A
-    leftA = posA.x;
-    rightA = posA.x + objectA->getWidth();
-    topA = posA.y;
-    bottomA = posA.y + objectA->getHeight();
-
-    // sides for B
-    leftB = posB.x;
-    rightB = posB.x + objectB->getWidth();
-    topB = posB.y;
-    bottomB = posB.y + objectB->getHeight();
-
-    //If any of the sides from A are outside of B
-    if( bottomA <= topB )
-    {
-        return false;
-    }
-
-    if( topA >= bottomB )
-    {
-        return false;
-    }
-
-    if( rightA <= leftB )
-    {
-        return false;
-    }
-
-    if( leftA >= rightB )
-    {
-        return false;
-    }
-
-    return true;
-} */
-
 void Level::draw(Renderer* renderer)
 {
+	for(unsigned int i = 0; i < mBackgrounds.size(); i++)
+	mBackgrounds[i]->draw(renderer);
     for(unsigned int i = 0; i < mObjects.size(); i++)
 	mObjects[i]->draw(renderer);
 }
@@ -162,12 +207,11 @@ Player* Level::findPlayer()
 {
     for(unsigned int i{}; i < mObjects.size(); ++i)
     {
-	Player* pl = dynamic_cast<Player*>(mObjects[i]);
-	if (pl)
-	{
-	    mPlayer = pl;
-	    break;
-	}
+		if (mObjects[i]->getId() == 0)
+		{
+			mPlayer = dynamic_cast<Player*>(mObjects[i]);
+			break;
+		}
     }
     return mPlayer;
 }

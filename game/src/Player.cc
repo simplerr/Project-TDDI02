@@ -5,6 +5,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
 {
     mVelY = 0;
     mVelX = 0;
+    setId(0);
 }
 
 Player::~Player()
@@ -71,4 +72,10 @@ void Player::addVel(int VelX, int VelY)
 Vec2 Player::getVel()
 {
     return Vec2(mVelX, mVelY);
+}
+
+Object* Player::clone()
+{
+    Object* NewObject = new Player(getPosition(), getWidth(), getHeight(), getFilename());
+    return NewObject;
 }

@@ -3,34 +3,38 @@
 
 #include <string>
 #include <vector>
+#include "Player.h"
 using namespace std;
 
 class Object;
 class Renderer;
-class Player;
 
 class Level
 {
 public:
-  Level(string filename);
+  Level();
   ~Level();
 
-  void addObject(Object* object); // FOR EDITOR
-  void saveObjectList(); // FOR EDITOR
-  
-  //Player* addPlayer(int x, int y);
+    void addObject(Object* object); // FOR EDITOR
+    void saveObjectList(); // FOR EDITOR
+    bool saveLevel(string filename);
+    void pop() { mObjects.pop_back(); }
+    Object* findObjectByPos(Vec2 mousePos);
+    bool isListEmpty();
+    void insertion_sort();
 
   Player* findPlayer();
   bool loadLevel(string filename);
   void update(float dt);
   void draw(Renderer* renderer);
-  //bool collision(Object* objectA, Object* objectB, bool& x, bool& y);
 
   Object* getObjectAt(float x, float y);
  
 private:
   vector<Object*> mObjects;
+  vector<Object*> mBackgrounds;
   Player* mPlayer;
+  string mFilename;
 };
 
 #endif

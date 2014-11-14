@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <string>
 #include "Vec2.h"
 
@@ -21,11 +22,14 @@ public:
 
     void drawTexture(Vec2 pos, int width, int height, Texture* texture);
     Texture* loadTexture(std::string filename);
-    std::pair<int,int> getScreenSize(){ return std::pair<int,int>(SCREEN_WIDTH, SCREEN_HEIGHT); } //bra att ha??
+    Texture* loadTexture(const char text[], unsigned int color1, unsigned int color2, unsigned int color3);
+    int getScreenWidth(){ return SCREEN_WIDTH; }//bra att ha??
+    int getScreenHeight(){ return SCREEN_HEIGHT; }
     // drawAnimation(...)
 private:
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
+    TTF_Font * mFont;
     const int SCREEN_WIDTH = 1024;
     const int SCREEN_HEIGHT = 768;
     //SDL_Texture mTexture; ???

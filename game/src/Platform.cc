@@ -3,7 +3,7 @@
 Platform::Platform(Vec2 pos, int width, int height, string filename)
     : Object(pos, width, height, filename)
 {
-
+    setId(1);
 }
 
 Platform::~Platform()
@@ -25,3 +25,9 @@ void Platform::handleCollision(Object* object)
 {
 
 }
+
+Object* Platform::clone()
+    {
+        Object* NewObject = new Platform(getPosition(), getWidth(), getHeight(), getFilename());
+        return NewObject;
+    }

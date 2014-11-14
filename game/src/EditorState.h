@@ -5,10 +5,14 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "Level.h"
+#include "Button.h"
+#include "Object.h"
+#include "Vec2.h"
+#include <vector>
 
 class EditorState : public BaseState {
  public:
-	EditorState();
+	EditorState(Renderer* renderer);
 	~EditorState();
 
 	void init();
@@ -19,8 +23,23 @@ class EditorState : public BaseState {
 
 	StateId getStateId() { return EDITOR_STATE; }
  private:
-	Texture *mMenu;
-	Level *mLevel;
+	Texture* mListBgd;
+    Texture* mGridBgd;
+    Texture* mTextPlatformar;
+    Texture* mTextBakgrunder;
+	Level* mLevel;
+    vector<Button*> buttonList;
+    Renderer* mRenderer;
+    Vec2 buttonSize{30, 30};
+    int mSCREEN_WIDTH;
+    int mSCREEN_HEIGHT;
+    int menuBarWidth{120};
+    Vec2 mousePos;
+    Vec2 gridPos;
+    Object* currentObject = nullptr;
+    unsigned int currentWidth;
+    unsigned int currentHeight;
+    unsigned int gridSize = 8;
 };
 
 #endif

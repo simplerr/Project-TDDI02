@@ -22,7 +22,8 @@ PlayState::~PlayState()
 
 void PlayState::init()
 {
-	mLevel = new Level("Maptest.txt");
+	mLevel = new Level();
+	mLevel->loadLevel("Maptest2.txt");
 	mPlayer = mLevel->findPlayer();
 }
 

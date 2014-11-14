@@ -12,6 +12,8 @@ public:
     Platform(Vec2 pos, int width, int height, string filename);
     ~Platform();
 
+    Object* clone();
+    
     void update(float dt);
     void draw(Renderer* renderer);
     void handleCollision(Object* collider);

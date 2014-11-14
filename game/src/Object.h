@@ -17,16 +17,22 @@ public:
 
     virtual void update(float dt) = 0;
     virtual void draw(Renderer* renderer);
+    void draw(Renderer* renderer, Vec2 mousePos);
     virtual void handleCollision(Object* collider) = 0;
     virtual bool collision(Object* objectA, Object* objectB);
+    virtual Object* clone() = 0;
     
     // add get/set
     Vec2 getPosition();
     int getWidth();
     int getHeight();
+    string getFilename() { return mFilename; }
 
     void setPosition(Vec2 pos);
     void setPosition(float x, float y);
+    void setSize(Vec2 newSize) { mWidth = newSize.x; mHeight = newSize.y; } //FÖR EDITOR
+    int getId(){return mId;}
+    void setId(int id){ mId = id;}
 private:
     Texture* mTexture;
     Vec2 mPosition;

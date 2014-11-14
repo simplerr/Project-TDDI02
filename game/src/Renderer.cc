@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 #include "Renderer.h"
 #include "Texture.h"
 #include "Vec2.h"
@@ -17,8 +18,10 @@ Renderer::~Renderer()
     // cleanup SDL
     SDL_DestroyRenderer(mRenderer);
     SDL_DestroyWindow(mWindow);
+	TTF_CloseFont(mFont);
     mWindow = NULL;
     mRenderer = NULL;
+	TTF_Quit();
     SDL_Quit();
 }
 
@@ -26,7 +29,7 @@ bool Renderer::initSDL()
 {
     bool success = true;
 
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
+    if(SDL_Init(SDL_INIT_VIDEO) < 0 || TTF_Init() < 0)
     {
 	cerr << "ERROR: Kunde inte initiera SDL\n";
         success = false;
@@ -46,7 +49,7 @@ bool Renderer::initSDL()
             if(mRenderer == NULL)
             {
                 cerr << "ERROR: Kunde inte skapa renderer\n" << SDL_GetError();
-		success = false;
+				success = false;
             }else
             {
                 // initialize renderer color
@@ -58,7 +61,14 @@ bool Renderer::initSDL()
 					cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << endl; 
 					success = false; 
 				}
-
+				
+				mFont = TTF_OpenFont("../fonts/arial.ttf", 40);
+				if(mFont == NULL)
+				{
+					cerr << "ERROR: Kunde inte skapa mFont\n" << SDL_GetError();
+					success = false;
+				}
+			
                 // initialize PNG loading
                 int imgFlags = IMG_INIT_PNG;
                 if( !( IMG_Init( imgFlags ) & imgFlags ) )
@@ -87,8 +97,6 @@ void Renderer::endScene()
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture)
 {
     SDL_Rect SDLRect{pos.x, pos.y, width, height};
-
-
     SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &SDLRect);
 }
 
@@ -108,6 +116,30 @@ Texture* Renderer::loadTexture(std::string filename)
         if(newTexture == NULL)
         {
             cerr << "ERROR: Misslyckades konvertera fil: " << filename << SDL_GetError() << endl;
+        }
+        SDL_FreeSurface(tmpSurface);
+    }
+
+    return new Texture(newTexture);
+}
+
+Texture* Renderer::loadTexture(const char text[], unsigned int color1, unsigned int color2, unsigned int color3)
+{
+   
+	SDL_Texture* newTexture = NULL;
+    SDL_Color color = { color1, color2, color3 };
+    
+    SDL_Surface* tmpSurface = TTF_RenderText_Solid(mFont, text, color);
+    if(tmpSurface == NULL)
+    {
+        cerr << "ERROR: Kunde inte ladda text: " << text << endl;
+    }else
+    {
+        //Convertera surface till screen format
+        newTexture = SDL_CreateTextureFromSurface(mRenderer, tmpSurface);
+        if(newTexture == NULL)
+        {
+            cerr << "ERROR: Misslyckades konvertera text: " << text << SDL_GetError() << endl;
         }
         SDL_FreeSurface(tmpSurface);
     }
