@@ -80,12 +80,14 @@ void EditorState::update(float dt)
 
 void EditorState::draw(Renderer* renderer)
 {
+	//Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
 	if (currentObject != nullptr && currentObject->getId() == 4)
 		currentObject->draw(renderer, gridPos);
 		
 	//Ritar ut alla object (platformar osv....)
 	mLevel->draw(renderer); //Rita ut alla skapade objekt
 	
+	//Ritar ut markerat objekt om det inte är en bakgrund
 	if (currentObject != nullptr && currentObject->getId() != 4)
 		currentObject->draw(renderer, gridPos);
 	
@@ -169,7 +171,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 	}
 
 	// Ta upp Object
-	if ( e.type == SDL_MOUSEBUTTONDOWN )
+	if ( e.type == SDL_MOUSEBUTTONDOWN  )
 	{
 		//kolla om knapp är markerad
 		for (unsigned int i{}; i < buttonList.size(); ++i)
@@ -209,7 +211,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 			
 			
 		//Om vi inte har något objekt markerat
-		if ( currentObject == nullptr )
+		if ( currentObject == nullptr && mousePos.x < mSCREEN_WIDTH-menuBarWidth )
 		{
 			//kolla i objektlista ifall ett skapat objekt är markerat
 			currentObject = mLevel->findObjectByPos(mousePos);

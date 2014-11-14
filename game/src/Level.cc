@@ -99,6 +99,8 @@ bool Level::saveLevel(string filename)
 Object* Level::findObjectByPos(Vec2 mousePos)
 {
 	int objectLeft, objectRight, objectUpper, objectBottom;
+	Object* found;
+	Object* lowestFound;
 	for(unsigned int i{}; i < mObjects.size(); ++i)
     {
 		objectUpper = mObjects[i]->getPosition().y;
@@ -108,21 +110,37 @@ Object* Level::findObjectByPos(Vec2 mousePos)
 		
 		if ( mousePos.y > objectUpper && mousePos.x > objectLeft && mousePos.y < objectBottom && mousePos.x < objectRight )
 		{
-			std::cout << mObjects.size() << std::endl; 
-			Object* found = mObjects[i]->clone();
+			found = mObjects[i];
+			if (lowestFound != nullptr)
+			{
+				if (lowestFound->getId() >= found->getId() )
+					lowestFound = found;
+			}
+			else
+				lowestFound = found;	
+		}
 			
-			for(unsigned int j{i+1}; j < mObjects.size(); ++j)
+	}
+	
+	found = lowestFound->clone();
+	for(unsigned int z{}; z < mObjects.size(); ++z)
+	{
+		if (lowestFound == mObjects[z])
+		{
+			for(unsigned int j{z+1}; j < mObjects.size(); ++j)
 			{
 				std::swap(mObjects[j], mObjects[j-1]);
 			}
-				
-			mObjects.resize(mObjects.size()-1);
-			mObjects.shrink_to_fit();
-			return found;
+			break;
 		}
-			
-    }
-	return nullptr;
+	}
+	//lowestFound = nullptr;
+	//delete mObjects[mObjects.size()];
+	mObjects.resize(mObjects.size()-1);
+	mObjects.shrink_to_fit();
+	return found;
+	
+	//return nullptr;
 }
 
 bool Level::isListEmpty()
