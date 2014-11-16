@@ -99,8 +99,8 @@ bool Level::saveLevel(string filename)
 Object* Level::findObjectByPos(Vec2 mousePos)
 {
 	int objectLeft, objectRight, objectUpper, objectBottom;
-	Object* found;
-	Object* lowestFound;
+	Object* found = nullptr;
+	Object* lowestFound = nullptr;
 	for(unsigned int i{}; i < mObjects.size(); ++i)
     {
 		objectUpper = mObjects[i]->getPosition().y;
@@ -110,6 +110,7 @@ Object* Level::findObjectByPos(Vec2 mousePos)
 		
 		if ( mousePos.y > objectUpper && mousePos.x > objectLeft && mousePos.y < objectBottom && mousePos.x < objectRight )
 		{
+			//Fixar så man får det översta objectet som är placerat
 			found = mObjects[i];
 			if (lowestFound != nullptr)
 			{
@@ -119,26 +120,32 @@ Object* Level::findObjectByPos(Vec2 mousePos)
 			else
 				lowestFound = found;	
 		}
-			
 	}
 	
-	found = lowestFound->clone();
-	for(unsigned int z{}; z < mObjects.size(); ++z)
+	if(lowestFound != nullptr)
 	{
-		if (lowestFound == mObjects[z])
+		found = lowestFound->clone();
+		for(unsigned int z{}; z < mObjects.size(); ++z)
 		{
-			for(unsigned int j{z+1}; j < mObjects.size(); ++j)
+			if (lowestFound == mObjects[z])
 			{
-				std::swap(mObjects[j], mObjects[j-1]);
+				for(unsigned int j{z+1}; j < mObjects.size(); ++j)
+				{
+					std::swap(mObjects[j], mObjects[j-1]);
+				}
+				break;
 			}
-			break;
 		}
+		
+		//lowestFound = nullptr;
+		//delete mObjects[mObjects.size()];
+		mObjects.resize(mObjects.size()-1);
+		mObjects.shrink_to_fit();
+		return found;
 	}
-	//lowestFound = nullptr;
-	//delete mObjects[mObjects.size()];
-	mObjects.resize(mObjects.size()-1);
-	mObjects.shrink_to_fit();
-	return found;
+	return nullptr;
+	
+	
 	
 	//return nullptr;
 }
