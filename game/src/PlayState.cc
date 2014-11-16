@@ -34,9 +34,8 @@ void PlayState::cleanup()
 
 void PlayState::update(float dt)
 {
-    mLevel->update(dt);
+	mLevel->update(dt);
 	
-    
 	Mix_Music *mMusic = Mix_LoadMUS("../sounds/Hits_from_the_bong.mp3");
 	if (mMusic)
 		if (Mix_PlayingMusic() == 0)
@@ -45,6 +44,7 @@ void PlayState::update(float dt)
 
 void PlayState::draw(Renderer* renderer)
 {
+	renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight());
     // draw test bkgd
     if(mTestBkgd != nullptr)
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mTestBkgd);

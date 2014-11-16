@@ -32,22 +32,30 @@ bool Level::loadLevel(string filename)
     ifstream input (mFilename);
     int index, posx, posy, width, height = 0;
     string path = "";
+	
     if( input.is_open() )
     {
-	while (input >> index) 
-	{
-		input >> posx >> posy >> width >> height;
-		input >> path;
-	    if (index == 0) // Player
-			mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
-	    else if (index == 1) // Platformar
-			mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
-		else if (index == 4) // Backgrounds
-			mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
-		else
-			cerr << "FEL, objekt okänt\n";
-	    
-	}
+		input >> width >> height;
+		LEVEL_WIDTH = width;
+		LEVEL_HEIGHT = height;
+		while (input >> index) 
+		{
+			input >> posx >> posy >> width >> height;
+			input >> path;
+			if (index == 0) // Player
+				mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
+			else if (index == 1) // Platformar
+				mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
+			/*else if (index == 2) // Fiender
+				mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path) );
+			else if (index == 3) // Powerups
+				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
+			else if (index == 4) // Backgrounds
+				mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
+			else
+				cerr << "FEL, objekt okänt\n";
+			
+		}
 	
 	input.close();
 	return true;
@@ -63,10 +71,34 @@ bool Level::loadLevel(string filename)
 
 bool Level::saveLevel(string filename)
 {
+	int maxHeight{}, maxWidth{}, temp{};
 	mFilename = filename;
     ofstream output (mFilename);
     if( output.is_open() )
     {
+		// LOOPA IGOM OBJECT FÖR ATT BESTÄMMA LEVEL_HEIGHT OCH LEVEL_WIDTH
+		for(unsigned int k{}; k < mObjects.size(); ++k)
+		{
+			temp = mObjects[k]->getPosition().x + mObjects[k]->getWidth(); // Objects right
+			if( temp > maxWidth )
+				maxWidth = temp;
+			temp = mObjects[k]->getPosition().y + mObjects[k]->getHeight(); // Objects bottom
+			if( temp > maxHeight )
+				maxHeight = temp;
+		}
+		// KOLLA SÅ ATT INTE LEVEL ÄR FÖR LITEN FÖR SKÄRMEN
+		if ( maxWidth < SCREEN_WIDTH )
+			output << SCREEN_WIDTH;
+		else
+			output << maxWidth;
+		output << " ";
+		if ( maxHeight < SCREEN_HEIGHT )
+			output << SCREEN_HEIGHT;
+		else
+			output << maxHeight;
+		output << "\n";
+		
+		// SPARA ALLA OBJEKT
 		for(unsigned int i{}; i < mObjects.size(); ++i)
 		{
 			
@@ -185,22 +217,24 @@ void Level::update(float dt)
 		
 		if(mPlayer == mObjects[i]) //Så att den inte kollar kollision med sig själv...
 			continue;
+		
 		//##############
 		// KOLLA OM KOLLISION FÖR PLAYER X-LED
-		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
-		if ( mPlayer->collision(mPlayer, objectB) )
+		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA FRAM
+		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().x + mPlayer->getWidth() > LEVEL_WIDTH || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
 		{
 			x = true;
 		}
-		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y);
+		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA TBX
 		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
-		if ( mPlayer->collision(mPlayer, objectB) )
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y); //FLYTTA FRAM
+		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > LEVEL_HEIGHT || mPlayer->getPosition().y < 0 ) //KOLLA COLLISION
 		{
 			y = true;
 		}
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
+		
     }
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);

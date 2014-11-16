@@ -94,10 +94,17 @@ void Renderer::endScene()
      SDL_Delay(1000/60); // 60 FPS
 }
 
-void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture)
+void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    SDL_Rect SDLRect{pos.x, pos.y, width, height};
+    SDL_Rect SDLRect{pos.x, pos.y, width, height}; // mPosX - camX, mPosY - camY
     SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &SDLRect);
+	
+	//if( clip != NULL )
+	//{
+		//SDLRect.x -= camera.x;
+		//SDLRect.y -= camera.y;
+	//}
+	//SDL_RenderCopyEx( mRenderer, texture->getData(), clip, &SDLRect, angle, center, flip );
 }
 
 Texture* Renderer::loadTexture(std::string filename)
@@ -145,4 +152,22 @@ Texture* Renderer::loadTexture(const char text[], unsigned int color1, unsigned 
     }
 
     return new Texture(newTexture);
+}
+
+
+void Renderer::updateCamera(int x, int y, int width, int height)
+{
+	//Center the camera over the dot
+	camera.x = ( x + width / 2 ) - SCREEN_WIDTH / 2;
+	camera.y = ( y + height / 2 ) - SCREEN_HEIGHT / 2;
+	
+	//Keep the camera in bounds
+	if( camera.x < 0 )
+		camera.x = 0;
+	if( camera.y < 0 )
+		camera.y = 0;
+	if( camera.x > LEVEL_WIDTH - camera.w )
+		camera.x = LEVEL_WIDTH - camera.w;
+	if( camera.y > LEVEL_HEIGHT - camera.h )
+		camera.y = LEVEL_HEIGHT - camera.h;
 }

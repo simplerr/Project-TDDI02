@@ -1,1 +1,6 @@
-4 840 584 200 200 ../imgs/downloads/Other/FarBackground.png
+1320 1096
+4 0 0 1320 1096 ../imgs/downloads/Other/FarBackground.png
+1 600 680 104 104 ../imgs/downloads/Walkways/Walkway3.png
+1 704 680 104 104 ../imgs/downloads/Walkways/Walkway2.png
+1 808 680 104 104 ../imgs/downloads/Walkways/Walkway2.png
+0 176 352 48 48 ../imgs/player.jpg
