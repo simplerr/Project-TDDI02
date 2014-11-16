@@ -28,7 +28,9 @@ private:
     Level* mLevel;
     Player* mPlayer;
     Texture* mTestBkgd;
+    Texture* mPauseMenu;
     float speed = 3.0;
+    bool mPaused;
 };
 
 #endif

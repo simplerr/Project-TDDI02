@@ -6,10 +6,7 @@
 #include "BaseState.h"
 #include "Renderer.h"
 //...
-#include "PlayState.h"
-#include "MenuState.h"
-#include "PauseState.h"
-#include "EditorState.h"
+#include "BaseState.h"
 
 class Game
 {
@@ -26,11 +23,7 @@ public:
     void handleEvent(SDL_Event e, bool& exit);
 
 private:
-    BaseState* mGameState;
-    PlayState* mPlayState = nullptr;
-    MenuState* mMenuState = nullptr;
-    PauseState* mPauseState = nullptr;
-    EditorState* mEditorState= nullptr;
+    BaseState* mActiveState;
     Renderer* mRenderer;
     Mix_Music *mMusic;
 };
