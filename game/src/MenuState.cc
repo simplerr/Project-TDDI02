@@ -2,16 +2,18 @@
 
 MenuState::MenuState()
 {
-	//mRenderer = new Renderer();
-	mMenu = nullptr;
+    mMenu = nullptr;
+    mPlayButton = nullptr;
+    mExitButton = nullptr;
+    mCredit = nullptr;
 }
 
 MenuState::~MenuState()
 {
-	delete mMenu;
-	delete mPlayButton;
-	delete mExitButton;
-	delete mCredit;
+    delete mMenu;
+    delete mPlayButton;
+    delete mExitButton;
+    delete mCredit;
 }
 
 void MenuState::init()

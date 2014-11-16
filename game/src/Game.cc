@@ -4,45 +4,42 @@
 #include "PauseState.h"
 #include "Renderer.h"
 #include "BaseState.h"
-
+#include "EditorState.h"
+#include <iostream>
 
 Game::Game()
 {
     mRenderer = new Renderer;
-    mEditorState = new EditorState(mRenderer);
-    //mEditorState->init();
-    mGameState = mEditorState;
+
+    mActiveState = new MenuState;
+    mActiveState->init();
 }
  
 Game::~Game()
 {
-    delete mPlayState;
-    delete mMenuState;
-    delete mPauseState;
-    delete mRenderer;
+    
 }
 
 bool Game::initWindow()
 {
     // init the window using SDL
-	mMusic = Mix_LoadMUS("../sounds/Hits_from_the_bong.mp3");
-	if (!mMusic)
-		return false;
-	return mRenderer->initSDL();
+    return mRenderer->initSDL();
 }
 
 void Game::cleanup()
 {
-	// VET EJ OM DETTA ÄR RÄTT, MINNESLÄCKA VID AVSLUT AV PROGRAM KAN FÖREKOMMA
-	mPlayState->cleanup();
-	mMenuState->cleanup();
-	mPauseState->cleanup();
-	
+    delete mActiveState;
 }
 void Game::changeState(BaseState* state)
 {
+    // cleanup the old one(s)
+    if(mActiveState != nullptr)
+	delete mActiveState;
+
     // init the new one
-    mGameState = state;
+    state->init();
+      
+    mActiveState = state;
 }
 
 void Game::run()
@@ -51,22 +48,27 @@ void Game::run()
     // make sure the game runs at 60 fps
     float dt = 0.0f;
 
+    BaseState::StateId changeStateTo = mActiveState->changeStateTo();
+
+    BaseState* newState = nullptr;
+    if(changeStateTo == BaseState::PLAY_STATE)
+	newState = new PlayState;
+    else if(changeStateTo == BaseState::MENU_STATE)
+	newState = new MenuState;
+    //else if(changeStateTo == BaseState::EDITOR_STATE)
+	//newState = new EditorState;
+       
+    if(newState != nullptr)
+	changeState(newState);
+    
     // update the current gamestate
-    mGameState->update(dt);
+    mActiveState->update(dt);
     
     // all rendering should happen between beginScene() and endScene()
     mRenderer->beginScene();
-
-
-
-	// #########################
-	//Kom gärna på en bättre lösning om möjligt att rendra PlayState bakom PauseState
-	if(mGameState->getStateId() == BaseState::PAUSE_STATE)
-		mPlayState->draw(mRenderer);
-	// #########################
 	
-	// draw the current gamestate
-	mGameState->draw(mRenderer);
+    // draw the current gamestate
+    mActiveState->draw(mRenderer);
 	
     mRenderer->endScene();
 }
@@ -77,32 +79,6 @@ void Game::handleEvent(SDL_Event e, bool& exit)
     if(e.type == SDL_QUIT)
         exit = true;
 
-    BaseState::StateId changeStateTo = mGameState->changeStateTo();
-
-    if(changeStateTo == BaseState::PLAY_STATE)
-    {
-	mPlayState = new PlayState;
-	mPlayState->init();
-	changeState(mPlayState);         	
-    }
-    else if(changeStateTo == BaseState::MENU_STATE)
-    {
-	mMenuState = new MenuState;
-	mMenuState->init();
-	changeState(mMenuState);
-    }
-    else if(changeStateTo == BaseState::PAUSE_STATE)
-    {
-	mPauseState = new PauseState;
-	mPauseState->init();
-	changeState(mPauseState);
-    }
-    else if(changeStateTo == BaseState::EDITOR_STATE)
-    {
-	//mEditorState = new EditorState;
-	//mEditorState->init();
-	//changeState(mPauseState);
-    }
-
-    mGameState->handleEvent(e, exit); //Övriga "Special" inputs för specifika states
+    // update the current gamestate
+    mActiveState->handleEvent(e, exit);
 }
