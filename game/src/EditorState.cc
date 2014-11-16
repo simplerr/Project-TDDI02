@@ -178,8 +178,11 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 		{
 			if( buttonList[i]->mouseOver(mousePos)) //om innanför en knapp
 			{
-				delete currentObject; //Om man väljer någon annan efter man har valt
-				currentObject = nullptr;
+				if(currentObject != nullptr)
+				{
+						delete currentObject; //Om man väljer någon annan efter man har valt
+						currentObject = nullptr;
+				}
 				switch(i)
 				{
 					case 0: currentObject = new Player(mousePos, 48, 48, "../imgs/player.jpg"); break;
@@ -210,7 +213,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 		} // END LOOP
 			
 			
-		//Om vi inte har något objekt markerat
+		//Om vi inte har något objekt markerat och klickar på grid
 		if ( currentObject == nullptr && mousePos.x < mSCREEN_WIDTH-menuBarWidth )
 		{
 			//kolla i objektlista ifall ett skapat objekt är markerat

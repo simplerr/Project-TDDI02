@@ -38,7 +38,7 @@ bool Renderer::initSDL()
     {
 
 	 // create window
-        mWindow = SDL_CreateWindow("Rockblock II", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        mWindow = SDL_CreateWindow("Rockblock II", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN/*|SDL_WINDOW_RESIZABLE*/);
         if(mWindow == NULL)
         {
             cerr << "ERROR: Kunde inte skapa fönster\n";
@@ -127,7 +127,7 @@ Texture* Renderer::loadTexture(const char text[], unsigned int color1, unsigned 
 {
    
 	SDL_Texture* newTexture = NULL;
-    SDL_Color color = { color1, color2, color3 };
+    SDL_Color color = { (unsigned char)color1, (unsigned char)color2, (unsigned char)color3 };
     
     SDL_Surface* tmpSurface = TTF_RenderText_Solid(mFont, text, color);
     if(tmpSurface == NULL)
