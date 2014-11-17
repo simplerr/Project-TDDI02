@@ -9,7 +9,7 @@
 
 static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
-static int LEVEL_WIDTH;
+static int LEVEL_WIDTH; // dom skall inte vara static men åtkomst överallt
 static int LEVEL_HEIGHT;
 
 // handles all SDL code
