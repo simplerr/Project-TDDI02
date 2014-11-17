@@ -6,12 +6,9 @@
 #include "Background.h"
 
 
-EditorState::EditorState(Renderer* renderer)
-	: mRenderer(renderer)
+EditorState::EditorState()
 {
-	mSCREEN_WIDTH = renderer->getScreenWidth();
-	mSCREEN_HEIGHT = renderer->getScreenHeight();
-	init();
+	//init();
 }
 
 EditorState::~EditorState()
@@ -31,11 +28,10 @@ void EditorState::init()
 {
 	//ALLA KNAPPAR PÅ VÄNSTER SIDA
 	
-	int col1 = mSCREEN_WIDTH-(buttonSize.x*3)-20;
-	int col2 = mSCREEN_WIDTH-(buttonSize.x*2)-15;
-	int col3 = mSCREEN_WIDTH-buttonSize.x-10;
+	int col1 = SCREEN_WIDTH-(buttonSize.x*3)-20;
+	int col2 = SCREEN_WIDTH-(buttonSize.x*2)-15;
+	int col3 = SCREEN_WIDTH-buttonSize.x-10;
 	int row = buttonSize.y; // mSCREEN_HEIGHT+buttonSize.y;
-	
 	//###### CREATURES ######
 	buttonList = {
 		new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, "../imgs/player.jpg"),
@@ -57,7 +53,7 @@ void EditorState::init()
 		//###### BACKGROUNDS ######
 	
 		// //###### OTHERS ######
-		new Button(Vec2(mSCREEN_WIDTH-110, mSCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
+		new Button(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
 	}; 
 	mLevel = new Level();
 }
@@ -73,8 +69,8 @@ void EditorState::update(float dt)
 	SDL_GetMouseState( &mousePos.x, &mousePos.y ); //Get mouse position
 	if  (mousePos.x != 0 && mousePos.y != 0 )
 	{
-		gridPos.x = (mousePos.x / (mSCREEN_WIDTH/(mSCREEN_WIDTH/gridSize)))*(mSCREEN_WIDTH/(mSCREEN_WIDTH/gridSize));
-		gridPos.y = (mousePos.y / (mSCREEN_HEIGHT/(mSCREEN_HEIGHT/gridSize)))*(mSCREEN_HEIGHT/(mSCREEN_HEIGHT/gridSize));
+		gridPos.x = (mousePos.x / (SCREEN_WIDTH/(SCREEN_WIDTH/gridSize)))*(SCREEN_WIDTH/(SCREEN_WIDTH/gridSize));
+		gridPos.y = (mousePos.y / (SCREEN_HEIGHT/(SCREEN_HEIGHT/gridSize)))*(SCREEN_HEIGHT/(SCREEN_HEIGHT/gridSize));
 	}
 }
 
@@ -93,14 +89,14 @@ void EditorState::draw(Renderer* renderer)
 	
 	//Bakgrund grid
 	if(mGridBgd != nullptr)
-		renderer->drawTexture(Vec2(0, 0), mSCREEN_WIDTH, mSCREEN_HEIGHT, mGridBgd);
+		renderer->drawTexture(Vec2(0, 0), SCREEN_WIDTH, SCREEN_HEIGHT, mGridBgd);
     else
 		mGridBgd = renderer->loadTexture("../imgs/backgrounds/grid8px.png");
 		
 		
 	//Bakgrund sidan
 	if(mListBgd != nullptr)
-		renderer->drawTexture(Vec2(mSCREEN_WIDTH-menuBarWidth, 0), 120, mSCREEN_HEIGHT, mListBgd);
+		renderer->drawTexture(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, mListBgd);
     else
 		mListBgd = renderer->loadTexture("../imgs/backgrounds/darkblue.png");
 	
@@ -111,12 +107,12 @@ void EditorState::draw(Renderer* renderer)
 	}
 	
 	if(mTextPlatformar != nullptr)
-		renderer->drawTexture(Vec2(mSCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, mTextPlatformar);
+		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, mTextPlatformar);
     else
 		mTextPlatformar = renderer->loadTexture("..Platformar..", 0, 0, 0);
 		
 	if(mTextBakgrunder != nullptr)
-		renderer->drawTexture(Vec2(mSCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, mTextBakgrunder);
+		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, mTextBakgrunder);
     else
 		mTextBakgrunder = renderer->loadTexture("..Bakgrunder..", 0, 0, 0);
 		
@@ -129,7 +125,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 	if( currentObject != nullptr )
 	{
 		// Placera objekt
-		if(e.type == SDL_MOUSEBUTTONDOWN && mousePos.x < mSCREEN_WIDTH-menuBarWidth ) // 120 == bredd på sidmenyn
+		if(e.type == SDL_MOUSEBUTTONDOWN && mousePos.x < SCREEN_WIDTH-menuBarWidth ) // 120 == bredd på sidmenyn
 		{
 			currentObject->setPosition(gridPos);
 			mLevel->addObject( currentObject->clone() );
@@ -214,7 +210,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 			
 			
 		//Om vi inte har något objekt markerat och klickar på grid
-		if ( currentObject == nullptr && mousePos.x < mSCREEN_WIDTH-menuBarWidth )
+		if ( currentObject == nullptr && mousePos.x < SCREEN_WIDTH-menuBarWidth )
 		{
 			//kolla i objektlista ifall ett skapat objekt är markerat
 			currentObject = mLevel->findObjectByPos(mousePos);

@@ -22,6 +22,7 @@ private:
     Texture *mMenu;
     Texture *mPlayButton;
     Texture *mCredit;
+    Texture *mEditorButton;
 
     Texture *mExitButton;
 };

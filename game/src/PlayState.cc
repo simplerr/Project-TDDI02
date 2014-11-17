@@ -49,6 +49,8 @@ void PlayState::draw(Renderer* renderer)
     else
 	mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
 
+	mLevel->draw(renderer);
+	
     if(mPaused)
     {
 	if (mPauseMenu != nullptr)
@@ -56,8 +58,6 @@ void PlayState::draw(Renderer* renderer)
 	else
 	    mPauseMenu = renderer->loadTexture("../imgs/backgrounds/pause.png");
     }
-
-    mLevel->draw(renderer);
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)

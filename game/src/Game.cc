@@ -52,11 +52,11 @@ void Game::run()
 
     BaseState* newState = nullptr;
     if(changeStateTo == BaseState::PLAY_STATE)
-	newState = new PlayState;
+		newState = new PlayState;
     else if(changeStateTo == BaseState::MENU_STATE)
-	newState = new MenuState;
-    //else if(changeStateTo == BaseState::EDITOR_STATE)
-	//newState = new EditorState;
+		newState = new MenuState;
+    else if(changeStateTo == BaseState::EDITOR_STATE)
+		newState = new EditorState;
        
     if(newState != nullptr)
 	changeState(newState);

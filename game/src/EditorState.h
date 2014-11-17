@@ -12,7 +12,7 @@
 
 class EditorState : public BaseState {
  public:
-	EditorState(Renderer* renderer);
+	EditorState();
 	~EditorState();
 
 	void init();
@@ -31,8 +31,6 @@ class EditorState : public BaseState {
     vector<Button*> buttonList;
     Renderer* mRenderer;
     Vec2 buttonSize{30, 30};
-    int mSCREEN_WIDTH;
-    int mSCREEN_HEIGHT;
     int menuBarWidth{120};
     Vec2 mousePos;
     Vec2 gridPos;
