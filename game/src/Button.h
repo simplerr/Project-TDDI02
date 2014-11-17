@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "Renderer.h"
 #include <SDL2/SDL.h>
+#include <string>
 
 class Button
 {
@@ -22,7 +23,7 @@ private:
     Vec2 mPos;
     int mWidth, mHeight;
     std::string mFilePath;
-    Texture* mTexture;
+    Texture* mTexture = nullptr;
     
 };
 

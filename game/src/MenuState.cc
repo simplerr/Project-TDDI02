@@ -7,6 +7,7 @@ MenuState::MenuState()
     mExitButton = nullptr;
 	mEditorButton = nullptr;
     mCredit = nullptr;
+	init();
 }
 
 MenuState::~MenuState()

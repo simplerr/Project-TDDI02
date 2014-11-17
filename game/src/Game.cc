@@ -4,7 +4,6 @@
 #include "PauseState.h"
 #include "Renderer.h"
 #include "BaseState.h"
-#include "EditorState.h"
 #include <iostream>
 
 Game::Game()
@@ -17,7 +16,7 @@ Game::Game()
  
 Game::~Game()
 {
-    
+    delete mActiveState;
 }
 
 bool Game::initWindow()
@@ -28,17 +27,15 @@ bool Game::initWindow()
 
 void Game::cleanup()
 {
-    delete mActiveState;
+    ;
 }
 void Game::changeState(BaseState* state)
 {
     // cleanup the old one(s)
+	std::cout << "sss" << std::endl;
     if(mActiveState != nullptr)
-	delete mActiveState;
-
-    // init the new one
-    state->init();
-      
+		delete mActiveState;
+	std::cout << "sss" << std::endl;
     mActiveState = state;
 }
 
@@ -49,7 +46,6 @@ void Game::run()
     float dt = 0.0f;
 
     BaseState::StateId changeStateTo = mActiveState->changeStateTo();
-
     BaseState* newState = nullptr;
     if(changeStateTo == BaseState::PLAY_STATE)
 		newState = new PlayState;
@@ -59,14 +55,15 @@ void Game::run()
 		newState = new EditorState;
        
     if(newState != nullptr)
-	changeState(newState);
-    
+		changeState(newState);
+	
+	
     // update the current gamestate
     mActiveState->update(dt);
-    
+	
     // all rendering should happen between beginScene() and endScene()
     mRenderer->beginScene();
-	
+
     // draw the current gamestate
     mActiveState->draw(mRenderer);
 	

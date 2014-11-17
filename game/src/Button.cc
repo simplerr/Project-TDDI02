@@ -1,12 +1,14 @@
 #include "Button.h"
-
+#include <iostream>
 
 Button::Button(Vec2 pos, int width, int height, std::string str)
   : mPos(pos), mWidth(width), mHeight(height), mFilePath(str)
 {}
 
 Button::~Button()
-{}
+{
+    delete mTexture;
+}
 
 void Button::draw(Renderer* renderer)
 {

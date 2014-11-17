@@ -29,7 +29,6 @@ class EditorState : public BaseState {
     Texture* mTextBakgrunder;
 	Level* mLevel;
     vector<Button*> buttonList;
-    Renderer* mRenderer;
     Vec2 buttonSize{30, 30};
     int menuBarWidth{120};
     Vec2 mousePos;

@@ -8,7 +8,11 @@
 
 EditorState::EditorState()
 {
-	//init();
+	init();
+	mListBgd = nullptr;
+    mGridBgd = nullptr;
+    mTextPlatformar = nullptr;
+    mTextBakgrunder = nullptr;
 }
 
 EditorState::~EditorState()
@@ -19,7 +23,6 @@ EditorState::~EditorState()
 	}
 	delete mLevel;
 	delete mListBgd;
-    delete mRenderer;
 	if ( currentObject != nullptr )
 		delete currentObject;
 }
@@ -35,23 +38,19 @@ void EditorState::init()
 	//###### CREATURES ######
 	buttonList = {
 		new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, "../imgs/player.jpg"),
-	
 		//###### PLATFORMS ######
 		new Button(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/platform.jpg"),
 		new Button(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/lava.png"),
 		new Button(Vec2(col3, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/block.png"),
-		
 		new Button(Vec2(col1, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway3.png"),
 		new Button(Vec2(col2, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway2.png"), 
 		new Button(Vec2(col3, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway1.png"),
 		//###### PLATFORMS ######
-		
 		//###### BACKGROUNDS ######
 		new Button(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/backgrounds/skygrad.jpg"),
 		new Button(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/FarBackground.png"),
 		new Button(Vec2(col3, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/Grass.png"),
 		//###### BACKGROUNDS ######
-	
 		// //###### OTHERS ######
 		new Button(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
 	}; 
@@ -79,7 +78,7 @@ void EditorState::draw(Renderer* renderer)
 	//Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
 	if (currentObject != nullptr && currentObject->getId() == 4)
 		currentObject->draw(renderer, gridPos);
-		
+	
 	//Ritar ut alla object (platformar osv....)
 	mLevel->draw(renderer); //Rita ut alla skapade objekt
 	
@@ -92,8 +91,6 @@ void EditorState::draw(Renderer* renderer)
 		renderer->drawTexture(Vec2(0, 0), SCREEN_WIDTH, SCREEN_HEIGHT, mGridBgd);
     else
 		mGridBgd = renderer->loadTexture("../imgs/backgrounds/grid8px.png");
-		
-		
 	//Bakgrund sidan
 	if(mListBgd != nullptr)
 		renderer->drawTexture(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, mListBgd);
@@ -101,9 +98,9 @@ void EditorState::draw(Renderer* renderer)
 		mListBgd = renderer->loadTexture("../imgs/backgrounds/darkblue.png");
 	
 	//Ritar ut alla knappar
-	for (unsigned int i{}; i < buttonList.size(); ++i)
+	for (unsigned int p{0}; p < buttonList.size(); ++p)
 	{
-		buttonList[i]->draw(renderer);
+		buttonList[p]->draw(renderer);
 	}
 	
 	if(mTextPlatformar != nullptr)

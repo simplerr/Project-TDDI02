@@ -13,6 +13,7 @@ PlayState::PlayState()
     mPlayer = nullptr;
     mPauseMenu = nullptr;
     mPaused = false;
+	init();
 }
 
 PlayState::~PlayState()
@@ -65,7 +66,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
     if(!mPaused)
     {
 	//If a key was pressed
-	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 && !mPaused) 
 	{
 	    //Adjust the velocity
 	    switch( e.key.keysym.sym )
@@ -97,7 +98,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
     {
 	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
 	{
-	    if(e.key.keysym.sym == SDLK_UP) // GÅ TILLBAKA TILL SPELET
+	    if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET
 	    {
 		mPaused = !mPaused;
 	    }
