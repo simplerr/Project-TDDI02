@@ -54,7 +54,7 @@ void PlayState::draw(Renderer* renderer)
     if(mPaused)
     {
 	if (mPauseMenu != nullptr)
-	    renderer->drawTexture(Vec2(0, 0), 1024, 768, mPauseMenu);
+	    renderer->drawTextureScreen(Vec2(0,0), 1024, 768, mPauseMenu);
 	else
 	    mPauseMenu = renderer->loadTexture("../imgs/backgrounds/pause.png");
     }

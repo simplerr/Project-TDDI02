@@ -26,6 +26,8 @@ public:
     Vec2 getPosition();
     int getWidth();
     int getHeight();
+    void setWidth( int newW) { mWidth = newW; }
+    void setHeight( int newH){ mHeight = newH; }
     string getFilename() { return mFilename; }
 
     void setPosition(Vec2 pos);

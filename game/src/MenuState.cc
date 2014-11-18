@@ -36,6 +36,8 @@ void MenuState::update(float dt)
 
 void MenuState::draw(Renderer* renderer)
 {
+		//set camera to normal pos
+		renderer->updateCamera(0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); 
 	// draw test bkgd
 	if(mMenu != nullptr && mPlayButton != nullptr &&  mExitButton != nullptr && mEditorButton != nullptr )
 	{

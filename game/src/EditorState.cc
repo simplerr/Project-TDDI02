@@ -61,19 +61,9 @@ void EditorState::init()
 		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, "..Bakgrunder..", 0,0,0)
 	};
 	mLevel = new Level();
+	mLevel->loadLevel("Maptest2.txt");
 }
 
-/*
-if(mTextPlatformar != nullptr)
-		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, mTextPlatformar);
-    else
-		mTextPlatformar = renderer->loadTexture("..Platformar..", 0, 0, 0);
-		
-	if(mTextBakgrunder != nullptr)
-		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, mTextBakgrunder);
-    else
-		mTextBakgrunder = renderer->loadTexture("..Bakgrunder..", 0, 0, 0);
-*/
 void EditorState::cleanup()
 {
 	;
@@ -214,7 +204,8 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 		if ( currentObject == nullptr && mousePos.x < SCREEN_WIDTH-menuBarWidth )
 		{
 			//kolla i objektlista ifall ett skapat objekt är markerat
-			currentObject = mLevel->findObjectByPos(mousePos);
+			Vec2 levelMousePos(mousePos.x+(mLevel->getCam().x-SCREEN_WIDTH/2),mousePos.y+(mLevel->getCam().y-SCREEN_HEIGHT/2));
+			currentObject = mLevel->findObjectByPos(levelMousePos);
 			if( currentObject != nullptr )
 			{
 				currentHeight = currentObject->getHeight();
@@ -247,20 +238,18 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 	
 	if(e.key.keysym.sym == SDLK_RIGHT && e.type == SDL_KEYDOWN)
     {
-		mLevel->setCam(8,0);
+		mLevel->setCam(32,0);
     }
 	if(e.key.keysym.sym == SDLK_LEFT && e.type == SDL_KEYDOWN)
     {
-		mLevel->setCam(-8,0);
+		mLevel->setCam(-32,0);
     }
 	if(e.key.keysym.sym == SDLK_UP && e.type == SDL_KEYDOWN)
     {
-		mLevel->setCam(0,-8);
+		mLevel->setCam(0,-32);
     }
 	if(e.key.keysym.sym == SDLK_DOWN && e.type == SDL_KEYDOWN)
     {
-		mLevel->setCam(0,8);
-    }
-	
-    
+		mLevel->setCam(0,32);
+    } 
 }
