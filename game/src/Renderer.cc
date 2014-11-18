@@ -96,20 +96,18 @@ void Renderer::endScene()
 
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    SDL_Rect SDLRect{pos.x, pos.y, width, height}; // mPosX - camX, mPosY - camY
-    //SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &SDLRect);
-	
-		//SDLRect.x -= camera.x;
-		//SDLRect.y -= camera.y;
+    SDL_Rect SDLRect{pos.x-camera.x, pos.y-camera.y, width, height};
 
-	SDL_RenderCopyEx( mRenderer, texture->getData(), NULL, &SDLRect, angle, center, flip );
+	SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
 }
-void Renderer::drawPlayer(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
+
+void Renderer::drawTextureScreen(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    SDL_Rect SDLRect{pos.x-camera.x, pos.y-camera.y, width, height}; // mPosX - camX, mPosY - camY
-	
-	SDL_RenderCopyEx( mRenderer, texture->getData(), clip, &SDLRect, angle, center, flip );
+    SDL_Rect SDLRect{pos.x, pos.y, width, height};
+
+	SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
 }
+
 
 Texture* Renderer::loadTexture(std::string filename)
 {
@@ -134,13 +132,13 @@ Texture* Renderer::loadTexture(std::string filename)
     return new Texture(newTexture);
 }
 
-Texture* Renderer::loadTexture(const char text[], unsigned int color1, unsigned int color2, unsigned int color3)
+Texture* Renderer::loadTexture(string text, unsigned int color1, unsigned int color2, unsigned int color3)
 {
    
 	SDL_Texture* newTexture = NULL;
     SDL_Color color = { (unsigned char)color1, (unsigned char)color2, (unsigned char)color3 };
     
-    SDL_Surface* tmpSurface = TTF_RenderText_Solid(mFont, text, color);
+    SDL_Surface* tmpSurface = TTF_RenderText_Solid(mFont, text.c_str(), color);
     if(tmpSurface == NULL)
     {
         cerr << "ERROR: Kunde inte ladda text: " << text << endl;
@@ -159,12 +157,12 @@ Texture* Renderer::loadTexture(const char text[], unsigned int color1, unsigned 
 }
 
 
-void Renderer::updateCamera(int x, int y, int width, int height)
+void Renderer::updateCamera(int x, int y, int width, int height, int LEVEL_WIDTH, int LEVEL_HEIGHT)
 {
 	//Center the camera over the player
 	camera.x = ( x + width / 2 ) - SCREEN_WIDTH / 2;
 	camera.y = ( y + height / 2 ) - SCREEN_HEIGHT / 2;
-	
+	std::cout << "camera.x: " << camera.x << " camera.y: " << camera.y << std::endl; 
 	//Keep the camera in bounds
 	if( camera.x < 0 )
 		camera.x = 0;
@@ -174,4 +172,5 @@ void Renderer::updateCamera(int x, int y, int width, int height)
 		camera.x = LEVEL_WIDTH - camera.w;
 	if( camera.y > LEVEL_HEIGHT - camera.h )
 		camera.y = LEVEL_HEIGHT - camera.h;
+		
 }

@@ -53,10 +53,27 @@ void EditorState::init()
 		//###### BACKGROUNDS ######
 		// //###### OTHERS ######
 		new Button(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
-	}; 
+	};
+	buttonListUnclickable = {
+		new Button(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, "../imgs/backgrounds/grid8px.png"),
+		new Button(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, "../imgs/backgrounds/darkblue.png"),
+		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, "..Platformar..", 0,0,0),
+		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, "..Bakgrunder..", 0,0,0)
+	};
 	mLevel = new Level();
 }
 
+/*
+if(mTextPlatformar != nullptr)
+		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, mTextPlatformar);
+    else
+		mTextPlatformar = renderer->loadTexture("..Platformar..", 0, 0, 0);
+		
+	if(mTextBakgrunder != nullptr)
+		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, mTextBakgrunder);
+    else
+		mTextBakgrunder = renderer->loadTexture("..Bakgrunder..", 0, 0, 0);
+*/
 void EditorState::cleanup()
 {
 	;
@@ -68,50 +85,37 @@ void EditorState::update(float dt)
 	SDL_GetMouseState( &mousePos.x, &mousePos.y ); //Get mouse position
 	if  (mousePos.x != 0 && mousePos.y != 0 )
 	{
-		gridPos.x = (mousePos.x / (SCREEN_WIDTH/(SCREEN_WIDTH/gridSize)))*(SCREEN_WIDTH/(SCREEN_WIDTH/gridSize));
-		gridPos.y = (mousePos.y / (SCREEN_HEIGHT/(SCREEN_HEIGHT/gridSize)))*(SCREEN_HEIGHT/(SCREEN_HEIGHT/gridSize));
+		gridPos.x = ((mousePos.x+(mLevel->getCam().x-SCREEN_WIDTH/2)) / (SCREEN_WIDTH/(SCREEN_WIDTH/gridSize)))*(SCREEN_WIDTH/(SCREEN_WIDTH/gridSize));
+		gridPos.y = ((mousePos.y+(mLevel->getCam().y-SCREEN_HEIGHT/2)) / (SCREEN_HEIGHT/(SCREEN_HEIGHT/gridSize)))*(SCREEN_HEIGHT/(SCREEN_HEIGHT/gridSize));
 	}
 }
 
 void EditorState::draw(Renderer* renderer)
 {
+	
+	//renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), 9000, 9000);
 	//Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
 	if (currentObject != nullptr && currentObject->getId() == 4)
 		currentObject->draw(renderer, gridPos);
-	
+
 	//Ritar ut alla object (platformar osv....)
 	mLevel->draw(renderer); //Rita ut alla skapade objekt
-	
+
 	//Ritar ut markerat objekt om det inte är en bakgrund
 	if (currentObject != nullptr && currentObject->getId() != 4)
 		currentObject->draw(renderer, gridPos);
 	
-	//Bakgrund grid
-	if(mGridBgd != nullptr)
-		renderer->drawTexture(Vec2(0, 0), SCREEN_WIDTH, SCREEN_HEIGHT, mGridBgd);
-    else
-		mGridBgd = renderer->loadTexture("../imgs/backgrounds/grid8px.png");
-	//Bakgrund sidan
-	if(mListBgd != nullptr)
-		renderer->drawTexture(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, mListBgd);
-    else
-		mListBgd = renderer->loadTexture("../imgs/backgrounds/darkblue.png");
+	//Ritar ut alla oklickbara knappar
+	for (unsigned int c{0}; c < buttonListUnclickable.size(); ++c)
+	{
+		buttonListUnclickable[c]->draw(renderer);
+	}
 	
 	//Ritar ut alla knappar
 	for (unsigned int p{0}; p < buttonList.size(); ++p)
 	{
 		buttonList[p]->draw(renderer);
 	}
-	
-	if(mTextPlatformar != nullptr)
-		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, mTextPlatformar);
-    else
-		mTextPlatformar = renderer->loadTexture("..Platformar..", 0, 0, 0);
-		
-	if(mTextBakgrunder != nullptr)
-		renderer->drawTexture(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, mTextBakgrunder);
-    else
-		mTextBakgrunder = renderer->loadTexture("..Bakgrunder..", 0, 0, 0);
 		
 	
 }
@@ -240,5 +244,23 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
     {
 		setNextState(BaseState::MENU_STATE);
     }
+	
+	if(e.key.keysym.sym == SDLK_RIGHT && e.type == SDL_KEYDOWN)
+    {
+		mLevel->setCam(8,0);
+    }
+	if(e.key.keysym.sym == SDLK_LEFT && e.type == SDL_KEYDOWN)
+    {
+		mLevel->setCam(-8,0);
+    }
+	if(e.key.keysym.sym == SDLK_UP && e.type == SDL_KEYDOWN)
+    {
+		mLevel->setCam(0,-8);
+    }
+	if(e.key.keysym.sym == SDLK_DOWN && e.type == SDL_KEYDOWN)
+    {
+		mLevel->setCam(0,8);
+    }
+	
     
 }

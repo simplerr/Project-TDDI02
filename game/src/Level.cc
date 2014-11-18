@@ -7,7 +7,10 @@
 #include "Background.h"
 
 Level::Level()
-{}
+{
+	camX=SCREEN_WIDTH/2;
+	camY=SCREEN_HEIGHT/2;
+}
 
 Level::~Level()
 {
@@ -36,8 +39,8 @@ bool Level::loadLevel(string filename)
     if( input.is_open() )
     {
 		input >> width >> height;
-		LEVEL_WIDTH = width;
-		LEVEL_HEIGHT = height;
+		mLEVEL_WIDTH = width;
+		mLEVEL_HEIGHT = height;
 		while (input >> index) 
 		{
 			input >> posx >> posy >> width >> height;
@@ -207,6 +210,16 @@ void Level::insertion_sort()
 	}
 }
 
+void Level::setCam(int x, int y)
+{
+    camX = camX + x;
+    camY = camY + y;
+	if ( camX < SCREEN_WIDTH/2 )
+		camX = SCREEN_WIDTH/2;
+	if (camY < SCREEN_HEIGHT/2 )
+		camY = SCREEN_HEIGHT/2;
+}
+
 void Level::update(float dt)
 {
     // collision
@@ -221,14 +234,14 @@ void Level::update(float dt)
 		//##############
 		// KOLLA OM KOLLISION FÖR PLAYER X-LED
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().x + mPlayer->getWidth() > LEVEL_WIDTH || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
+		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().x + mPlayer->getWidth() > mLEVEL_WIDTH || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
 		{
 			x = true;
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA TBX
 		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > LEVEL_HEIGHT || mPlayer->getPosition().y < 0 ) //KOLLA COLLISION
+		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT || mPlayer->getPosition().y < 0 ) //KOLLA COLLISION
 		{
 			y = true;
 		}
@@ -251,6 +264,14 @@ void Level::update(float dt)
 
 void Level::draw(Renderer* renderer)
 {
+	if ( mPlayer != nullptr )
+		renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), mLEVEL_WIDTH, mLEVEL_HEIGHT);
+	else{
+		renderer->updateCamera(camX, camY, 0, 0, 10000, 10000);
+		std::cout << "camX: " << camX << "camY: "<<camY << std::endl;
+	}
+		
+		
 	for(unsigned int i = 0; i < mBackgrounds.size(); i++)
 	mBackgrounds[i]->draw(renderer);
     for(unsigned int i = 0; i < mObjects.size(); i++)
