@@ -33,8 +33,9 @@ public:
     void setSize(Vec2 newSize) { mWidth = newSize.x; mHeight = newSize.y; } //FÖR EDITOR
     int getId(){return mId;}
     void setId(int id){ mId = id;}
-private:
     Texture* mTexture;
+private:
+    
     Vec2 mPosition;
     string mFilename;
     int mWidth, mHeight;

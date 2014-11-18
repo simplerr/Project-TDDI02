@@ -65,7 +65,7 @@ bool Renderer::initSDL()
 				mFont = TTF_OpenFont("../fonts/arial.ttf", 40);
 				if(mFont == NULL)
 				{
-					cerr << "ERROR: Kunde inte skapa mFont\n" << SDL_GetError();
+					cerr << "ERROR: Kunde inte skapa mFont\n" << TTF_GetError();
 					success = false;
 				}
 			
@@ -97,14 +97,18 @@ void Renderer::endScene()
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
     SDL_Rect SDLRect{pos.x, pos.y, width, height}; // mPosX - camX, mPosY - camY
-    SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &SDLRect);
+    //SDL_RenderCopy(mRenderer, texture->getData(), nullptr, &SDLRect);
 	
-	//if( clip != NULL )
-	//{
 		//SDLRect.x -= camera.x;
 		//SDLRect.y -= camera.y;
-	//}
-	//SDL_RenderCopyEx( mRenderer, texture->getData(), clip, &SDLRect, angle, center, flip );
+
+	SDL_RenderCopyEx( mRenderer, texture->getData(), NULL, &SDLRect, angle, center, flip );
+}
+void Renderer::drawPlayer(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
+{
+    SDL_Rect SDLRect{pos.x-camera.x, pos.y-camera.y, width, height}; // mPosX - camX, mPosY - camY
+	
+	SDL_RenderCopyEx( mRenderer, texture->getData(), clip, &SDLRect, angle, center, flip );
 }
 
 Texture* Renderer::loadTexture(std::string filename)
@@ -157,7 +161,7 @@ Texture* Renderer::loadTexture(const char text[], unsigned int color1, unsigned 
 
 void Renderer::updateCamera(int x, int y, int width, int height)
 {
-	//Center the camera over the dot
+	//Center the camera over the player
 	camera.x = ( x + width / 2 ) - SCREEN_WIDTH / 2;
 	camera.y = ( y + height / 2 ) - SCREEN_HEIGHT / 2;
 	
