@@ -1,7 +1,7 @@
 1024 768
-1 0 504 200 104 ../imgs/platforms/platform.jpg
-1 200 504 200 104 ../imgs/platforms/platform.jpg
-1 400 504 200 104 ../imgs/platforms/platform.jpg
-1 600 504 200 104 ../imgs/platforms/platform.jpg
-1 800 504 200 104 ../imgs/platforms/platform.jpg
-0 72 456 48 48 ../imgs/player.jpg
+4 0 0 960 744 ../imgs/downloads/Other/FarBackground.png
+1 0 392 200 104 ../imgs/platforms/platform.jpg
+1 200 392 200 104 ../imgs/platforms/platform.jpg
+1 400 392 200 104 ../imgs/platforms/platform.jpg
+1 600 392 200 104 ../imgs/platforms/platform.jpg
+0 72 344 48 48 ../imgs/player.jpg
