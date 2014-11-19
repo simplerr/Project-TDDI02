@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Object.h"
 #include "Game.h"
+#include "Enemy.h"
 
 
 PlayState::PlayState()
@@ -28,6 +29,9 @@ void PlayState::init()
     mLevel = new Level();
     mLevel->loadLevel("Maptest2.txt");
     mPlayer = mLevel->findPlayer();
+
+    // add test enemy
+    mLevel->addObject(new Enemy(Vec2(50, 50), 50, 50, "../imgs/enemy.png", 300));
 }
 
 void PlayState::cleanup()
