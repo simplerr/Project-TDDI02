@@ -24,6 +24,7 @@ public:
     void insertion_sort();
     void setCam(int x, int y);
     Vec2 getCam(){ return Vec2(camX, camY); }
+
     
   Player* findPlayer();
   bool loadLevel(string filename);

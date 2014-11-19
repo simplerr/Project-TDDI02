@@ -16,6 +16,10 @@ public:
     void draw(Renderer* renderer);
     void handleCollision(Object* collider);
     void addVel(int VelX, int VelY);
+    void setjump(int i);
+    void setfall(int i);
+    bool getfall();
+    bool getjump();
     
     //void playerJump(int speed)
 
@@ -23,7 +27,8 @@ public:
 private:
     int mVelX;
     int mVelY;
-    bool jumpEnable;
+    bool jumping;
+    bool falling;
 };
 
 #endif

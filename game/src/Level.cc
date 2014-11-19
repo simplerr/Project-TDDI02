@@ -244,6 +244,8 @@ void Level::update(float dt)
 		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT || mPlayer->getPosition().y < 0 ) //KOLLA COLLISION
 		{
 			y = true;
+			mPlayer->setfall(2);
+			mPlayer->addVel(0,0);
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
@@ -252,8 +254,18 @@ void Level::update(float dt)
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
-		
+	{
+		if(!mPlayer->getfall())
+		{
+		    cout << "faller inte" << endl;
+		    mPlayer->setfall(1);
+		}
+		else if(mPlayer->getfall())
+		{
+		    cout << "faller" << endl;
+		    mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
+		}
+	}	
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {

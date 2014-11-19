@@ -70,8 +70,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 	    //Adjust the velocity
 	    switch( e.key.keysym.sym )
 	    {
-	    case SDLK_UP: mPlayer->addVel(0, -speed); break; // case SDLK_UP: mPlayer->playerJump(speed); break;
-	    case SDLK_DOWN: mPlayer->addVel(0, +speed); break;
+	    case SDLK_UP: mPlayer->setjump(1); break; // case SDLK_UP: mPlayer->playerJump(speed); break;
 	    case SDLK_LEFT: mPlayer->addVel(-speed, 0); break;
 	    case SDLK_RIGHT: mPlayer->addVel(+speed, 0); break;
 	    }
@@ -86,8 +85,6 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 	    //Adjust the velocity
 	    switch( e.key.keysym.sym )
 	    {
-	    case SDLK_UP: mPlayer->addVel(0, +speed); break; // case SDLK_UP: mPlayer->playerJump(speed); break;
-	    case SDLK_DOWN: mPlayer->addVel(0, -speed); break;
 	    case SDLK_LEFT: mPlayer->addVel(+speed, 0); break;
 	    case SDLK_RIGHT: mPlayer->addVel(-speed, 0); break;
 	    }

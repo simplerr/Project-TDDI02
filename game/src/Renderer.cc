@@ -162,7 +162,7 @@ void Renderer::updateCamera(int x, int y, int width, int height, int LEVEL_WIDTH
 	//Center the camera over the player
 	camera.x = ( x + width / 2 ) - SCREEN_WIDTH / 2;
 	camera.y = ( y + height / 2 ) - SCREEN_HEIGHT / 2;
-	std::cout << "camera.x: " << camera.x << " camera.y: " << camera.y << std::endl; 
+	//std::cout << "camera.x: " << camera.x << " camera.y: " << camera.y << std::endl; 
 	//Keep the camera in bounds
 	if( camera.x < 0 )
 		camera.x = 0;

@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player(Vec2 pos, int width, int height, string filename)
     : Object(pos, width, height, filename)
@@ -78,4 +79,39 @@ Object* Player::clone()
 {
     Object* NewObject = new Player(getPosition(), getWidth(), getHeight(), getFilename());
     return NewObject;
+}
+
+void Player::setjump(int i)
+{
+    if(i==1)
+    {
+	jumping = true;
+    }
+    else
+	jumping = false;
+}
+
+void Player::setfall(int i)
+{
+    if(i==1)
+    {
+	falling = true;
+	mVelY = 2;
+	cout << "Falling = true" << endl;
+    }
+    else
+    {
+	falling = false;
+	cout << "Falling = false" << endl;
+    }
+}
+
+bool Player::getjump()
+{
+    return jumping;
+}
+
+bool Player::getfall()
+{
+    return falling;
 }
