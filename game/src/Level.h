@@ -25,6 +25,9 @@ public:
     void setCam(int x, int y);
     Vec2 getCam(){ return Vec2(camX, camY); }
 
+
+    Vec2 getLevelSize(){ return Vec2(mLEVEL_WIDTH, mLEVEL_HEIGHT); }
+
     
   Player* findPlayer();
   bool loadLevel(string filename);
@@ -38,7 +41,7 @@ private:
   vector<Object*> mBackgrounds;
   Player* mPlayer = nullptr;
   string mFilename;
-  int mLEVEL_WIDTH; // dom skall inte vara static men åtkomst överallt
+  int mLEVEL_WIDTH;
   int mLEVEL_HEIGHT;
   unsigned int camX;
   unsigned int camY;

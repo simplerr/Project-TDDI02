@@ -97,7 +97,7 @@ void Renderer::endScene()
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
     SDL_Rect SDLRect{pos.x-camera.x, pos.y-camera.y, width, height};
-
+	
 	SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
 }
 
