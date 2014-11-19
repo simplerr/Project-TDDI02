@@ -32,10 +32,9 @@ void Game::cleanup()
 void Game::changeState(BaseState* state)
 {
     // cleanup the old one(s)
-	std::cout << "sss" << std::endl;
     if(mActiveState != nullptr)
 		delete mActiveState;
-	std::cout << "sss" << std::endl;
+	
     mActiveState = state;
 }
 
@@ -44,20 +43,21 @@ void Game::run()
     // TODO
     // make sure the game runs at 60 fps
     float dt = 0.0f;
-
+	
     BaseState::StateId changeStateTo = mActiveState->changeStateTo();
     BaseState* newState = nullptr;
     if(changeStateTo == BaseState::PLAY_STATE)
 		newState = new PlayState;
     else if(changeStateTo == BaseState::MENU_STATE)
 		newState = new MenuState;
-    else if(changeStateTo == BaseState::EDITOR_STATE)
+    else if(changeStateTo == BaseState::EDITOR_STATE){
 		newState = new EditorState;
+	}
        
     if(newState != nullptr)
 		changeState(newState);
-	
-	
+		
+
     // update the current gamestate
     mActiveState->update(dt);
 	

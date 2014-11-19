@@ -22,7 +22,9 @@ public:
     Object* findObjectByPos(Vec2 mousePos);
     bool isListEmpty();
     void insertion_sort();
-
+    void setCam(int x, int y);
+    Vec2 getCam(){ return Vec2(camX, camY); }
+    
   Player* findPlayer();
   bool loadLevel(string filename);
   void update(float dt);
@@ -33,8 +35,12 @@ public:
 private:
   vector<Object*> mObjects;
   vector<Object*> mBackgrounds;
-  Player* mPlayer;
+  Player* mPlayer = nullptr;
   string mFilename;
+  int mLEVEL_WIDTH; // dom skall inte vara static men åtkomst överallt
+  int mLEVEL_HEIGHT;
+  unsigned int camX;
+  unsigned int camY;
 };
 
 #endif

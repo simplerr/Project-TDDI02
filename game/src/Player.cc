@@ -22,10 +22,6 @@ void Player::update(float dt)
 
 void Player::draw(Renderer* renderer)
 {
-    //if(mTexture != nullptr)
-     // renderer->drawPlayer(getPosition(), getWidth(), getHeight(), Object::mTexture);
-    //else
-      //Object::mTexture = renderer->loadTexture(getFilename());
     Object::draw(renderer);
 }
 

@@ -43,7 +43,6 @@ void PlayState::update(float dt)
 
 void PlayState::draw(Renderer* renderer)
 {
-	renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight());
     // draw test bkgd
     if(mTestBkgd != nullptr)
 	renderer->drawTexture(Vec2(0, 0), 1024, 768, mTestBkgd);
@@ -55,7 +54,7 @@ void PlayState::draw(Renderer* renderer)
     if(mPaused)
     {
 	if (mPauseMenu != nullptr)
-	    renderer->drawTexture(Vec2(0, 0), 1024, 768, mPauseMenu);
+	    renderer->drawTextureScreen(Vec2(0,0), 1024, 768, mPauseMenu);
 	else
 	    mPauseMenu = renderer->loadTexture("../imgs/backgrounds/pause.png");
     }

@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "Button.h"
 #include "Object.h"
+#include "Player.h"
 #include "Vec2.h"
 #include <vector>
 
@@ -27,8 +28,11 @@ class EditorState : public BaseState {
     Texture* mGridBgd;
     Texture* mTextPlatformar;
     Texture* mTextBakgrunder;
+    int camX = SCREEN_WIDTH/2;
+    int camY = SCREEN_HEIGHT/2;
 	Level* mLevel;
     vector<Button*> buttonList;
+    vector<Button*> buttonListUnclickable;
     Vec2 buttonSize{30, 30};
     int menuBarWidth{120};
     Vec2 mousePos;
