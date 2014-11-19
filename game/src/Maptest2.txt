@@ -1,26 +1,25 @@
-<<<<<<< HEAD
-1024 768
-4 0 0 960 744 ../imgs/downloads/Other/FarBackground.png
-1 0 392 200 104 ../imgs/platforms/platform.jpg
-1 200 392 200 104 ../imgs/platforms/platform.jpg
-1 400 392 200 104 ../imgs/platforms/platform.jpg
-1 600 392 200 104 ../imgs/platforms/platform.jpg
-0 72 344 48 48 ../imgs/player.jpg
-=======
-3432 1728
-4 0 0 1064 864 ../imgs/downloads/Other/FarBackground.png
-4 1064 0 1144 864 ../imgs/downloads/Other/FarBackground.png
-4 2208 0 1144 864 ../imgs/downloads/Other/FarBackground.png
-4 0 864 1144 864 ../imgs/downloads/Other/FarBackground.png
-4 1144 864 1144 864 ../imgs/downloads/Other/FarBackground.png
-4 2288 864 1144 864 ../imgs/downloads/Other/FarBackground.png
+2488 1648
+4 1736 1448 200 200 ../imgs/downloads/Other/Grass.png
+4 1536 328 200 200 ../imgs/downloads/Other/Grass.png
+4 1776 256 200 200 ../imgs/downloads/Other/Grass.png
+4 2000 152 200 200 ../imgs/downloads/Other/Grass.png
+4 2032 160 200 200 ../imgs/downloads/Other/Grass.png
+4 2048 160 200 200 ../imgs/downloads/Other/Grass.png
+4 136 264 200 200 ../imgs/downloads/Other/Grass.png
+4 168 264 200 200 ../imgs/downloads/Other/Grass.png
+4 208 264 200 200 ../imgs/downloads/Other/Grass.png
+4 264 280 200 200 ../imgs/downloads/Other/Grass.png
+4 344 280 200 200 ../imgs/downloads/Other/Grass.png
+4 384 280 200 200 ../imgs/downloads/Other/Grass.png
+4 392 264 200 200 ../imgs/downloads/Other/Grass.png
+4 560 264 200 200 ../imgs/downloads/Other/Grass.png
+4 528 264 200 200 ../imgs/downloads/Other/Grass.png
 1 0 432 104 104 ../imgs/downloads/Walkways/Walkway3.png
 1 104 432 104 104 ../imgs/downloads/Walkways/Walkway2.png
 1 208 432 104 104 ../imgs/downloads/Walkways/Walkway2.png
 1 312 432 104 104 ../imgs/downloads/Walkways/Walkway2.png
 1 416 432 104 104 ../imgs/downloads/Walkways/Walkway2.png
 1 520 432 104 104 ../imgs/downloads/Walkways/Walkway2.png
-1 936 432 104 104 ../imgs/downloads/Walkways/Walkway1.png
 1 832 432 104 104 ../imgs/downloads/Walkways/Walkway3.png
 1 624 432 104 104 ../imgs/downloads/Walkways/Walkway1.png
 1 808 616 104 104 ../imgs/downloads/Walkways/Walkway1.png
@@ -31,12 +30,12 @@
 1 1360 544 104 104 ../imgs/downloads/Walkways/Walkway1.png
 1 1536 480 104 104 ../imgs/downloads/Walkways/Walkway3.png
 1 1640 480 104 104 ../imgs/downloads/Walkways/Walkway1.png
-1 1776 400 104 104 ../imgs/downloads/Walkways/Walkway3.png
 1 1880 400 104 104 ../imgs/downloads/Walkways/Walkway1.png
 1 2024 312 104 104 ../imgs/downloads/Walkways/Walkway3.png
 1 2128 312 104 104 ../imgs/downloads/Walkways/Walkway1.png
 1 2280 880 104 104 ../imgs/downloads/Walkways/Walkway2.png
 1 2384 880 104 104 ../imgs/downloads/Walkways/Walkway1.png
 1 2176 880 104 104 ../imgs/downloads/Walkways/Walkway3.png
+1 936 432 104 104 ../imgs/downloads/Walkways/Walkway1.png
+1 1776 400 104 104 ../imgs/downloads/Walkways/Walkway3.png
 0 32 384 48 48 ../imgs/player.jpg
->>>>>>> 68fab6ff8ea66cb723cd4f3c19d64f4c8d2de294
