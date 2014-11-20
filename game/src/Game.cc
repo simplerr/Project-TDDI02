@@ -4,6 +4,7 @@
 #include "PauseState.h"
 #include "Renderer.h"
 #include "BaseState.h"
+#include "Credit.h"
 #include <iostream>
 
 Game::Game()
@@ -50,9 +51,10 @@ void Game::run()
 		newState = new PlayState;
     else if(changeStateTo == BaseState::MENU_STATE)
 		newState = new MenuState;
-    else if(changeStateTo == BaseState::EDITOR_STATE){
+    else if(changeStateTo == BaseState::EDITOR_STATE)
 		newState = new EditorState;
-	}
+	else if (changeStateTo == BaseState::CREDIT)
+		newState = new Credit;
        
     if(newState != nullptr)
 		changeState(newState);

@@ -1,12 +1,4 @@
 2488 984
-3 520 384 38 38 ../imgs/powerup.png
-3 744 424 40 40 ../imgs/powerup.png
-3 776 424 40 40 ../imgs/powerup.png
-3 784 536 40 40 ../imgs/powerup.png
-3 408 248 40 40 ../imgs/powerup.png
-3 432 272 40 40 ../imgs/powerup.png
-3 456 296 40 40 ../imgs/powerup.png
-3 480 328 40 40 ../imgs/powerup.png
 3 496 352 40 40 ../imgs/powerup.png
 2 50 550 50 50 ../imgs/downloads/Walkways/Walkway3.png 300
 1 0 432 104 104 ../imgs/downloads/Walkways/Walkway3.png

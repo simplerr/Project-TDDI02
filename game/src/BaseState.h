@@ -9,7 +9,7 @@ class Renderer;
 class BaseState
 {
 public:
-    enum StateId {BASE_STATE, PLAY_STATE, MENU_STATE, PAUSE_STATE, EDITOR_STATE};
+    enum StateId {BASE_STATE, PLAY_STATE, MENU_STATE, PAUSE_STATE, EDITOR_STATE, CREDIT};
 
     BaseState() : mChangeStateTo(BASE_STATE) {};
     virtual ~BaseState() {};
