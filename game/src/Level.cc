@@ -266,24 +266,25 @@ void Level::update(float dt)
 		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT || mPlayer->getPosition().y < 0 ) //KOLLA COLLISION
 		{
 			y = true;
-			mPlayer->setfall(2);
-			mPlayer->setjump(2);
-			mPlayer->setVel(mPlayer->getVel().x,0);
+			mPlayer->setfall(2); //Sätter hopp till false
+			mPlayer->setjump(2); //Sätter fall till false
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
 		
     }
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
-		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
+	    mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
+	else
+	    mPlayer->setVel(0, mPlayer->getVel().y);
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
 	{
-	    if(mPlayer->getjump())
+	    if(mPlayer->getjump()) //Hanterar ifall spelaren är inuti ett hopp
 	    {
 			mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y +1);
 			mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
 	    }
-	    else
+	    else //Hanterar ifall spelaren faller eller ej
 	    {
 			if(!mPlayer->getfall())
 			{
@@ -296,7 +297,9 @@ void Level::update(float dt)
 				mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
 			}
 	    }
-	}	
+	}
+	else
+	    mPlayer->setVel(mPlayer->getVel().x, 0);
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
