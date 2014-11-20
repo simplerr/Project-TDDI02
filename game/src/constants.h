@@ -11,6 +11,7 @@ static const std::string ROCK_PLATFORM = "../imgs/rock_platform.png";
 //###### EDITOR #######
 static const std::string FILEPATH_PLAYER = "../imgs/player.jpg";
 static const std::string FILEPATH_ENEMY1 = "../imgs/enemy.png";
+static const std::string FILEPATH_POWERUP1 = "../imgs/powerup.png";
 static const std::string FILEPATH_PLATFORM_1 = "../imgs/platforms/platform.jpg";
 static const std::string FILEPATH_PLATFORM_2 = "../imgs/platforms/lava.png";
 static const std::string FILEPATH_PLATFORM_3 = "../imgs/platforms/block.png";
