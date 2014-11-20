@@ -3,7 +3,7 @@
 Background::Background(Vec2 pos, int width, int height, string filename)
     : Object(pos, width, height, filename)
 {
-    setId(4);
+    setId(5);
 }
 
 Background::~Background()

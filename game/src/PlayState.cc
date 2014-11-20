@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Object.h"
 #include "Game.h"
+#include "Enemy.h"
 
 
 PlayState::PlayState()
@@ -70,7 +71,11 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 	    //Adjust the velocity
 	    switch( e.key.keysym.sym )
 	    {
-	    case SDLK_UP: mPlayer->setjump(1); break; // case SDLK_UP: mPlayer->playerJump(speed); break;
+	    case SDLK_UP:
+			    if(!mPlayer->getjump() && !mPlayer->getfall())
+			    {
+				mPlayer->setjump(1); break;
+			    }
 	    case SDLK_LEFT: mPlayer->addVel(-speed, 0); break;
 	    case SDLK_RIGHT: mPlayer->addVel(+speed, 0); break;
 	    }

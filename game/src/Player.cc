@@ -86,6 +86,7 @@ void Player::setjump(int i)
     if(i==1)
     {
 	jumping = true;
+	mVelY = -20;
     }
     else
 	jumping = false;
@@ -97,12 +98,10 @@ void Player::setfall(int i)
     {
 	falling = true;
 	mVelY = 2;
-	cout << "Falling = true" << endl;
     }
     else
     {
 	falling = false;
-	cout << "Falling = false" << endl;
     }
 }
 
@@ -114,4 +113,10 @@ bool Player::getjump()
 bool Player::getfall()
 {
     return falling;
+}
+
+void Player::setVel(int x, int y)
+{
+    mVelX = x;
+    mVelY = y;
 }
