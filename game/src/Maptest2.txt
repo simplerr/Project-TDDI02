@@ -1,12 +1,5 @@
 2488 984
 2 50 550 50 50 ../imgs/downloads/Walkways/Walkway3.png 300
-2 152 272 50 50 ../imgs/enemy.png 1130
-2 232 80 50 50 ../imgs/enemy.png 1130
-2 496 328 50 50 ../imgs/enemy.png 1130
-2 232 664 50 50 ../imgs/enemy.png 1024
-2 720 64 50 50 ../imgs/enemy.png 400
-2 280 344 50 50 ../imgs/enemy.png 400
-2 456 592 50 50 ../imgs/enemy.png 400
 1 0 432 104 104 ../imgs/downloads/Walkways/Walkway3.png
 1 104 432 104 104 ../imgs/downloads/Walkways/Walkway2.png
 1 208 432 104 104 ../imgs/downloads/Walkways/Walkway2.png
