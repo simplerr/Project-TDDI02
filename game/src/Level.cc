@@ -246,9 +246,10 @@ void Level::update(float dt)
 {	
     // collision
 	bool x, y = false;
+	Object* objectB;
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
-	    Object* objectB = mObjects[i];
+	    objectB = mObjects[i];
 		
 		if(mPlayer == mObjects[i]) //Så att den inte kollar kollision med sig själv...
 			continue;
@@ -268,6 +269,7 @@ void Level::update(float dt)
 			y = true;
 			mPlayer->setfall(2); //Sätter hopp till false
 			mPlayer->setjump(2); //Sätter fall till false
+			break;
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
@@ -298,8 +300,10 @@ void Level::update(float dt)
 			}
 	    }
 	}
-	else
-	    mPlayer->setVel(mPlayer->getVel().x, 0);
+	else{
+	    //mPlayer->setVel(mPlayer->getVel().x, 0);
+		mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight());
+		}
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
