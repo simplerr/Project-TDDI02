@@ -1,10 +1,12 @@
 #include "Level.h"
 #include "Object.h"
 #include "Player.h"
+#include "Enemy.h"
 #include <fstream>
 #include <iostream>
 #include "Platform.h"
 #include "Background.h"
+#include "Decoration.h"
 
 Level::Level()
 {
@@ -49,11 +51,17 @@ bool Level::loadLevel(string filename)
 				mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
 			else if (index == 1) // Platformar
 				mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
-			/*else if (index == 2) // Fiender
-				mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path) );
-			else if (index == 3) // Powerups
+			else if (index == 2) // Fiender
+			{
+				int turnX;
+				input >> turnX;
+				mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path, turnX) );
+			}
+			/*else if (index == 3) // Powerups
 				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
 			else if (index == 4) // Backgrounds
+				mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
+			else if (index == 5) // Backgrounds
 				mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
 			else
 				cerr << "FEL, objekt okänt\n";
@@ -115,9 +123,20 @@ bool Level::saveLevel(string filename)
 				output << "3 ";
 			else if (mObjects[i]->getId() == 4)
 				output << "4 ";
+			else if (mObjects[i]->getId() == 5)
+				output << "5 ";
 			
 			output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
-				<< mObjects[i]->getHeight() << " " << mObjects[i]->getFilename() << "\n"; 
+				<< mObjects[i]->getHeight() << " " << mObjects[i]->getFilename();
+				
+			if (mObjects[i]->getId() == 2){ //Om enemy, lägg till endX
+				Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
+					output << " " << enemy->getEndX();
+				//delete enemy;
+			}
+			
+			output << "\n";
+				
 		}
 		output.close();
 		return true;

@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Object.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Vec2.h"
 #include <vector>
 

@@ -4,7 +4,8 @@
 #include <iostream>
 #include "Platform.h"
 #include "Background.h"
-
+#include "constants.h"
+#include "Decoration.h"
 
 EditorState::EditorState()
 {
@@ -37,18 +38,19 @@ void EditorState::init()
 	int row = buttonSize.y; // mSCREEN_HEIGHT+buttonSize.y;
 	//###### CREATURES ######
 	buttonList = {
-		new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, "../imgs/player.jpg"),
+		new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_PLAYER),
+		new Button(Vec2(col2, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_ENEMY1),
 		//###### PLATFORMS ######
-		new Button(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/platform.jpg"),
-		new Button(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/lava.png"),
-		new Button(Vec2(col3, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/block.png"),
-		new Button(Vec2(col1, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway3.png"),
-		new Button(Vec2(col2, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway2.png"), 
-		new Button(Vec2(col3, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway1.png"),
+		new Button(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_1),
+		new Button(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_2),
+		new Button(Vec2(col3, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_3),
+		new Button(Vec2(col1, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_4),
+		new Button(Vec2(col2, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_5), 
+		new Button(Vec2(col3, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_6),
 		//###### PLATFORMS ######
 		//###### BACKGROUNDS ######
-		new Button(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/backgrounds/skygrad.jpg"),
-		new Button(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/FarBackground.png"),
+		new Button(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_1),
+		new Button(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_2),
 		new Button(Vec2(col3, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/Grass.png"),
 		//###### BACKGROUNDS ######
 		// //###### OTHERS ######
@@ -85,14 +87,14 @@ void EditorState::draw(Renderer* renderer)
 	
 	//renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), 9000, 9000);
 	//Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
-	if (currentObject != nullptr && currentObject->getId() == 4)
+	if (currentObject != nullptr && currentObject->getId() == 5)
 		currentObject->draw(renderer, gridPos);
 
 	//Ritar ut alla object (platformar osv....)
 	mLevel->draw(renderer); //Rita ut alla skapade objekt
 
 	//Ritar ut markerat objekt om det inte är en bakgrund
-	if (currentObject != nullptr && currentObject->getId() != 4)
+	if (currentObject != nullptr && currentObject->getId() != 5)
 		currentObject->draw(renderer, gridPos);
 	
 	//Ritar ut alla oklickbara knappar
@@ -172,17 +174,18 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				}
 				switch(i)
 				{
-					case 0: currentObject = new Player(mousePos, 48, 48, "../imgs/player.jpg"); break;
-					case 1:	currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/platform.jpg" ); break;
-					case 2: currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/lava.png" ); break;
-					case 3: currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/block.png" ); break;
-					case 4: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway3.png" ); break;
-					case 5: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway2.png" ); break;
-					case 6: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway1.png" ); break;
-					case 7: currentObject = new Background( mousePos, 200, 200, "../imgs/backgrounds/skygrad.jpg" ); break;
-					case 8: currentObject = new Background( mousePos, 200, 200, "../imgs/downloads/Other/FarBackground.png" ); break;
-					case 9: currentObject = new Background( mousePos, 200, 200, "../imgs/downloads/Other/Grass.png" ); break;
-					case 10:
+					case 0: currentObject = new Player(mousePos, 48, 48, FILEPATH_PLAYER); break;
+					case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, 200); break;
+					case 2:	currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_1 ); break;
+					case 3: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
+					case 4: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_3 ); break;
+					case 5: currentObject = new Platform( mousePos, 104, 104, FILEPATH_PLATFORM_4 ); break;
+					case 6: currentObject = new Platform( mousePos, 104, 104, FILEPATH_PLATFORM_5 ); break;
+					case 7: currentObject = new Platform( mousePos, 104, 104, FILEPATH_PLATFORM_6 ); break;
+					case 8: currentObject = new Background( mousePos, 200, 200, FILEPATH_BACKGROUND_1 ); break;
+					case 9: currentObject = new Background( mousePos, 200, 200, FILEPATH_BACKGROUND_2 ); break;
+					case 10: currentObject = new Decoration( mousePos, 200, 200, "../imgs/downloads/Other/Grass.png" ); break;
+					case 11:
 						if ( mLevel->saveLevel("Maptest2.txt") )
 							cout << "Succeeded to save file!\n";
 						else

@@ -5,7 +5,8 @@ Enemy::Enemy(Vec2 pos, int width, int height, string filename, float endx)
     : Object(pos, width, height, filename)
 {
     mMoveSpeed = 1.0f;
-
+	setId(2);
+	
     if(endx > pos.x)
     {
 	mLeftX = pos.x;
@@ -75,4 +76,12 @@ Object* Enemy::clone()
 {
     Object* NewObject = new Enemy(getPosition(), getWidth(), getHeight(), getFilename(), mRightX);
     return NewObject;
+}
+
+int Enemy::getEndX()
+{
+	if (mDirection == RIGHT)
+		return mRightX;
+	else
+		return mLeftX;
 }
