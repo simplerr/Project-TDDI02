@@ -59,10 +59,6 @@ bool Level::loadLevel(string filename)
 			    input >> endx;
 			    mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path, endx) );
 			}
-			//else if (index == 3) // Powerups
-			//    mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
-			else if (index == 4) // Backgrounds
-			    mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
 			else if (index == 3) // Powerups
 				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
 			else if (index == 4) // Decoration
@@ -316,9 +312,9 @@ void Level::draw(Renderer* renderer)
 		
 		
 	for(unsigned int i = 0; i < mBackgrounds.size(); i++)
-	mBackgrounds[i]->draw(renderer);
+		mBackgrounds[i]->draw(renderer);
     for(unsigned int i = 0; i < mObjects.size(); i++)
-	mObjects[i]->draw(renderer);
+		mObjects[i]->draw(renderer);
 }
 
 Object* Level::getObjectAt(float x, float y)
