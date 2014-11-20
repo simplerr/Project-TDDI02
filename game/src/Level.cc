@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Powerup.h"
 #include <fstream>
 #include <iostream>
 #include "Platform.h"
@@ -57,8 +58,8 @@ bool Level::loadLevel(string filename)
 			    input >> endx;
 			    mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path, endx) );
 			}
-			/*else if (index == 3) // Powerups
-				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
+			else if (index == 3) // Powerups
+				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
 			else if (index == 4) // Decoration
 				mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
 			else if (index == 5) // Backgrounds
