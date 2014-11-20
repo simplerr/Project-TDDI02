@@ -8,6 +8,7 @@
 #include "Platform.h"
 #include "Background.h"
 #include "Enemy.h"
+#include "Decoration.h"
 
 Level::Level()
 {
@@ -61,7 +62,7 @@ bool Level::loadLevel(string filename)
 			//else if (index == 3) // Powerups
 			//    mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
 			else if (index == 4) // Backgrounds
-			    mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
+			    mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
 			else if (index == 3) // Powerups
 				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
 			else if (index == 4) // Decoration
