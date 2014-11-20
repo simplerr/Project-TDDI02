@@ -4,12 +4,13 @@
 #include <iostream>
 #include "Platform.h"
 #include "Background.h"
+#include "Enemy.h"
 
 
 EditorState::EditorState()
 {
-	init();
-	mListBgd = nullptr;
+    init();
+    mListBgd = nullptr;
     mGridBgd = nullptr;
     mTextPlatformar = nullptr;
     mTextBakgrunder = nullptr;
@@ -17,51 +18,53 @@ EditorState::EditorState()
 
 EditorState::~EditorState()
 {
-	for (unsigned int i{}; i < buttonList.size(); ++i)
-	{
-		delete buttonList[i];
-	}
-	delete mLevel;
-	delete mListBgd;
-	if ( currentObject != nullptr )
-		delete currentObject;
+    for (unsigned int i{}; i < buttonList.size(); ++i)
+    {
+	delete buttonList[i];
+    }
+    delete mLevel;
+    delete mListBgd;
+    if ( currentObject != nullptr )
+	delete currentObject;
 }
 
 void EditorState::init()
 {
-	//ALLA KNAPPAR PÅ VÄNSTER SIDA
-	
-	int col1 = SCREEN_WIDTH-(buttonSize.x*3)-20;
-	int col2 = SCREEN_WIDTH-(buttonSize.x*2)-15;
-	int col3 = SCREEN_WIDTH-buttonSize.x-10;
-	int row = buttonSize.y; // mSCREEN_HEIGHT+buttonSize.y;
-	//###### CREATURES ######
-	buttonList = {
-		new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, "../imgs/player.jpg"),
-		//###### PLATFORMS ######
-		new Button(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/platform.jpg"),
-		new Button(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/lava.png"),
-		new Button(Vec2(col3, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/block.png"),
-		new Button(Vec2(col1, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway3.png"),
-		new Button(Vec2(col2, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway2.png"), 
-		new Button(Vec2(col3, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway1.png"),
-		//###### PLATFORMS ######
-		//###### BACKGROUNDS ######
-		new Button(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/backgrounds/skygrad.jpg"),
-		new Button(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/FarBackground.png"),
-		new Button(Vec2(col3, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/Grass.png"),
-		//###### BACKGROUNDS ######
-		// //###### OTHERS ######
-		new Button(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
-	};
-	buttonListUnclickable = {
-		new Button(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, "../imgs/backgrounds/grid8px.png"),
-		new Button(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, "../imgs/backgrounds/darkblue.png"),
-		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, "..Platformar..", 0,0,0),
-		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, "..Bakgrunder..", 0,0,0)
-	};
-	mLevel = new Level();
-	mLevel->loadLevel("Maptest2.txt");
+    //ALLA KNAPPAR PÅ HÖGER SIDA
+    
+    int col1 = SCREEN_WIDTH-(buttonSize.x*3)-20;
+    int col2 = SCREEN_WIDTH-(buttonSize.x*2)-15;
+    int col3 = SCREEN_WIDTH-buttonSize.x-10;
+    int row = buttonSize.y; // mSCREEN_HEIGHT+buttonSize.y;
+    //###### CREATURES ######
+    buttonList = {
+	new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, "../imgs/player.jpg"),
+	//###### PLATFORMS ######
+	new Button(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/platform.jpg"),
+	new Button(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/lava.png"),
+	new Button(Vec2(col3, 10+row*3), buttonSize.x, buttonSize.y, "../imgs/platforms/block.png"),
+	new Button(Vec2(col1, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway3.png"),
+	new Button(Vec2(col2, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway2.png"), 
+	new Button(Vec2(col3, 15+row*4), buttonSize.x, buttonSize.y, "../imgs/downloads/Walkways/Walkway1.png"),
+	//###### PLATFORMS ######
+	//###### BACKGROUNDS ######
+	new Button(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/backgrounds/skygrad.jpg"),
+	new Button(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/FarBackground.png"),
+	new Button(Vec2(col3, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/Grass.png"),
+	//###### BACKGROUNDS ######
+	//##### ENEMIES ######
+	new Button(Vec2(col1, 10+row*12), buttonSize.x, buttonSize.y, "../imgs/enemy.png"),
+	// //###### OTHERS ######
+	new Button(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
+    };
+    buttonListUnclickable = {
+	new Button(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, "../imgs/backgrounds/grid8px.png"),
+	new Button(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, "../imgs/backgrounds/darkblue.png"),
+	new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, "..Platformar..", 0,0,0),
+	new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, "..Bakgrunder..", 0,0,0)
+    };
+    mLevel = new Level();
+    mLevel->loadLevel("Maptest2.txt");
 }
 
 void EditorState::cleanup()
@@ -172,28 +175,29 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				}
 				switch(i)
 				{
-					case 0: currentObject = new Player(mousePos, 48, 48, "../imgs/player.jpg"); break;
-					case 1:	currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/platform.jpg" ); break;
-					case 2: currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/lava.png" ); break;
-					case 3: currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/block.png" ); break;
-					case 4: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway3.png" ); break;
-					case 5: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway2.png" ); break;
-					case 6: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway1.png" ); break;
-					case 7: currentObject = new Background( mousePos, 200, 200, "../imgs/backgrounds/skygrad.jpg" ); break;
-					case 8: currentObject = new Background( mousePos, 200, 200, "../imgs/downloads/Other/FarBackground.png" ); break;
-					case 9: currentObject = new Background( mousePos, 200, 200, "../imgs/downloads/Other/Grass.png" ); break;
-					case 10:
-						if ( mLevel->saveLevel("Maptest2.txt") )
-							cout << "Succeeded to save file!\n";
-						else
-							cout << "Failed to save file!\n";
-					break;
-					default: currentObject = nullptr;
+				case 0: currentObject = new Player(mousePos, 48, 48, "../imgs/player.jpg"); break;
+				case 1:	currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/platform.jpg" ); break;
+				case 2: currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/lava.png" ); break;
+				case 3: currentObject = new Platform( mousePos, 200, 104, "../imgs/platforms/block.png" ); break;
+				case 4: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway3.png" ); break;
+				case 5: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway2.png" ); break;
+				case 6: currentObject = new Platform( mousePos, 104, 104, "../imgs/downloads/Walkways/Walkway1.png" ); break;
+				case 7: currentObject = new Background( mousePos, 200, 200, "../imgs/backgrounds/skygrad.jpg" ); break;
+				case 8: currentObject = new Background( mousePos, 200, 200, "../imgs/downloads/Other/FarBackground.png" ); break;
+				case 9: currentObject = new Background( mousePos, 200, 200, "../imgs/downloads/Other/Grass.png" ); break;
+				case 10: currentObject = new Enemy( mousePos, 50, 50, "../imgs/enemy.png", 400 ); break;
+				case 11:
+				    if ( mLevel->saveLevel("Maptest2.txt") )
+					cout << "Succeeded to save file!\n";
+				    else
+					cout << "Failed to save file!\n";
+				    break;
+				default: currentObject = nullptr;
 				}
 				if (currentObject != nullptr)
 				{
-					currentHeight = currentObject->getHeight();
-					currentWidth = currentObject->getWidth();
+				    currentHeight = currentObject->getHeight();
+				    currentWidth = currentObject->getWidth();
 				}
 				break; //Eftersom att vi hittat en knapp går vi ur loopen
 			} // END IF
