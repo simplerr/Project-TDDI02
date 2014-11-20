@@ -267,8 +267,6 @@ void Level::update(float dt)
 		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT || mPlayer->getPosition().y < 0 ) //KOLLA COLLISION
 		{
 			y = true;
-			mPlayer->setfall(2); //Sätter hopp till false
-			mPlayer->setjump(2); //Sätter fall till false
 			break;
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
@@ -290,7 +288,6 @@ void Level::update(float dt)
 	    {
 			if(!mPlayer->getfall())
 			{
-
 				mPlayer->setfall(1);
 			}
 			else if(mPlayer->getfall())
@@ -301,15 +298,22 @@ void Level::update(float dt)
 	    }
 	}
 	else{
-	    //mPlayer->setVel(mPlayer->getVel().x, 0);
-		mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight());
+	    mPlayer->setVel(mPlayer->getVel().x, 0);
+		mPlayer->setfall(2); //Sätter hopp till false
+		mPlayer->setjump(2); //Sätter fall till false
+		if( objectB->getPosition().y+objectB->getHeight()/2 > mPlayer->getPosition().y+mPlayer->getHeight() ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
+			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+		else
+			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y+objectB->getHeight()); // om du ska hamna under
 		}
+	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y);
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
 		mObjects[i]->update(dt);
     }
-	
+	cout << mPlayer->getVel().x << " " << mPlayer->getVel().y << endl;
+
 }
 
 void Level::draw(Renderer* renderer)
