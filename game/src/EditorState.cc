@@ -41,32 +41,34 @@ void EditorState::init()
 	int row = buttonSize.y; // mSCREEN_HEIGHT+buttonSize.y;
 	//###### CREATURES ######
 	buttonList = {
-		new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_PLAYER),
-		new Button(Vec2(col2, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_ENEMY1),
-		new Button(Vec2(col3, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_POWERUP1),
+		new ButtonImg(Vec2(col1, 30+row*0), buttonSize.x, buttonSize.y, FILEPATH_PLAYER),
+		new ButtonImg(Vec2(col2, 30+row*0), buttonSize.x, buttonSize.y, FILEPATH_ENEMY1),
+		new ButtonImg(Vec2(col3, 30+row*0), buttonSize.x, buttonSize.y, FILEPATH_POWERUP1),
 		//###### PLATFORMS ######
-		new Button(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_1),
-		new Button(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_2),
-		new Button(Vec2(col3, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_3),
-		new Button(Vec2(col1, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_4),
-		new Button(Vec2(col2, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_5), 
-		new Button(Vec2(col3, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_6),
+		new ButtonImg(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_1),
+		new ButtonImg(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_2),
+		new ButtonImg(Vec2(col3, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_3),
+		new ButtonImg(Vec2(col1, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_4),
+		new ButtonImg(Vec2(col2, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_5), 
+		new ButtonImg(Vec2(col3, 15+row*4), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_6),
 		//###### PLATFORMS ######
 		//###### BACKGROUNDS ######
-		new Button(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_1),
-		new Button(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_2),
+		new ButtonImg(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_1),
+		new ButtonImg(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_2),
 		//###### BACKGROUNDS ######
 		//###### DECORATIONS ######
-		new Button(Vec2(col1, 10+row*10), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_1),
+		new ButtonImg(Vec2(col1, 10+row*12), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_1),
 		//###### DECORATIONS ######
 		// //###### OTHERS ######
-		new Button(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
+		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE)
 	};
 	buttonListUnclickable = { //VIKTIGT ATT DET SOM SKALL VARA LÄNGST BAK ÄR FÖRST OSV.
-		new Button(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, FILEPATH_GRID),
-		new Button(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, FILEPATH_MENU_BACKGROUND),
-		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, TEXT_MENU_1, 0,0,0),
-		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, TEXT_MENU_2, 0,0,0)
+		new ButtonImg(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, FILEPATH_GRID),
+		new ButtonImg(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, FILEPATH_MENU_BACKGROUND),
+		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, TEXT_MENU_1, 0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, TEXT_MENU_2, 0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x-15), 80, 13, TEXT_MENU_3, 0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, row*12), 80, 13, TEXT_MENU_4, 0,0,0)
 	};
 	mLevel = new Level();
 	mLevel->loadLevel("Maptest2.txt");

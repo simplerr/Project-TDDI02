@@ -35,19 +35,19 @@ public:
 private:
     const int mcolor1, mcolor2, mcolor3;
     Texture* mText = nullptr;
-    std::string mFilePath;
+    const std::string mFilePath;
 };
 
 class ButtonImg : public Button
 {
 public:
-    ButtonImg(Vec2 pos, int width, int height, std::string str);
+    ButtonImg(Vec2 pos, int width, int height, const std::string str);
     ~ButtonImg();
     
     void draw(Renderer* renderer);
 private:
     Texture* mTexture = nullptr;
-    std::string mFilePath;
+    const std::string mFilePath;
 };
 
 #endif
