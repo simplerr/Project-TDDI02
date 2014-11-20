@@ -1,12 +1,11 @@
 #include "Level.h"
 #include "Object.h"
 #include "Player.h"
-#include "Enemy.h"
 #include <fstream>
 #include <iostream>
 #include "Platform.h"
 #include "Background.h"
-#include "Decoration.h"
+#include "Enemy.h"
 
 Level::Level()
 {
@@ -50,19 +49,17 @@ bool Level::loadLevel(string filename)
 			if (index == 0) // Player
 			    mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
 			else if (index == 1) // Platformar
-				mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
+			    mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
 			else if (index == 2) // Fiender
 			{
 			    float endx;
 			    input >> endx;
 			    mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path, endx) );
 			}
-			/*else if (index == 3) // Powerups
-				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
-			else if (index == 4) // Decoration
-				mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
-			else if (index == 5) // Backgrounds
-				mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
+			//else if (index == 3) // Powerups
+			//    mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
+			else if (index == 4) // Backgrounds
+			    mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
 			else
 			    cerr << "FEL, objekt okänt\n";
 			
@@ -237,7 +234,7 @@ void Level::setCam(int x, int y)
 }
 
 void Level::update(float dt)
-{
+{	
     // collision
 	bool x, y = false;
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
@@ -261,7 +258,8 @@ void Level::update(float dt)
 		{
 			y = true;
 			mPlayer->setfall(2);
-			mPlayer->addVel(0,0);
+			mPlayer->setjump(2);
+			mPlayer->setVel(mPlayer->getVel().x,0);
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
@@ -271,16 +269,22 @@ void Level::update(float dt)
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
 	{
+	    if(mPlayer->getjump())
+	    {
+		mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y +1);
+		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
+	    }
+	    else
+	    {
 		if(!mPlayer->getfall())
 		{
-		    cout << "faller inte" << endl;
 		    mPlayer->setfall(1);
 		}
 		else if(mPlayer->getfall())
 		{
-		    cout << "faller" << endl;
 		    mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
 		}
+	    }
 	}	
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)

@@ -20,6 +20,7 @@ public:
     void setfall(int i);
     bool getfall();
     bool getjump();
+    void setVel(int x, int y);
     
     //void playerJump(int speed)
 
