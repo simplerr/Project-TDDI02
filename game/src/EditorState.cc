@@ -7,6 +7,7 @@
 #include "constants.h"
 #include "Decoration.h"
 #include "Enemy.h"
+#include "Powerup.h"
 
 EditorState::EditorState()
 {
@@ -42,6 +43,7 @@ void EditorState::init()
 	buttonList = {
 		new Button(Vec2(col1, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_PLAYER),
 		new Button(Vec2(col2, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_ENEMY1),
+		new Button(Vec2(col3, 10+row*0), buttonSize.x, buttonSize.y, FILEPATH_POWERUP1),
 		//###### PLATFORMS ######
 		new Button(Vec2(col1, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_1),
 		new Button(Vec2(col2, 10+row*3), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_2),
@@ -53,16 +55,18 @@ void EditorState::init()
 		//###### BACKGROUNDS ######
 		new Button(Vec2(col1, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_1),
 		new Button(Vec2(col2, 10+row*8), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_2),
-		new Button(Vec2(col3, 10+row*8), buttonSize.x, buttonSize.y, "../imgs/downloads/Other/Grass.png"),
 		//###### BACKGROUNDS ######
+		//###### DECORATIONS ######
+		new Button(Vec2(col1, 10+row*10), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_1),
+		//###### DECORATIONS ######
 		// //###### OTHERS ######
 		new Button(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, "../imgs/SAVE.png")
 	};
-	buttonListUnclickable = {
-		new Button(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, "../imgs/backgrounds/grid8px.png"),
-		new Button(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, "../imgs/backgrounds/darkblue.png"),
-		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, "..Platformar..", 0,0,0),
-		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, "..Bakgrunder..", 0,0,0)
+	buttonListUnclickable = { //VIKTIGT ATT DET SOM SKALL VARA LÄNGST BAK ÄR FÖRST OSV.
+		new Button(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, FILEPATH_GRID),
+		new Button(Vec2(SCREEN_WIDTH-menuBarWidth, 0), 120, SCREEN_HEIGHT, FILEPATH_MENU_BACKGROUND),
+		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*3-5), 80, 13, TEXT_MENU_1, 0,0,0),
+		new TextItem(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x*8-5), 80, 13, TEXT_MENU_2, 0,0,0)
 	};
 	mLevel = new Level();
 	mLevel->loadLevel("Maptest2.txt");
@@ -185,22 +189,23 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				}
 				switch(i)
 				{
-					case 0: currentObject = new Player(mousePos, 48, 48, FILEPATH_PLAYER); break;
-					case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, 200); break;
-					case 2:	currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_1 ); break;
-					case 3: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
-					case 4: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_3 ); break;
-					case 5: currentObject = new Platform( mousePos, 104, 104, FILEPATH_PLATFORM_4 ); break;
-					case 6: currentObject = new Platform( mousePos, 104, 104, FILEPATH_PLATFORM_5 ); break;
-					case 7: currentObject = new Platform( mousePos, 104, 104, FILEPATH_PLATFORM_6 ); break;
-					case 8: currentObject = new Background( mousePos, 200, 200, FILEPATH_BACKGROUND_1 ); break;
-					case 9: currentObject = new Background( mousePos, 200, 200, FILEPATH_BACKGROUND_2 ); break;
-					case 10: currentObject = new Decoration( mousePos, 200, 200, "../imgs/downloads/Other/Grass.png" ); break;
-					case 11:
-						if ( mLevel->saveLevel("Maptest2.txt") )
-							cout << "Succeeded to save file!\n";
-						else
-							cout << "Failed to save file!\n";
+				case 0: currentObject = new Player(mousePos, 48, 48, FILEPATH_PLAYER); break;
+				case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, 200); break;
+				case 2: currentObject = new Powerup(mousePos, 40, 40, FILEPATH_POWERUP1); break;
+				case 3:	currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_1 ); break;
+				case 4: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
+				case 5: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_3 ); break;
+				case 6: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_4 ); break;
+				case 7: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_5 ); break;
+				case 8: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_6 ); break;
+				case 9: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_1 ); break;
+				case 10: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_2 ); break;
+				case 11: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_1 ); break;
+				case 12:
+					if ( mLevel->saveLevel("Maptest2.txt") )
+						cout << "Succeeded to save file!\n";
+					else
+						cout << "Failed to save file!\n";
 					break;
 					default: currentObject = nullptr;
 				}
