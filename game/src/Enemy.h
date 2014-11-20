@@ -22,10 +22,12 @@ public:
     void addVel(float velx, float vely);
     void setVel(float velx, float vely);
     Vec2 getVel();
-    int getEndX();
+    
+    float getEndX();
 private:
     float mMoveSpeed;
     float mLeftX, mRightX;
+    float mEndX;
     Direction mDirection;
     float mVelX, mVelY;
 };

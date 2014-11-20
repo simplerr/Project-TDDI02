@@ -6,26 +6,28 @@
 #include "Background.h"
 #include "constants.h"
 #include "Decoration.h"
+#include "Enemy.h"
 
 EditorState::EditorState()
 {
-	init();
-	mListBgd = nullptr;
-    mGridBgd = nullptr;
+    init();
     mTextPlatformar = nullptr;
     mTextBakgrunder = nullptr;
+    mFlagTexture = nullptr;
 }
 
 EditorState::~EditorState()
 {
-	for (unsigned int i{}; i < buttonList.size(); ++i)
-	{
-		delete buttonList[i];
-	}
-	delete mLevel;
-	delete mListBgd;
-	if ( currentObject != nullptr )
-		delete currentObject;
+    for (unsigned int i{}; i < buttonList.size(); ++i)
+    {
+	delete buttonList[i];
+    }
+    delete mLevel;
+    delete mTextPlatformar;
+    delete mTextBakgrunder;
+    //delete mFlagTexture;
+    if ( currentObject != nullptr )
+	delete currentObject;
 }
 
 void EditorState::init()
@@ -95,7 +97,16 @@ void EditorState::draw(Renderer* renderer)
 
 	//Ritar ut markerat objekt om det inte är en bakgrund
 	if (currentObject != nullptr && currentObject->getId() != 5)
-		currentObject->draw(renderer, gridPos);
+	    currentObject->draw(renderer, gridPos);
+
+	// Rita ut slutpositionen för fienders patrullering
+	if (currentObject != nullptr && currentObject->getId() == 2)
+	{
+	    if(mFlagTexture == nullptr)
+	    	mFlagTexture = renderer->loadTexture("../imgs/flag.png");
+	    
+	    renderer->drawTextureScreen(currentObject->getPosition(), 25, 25, mFlagTexture);
+	}
 	
 	//Ritar ut alla oklickbara knappar
 	for (unsigned int c{0}; c < buttonListUnclickable.size(); ++c)
@@ -195,8 +206,8 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				}
 				if (currentObject != nullptr)
 				{
-					currentHeight = currentObject->getHeight();
-					currentWidth = currentObject->getWidth();
+				    currentHeight = currentObject->getHeight();
+				    currentWidth = currentObject->getWidth();
 				}
 				break; //Eftersom att vi hittat en knapp går vi ur loopen
 			} // END IF

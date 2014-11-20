@@ -48,23 +48,23 @@ bool Level::loadLevel(string filename)
 			input >> posx >> posy >> width >> height;
 			input >> path;
 			if (index == 0) // Player
-				mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
+			    mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
 			else if (index == 1) // Platformar
 				mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
 			else if (index == 2) // Fiender
 			{
-				int turnX;
-				input >> turnX;
-				mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path, turnX) );
+			    float endx;
+			    input >> endx;
+			    mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path, endx) );
 			}
 			/*else if (index == 3) // Powerups
 				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) ); */
-			else if (index == 4) // Backgrounds
+			else if (index == 4) // Decoration
 				mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
 			else if (index == 5) // Backgrounds
 				mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
 			else
-				cerr << "FEL, objekt okänt\n";
+			    cerr << "FEL, objekt okänt\n";
 			
 		}
 	
@@ -82,69 +82,66 @@ bool Level::loadLevel(string filename)
 
 bool Level::saveLevel(string filename)
 {
-	int maxHeight{}, maxWidth{}, temp{};
-	mFilename = filename;
+    int maxHeight{}, maxWidth{}, temp{};
+    mFilename = filename;
     ofstream output (mFilename);
     if( output.is_open() )
     {
-		// LOOPA IGOM OBJECT FÖR ATT BESTÄMMA LEVEL_HEIGHT OCH LEVEL_WIDTH
-		for(unsigned int k{}; k < mObjects.size(); ++k)
-		{
-			temp = mObjects[k]->getPosition().x + mObjects[k]->getWidth(); // Objects right
-			if( temp > maxWidth )
-				maxWidth = temp;
-			temp = mObjects[k]->getPosition().y + mObjects[k]->getHeight(); // Objects bottom
-			if( temp > maxHeight )
-				maxHeight = temp;
-		}
-		// KOLLA SÅ ATT INTE LEVEL ÄR FÖR LITEN FÖR SKÄRMEN
-		if ( maxWidth < SCREEN_WIDTH )
-			output << SCREEN_WIDTH;
-		else
-			output << maxWidth;
-		output << " ";
-		if ( maxHeight < SCREEN_HEIGHT )
-			output << SCREEN_HEIGHT;
-		else
-			output << maxHeight;
+	// LOOPA IGOM OBJECT FÖR ATT BESTÄMMA LEVEL_HEIGHT OCH LEVEL_WIDTH
+	for(unsigned int k{}; k < mObjects.size(); ++k)
+	{
+	    temp = mObjects[k]->getPosition().x + mObjects[k]->getWidth(); // Objects right
+	    if( temp > maxWidth )
+		maxWidth = temp;
+	    temp = mObjects[k]->getPosition().y + mObjects[k]->getHeight(); // Objects bottom
+	    if( temp > maxHeight )
+		maxHeight = temp;
+	}
+	// KOLLA SÅ ATT INTE LEVEL ÄR FÖR LITEN FÖR SKÄRMEN
+	if ( maxWidth < SCREEN_WIDTH )
+	    output << SCREEN_WIDTH;
+	else
+	    output << maxWidth;
+	output << " ";
+	if ( maxHeight < SCREEN_HEIGHT )
+	    output << SCREEN_HEIGHT;
+	else
+	    output << maxHeight;
+	output << "\n";
+	
+	// SPARA ALLA OBJEKT
+	for(unsigned int i{}; i < mObjects.size(); ++i)
+	{
+	    
+	    if (mObjects[i]->getId() == 0)
+		output << "0 ";
+	    else if (mObjects[i]->getId() == 1)
+		output << "1 ";
+	    else if (mObjects[i]->getId() == 2)
+		output << "2 ";
+	    else if (mObjects[i]->getId() == 3)
+		output << "3 ";
+	    else if (mObjects[i]->getId() == 4)
+		output << "4 ";
+	    
+	    output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
+		   << mObjects[i]->getHeight() << " " << mObjects[i]->getFilename();
+
+	    if(mObjects[i]->getId() == 2)
+	    {
+		Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
+		output << " " << enemy->getEndX() << "\n"; 
+	    }
+	    else
 		output << "\n";
-		
-		// SPARA ALLA OBJEKT
-		for(unsigned int i{}; i < mObjects.size(); ++i)
-		{
-			
-			if (mObjects[i]->getId() == 0)
-				output << "0 ";
-			else if (mObjects[i]->getId() == 1)
-				output << "1 ";
-			else if (mObjects[i]->getId() == 2)
-				output << "2 ";
-			else if (mObjects[i]->getId() == 3)
-				output << "3 ";
-			else if (mObjects[i]->getId() == 4)
-				output << "4 ";
-			else if (mObjects[i]->getId() == 5)
-				output << "5 ";
-			
-			output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
-				<< mObjects[i]->getHeight() << " " << mObjects[i]->getFilename();
-				
-			if (mObjects[i]->getId() == 2){ //Om enemy, lägg till endX
-				Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
-					output << " " << enemy->getEndX();
-				//delete enemy;
-			}
-			
-			output << "\n";
-				
-		}
-		output.close();
-		return true;
+	}
+	output.close();
+	return true;
     }
     else
     {
-		cerr << "Error, kunde inte öppna kartan vid save. Filnamn som söktes: " << mFilename << "\n";
-		return false;
+	cerr << "Error, kunde inte öppna kartan vid save. Filnamn som söktes: " << mFilename << "\n";
+	return false;
     }
     //vector<Object> Creatures;
     //vector<Object> Platforms;
@@ -152,56 +149,56 @@ bool Level::saveLevel(string filename)
 
 Object* Level::findObjectByPos(Vec2 mousePos)
 {
-	int objectLeft, objectRight, objectUpper, objectBottom;
-	Object* found = nullptr;
-	Object* lowestFound = nullptr;
-	for(unsigned int i{}; i < mObjects.size(); ++i)
+    int objectLeft, objectRight, objectUpper, objectBottom;
+    Object* found = nullptr;
+    Object* lowestFound = nullptr;
+    for(unsigned int i{}; i < mObjects.size(); ++i)
     {
-		objectUpper = mObjects[i]->getPosition().y;
-		objectBottom = mObjects[i]->getPosition().y + mObjects[i]->getHeight();
-		objectLeft = mObjects[i]->getPosition().x;
-		objectRight = mObjects[i]->getPosition().x + mObjects[i]-> getWidth();
-		
-		if ( mousePos.y > objectUpper && mousePos.x > objectLeft && mousePos.y < objectBottom && mousePos.x < objectRight )
-		{
-			//Fixar så man får det översta objectet som är placerat
-			found = mObjects[i];
-			if (lowestFound != nullptr)
-			{
-				if (lowestFound->getId() >= found->getId() )
-					lowestFound = found;
-			}
-			else
-				lowestFound = found;	
-		}
-	}
+	objectUpper = mObjects[i]->getPosition().y;
+	objectBottom = mObjects[i]->getPosition().y + mObjects[i]->getHeight();
+	objectLeft = mObjects[i]->getPosition().x;
+	objectRight = mObjects[i]->getPosition().x + mObjects[i]-> getWidth();
 	
-	if(lowestFound != nullptr)
+	if ( mousePos.y > objectUpper && mousePos.x > objectLeft && mousePos.y < objectBottom && mousePos.x < objectRight )
 	{
-		found = lowestFound->clone();
-		for(unsigned int z{}; z < mObjects.size(); ++z)
-		{
-			if (lowestFound == mObjects[z])
-			{
-				for(unsigned int j{z+1}; j < mObjects.size(); ++j)
-				{
-					std::swap(mObjects[j], mObjects[j-1]);
-				}
-				break;
-			}
-		}
-		
-		//lowestFound = nullptr;
-		//delete mObjects[mObjects.size()];
-		mObjects.resize(mObjects.size()-1);
-		mObjects.shrink_to_fit();
-		return found;
+	    //Fixar så man får det översta objectet som är placerat
+	    found = mObjects[i];
+	    if (lowestFound != nullptr)
+	    {
+		if (lowestFound->getId() >= found->getId() )
+		    lowestFound = found;
+	    }
+	    else
+		lowestFound = found;	
 	}
-	return nullptr;
+    }
+    
+    if(lowestFound != nullptr)
+    {
+	found = lowestFound->clone();
+	for(unsigned int z{}; z < mObjects.size(); ++z)
+	{
+	    if (lowestFound == mObjects[z])
+	    {
+		for(unsigned int j{z+1}; j < mObjects.size(); ++j)
+		{
+		    std::swap(mObjects[j], mObjects[j-1]);
+		}
+		break;
+	    }
+	}
 	
-	
-	
-	//return nullptr;
+	//lowestFound = nullptr;
+	//delete mObjects[mObjects.size()];
+	mObjects.resize(mObjects.size()-1);
+	mObjects.shrink_to_fit();
+	return found;
+    }
+    return nullptr;
+    
+    
+    
+    //return nullptr;
 }
 
 bool Level::isListEmpty()
@@ -251,7 +248,7 @@ void Level::update(float dt)
 			continue;
 		
 		//##############
-		// KOLLA OM KOLLISION FÖR PLAYER X-LED
+		// KOLLA OM KOLLISION FÖR PLAYER X-LED3
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA FRAM
 		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().x + mPlayer->getWidth() > mLEVEL_WIDTH || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
 		{
