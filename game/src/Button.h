@@ -11,11 +11,10 @@ class Button
 {
 public:
   Button(Vec2 pos, int width, int height);
-  Button(Vec2 pos, int width, int height, std::string str);
-  Button(Vec2 pos, int width, int height, std::string str, int color1, int color2, int color3);
-  ~Button();
+  //Button(Vec2 pos, int width, int height, std::string str);
+  virtual ~Button();
   
-  void draw(Renderer* renderer);
+  virtual void draw(Renderer* renderer);
   bool mouseOver(Vec2 mousePos);
 
   
@@ -24,33 +23,31 @@ public:
 private:
     Vec2 mPos;
     int mWidth, mHeight;
-    std::string mFilePath;
-    Texture* mTexture = nullptr;
-    int mcolor1, mcolor2, mcolor3;
 };
-  /* 
-class MenuItem : public Interface
-{
-    MenuItem(Vec2 pos, int width, int height, std::string str)
-};
-
-class Button : public Interface
-{
-    MenuItem(Vec2 pos, int width, int height, std::string str)
-;}
-*/
   
-class TextItem : public Button
+class ButtonText : public Button
 {
 public:
-    TextItem(Vec2 pos, int width, int height, std::string str, const int color1, const int color2, const int color3);
-    ~TextItem();
+    ButtonText(Vec2 pos, int width, int height, std::string str, const int color1, const int color2, const int color3);
+    ~ButtonText();
     
     void draw(Renderer* renderer);
 private:
     const int mcolor1, mcolor2, mcolor3;
     Texture* mText = nullptr;
-    std::string FilePath;
+    std::string mFilePath;
+};
+
+class ButtonImg : public Button
+{
+public:
+    ButtonImg(Vec2 pos, int width, int height, std::string str);
+    ~ButtonImg();
+    
+    void draw(Renderer* renderer);
+private:
+    Texture* mTexture = nullptr;
+    std::string mFilePath;
 };
 
 #endif
