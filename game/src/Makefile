@@ -5,8 +5,8 @@
 CCC	= g++ -std=c++11 -Wall -pedantic 
 LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 
-all: main.cc Game.o Enemy.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o
-	$(CCC) -o main main.cc Game.o Enemy.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o $(LFLAGS)
+all: main.cc Game.o Enemy.o PlayState.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o Powerup.o
+	$(CCC) -o main main.cc Game.o Enemy.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o Powerup.o $(LFLAGS)
 
 Game.o: Game.cc Game.h
 	$(CCC) -c Game.cc 
@@ -46,12 +46,15 @@ Button.o: Button.cc Button.h
 
 Sound.o: Sound.cc Sound.h
 	$(CCC) -c Sound.cc
-	
+
 Background.o: Background.cc Background.h
 	$(CCC) -c Background.cc
 
 Enemy.o: Enemy.cc Enemy.h
 	$(CCC) -c Enemy.cc
+
+Powerup.o: Powerup.cc Powerup.h
+	$(CCC) -c Powerup.cc
 
 clean:
 	@ \rm -rf *.o *.gch core
