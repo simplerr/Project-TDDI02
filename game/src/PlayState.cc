@@ -74,10 +74,12 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 			case SDLK_SPACE:
 			    if(!mPlayer->getjump() && !mPlayer->getfall())
 			    {
-					mPlayer->setjump(1); break;
+					mPlayer->setjump(1); 
 			    }
+			break;
 			case SDLK_LEFT: mPlayer->addVel(-speed, 0); break;
 			case SDLK_RIGHT: mPlayer->addVel(+speed, 0); break;
+			default: break;
 			}
 
 			// ENTER PAUSE MENU
@@ -92,6 +94,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 			{
 			case SDLK_LEFT: mPlayer->addVel(+speed, 0); break;
 			case SDLK_RIGHT: mPlayer->addVel(-speed, 0); break;
+			default: break;
 			}
 		}	
     }
