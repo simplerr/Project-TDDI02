@@ -280,27 +280,27 @@ void Level::update(float dt)
 	{
 	    if(mPlayer->getjump())
 	    {
-		mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y +1);
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
+			mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y +1);
+			mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
 	    }
 	    else
 	    {
-		if(!mPlayer->getfall())
-		{
+			if(!mPlayer->getfall())
+			{
 
-		    mPlayer->setfall(1);
-		}
-		else if(mPlayer->getfall())
-		{
-		    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y -1);
-		    mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
-		}
+				mPlayer->setfall(1);
+			}
+			else if(mPlayer->getfall())
+			{
+				mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y + 1);
+				mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
+			}
 	    }
 	}	
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
-	mObjects[i]->update(dt);
+		mObjects[i]->update(dt);
     }
 	
 }

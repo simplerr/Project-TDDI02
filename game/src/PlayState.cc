@@ -65,49 +65,49 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 {
     if(!mPaused)
     {
-	//If a key was pressed
-	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 && !mPaused) 
-	{
-	    //Adjust the velocity
-	    switch( e.key.keysym.sym )
-	    {
-	    case SDLK_UP:
+		//If a key was pressed
+		if( e.type == SDL_KEYDOWN && e.key.repeat == 0 && !mPaused) 
+		{
+			//Adjust the velocity
+			switch( e.key.keysym.sym )
+			{
+			case SDLK_SPACE:
 			    if(!mPlayer->getjump() && !mPlayer->getfall())
 			    {
-				mPlayer->setjump(1); break;
+					mPlayer->setjump(1); break;
 			    }
-	    case SDLK_LEFT: mPlayer->addVel(-speed, 0); break;
-	    case SDLK_RIGHT: mPlayer->addVel(+speed, 0); break;
-	    }
+			case SDLK_LEFT: mPlayer->addVel(-speed, 0); break;
+			case SDLK_RIGHT: mPlayer->addVel(+speed, 0); break;
+			}
 
-	    // ENTER PAUSE MENU
-	    if(e.key.keysym.sym == SDLK_ESCAPE)
-		mPaused = !mPaused;
-	}
-	//If a key was released
-	else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
-	{
-	    //Adjust the velocity
-	    switch( e.key.keysym.sym )
-	    {
-	    case SDLK_LEFT: mPlayer->addVel(+speed, 0); break;
-	    case SDLK_RIGHT: mPlayer->addVel(-speed, 0); break;
-	    }
-	}	
+			// ENTER PAUSE MENU
+			if(e.key.keysym.sym == SDLK_ESCAPE)
+				mPaused = !mPaused;
+		}
+		//If a key was released
+		else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+		{
+			//Adjust the velocity
+			switch( e.key.keysym.sym )
+			{
+			case SDLK_LEFT: mPlayer->addVel(+speed, 0); break;
+			case SDLK_RIGHT: mPlayer->addVel(-speed, 0); break;
+			}
+		}	
     }
     else
     {
-	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-	{
-	    if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET
-	    {
-		mPaused = !mPaused;
-	    }
-	    else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
-	    {
-		setNextState(BaseState::MENU_STATE);
-	    }
-	}
+		if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+		{
+			if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET
+			{
+				mPaused = !mPaused;
+			}
+			else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
+			{
+				setNextState(BaseState::MENU_STATE);
+			}
+		}
     }
     
 }

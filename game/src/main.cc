@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "PlayState.h"
 #include "MenuState.h"
+#include "Sound.h"
 #include <iostream>
 
 
@@ -16,9 +17,10 @@ int main(int argc, char* argv[])
     }
 
     bool exit = false;
-
+	Sound s("../sounds/music.mp3");
     while(!exit)
     {
+		s.play();
 		SDL_Event e;
 
 		// poll SDL event
