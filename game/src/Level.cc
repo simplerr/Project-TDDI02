@@ -290,6 +290,7 @@ void Level::update(float dt)
 		}
 		else if(mPlayer->getfall())
 		{
+		    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y -1);
 		    mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
 		}
 	    }
