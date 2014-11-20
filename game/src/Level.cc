@@ -286,6 +286,7 @@ void Level::update(float dt)
 	    {
 		if(!mPlayer->getfall())
 		{
+
 		    mPlayer->setfall(1);
 		}
 		else if(mPlayer->getfall())
