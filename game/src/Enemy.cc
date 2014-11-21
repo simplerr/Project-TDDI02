@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Player.h"
 #include <iostream>
 
 Enemy::Enemy(Vec2 pos, int width, int height, string filename, float endx)
@@ -53,7 +54,7 @@ void Enemy::draw(Renderer* renderer)
 
 void Enemy::handleCollision(Object* object)
 {
-
+	object->setPosition(Vec2(0, 0));
 }
 
 void Enemy::addVel(float velx, float vely)

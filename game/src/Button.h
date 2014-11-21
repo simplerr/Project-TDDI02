@@ -33,9 +33,9 @@ public:
     
     void draw(Renderer* renderer);
 private:
+    const std::string mFilePath;
     const int mcolor1, mcolor2, mcolor3;
     Texture* mText = nullptr;
-    const std::string mFilePath;
 };
 
 class ButtonImg : public Button

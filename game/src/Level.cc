@@ -272,7 +272,7 @@ void Level::update(float dt)
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
 	    mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
 	else
-	    mPlayer->setVel(0, mPlayer->getVel().y);
+	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
 	{
 	    if(mPlayer->getjump()) //Hanterar ifall spelaren är inuti ett hopp
@@ -294,14 +294,22 @@ void Level::update(float dt)
 	    }
 	}
 	else{
-	    mPlayer->setVel(mPlayer->getVel().x, 0);
-		mPlayer->setfall(2); //Sätter hopp till false
+	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
 		mPlayer->setjump(2); //Sätter fall till false
-		if( objectB->getPosition().y+objectB->getHeight()/2 > mPlayer->getPosition().y+mPlayer->getHeight() ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
-			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
-		else
-			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y+objectB->getHeight()); // om du ska hamna under
+		if (mPlayer->getVel().y != 0){
+			if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
+			{
+				mPlayer->setfall(2); //Sätter hopp till false
+				mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+			}
+			else
+			{
+				mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y+objectB->getHeight()); // om du ska hamna under
+				mPlayer->setfall(1); //Sätter hopp till true
+			}
 		}
+	}
+		
 	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y);
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
