@@ -29,3 +29,8 @@ static const std::string TEXT_MENU_4 = "..Decoration..";
 static const std::string FILEPATH_GRID = "../imgs/backgrounds/grid8px.png";
 static const std::string FILEPATH_MENU_BACKGROUND = "../imgs/backgrounds/darkblue.png";
 static const std::string FILEPATH_SAVE = "../imgs/SAVE.png";
+
+//###### MAPS #####
+static const std::string FILEPATH_LVL1 = "Map1.txt";
+static const std::string FILEPATH_LVL2 = "Map2.txt";
+static const std::string FILEPATH_LVL3 = "Map3.txt";

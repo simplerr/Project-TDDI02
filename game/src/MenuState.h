@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "Button.h"
+#include "Level.h"
 #include <vector>
 
 class MenuState : public BaseState {
@@ -23,6 +24,7 @@ private:
     Texture *mMenu;
 	vector<Button*> buttonList;
 	Vec2 mousePos;
+	Level *level;
 };
 
 #endif

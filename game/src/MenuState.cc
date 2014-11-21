@@ -1,4 +1,5 @@
 #include "MenuState.h"
+#include "constants.h"
 
 MenuState::MenuState()
 {
@@ -17,7 +18,9 @@ MenuState::~MenuState()
 void MenuState::init()
 {
 	buttonList = {	
-		new ButtonImg(Vec2(412, 200), 200, 200, "../imgs/PLAY.png"), // Play
+		new ButtonImg(Vec2(212, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 1
+		new ButtonImg(Vec2(422, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 2
+		new ButtonImg(Vec2(632, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 3
 		new ButtonImg(Vec2(412, 420), 200, 100, "../imgs/backgrounds/credit.png"), // Credit
 		new ButtonImg(Vec2(412, 550), 200, 100, "../imgs/EXIT.png"), // Exit
 		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, "../imgs/toEditor.png")
@@ -64,12 +67,18 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 					setNextState(BaseState::PLAY_STATE);	
 					break;
 				case 1:
-					setNextState(BaseState::CREDIT);
+					setNextState(BaseState::PLAY_STATE);
 					break;
 				case 2:
-					exit = true;
+					setNextState(BaseState::PLAY_STATE);
 					break;
 				case 3:
+					setNextState(BaseState::CREDIT);
+					break;
+				case 4:
+					exit = true;
+					break;
+				case 5:
 					setNextState(BaseState::EDITOR_STATE);
 					break;
 				default:

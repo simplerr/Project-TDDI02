@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	Sound s("../sounds/music.mp3");
     while(!exit)
     {
-		s.play();
+		//s.play();
 		SDL_Event e;
 
 		// poll SDL event

@@ -71,7 +71,7 @@ void EditorState::init()
 		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, row*12), 80, 13, TEXT_MENU_4, 0,0,0)
 	};
 	mLevel = new Level();
-	mLevel->loadLevel("Maptest2.txt");
+	mLevel->loadLevel("Map1.txt");
 }
 
 void EditorState::cleanup()

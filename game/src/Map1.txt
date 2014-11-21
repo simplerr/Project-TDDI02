@@ -1,6 +1,7 @@
 2128 768
-8 24 560 560 ../imgs/backgrounds/skygrad.jpg
+4 1736 240 104 48 ../imgs/downloads/Other/Grass.png
 3 1048 368 104 48 ../imgs/downloads/Other/Grass.png
+4 96 248 104 48 ../imgs/downloads/Other/Grass.png
 1 16 296 104 76 ../imgs/downloads/Walkways/Walkway3.png
 1 120 296 104 76 ../imgs/downloads/Walkways/Walkway2.png
 1 224 296 104 76 ../imgs/downloads/Walkways/Walkway2.png

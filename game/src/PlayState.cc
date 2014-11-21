@@ -30,7 +30,7 @@ PlayState::~PlayState()
 void PlayState::init()
 {
     mLevel = new Level();
-    mLevel->loadLevel("Maptest2.txt");
+    mLevel->loadLevel("Map1.txt");
     mPlayer = mLevel->findPlayer();
 
 	buttonList = {
@@ -52,11 +52,11 @@ void PlayState::update(float dt)
 
 void PlayState::draw(Renderer* renderer)
 {
-    // draw test bkgd
+    /* draw test bkgd
     if(mTestBkgd != nullptr)
 		renderer->drawTexture(Vec2(0, 0), mLevel->getLevelSize().x, mLevel->getLevelSize().y, mTestBkgd);
     else
-		mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
+	mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg"); */
 
 	mLevel->draw(renderer);
 	
