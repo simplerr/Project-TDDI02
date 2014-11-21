@@ -2,18 +2,21 @@
 
 PauseState::PauseState()
 {
-	//currentGame = nullptr;
-	mPauseMenu = nullptr;
+	init();
 }
 
 PauseState::~PauseState()
 {
-	delete mPauseMenu;
+	for (unsigned int i = 0; i < buttonList.size(); i++)
+		delete buttonList.at(i);
 }
 
 void PauseState::init()
 {
-	;
+	buttonList = {
+		new ButtonImg(Vec2(412, 100), 200, 100, "../imgs/backgrounds/pauseback.png"),
+		new ButtonImg(Vec2(412, 400), 200, 100, "../imgs/backgrounds/pausetomenu.png")
+	};
 }
 
 void PauseState::cleanup()
@@ -28,20 +31,34 @@ void PauseState::update(float dt)
 
 void PauseState::draw(Renderer* renderer)
 {
-	if (mPauseMenu != nullptr)
-		renderer->drawTexture(Vec2(0, 0), 1024, 768, mPauseMenu);
-	else
-		mPauseMenu = renderer->loadTexture("../imgs/backgrounds/pause.png");
+	for (unsigned int i = 0; i < buttonList.size(); i++)
+		buttonList.at(i)->draw(renderer);
 }
 
 void PauseState::handleEvent(SDL_Event e, bool& exit)
 {
-    if(e.key.keysym.sym == SDLK_UP) // GÅ TILLBAKA TILL SPELET
+	if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
     {
-	setNextState(BaseState::PLAY_STATE);
-    }
-    else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
-    {
-	setNextState(BaseState::MENU_STATE);
-    }
+		SDL_GetMouseState(&mousePos.x, &mousePos.y);
+		for (unsigned int i = 0; i < buttonList.size(); i++) {
+			
+			if (buttonList.at(i)->mouseOver(mousePos)) {
+
+				switch (i) {
+				case 0:
+					setNextState(BaseState::PLAY_STATE);	
+					break;
+				case 1:
+					setNextState(BaseState::MENU_STATE);
+					break;
+				default:
+					break;
+				}
+
+			}
+
+		}
+
+	}
+
 }

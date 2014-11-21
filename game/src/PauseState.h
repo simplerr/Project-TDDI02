@@ -5,6 +5,8 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "PlayState.h"
+#include "Button.h"
+#include <vector>
 
 class PauseState : public BaseState {
  public:
@@ -19,7 +21,8 @@ class PauseState : public BaseState {
 
     StateId getStateId() { return PAUSE_STATE; }
  private:
-    Texture *mPauseMenu;
+    vector<Button*> buttonList;
+	Vec2 mousePos;
 };
 
 #endif

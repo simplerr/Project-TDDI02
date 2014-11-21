@@ -4,6 +4,8 @@
 #include "BaseState.h"
 #include "Renderer.h"
 #include "Texture.h"
+#include "Button.h"
+#include <vector>
 
 class MenuState : public BaseState {
 public:
@@ -19,12 +21,9 @@ public:
     StateId getStateId() { return MENU_STATE; }
 private:
     Texture *mMenu;
-    Texture *mPlayButton;
-    Texture *mCredit;
-    Texture *mEditorButton;
-    Texture *mExitButton;
+	vector<Button*> buttonList;
+	Vec2 mousePos;
 };
 
 #endif
-
 

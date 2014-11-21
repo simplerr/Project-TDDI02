@@ -186,11 +186,10 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 			{
 				if(currentObject != nullptr)
 				{
-						delete currentObject; //Om man väljer någon annan efter man har valt
-						currentObject = nullptr;
+					delete currentObject; //Om man väljer någon annan efter man har valt
+					currentObject = nullptr;
 				}
-				switch(i)
-				{
+				switch(i) {
 				case 0: currentObject = new Player(mousePos, 48, 48, FILEPATH_PLAYER); break;
 				case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, 200); break;
 				case 2: currentObject = new Powerup(mousePos, 40, 40, FILEPATH_POWERUP1); break;
@@ -209,7 +208,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 					else
 						cout << "Failed to save file!\n";
 					break;
-					default: currentObject = nullptr;
+				default: currentObject = nullptr;
 				}
 				if (currentObject != nullptr)
 				{

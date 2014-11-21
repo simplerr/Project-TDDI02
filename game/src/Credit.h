@@ -4,6 +4,7 @@
 #include "BaseState.h"
 #include "Renderer.h"
 #include "Texture.h"
+#include "Button.h"
 
 class Credit : public BaseState {
 public:
@@ -16,10 +17,11 @@ public:
     void draw(Renderer* renderer);
     void handleEvent(SDL_Event e, bool& exit);
     
-    StateId getStateId() { return EDITOR_STATE; }
+    StateId getStateId() { return CREDIT; }
 private:
     Texture* mBackground;
-	Texture* mExit;
+	Button *mBack;
+	Vec2 mousePos;
 };
 
 #endif

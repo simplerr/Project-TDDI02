@@ -3,18 +3,18 @@
 Credit::Credit()
 {
 	mBackground = nullptr;
-	mExit = nullptr;
+	init();
 }
 
 Credit::~Credit()
 {
+	delete mBack;
 	delete mBackground;
-	delete mExit;
 }
 
 void Credit::init()
 {
-	;
+	mBack = new ButtonImg(Vec2(412, 420), 200, 100, "../imgs/backgrounds/creditback.png");
 }
 
 void Credit::cleanup()
@@ -31,26 +31,21 @@ void Credit::draw(Renderer* renderer)
 {
 	renderer->updateCamera(0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	if (mBackground != nullptr && mExit != nullptr) {
-		
+	if (mBackground != nullptr) 		
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mBackground);
-		renderer->drawTexture(Vec2(278-100, 560), 620, 110, mExit);
-	} else {
-		
+	else 		
 		mBackground = renderer->loadTexture("../imgs/backgrounds/credit.jpg");
-		mExit = renderer->loadTexture("../imgs/backgrounds/creditback.png");
 		
-	}
+	mBack->draw(renderer);
 }
 
 void Credit::handleEvent(SDL_Event e, bool& exit)
 {
     if(e.type == SDL_MOUSEBUTTONDOWN)
     {
-		int x, y;
-		SDL_GetMouseState( &x, &y );
+		SDL_GetMouseState(&mousePos.x, &mousePos.y);
 		
-		if (x > 512-100 && x < 512+100 && y > 560 && y < 670)
+		if (mBack->mouseOver(mousePos)) 
 			setNextState(BaseState::MENU_STATE);		
 	}
 }

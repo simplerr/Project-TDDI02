@@ -4,6 +4,8 @@
 #include "BaseState.h"
 #include "Level.h"
 #include "Texture.h"
+#include "Button.h"
+#include <vector>
 /*
 class Renderer;
 class Level;
@@ -31,6 +33,8 @@ private:
     Texture* mPauseMenu;
     float speed = 3.0;
     bool mPaused;
+	vector<Button*> buttonList;
+	Vec2 mousePos;
 };
 
 #endif

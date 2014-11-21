@@ -19,6 +19,9 @@ PlayState::PlayState()
 
 PlayState::~PlayState()
 {
+	for (unsigned int i = 0; i < buttonList.size(); i++)
+		delete buttonList.at(i);
+
     delete mLevel;
     delete mTestBkgd;
     delete mPauseMenu;
@@ -29,6 +32,11 @@ void PlayState::init()
     mLevel = new Level();
     mLevel->loadLevel("Maptest2.txt");
     mPlayer = mLevel->findPlayer();
+
+	buttonList = {
+		new ButtonImg(Vec2(350, 300), 300, 100, "../imgs/backgrounds/pauseback.png"),
+		new ButtonImg(Vec2(350, 400), 300, 100, "../imgs/backgrounds/pausetomenu.png")
+	};
 }
 
 void PlayState::cleanup()
@@ -46,19 +54,16 @@ void PlayState::draw(Renderer* renderer)
 {
     // draw test bkgd
     if(mTestBkgd != nullptr)
-	renderer->drawTexture(Vec2(0, 0), mLevel->getLevelSize().x, mLevel->getLevelSize().y, mTestBkgd);
+		renderer->drawTexture(Vec2(0, 0), mLevel->getLevelSize().x, mLevel->getLevelSize().y, mTestBkgd);
     else
-	mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
+		mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg");
 
 	mLevel->draw(renderer);
 	
-    if(mPaused)
-    {
-	if (mPauseMenu != nullptr)
-	    renderer->drawTextureScreen(Vec2(0,0), 1024, 768, mPauseMenu);
-	else
-	    mPauseMenu = renderer->loadTexture("../imgs/backgrounds/pause.png");
-    }
+	if (mPaused) {
+		for (unsigned int i = 0; i < buttonList.size(); i++)
+			buttonList.at(i)->draw(renderer);
+	}
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)
@@ -101,16 +106,33 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
     else
     {
 		if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-		{
-			if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET
-			{
+			if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET VIA ESCAPE
 				mPaused = !mPaused;
+
+		if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
+		{
+			SDL_GetMouseState(&mousePos.x, &mousePos.y);
+			for (unsigned int i = 0; i < buttonList.size(); i++) {
+			
+				if (buttonList.at(i)->mouseOver(mousePos)) {
+
+					switch (i) {
+					case 0:
+						mPaused = !mPaused;	
+						break;
+					case 1:
+						setNextState(BaseState::MENU_STATE);
+						break;
+					default:
+						break;
+					}
+
+				}
+
 			}
-			else if (e.key.keysym.sym == SDLK_DOWN) // GÅ TILL MENYN OCH AVSLUTA NIVÅN
-			{
-				setNextState(BaseState::MENU_STATE);
-			}
+
 		}
-    }
+
+	}
     
 }
