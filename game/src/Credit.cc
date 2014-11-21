@@ -14,7 +14,7 @@ Credit::~Credit()
 
 void Credit::init()
 {
-	mBack = new ButtonImg(Vec2(412, 420), 200, 100, "../imgs/backgrounds/creditback.png");
+	mBack = new ButtonImg(Vec2(300, SCREEN_HEIGHT-175), 420, 80, "../imgs/backgrounds/creditback.png");
 }
 
 void Credit::cleanup()
