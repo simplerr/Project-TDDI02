@@ -1,8 +1,11 @@
 #include "MenuState.h"
+#include <iostream>
+using namespace std;
 
 MenuState::MenuState()
 {
     mMenu = nullptr;
+    mAlphaOverlay = nullptr;
 }
 
 MenuState::~MenuState()
@@ -11,6 +14,7 @@ MenuState::~MenuState()
 		delete buttonList.at(i);
 
     delete mMenu;
+    delete mAlphaOverlay;
 }
 
 void MenuState::init(string initData)
@@ -53,8 +57,10 @@ void MenuState::draw(Renderer* renderer)
 	{
 		buttonList[i]->draw(renderer);
 		
+		cout << "c: " << getLvlUnlocks() << endl;
+		
 		SDL_Rect rect = buttonList[i]->getRect();
-		if((i == 1 && lvlUnlocks < 1) || (i == 2 && lvlUnlocks < 2))
+		if((i == 1 && getLvlUnlocks() < 1) || (i == 2 && getLvlUnlocks() < 2))
 		    renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mAlphaOverlay);
 	}
 }
