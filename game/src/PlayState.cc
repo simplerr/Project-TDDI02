@@ -53,6 +53,7 @@ void PlayState::update(float dt)
 			if (getLvlUnlocks() < 2)
 				incLvl();
 			setNextState(BaseState::MENU_STATE);
+			
 		} 
 		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y) // Trillar spelaren ned, ladda om banan
 		    init(mLevel->getCurrentLevel()); // (Kan behövas ändras)

@@ -22,9 +22,10 @@ public:
     StateId getStateId() { return MENU_STATE; }
 private:
     Texture *mMenu;
-	vector<Button*> buttonList;
-	Vec2 mousePos;
-	Level *level;
+    Texture *mAlphaOverlay;
+    vector<Button*> buttonList;
+    Vec2 mousePos;
+    Level *level;
 };
 
 #endif

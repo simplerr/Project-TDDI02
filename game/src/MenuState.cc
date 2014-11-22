@@ -44,10 +44,19 @@ void MenuState::draw(Renderer* renderer)
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mMenu);
 	else
 		mMenu = renderer->loadTexture("../imgs/backgrounds/menu.jpg");
+
+	if(mAlphaOverlay == nullptr)
+	    mAlphaOverlay = renderer->loadTexture("../imgs/alpha.png");
 	
 	// Renderera ut knapparna
 	for (unsigned int i = 0; i < buttonList.size(); i++)
+	{
 		buttonList[i]->draw(renderer);
+		
+		SDL_Rect rect = buttonList[i]->getRect();
+		if((i == 1 && lvlUnlocks < 1) || (i == 2 && lvlUnlocks < 2))
+		    renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mAlphaOverlay);
+	}
 }
 
 void MenuState::handleEvent(SDL_Event e, bool& exit)
