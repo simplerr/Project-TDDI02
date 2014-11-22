@@ -29,7 +29,7 @@ PlayState::~PlayState()
 void PlayState::init(string initData) // initData will be the filename of the level
 {
     mLevel = new Level();
-    mLevel->loadLevel(initData);
+    mLevel->loadLevel(initData, 1); // 1 för att det är playstate
     mPlayer = mLevel->findPlayer();
 
 	buttonList = {
