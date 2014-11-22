@@ -31,8 +31,8 @@ static const std::string FILEPATH_MENU_BACKGROUND = "../imgs/backgrounds/darkblu
 static const std::string FILEPATH_SAVE = "../imgs/SAVE.png";
 
 //###### MAPS #####
-static const std::string FILEPATH_LVL1 = "Map1.txt";
-static const std::string FILEPATH_LVL2 = "Map2.txt";
-static const std::string FILEPATH_LVL3 = "Map3.txt";
+static const std::string FILEPATH_LVL1 = "level1.txt";
+static const std::string FILEPATH_LVL2 = "level2.txt";
+static const std::string FILEPATH_LVL3 = "level3.txt";
 
 static int lvlUnlocks = 0;

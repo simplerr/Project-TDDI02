@@ -49,8 +49,10 @@ void PlayState::update(float dt)
 		mLevel->update(dt);
 		
 
-		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLevel->getLevelSize().x) { // Om spelaren klarat banan
-			if (getLvlUnlocks() < 2)
+		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLevel->getLevelSize().x) { // Om spelaren klarat banan;
+			if (getLvlUnlocks() == 0 && mLevel->getCurrentLevel() == FILEPATH_LVL1)
+				incLvl();
+			else if (getLvlUnlocks() == 1 && mLevel->getCurrentLevel() == FILEPATH_LVL2)
 				incLvl();
 			setNextState(BaseState::MENU_STATE);
 			
