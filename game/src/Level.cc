@@ -125,6 +125,8 @@ bool Level::saveLevel(string filename)
 		output << "3 ";
 	    else if (mObjects[i]->getId() == 4)
 		output << "4 ";
+		else if (mObjects[i]->getId() == 5)
+		output << "5 ";
 	    
 	    output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
 		   << mObjects[i]->getHeight() << " " << mObjects[i]->getFilename();
@@ -253,14 +255,14 @@ void Level::update(float dt)
 		//##############
 		// KOLLA OM KOLLISION FÖR PLAYER X-LED3
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().x + mPlayer->getWidth() > mLEVEL_WIDTH || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
+		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
 		{
 			x = true;
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA TBX
 		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT || mPlayer->getPosition().y < 0 ) //KOLLA COLLISION
+		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT ) //KOLLA COLLISION
 		{
 			y = true;
 			break;
@@ -268,11 +270,14 @@ void Level::update(float dt)
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
 		
+		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLEVEL_WIDTH ) //Om slutetet på banan, göt något
+			mPlayer->setPosition(0, 0 );
+		
     }
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
 	    mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
-	else
-	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
+	/*else
+	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);*/
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
 	{
 	    if(mPlayer->getjump()) //Hanterar ifall spelaren är inuti ett hopp
@@ -294,30 +299,27 @@ void Level::update(float dt)
 	    }
 	}
 	else{
-	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
+	    //mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
 		mPlayer->setjump(2); //Sätter fall till false
-		if (mPlayer->getVel().y != 0){
-			if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
-			{
-				mPlayer->setfall(2); //Sätter hopp till false
-				mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
-			}
-			else
-			{
-				mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y+objectB->getHeight()); // om du ska hamna under
-				mPlayer->setfall(1); //Sätter hopp till true
-			}
+		
+		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
+		{
+			mPlayer->setfall(2); //Sätter hopp till false
+			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+		}
+		else
+		{
+			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y+objectB->getHeight()); // om du ska hamna under
+			mPlayer->setfall(1); //Sätter hopp till true
 		}
 	}
 		
-	mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y);
+	//mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y);
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
 		mObjects[i]->update(dt);
-    }
-	cout << mPlayer->getVel().x << " " << mPlayer->getVel().y << endl;
-
+	}
 }
 
 void Level::draw(Renderer* renderer)
@@ -326,7 +328,6 @@ void Level::draw(Renderer* renderer)
 		renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), mLEVEL_WIDTH, mLEVEL_HEIGHT);
 	else{
 		renderer->updateCamera(camX, camY, 0, 0, 10000, 10000);
-		std::cout << "camX: " << camX << "camY: "<<camY << std::endl;
 	}
 		
 		

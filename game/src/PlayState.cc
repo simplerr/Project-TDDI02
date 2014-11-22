@@ -30,7 +30,7 @@ PlayState::~PlayState()
 void PlayState::init()
 {
     mLevel = new Level();
-    mLevel->loadLevel("Map1.txt");
+    mLevel->loadLevel("Maptest2.txt");
     mPlayer = mLevel->findPlayer();
 
 	buttonList = {
@@ -118,7 +118,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 
 					switch (i) {
 					case 0:
-						mPaused = !mPaused;	
+						mPaused = !mPaused;
 						break;
 					case 1:
 						setNextState(BaseState::MENU_STATE);

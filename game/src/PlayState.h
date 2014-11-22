@@ -31,7 +31,7 @@ private:
     Player* mPlayer;
     Texture* mTestBkgd;
     Texture* mPauseMenu;
-    float speed = 3.0;
+    float speed = 6.0;
     bool mPaused;
 	vector<Button*> buttonList;
 	Vec2 mousePos;
