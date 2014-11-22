@@ -2,8 +2,7 @@
 
 Credit::Credit()
 {
-	mBackground = nullptr;
-	init();
+    mBackground = nullptr;
 }
 
 Credit::~Credit()
@@ -12,7 +11,7 @@ Credit::~Credit()
 	delete mBackground;
 }
 
-void Credit::init()
+void Credit::init(string initData)
 {
 	mBack = new ButtonImg(Vec2(300, SCREEN_HEIGHT-175), 420, 80, "../imgs/backgrounds/creditback.png");
 }

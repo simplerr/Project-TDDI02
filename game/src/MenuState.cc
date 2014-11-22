@@ -3,7 +3,6 @@
 MenuState::MenuState()
 {
     mMenu = nullptr;
-	init();
 }
 
 MenuState::~MenuState()
@@ -14,7 +13,7 @@ MenuState::~MenuState()
     delete mMenu;
 }
 
-void MenuState::init()
+void MenuState::init(string initData)
 {
 	buttonList = {	
 		new ButtonImg(Vec2(212, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 1
@@ -63,25 +62,25 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 
 				switch (i) {
 				case 0:
-					setNextState(BaseState::PLAY_STATE);	
-					break;
+				    setNextState(BaseState::PLAY_STATE, "level1.txt");	
+				    break;
 				case 1:
-					setNextState(BaseState::PLAY_STATE);
-					break;
+				    setNextState(BaseState::PLAY_STATE, "level2.txt");
+				    break;
 				case 2:
-					setNextState(BaseState::PLAY_STATE);
-					break;
+				    setNextState(BaseState::PLAY_STATE, "level3.txt");
+				    break;
 				case 3:
-					setNextState(BaseState::CREDIT);
-					break;
+				    setNextState(BaseState::CREDIT);
+				    break;
 				case 4:
-					exit = true;
-					break;
+				    exit = true;
+				    break;
 				case 5:
-					setNextState(BaseState::EDITOR_STATE);
-					break;
+				    setNextState(BaseState::EDITOR_STATE);
+				    break;
 				default:
-					break;
+				    break;
 				}
 
 			}

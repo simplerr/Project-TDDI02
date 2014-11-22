@@ -32,9 +32,13 @@ void Game::cleanup()
 }
 void Game::changeState(BaseState* state)
 {
+    // init the new state
+    // using data from the previous state
+    state->init(mActiveState->getNextStateData());
+
     // cleanup the old one(s)
     if(mActiveState != nullptr)
-		delete mActiveState;
+	delete mActiveState;
 	
     mActiveState = state;
 }
@@ -57,7 +61,7 @@ void Game::run()
 		newState = new Credit;
        
     if(newState != nullptr)
-		changeState(newState);
+	changeState(newState);
 		
 
     // update the current gamestate

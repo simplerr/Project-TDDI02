@@ -13,7 +13,7 @@ public:
     MenuState();
     ~MenuState();
 
-    void init();
+    void init(string initData = "");
     void cleanup();
     void update(float dt);
     void draw(Renderer* renderer);

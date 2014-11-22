@@ -13,7 +13,6 @@ PlayState::PlayState()
     mPlayer = nullptr;
     mPauseMenu = nullptr;
     mPaused = false;
-	init();
 }
 
 PlayState::~PlayState()
@@ -26,10 +25,10 @@ PlayState::~PlayState()
     delete mPauseMenu;
 }
 
-void PlayState::init()
+void PlayState::init(string initData) // initData will be the filename of the level
 {
     mLevel = new Level();
-    mLevel->loadLevel("Maptest2.txt");
+    mLevel->loadLevel(initData);
     mPlayer = mLevel->findPlayer();
 
 	buttonList = {

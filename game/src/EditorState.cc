@@ -11,7 +11,6 @@
 
 EditorState::EditorState()
 {
-    init();
     mTextPlatformar = nullptr;
     mTextBakgrunder = nullptr;
     mFlagTexture = nullptr;
@@ -31,7 +30,7 @@ EditorState::~EditorState()
 	delete currentObject;
 }
 
-void EditorState::init()
+void EditorState::init(string initData)
 {
 	//ALLA KNAPPAR PÅ VÄNSTER SIDA
 	
