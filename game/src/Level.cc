@@ -262,7 +262,7 @@ void Level::update(float dt)
 		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA TBX
 		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT ) //KOLLA COLLISION
+		if ( mPlayer->collision(mPlayer, objectB)) //KOLLA COLLISION
 		{
 			y = true;
 			break;
@@ -270,8 +270,6 @@ void Level::update(float dt)
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
 		
-		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLEVEL_WIDTH ) //Om slutetet på banan, göt något
-			mPlayer->setPosition(0, 0 );
 		
     }
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED

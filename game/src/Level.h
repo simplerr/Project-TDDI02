@@ -34,6 +34,9 @@ public:
   void update(float dt);
   void draw(Renderer* renderer);
 
+  void setCurrentLevel(string f) { mFilename = f; }
+  string getCurrentLevel() { return mFilename; }
+
   Object* getObjectAt(float x, float y);
  
 private:

@@ -1,5 +1,4 @@
 #include "MenuState.h"
-#include "constants.h"
 
 MenuState::MenuState()
 {
