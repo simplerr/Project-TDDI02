@@ -57,8 +57,6 @@ void MenuState::draw(Renderer* renderer)
 	{
 		buttonList[i]->draw(renderer);
 		
-		cout << "c: " << getLvlUnlocks() << endl;
-		
 		SDL_Rect rect = buttonList[i]->getRect();
 		if((i == 1 && getLvlUnlocks() < 1) || (i == 2 && getLvlUnlocks() < 2))
 		    renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mAlphaOverlay);
