@@ -2,6 +2,7 @@
 #define BASESTATE_H
 
 #include <SDL2/SDL.h>
+#include "constants.h"
 
 
 class Renderer;
@@ -23,6 +24,10 @@ public:
     virtual StateId getStateId() = 0;// { return BASE_STATE; }
     StateId changeStateTo() { return mChangeStateTo; } // BASE_STATE don't do anything
     void setNextState(StateId nextState) { mChangeStateTo = nextState; }
+
+	void incLvl() { lvlUnlocks++; }
+	int getLvlUnlocks() { return lvlUnlocks; }
+
 private:
     StateId mChangeStateTo;
 };

@@ -66,10 +66,12 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 					setNextState(BaseState::PLAY_STATE);	
 					break;
 				case 1:
-					setNextState(BaseState::PLAY_STATE);
+					if (getLvlUnlocks() > 0)
+						setNextState(BaseState::PLAY_STATE);
 					break;
 				case 2:
-					setNextState(BaseState::PLAY_STATE);
+					if (getLvlUnlocks() > 1)
+						setNextState(BaseState::PLAY_STATE);
 					break;
 				case 3:
 					setNextState(BaseState::CREDIT);

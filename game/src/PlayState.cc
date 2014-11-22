@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "Game.h"
 #include "Enemy.h"
+#include <iostream>
 
 PlayState::PlayState()
 {
@@ -50,9 +51,8 @@ void PlayState::update(float dt)
 		
 
 		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLevel->getLevelSize().x) { // Om spelaren klarat banan
-			// std::cout << getLvlUnlocks() << std::endl;
-			// incLvlUnlocks();
-			// std::cout << getLvlUnlocks() << std::endl;
+			if (getLvlUnlocks() < 2)
+				incLvl();
 			setNextState(BaseState::MENU_STATE);
 		} 
 		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y) // Trillar spelaren ned, ladda om banan
