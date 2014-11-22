@@ -47,7 +47,7 @@ void MenuState::draw(Renderer* renderer)
 	if(mMenu != nullptr)
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mMenu);
 	else
-		mMenu = renderer->loadTexture("../imgs/backgrounds/menu.jpg");
+		mMenu = renderer->loadTexture("../imgs/lilb.jpg");
 
 	if(mAlphaOverlay == nullptr)
 	    mAlphaOverlay = renderer->loadTexture("../imgs/alpha.png");

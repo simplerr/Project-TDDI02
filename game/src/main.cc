@@ -17,10 +17,10 @@ int main(int argc, char* argv[])
     }
 
     bool exit = false;
-	Sound s("../sounds/music.mp3");
+	Sound s("../sounds/Hyperfun.mp3");
     while(!exit)
     {
-		//s.play();
+		s.play();
 		SDL_Event e;
 
 		// poll SDL event
