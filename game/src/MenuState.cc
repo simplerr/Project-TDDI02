@@ -65,10 +65,12 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 				    setNextState(BaseState::PLAY_STATE, "level1.txt");	
 				    break;
 				case 1:
-				    setNextState(BaseState::PLAY_STATE, "level2.txt");
+				    if (getLvlUnlocks() > 0)
+					setNextState(BaseState::PLAY_STATE, "level2.txt");
 				    break;
 				case 2:
-				    setNextState(BaseState::PLAY_STATE, "level3.txt");
+				    if (getLvlUnlocks() > 1)
+					setNextState(BaseState::PLAY_STATE, "level3.txt");
 				    break;
 				case 3:
 				    setNextState(BaseState::CREDIT);
