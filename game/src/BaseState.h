@@ -22,6 +22,7 @@ BaseState() : mChangeStateTo(BASE_STATE), mNextStateData("") {};
     virtual void draw(Renderer* renderer) = 0;
     virtual void handleEvent(SDL_Event e, bool& exit) = 0;  
 
+    StateId changeStateTo() { return mChangeStateTo; } // BASE_STATE don't do anything
     string getNextStateData() { return mNextStateData; }
     void setNextState(StateId nextState, string initData = "") { mChangeStateTo = nextState; mNextStateData = initData;}
 

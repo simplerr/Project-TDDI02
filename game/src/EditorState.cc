@@ -70,7 +70,12 @@ void EditorState::init(string initData)
 		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, row*12), 80, 13, TEXT_MENU_4, 0,0,0)
 	};
 	mLevel = new Level();
+
+	// level1.txt is the defualt level to edit
+	mLevel->setCurrentLevel("level1.txt");
 	mLevel->loadLevel(mLevel->getCurrentLevel());
+
+	cout << "level: " << mLevel->getCurrentLevel() << endl;
 }
 
 void EditorState::cleanup()
@@ -202,7 +207,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				case 10: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_2 ); break;
 				case 11: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_1 ); break;
 				case 12:
-					if ( mLevel->saveLevel("Maptest2.txt") )
+				    if ( mLevel->saveLevel(mLevel->getCurrentLevel()) )
 						cout << "Succeeded to save file!\n";
 					else
 						cout << "Failed to save file!\n";

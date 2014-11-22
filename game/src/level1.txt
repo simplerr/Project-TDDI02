@@ -1,16 +1,8 @@
-2800 1680
+2776 1120
 5 0 0 560 560 ../imgs/downloads/Other/FarBackground.png
-5 560 0 560 560 ../imgs/downloads/Other/FarBackground.png
-5 1120 0 560 560 ../imgs/downloads/Other/FarBackground.png
-5 0 1120 560 560 ../imgs/downloads/Other/FarBackground.png
-5 560 1120 560 560 ../imgs/downloads/Other/FarBackground.png
-5 1120 1120 560 560 ../imgs/downloads/Other/FarBackground.png
-5 1680 1120 560 560 ../imgs/downloads/Other/FarBackground.png
-5 2240 1120 560 560 ../imgs/downloads/Other/FarBackground.png
-4 480 720 104 48 ../imgs/downloads/Other/Grass.png
-4 416 720 104 48 ../imgs/downloads/Other/Grass.png
-4 344 720 104 48 ../imgs/downloads/Other/Grass.png
-4 64 624 104 48 ../imgs/downloads/Other/Grass.png
+5 440 0 560 560 ../imgs/downloads/Other/FarBackground.png
+5 0 560 560 560 ../imgs/downloads/Other/FarBackground.png
+5 560 560 560 560 ../imgs/downloads/Other/FarBackground.png
 2 104 128 48 48 ../imgs/enemy.png 200
 1 0 176 104 76 ../imgs/downloads/Walkways/Walkway3.png
 1 104 176 104 76 ../imgs/downloads/Walkways/Walkway2.png
