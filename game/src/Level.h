@@ -30,7 +30,7 @@ public:
 
     
   Player* findPlayer();
-  bool loadLevel(string filename);
+  bool loadLevel(string filename, int k);
   void update(float dt);
   void draw(Renderer* renderer);
 

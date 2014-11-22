@@ -73,7 +73,7 @@ void EditorState::init(string initData)
 
 	// level1.txt is the defualt level to edit
 	mLevel->setCurrentLevel("level1.txt");
-	mLevel->loadLevel(mLevel->getCurrentLevel());
+	mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
 
 	cout << "level: " << mLevel->getCurrentLevel() << endl;
 }

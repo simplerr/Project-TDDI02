@@ -1,13 +1,12 @@
+#include <fstream>
+#include <iostream>
 #include "Level.h"
 #include "Object.h"
 #include "Player.h"
-#include "Enemy.h"
 #include "Powerup.h"
-#include <fstream>
-#include <iostream>
+#include "Enemy.h"
 #include "Platform.h"
 #include "Background.h"
-#include "Enemy.h"
 #include "Decoration.h"
 
 Level::Level()
@@ -33,7 +32,7 @@ void Level::addObject(Object* object)
     mObjects.push_back(object);
 }
 
-bool Level::loadLevel(string filename)
+bool Level::loadLevel(string filename, int k)
 {
 	mFilename = filename;
     ifstream input (mFilename);
@@ -61,13 +60,22 @@ bool Level::loadLevel(string filename)
 			}
 			else if (index == 3) // Powerups
 				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
-			else if (index == 4) // Decoration
-				mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
-			else if (index == 5) // Backgrounds
-				mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
+			else if ( k == 1 ) // Play 
+			{
+				if (index == 4) // Decoration
+					mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
+				else if (index == 5) // Backgrounds
+					mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
+			}
+			else if ( k == 2 ) // Editor 
+			{
+				if (index == 4) // Decoration
+					mObjects.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
+				else if (index == 5) // Backgrounds
+					mObjects.push_back( new Background(Vec2(posx, posy), width, height, path) );
+			}
 			else
-			    cerr << "FEL, objekt okänt\n";
-			
+				cerr << "FEL, objekt okänt\n";
 		}
 	
 	input.close();
