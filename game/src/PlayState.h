@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "Button.h"
 #include <vector>
+
 /*
 class Renderer;
 class Level;
@@ -13,6 +14,9 @@ class Object;
 class Texture;
 class Player;
 */ 
+
+#define SPEEDBOOSTSEC 6
+
 class PlayState : public BaseState
 {
 public:
@@ -25,6 +29,11 @@ public:
     void draw(Renderer* renderer);
     void handleEvent(SDL_Event e, bool& exit);
 
+	void setSpeed(float);
+	float getSpeed();
+	void setTimer(Uint32);
+	Uint32 getTimer();
+
     StateId getStateId() { return PLAY_STATE; }
 private:
     Level* mLevel;
@@ -35,6 +44,8 @@ private:
     bool mPaused;
 	vector<Button*> buttonList;
 	Vec2 mousePos;
+	Uint32 mTimer, mLastTime;
+	int boostSeconds;
 };
 
 #endif
