@@ -7,8 +7,6 @@
 #include "Vec2.h"
 #include "Texture.h"
 
-static const int SCREEN_WIDTH = 1024;
-static const int SCREEN_HEIGHT = 768;
 // handles all SDL code
 class Renderer
 {
@@ -36,7 +34,7 @@ private:
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
     TTF_Font * mFont;
-    SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+    SDL_Rect camera;
     
 };
 

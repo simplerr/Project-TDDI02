@@ -5,10 +5,12 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "Vec2.h"
+#include "constants.h"
 using namespace std;
 
 Renderer::Renderer()
 {
+	camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
     mRenderer = nullptr;
     mWindow = nullptr;
 }
@@ -38,7 +40,7 @@ bool Renderer::initSDL()
     {
 
 	 // create window
-        mWindow = SDL_CreateWindow("Rockblock II", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN/*|SDL_WINDOW_RESIZABLE*/);
+        mWindow = SDL_CreateWindow(WINDOW_NAME , SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN/*|SDL_WINDOW_RESIZABLE*/);
         if(mWindow == NULL)
         {
             cerr << "ERROR: Kunde inte skapa fönster\n";
@@ -62,7 +64,7 @@ bool Renderer::initSDL()
 					success = false; 
 				}
 				
-				mFont = TTF_OpenFont("../fonts/arial.ttf", 40);
+				mFont = TTF_OpenFont(PATH_FONT , 40);
 				if(mFont == NULL)
 				{
 					cerr << "ERROR: Kunde inte skapa mFont\n" << TTF_GetError();

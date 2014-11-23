@@ -1,40 +1,14 @@
-2776 1120
-5 0 0 560 560 ../imgs/downloads/Other/FarBackground.png
-5 440 0 560 560 ../imgs/downloads/Other/FarBackground.png
-5 0 560 560 560 ../imgs/downloads/Other/FarBackground.png
-5 560 560 560 560 ../imgs/downloads/Other/FarBackground.png
-2 104 128 48 48 ../imgs/enemy.png 200
-1 0 176 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 104 176 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 208 176 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 312 176 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 416 176 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 632 448 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 216 448 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 112 448 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 312 448 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 544 448 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 0 672 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 104 672 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 328 768 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 432 768 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 536 768 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 728 768 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 832 768 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 936 768 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 1040 768 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 1144 768 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 1328 720 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 1432 720 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 1536 720 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 1640 720 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 1792 664 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 1896 664 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 2000 664 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 2104 664 104 76 ../imgs/downloads/Walkways/Walkway1.png
-1 2264 576 104 76 ../imgs/downloads/Walkways/Walkway3.png
-1 2368 576 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 2464 576 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 2568 576 104 76 ../imgs/downloads/Walkways/Walkway2.png
-1 2672 576 104 76 ../imgs/downloads/Walkways/Walkway1.png
-0 0 0 48 48 ../imgs/player.jpg
+2168 768
+2 792 288 48 48 ../imgs/enemy.png 584
+2 224 288 48 48 ../imgs/enemy.png 368
+2 224 520 48 48 ../imgs/enemy.png 336
+2 112 288 48 48 ../imgs/enemy.png 152
+1 8 336 832 104 ../imgs/platforms/platform.jpg
+1 840 296 200 104 ../imgs/platforms/platform.jpg
+1 1040 192 200 104 ../imgs/platforms/platform.jpg
+1 1168 512 200 104 ../imgs/platforms/platform.jpg
+1 1368 472 200 104 ../imgs/platforms/platform.jpg
+1 1568 432 200 104 ../imgs/platforms/platform.jpg
+1 1768 416 200 104 ../imgs/platforms/platform.jpg
+1 1968 400 200 104 ../imgs/platforms/platform.jpg
+0 16 288 48 48 ../imgs/player.jpg

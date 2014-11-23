@@ -24,6 +24,7 @@ public:
     Vec2 getVel();
     
     float getEndX();
+    void setEndX(float newEnd);
 private:
     float mMoveSpeed;
     float mLeftX, mRightX;

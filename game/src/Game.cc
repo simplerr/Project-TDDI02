@@ -48,7 +48,7 @@ void Game::run()
     // TODO
     // make sure the game runs at 60 fps
     float dt = 0.0f;
-	
+
     BaseState::StateId changeStateTo = mActiveState->changeStateTo();
     BaseState* newState = nullptr;
     if(changeStateTo == BaseState::PLAY_STATE)
@@ -59,11 +59,10 @@ void Game::run()
 		newState = new EditorState;
 	else if (changeStateTo == BaseState::CREDIT)
 		newState = new Credit;
-       
+
     if(newState != nullptr)
 	changeState(newState);
 		
-
     // update the current gamestate
     mActiveState->update(dt);
 	
@@ -74,6 +73,7 @@ void Game::run()
     mActiveState->draw(mRenderer);
 	
     mRenderer->endScene();
+
 }
 
 

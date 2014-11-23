@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Player.h"
+#include "Texture.h"
 using namespace std;
 
 class Object;
@@ -24,7 +25,7 @@ public:
     void insertion_sort();
     void setCam(int x, int y);
     Vec2 getCam(){ return Vec2(camX, camY); }
-
+    void clearList();
 
     Vec2 getLevelSize(){ return Vec2(mLEVEL_WIDTH, mLEVEL_HEIGHT); }
 
@@ -32,7 +33,7 @@ public:
   Player* findPlayer();
   bool loadLevel(string filename, int k);
   void update(float dt);
-  void draw(Renderer* renderer);
+  void draw(Renderer* renderer, bool flags = false);
 
   void setCurrentLevel(string f) { mFilename = f; }
   string getCurrentLevel() { return mFilename; }
@@ -48,6 +49,7 @@ private:
   int mLEVEL_HEIGHT;
   unsigned int camX;
   unsigned int camY;
+  Texture* mFlagTexture;
 };
 
 #endif

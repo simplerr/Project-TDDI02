@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include "constants.h"
 #include "Level.h"
 #include "Object.h"
 #include "Player.h"
@@ -13,6 +14,7 @@ Level::Level()
 {
 	camX=SCREEN_WIDTH/2;
 	camY=SCREEN_HEIGHT/2;
+	mFlagTexture = nullptr;
 }
 
 Level::~Level()
@@ -328,19 +330,30 @@ void Level::update(float dt)
 	}
 }
 
-void Level::draw(Renderer* renderer)
+void Level::draw(Renderer* renderer, bool flags)
 {
 	if ( mPlayer != nullptr )
 		renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), mLEVEL_WIDTH, mLEVEL_HEIGHT);
 	else{
 		renderer->updateCamera(camX, camY, 0, 0, 10000, 10000);
 	}
-		
-		
 	for(unsigned int i = 0; i < mBackgrounds.size(); i++)
 		mBackgrounds[i]->draw(renderer);
     for(unsigned int i = 0; i < mObjects.size(); i++)
+	{
 		mObjects[i]->draw(renderer);
+		if (mObjects[i]->getId() == 2 && flags == true)
+		{
+			Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
+			if (enemy->getEndX() != enemy->getPosition().x)
+			{
+				if(mFlagTexture == nullptr)
+					mFlagTexture = renderer->loadTexture("../imgs/flag.png");
+	
+				renderer->drawTextureScreen(Vec2(enemy->getEndX(), enemy->getPosition().y), 48, 48, mFlagTexture);
+			}
+		}
+    }
 }
 
 Object* Level::getObjectAt(float x, float y)
@@ -359,4 +372,16 @@ Player* Level::findPlayer()
 		}
     }
     return mPlayer;
+}
+
+void Level::clearList()
+{
+	if ( !isListEmpty() )
+	{
+		for(unsigned int i{}; i < mObjects.size(); ++i)
+		{
+			delete mObjects[i];
+		}
+		mObjects.resize(0);
+	}
 }

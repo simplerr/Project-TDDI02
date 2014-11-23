@@ -34,7 +34,7 @@ SDL_Rect Button::getRect()
 ButtonText::ButtonText(Vec2 pos, int width, int height, const std::string str, const  int color1, const int color2, const int color3)
 : Button(pos, width, height), mFilePath(str), mcolor1(color1), mcolor2(color2), mcolor3(color3)
 {
-    std::cout << mFilePath <<" created!\n";
+    
 }
 
 ButtonText::~ButtonText()

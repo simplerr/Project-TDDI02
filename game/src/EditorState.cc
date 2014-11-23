@@ -11,9 +11,11 @@
 
 EditorState::EditorState()
 {
+
     mTextPlatformar = nullptr;
     mTextBakgrunder = nullptr;
     mFlagTexture = nullptr;
+	setEnemyFlag = false;
 }
 
 EditorState::~EditorState()
@@ -33,7 +35,6 @@ EditorState::~EditorState()
 void EditorState::init(string initData)
 {
 	//ALLA KNAPPAR PÅ VÄNSTER SIDA
-	
 	int col1 = SCREEN_WIDTH-(buttonSize.x*3)-20;
 	int col2 = SCREEN_WIDTH-(buttonSize.x*2)-15;
 	int col3 = SCREEN_WIDTH-buttonSize.x-10;
@@ -59,7 +60,10 @@ void EditorState::init(string initData)
 		new ButtonImg(Vec2(col1, 10+row*12), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_1),
 		//###### DECORATIONS ######
 		// //###### OTHERS ######
-		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE)
+		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE),
+		new ButtonText(Vec2(col1, SCREEN_HEIGHT-70-buttonSize.y), buttonSize.x, buttonSize.y, FILEPATH_LEVEL_1,0,0,0),
+		new ButtonText(Vec2(col2, SCREEN_HEIGHT-70-buttonSize.y), buttonSize.x, buttonSize.y, FILEPATH_LEVEL_2,0,0,0),
+		new ButtonText(Vec2(col3, SCREEN_HEIGHT-70-buttonSize.y), buttonSize.x, buttonSize.y, FILEPATH_LEVEL_3,0,0,0)
 	};
 	buttonListUnclickable = { //VIKTIGT ATT DET SOM SKALL VARA LÄNGST BAK ÄR FÖRST OSV.
 		new ButtonImg(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, FILEPATH_GRID),
@@ -69,13 +73,11 @@ void EditorState::init(string initData)
 		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x-15), 80, 13, TEXT_MENU_3, 0,0,0),
 		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, row*12), 80, 13, TEXT_MENU_4, 0,0,0)
 	};
+
 	mLevel = new Level();
-
-	// level1.txt is the defualt level to edit
-	mLevel->setCurrentLevel("level1.txt");
+	mLevel->setCurrentLevel(FILEPATH_LVL1);
 	mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
-
-	cout << "level: " << mLevel->getCurrentLevel() << endl;
+	
 }
 
 void EditorState::cleanup()
@@ -96,26 +98,25 @@ void EditorState::update(float dt)
 
 void EditorState::draw(Renderer* renderer)
 {
-	
 	//renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), 9000, 9000);
 	//Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
 	if (currentObject != nullptr && currentObject->getId() == 5)
 		currentObject->draw(renderer, gridPos);
 
 	//Ritar ut alla object (platformar osv....)
-	mLevel->draw(renderer); //Rita ut alla skapade objekt
+	mLevel->draw(renderer, true); //Rita ut alla skapade objekt
 
 	//Ritar ut markerat objekt om det inte är en bakgrund
-	if (currentObject != nullptr && currentObject->getId() != 5)
+	if (currentObject != nullptr && currentObject->getId() != 5 && setEnemyFlag == false)
 	    currentObject->draw(renderer, gridPos);
 
 	// Rita ut slutpositionen för fienders patrullering
-	if (currentObject != nullptr && currentObject->getId() == 2)
+	if (setEnemyFlag == true)
 	{
 	    if(mFlagTexture == nullptr)
 	    	mFlagTexture = renderer->loadTexture("../imgs/flag.png");
 	    
-	    renderer->drawTextureScreen(currentObject->getPosition(), 25, 25, mFlagTexture);
+	    renderer->drawTextureScreen(gridPos, 48, 48, mFlagTexture);
 	}
 	
 	//Ritar ut alla oklickbara knappar
@@ -136,13 +137,39 @@ void EditorState::draw(Renderer* renderer)
 void EditorState::handleEvent(SDL_Event e, bool& exit)
 {
 	//Om vi har ett objekt på musen
-	if( currentObject != nullptr )
+	/*
+	{
+		if(e.type == SDL_MOUSEBUTTONDOWN && mousePos.x < SCREEN_WIDTH-menuBarWidth )
+		{
+			
+		}
+		else if(e.type == SDL_MOUSEBUTTONUP && mousePos.x < SCREEN_WIDTH-menuBarWidth )
+		{
+			
+		}
+	}*/
+	if ( currentObject != nullptr )
 	{
 		// Placera objekt
 		if(e.type == SDL_MOUSEBUTTONDOWN && mousePos.x < SCREEN_WIDTH-menuBarWidth ) // 120 == bredd på sidmenyn
 		{
 			currentObject->setPosition(gridPos);
 			mLevel->addObject( currentObject->clone() );
+
+			if (currentObject->getId() == 2)
+			{
+				setEnemyFlag = true;
+			}
+		}
+		else if (e.type == SDL_MOUSEBUTTONUP && mousePos.x < SCREEN_WIDTH-menuBarWidth )
+		{
+			
+			if ( setEnemyFlag == true )
+			{
+			mLevel->pop();
+			mLevel->addObject(new Enemy(currentObject->getPosition(), currentObject->getWidth(), currentObject->getHeight(), currentObject->getFilename(), gridPos.x));
+			setEnemyFlag = false;
+			}
 			mLevel->insertion_sort();
 		}
 		
@@ -195,7 +222,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				}
 				switch(i) {
 				case 0: currentObject = new Player(mousePos, 48, 48, FILEPATH_PLAYER); break;
-				case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, 200); break;
+				case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, mousePos.x); break;
 				case 2: currentObject = new Powerup(mousePos, 40, 40, FILEPATH_POWERUP1); break;
 				case 3:	currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_1 ); break;
 				case 4: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
@@ -211,6 +238,24 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 						cout << "Succeeded to save file!\n";
 					else
 						cout << "Failed to save file!\n";
+					break;
+				case 13:
+						mLevel->setCurrentLevel(FILEPATH_LVL1);
+						mLevel->clearList();
+						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
+						cout << "level: " << mLevel->getCurrentLevel() << endl;
+					break;
+				case 14:
+						mLevel->setCurrentLevel(FILEPATH_LVL2);
+						mLevel->clearList();
+						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
+						cout << "level: " << mLevel->getCurrentLevel() << endl;
+					break;
+				case 15:
+						mLevel->setCurrentLevel(FILEPATH_LVL3);
+						mLevel->clearList();
+						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
+						cout << "level: " << mLevel->getCurrentLevel() << endl;
 					break;
 				default: currentObject = nullptr;
 				}

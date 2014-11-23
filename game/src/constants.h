@@ -2,7 +2,12 @@
 
 #include <string>
 
+static const int SCREEN_WIDTH = 1024;
+static const int SCREEN_HEIGHT = 768;
+static const char WINDOW_NAME[] = "Rockblock II";
+static const char PATH_FONT[] = "../fonts/GROBOLD.ttf";
 static const std::string MENU_BKGD = "../imgs/menu_bkgd.png";
+
 
 //###### OBJEKT //######
 static const std::string GRASS_PLATFORM = "../imgs/grass_platform.png";
@@ -29,6 +34,10 @@ static const std::string TEXT_MENU_4 = "..Decoration..";
 static const std::string FILEPATH_GRID = "../imgs/backgrounds/grid8px.png";
 static const std::string FILEPATH_MENU_BACKGROUND = "../imgs/backgrounds/darkblue.png";
 static const std::string FILEPATH_SAVE = "../imgs/SAVE.png";
+static const std::string FILEPATH_LEVEL_1 = "1";
+static const std::string FILEPATH_LEVEL_2 = "2";
+static const std::string FILEPATH_LEVEL_3 = "3";
+
 
 //###### MAPS #####
 static const std::string FILEPATH_LVL1 = "level1.txt";

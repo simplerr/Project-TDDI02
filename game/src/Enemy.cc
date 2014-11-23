@@ -85,3 +85,8 @@ float Enemy::getEndX()
     return mEndX;
 
 }
+
+void Enemy::setEndX(float newEnd)
+{
+	mEndX = newEnd;
+}

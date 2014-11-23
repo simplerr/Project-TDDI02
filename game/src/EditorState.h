@@ -42,6 +42,7 @@ private:
     unsigned int currentWidth;
     unsigned int currentHeight;
     unsigned int gridSize = 8;
+    bool setEnemyFlag;
 };
 
 #endif
