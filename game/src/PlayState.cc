@@ -13,6 +13,9 @@ PlayState::PlayState()
     mTestBkgd = nullptr;
     mPlayer = nullptr;
     mPauseMenu = nullptr;
+	mLastTime = 0;
+	mTimer = 0;
+	boostSeconds = SPEEDBOOSTSEC;
     mPaused = false;
 }
 
@@ -48,7 +51,16 @@ void PlayState::update(float dt)
     if(!mPaused) {
 		mLevel->update(dt);
 		
+		if (boostSeconds > 0) {
+			mTimer = SDL_GetTicks();
+			if (mTimer > mLastTime + 1000) {
+				boostSeconds--;
+				std::cout << boostSeconds << " xD\n";
+				mLastTime = mTimer;
+			}
+		}
 
+		
 		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLevel->getLevelSize().x) { // Om spelaren klarat banan;
 			if (getLvlUnlocks() == 0 && mLevel->getCurrentLevel() == FILEPATH_LVL1)
 				incLvl();
@@ -147,4 +159,25 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 
 	}
     
+}
+
+
+void PlayState::setSpeed(float s)
+{
+	speed = s;
+}
+
+float PlayState::getSpeed()
+{
+	return speed;
+}
+
+void PlayState::setTimer(Uint32 t)
+{
+	mTimer = t;
+}
+
+Uint32 PlayState::getTimer()
+{
+	return mTimer;
 }
