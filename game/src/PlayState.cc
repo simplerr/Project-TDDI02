@@ -16,6 +16,7 @@ PlayState::PlayState()
 	mLastTime = 0;
 	mTimer = 0;
 	boostSeconds = SPEEDBOOSTSEC;
+	boostEnable = false;
     mPaused = false;
 }
 
@@ -47,18 +48,12 @@ void PlayState::cleanup()
 }
 
 void PlayState::update(float dt)
-{
+{	
     if(!mPaused) {
 		mLevel->update(dt);
 		
-		if (boostSeconds > 0) {
-			mTimer = SDL_GetTicks();
-			if (mTimer > mLastTime + 1000) {
-				boostSeconds--;
-				std::cout << boostSeconds << " xD\n";
-				mLastTime = mTimer;
-			}
-		}
+		if (boostEnable) // Enables when collision with powerup
+			speedUp(); // speedUp varar i SPEEDBOOSTSEC sekunder
 
 		
 		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLevel->getLevelSize().x) { // Om spelaren klarat banan;
@@ -180,4 +175,22 @@ void PlayState::setTimer(Uint32 t)
 Uint32 PlayState::getTimer()
 {
 	return mTimer;
+}
+
+void PlayState::speedUp()
+{
+	if (boostSeconds > 0) {
+		setSpeed(BOOSTUPSPEED);
+		mTimer = SDL_GetTicks();
+		if (mTimer > mLastTime + 1000) {
+			boostSeconds--;
+			mLastTime = mTimer;
+		}
+			
+	} else {
+		// Enough with the fun
+		boostEnable = false;
+		speed = DEFAULTSPEED;
+		boostSeconds = SPEEDBOOSTSEC;
+	}
 }

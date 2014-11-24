@@ -16,6 +16,8 @@ class Player;
 */ 
 
 #define SPEEDBOOSTSEC 6
+#define DEFAULTSPEED 6.0
+#define BOOSTUPSPEED 9.0
 
 class PlayState : public BaseState
 {
@@ -33,6 +35,7 @@ public:
 	float getSpeed();
 	void setTimer(Uint32);
 	Uint32 getTimer();
+	void speedUp();
 
     StateId getStateId() { return PLAY_STATE; }
 private:
@@ -46,6 +49,7 @@ private:
 	Vec2 mousePos;
 	Uint32 mTimer, mLastTime;
 	int boostSeconds;
+	bool boostEnable;
 };
 
 #endif
