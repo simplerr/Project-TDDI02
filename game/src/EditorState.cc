@@ -136,18 +136,6 @@ void EditorState::draw(Renderer* renderer)
 
 void EditorState::handleEvent(SDL_Event e, bool& exit)
 {
-	//Om vi har ett objekt på musen
-	/*
-	{
-		if(e.type == SDL_MOUSEBUTTONDOWN && mousePos.x < SCREEN_WIDTH-menuBarWidth )
-		{
-			
-		}
-		else if(e.type == SDL_MOUSEBUTTONUP && mousePos.x < SCREEN_WIDTH-menuBarWidth )
-		{
-			
-		}
-	}*/
 	if ( currentObject != nullptr )
 	{
 		// Placera objekt
@@ -283,13 +271,6 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 		}
 		
 	}
-
-	// Ta bort senast tillagda Objectet // SDLK_DELETE SDLK_BACKSPACE
-	if(e.key.keysym.sym == SDLK_z && e.type == SDL_KEYDOWN)
-    {
-		if ( !mLevel->isListEmpty() )
-			mLevel->pop();
-    }
 	
 	// Ta bort allt och börja om
 	if(e.key.keysym.sym == SDLK_F12 && e.type == SDL_KEYUP)

@@ -202,8 +202,6 @@ Object* Level::findObjectByPos(Vec2 mousePos)
 	    }
 	}
 	
-	//lowestFound = nullptr;
-	//delete mObjects[mObjects.size()];
 	mObjects.resize(mObjects.size()-1);
 	mObjects.shrink_to_fit();
 	return found;
@@ -254,10 +252,9 @@ void Level::update(float dt)
 {	
     // collision
 	bool x, y = false;
-	Object* objectB;
+	Object* objectColliedY;
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
-	    objectB = mObjects[i];
 		
 		if(mPlayer == mObjects[i]) //Så att den inte kollar kollision med sig själv...
 			continue;
@@ -265,17 +262,17 @@ void Level::update(float dt)
 		//##############
 		// KOLLA OM KOLLISION FÖR PLAYER X-LED3
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, objectB) || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
+		if ( mPlayer->collision(mPlayer, mObjects[i]) || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
 		{
 			x = true;
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA TBX
 		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, objectB)) //KOLLA COLLISION
+		if ( mPlayer->collision(mPlayer, mObjects[i])) //KOLLA COLLISION
 		{
 			y = true;
-			break;
+			objectColliedY = mObjects[i];
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
@@ -283,9 +280,14 @@ void Level::update(float dt)
 		
     }
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
+	{
 	    mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
-	/*else
-	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);*/
+	}
+	else
+	{
+	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
+	}
+	
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
 	{
 	    if(mPlayer->getjump()) //Hanterar ifall spelaren är inuti ett hopp
@@ -306,29 +308,28 @@ void Level::update(float dt)
 			}
 	    }
 	}
-	else{
-	    //mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
+	else
+	{
 		mPlayer->setjump(2); //Sätter fall till false
 		
 		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
 		{
 			mPlayer->setfall(2); //Sätter hopp till false
-			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+			mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
 		}
 		else
 		{
-			mPlayer->setPosition(mPlayer->getPosition().x, objectB->getPosition().y+objectB->getHeight()); // om du ska hamna under
+			mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y+objectColliedY->getHeight()); // om du ska hamna under
 			mPlayer->setfall(1); //Sätter hopp till true
 		}
 	}
-		
-	//mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y);
+	
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
 		mObjects[i]->update(dt);
 	}
-}
+} // END OF UPDATE
 
 void Level::draw(Renderer* renderer, bool flags)
 {
@@ -354,7 +355,7 @@ void Level::draw(Renderer* renderer, bool flags)
 			}
 		}
     }
-}
+} // END OF DRAW()
 
 Object* Level::getObjectAt(float x, float y)
 {
