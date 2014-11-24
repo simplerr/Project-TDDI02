@@ -1,4 +1,5 @@
 2168 768
+3 864 248 40 40 ../imgs/powerup.png
 2 792 288 48 48 ../imgs/enemy.png 584
 2 224 288 48 48 ../imgs/enemy.png 368
 2 224 520 48 48 ../imgs/enemy.png 336
@@ -11,4 +12,14 @@
 1 1568 432 200 104 ../imgs/platforms/platform.jpg
 1 1768 416 200 104 ../imgs/platforms/platform.jpg
 1 1968 400 200 104 ../imgs/platforms/platform.jpg
-0 16 288 48 48 ../imgs/player.jpg
+1 560 104 104 76 ../imgs/downloads/Walkways/Wall3.png
+1 456 104 104 76 ../imgs/downloads/Walkways/Wall3.png
+1 352 104 104 76 ../imgs/downloads/Walkways/Wall4.png
+1 248 104 104 76 ../imgs/downloads/Walkways/Wall2.png
+1 664 176 96 60 ../imgs/downloads/Walkways/Wall5.png
+1 256 176 96 60 ../imgs/downloads/Walkways/Wall6.png
+1 352 176 104 60 ../imgs/downloads/Walkways/Wall7.png
+1 456 176 104 60 ../imgs/downloads/Walkways/Wall7.png
+1 560 176 104 60 ../imgs/downloads/Walkways/Wall7.png
+1 664 104 104 76 ../imgs/downloads/Walkways/Wall1.png
+0 304 56 48 48 ../imgs/player.png
