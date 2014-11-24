@@ -253,6 +253,9 @@ void Level::update(float dt)
     // collision
 	bool x, y = false;
 	Object* objectColliedY;
+	Object* objectColliedX;
+	int yColID;
+	int xColID;
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 		
@@ -265,6 +268,7 @@ void Level::update(float dt)
 		if ( mPlayer->collision(mPlayer, mObjects[i]) || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
 		{
 			x = true;
+			objectColliedX = mObjects[i];
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA TBX
 		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
@@ -285,7 +289,18 @@ void Level::update(float dt)
 	}
 	else
 	{
+	    xColID = objectColliedX->getId();
+	    cout << xColID << endl;
+	    if(xColID = 2)
+	    {
+		setalive();
+	    }
+	    else if(xColID = 3)
+	    {
+		
+	    }
 	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
+	    
 	}
 	
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
@@ -311,6 +326,8 @@ void Level::update(float dt)
 	else
 	{
 		mPlayer->setjump(2); //Sätter fall till false
+		
+		yColID = objectColliedY->getId();
 		
 		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
 		{
@@ -385,4 +402,14 @@ void Level::clearList()
 		}
 		mObjects.resize(0);
 	}
+}
+
+void Level::setalive()
+{
+    alive = !alive;
+}
+
+bool Level::getalive()
+{
+    return alive;
 }
