@@ -351,7 +351,7 @@ void Level::draw(Renderer* renderer, bool flags)
 				if(mFlagTexture == nullptr)
 					mFlagTexture = renderer->loadTexture("../imgs/flag.png");
 	
-				renderer->drawTextureScreen(Vec2(enemy->getEndX(), enemy->getPosition().y), 48, 48, mFlagTexture);
+				renderer->drawTexture(Vec2(enemy->getEndX(), enemy->getPosition().y), 48, 48, mFlagTexture);
 			}
 		}
     }
