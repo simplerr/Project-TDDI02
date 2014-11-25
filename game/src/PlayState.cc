@@ -37,8 +37,10 @@ void PlayState::init(string initData) // initData will be the filename of the le
     mPlayer = mLevel->findPlayer();
 
 	buttonList = {
-		new ButtonImg(Vec2(350, 300), 300, 100, "../imgs/backgrounds/pauseback.png"),
-		new ButtonImg(Vec2(350, 400), 300, 100, "../imgs/backgrounds/pausetomenu.png")
+		new ButtonImg(Vec2(0, 0), 1024, 768, "../imgs/backgrounds/pause.png"),
+		new ButtonText(Vec2(390, 340), 260, 50, "Continue",15,13,15),
+		new ButtonText(Vec2(410, 400), 220, 50, "Menu",15,13,15)
+		
 	};
 }
 
@@ -136,10 +138,10 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 				if (buttonList.at(i)->mouseOver(mousePos)) {
 
 					switch (i) {
-					case 0:
+					case 1:
 						mPaused = !mPaused;
 						break;
-					case 1:
+					case 2:
 						setNextState(BaseState::MENU_STATE);
 						break;
 					default:

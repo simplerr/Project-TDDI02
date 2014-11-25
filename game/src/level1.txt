@@ -21,6 +21,8 @@
 4 840 304 104 48 ../imgs/downloads/Other/Grass.png
 4 984 304 104 48 ../imgs/downloads/Other/Grass.png
 2 800 288 48 48 ../imgs/enemy.png 1056
+2 256 152 48 48 ../imgs/enemy.png 504
+2 248 288 48 48 ../imgs/enemy.png 248
 1 0 336 104 76 ../imgs/downloads/Walkways/Wall2.png
 1 104 336 104 76 ../imgs/downloads/Walkways/Wall4.png
 1 208 336 104 76 ../imgs/downloads/Walkways/Wall4.png

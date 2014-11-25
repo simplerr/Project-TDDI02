@@ -336,7 +336,7 @@ void Level::update(float dt)
 		}
 		else
 		{
-			mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y+objectColliedY->getHeight()); // om du ska hamna under
+			mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y+objectColliedY->getHeight()+1); // om du ska hamna under
 			mPlayer->setfall(1); //Sätter hopp till true
 		}
 	}
