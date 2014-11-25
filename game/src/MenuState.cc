@@ -98,7 +98,9 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 				    break;
 				case 6:
 					mute = !mute;
-					if (mute) {
+				setMute(mute);
+				
+					if (!mute) {
 						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON);
 					} else {
 						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, MUTE_BUTTON);
