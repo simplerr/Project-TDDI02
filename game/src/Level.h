@@ -26,6 +26,8 @@ public:
     void setCam(int x, int y);
     Vec2 getCam(){ return Vec2(camX, camY); }
     void clearList();
+    void setalive();
+    bool getalive();
 
     Vec2 getLevelSize(){ return Vec2(mLEVEL_WIDTH, mLEVEL_HEIGHT); }
 
@@ -50,6 +52,7 @@ private:
   unsigned int camX;
   unsigned int camY;
   Texture* mFlagTexture;
+  bool alive;
 };
 
 #endif

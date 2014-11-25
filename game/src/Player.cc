@@ -28,6 +28,11 @@ void Player::draw(Renderer* renderer)
 
 void Player::handleCollision(Object* object)
 {
+    //if(object->getId() = 3)
+    
+    
+    
+    
     /* 
     //Move the dot left or right
     setPosition(getPosition().x + mVelX, getPosition().y);
