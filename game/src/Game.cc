@@ -9,6 +9,7 @@
 
 Game::Game()
 {
+	mMute = false;
     mRenderer = new Renderer;
 
     mActiveState = new MenuState;
@@ -74,6 +75,7 @@ void Game::run()
 	
     mRenderer->endScene();
 
+	mMute = mActiveState->getMute();
 }
 
 
@@ -84,4 +86,9 @@ void Game::handleEvent(SDL_Event e, bool& exit)
 
     // update the current gamestate
     mActiveState->handleEvent(e, exit);
+}
+
+bool Game::getMute()
+{
+	return mMute;
 }

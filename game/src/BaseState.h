@@ -29,9 +29,13 @@ BaseState() : mChangeStateTo(BASE_STATE), mNextStateData("") {};
 	void incLvl() { lvlUnlocks++; }
 	int getLvlUnlocks() { return lvlUnlocks; }
 
+	void setMute(bool m) { mBaseMute = m; }
+	bool getMute() { return mBaseMute; }
+
 private:
     StateId mChangeStateTo;
     string mNextStateData;
+	bool mBaseMute;
 };
 
 #endif  

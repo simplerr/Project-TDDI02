@@ -16,11 +16,15 @@ int main(int argc, char* argv[])
 	return 1;
     }
 
-    bool exit = false;
+    bool exit = false, mute = false;
 	Sound s("../sounds/Hyperfun.mp3");
     while(!exit)
     {
-		s.play();
+		if (!mute)
+			s.play();
+		else
+			s.pause();
+		
 		SDL_Event e;
 
 		// poll SDL event
@@ -28,6 +32,8 @@ int main(int argc, char* argv[])
 			game->handleEvent(e, exit);
 
 		game->run();
+
+		mute = game->getMute();
     }
 	
    //game->cleanup();

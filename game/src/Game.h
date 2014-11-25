@@ -20,6 +20,7 @@ public:
     bool initWindow();
     void run();
     void cleanup();
+	bool getMute();
     
     void handleEvent(SDL_Event e, bool& exit);
 
@@ -27,6 +28,7 @@ private:
     BaseState* mActiveState;
     Renderer* mRenderer;
     Mix_Music *mMusic;
+	bool mMute;
 };
 
 #endif
