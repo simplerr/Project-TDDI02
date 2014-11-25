@@ -1,14 +1,20 @@
-2168 768
-2 792 288 48 48 ../imgs/enemy.png 584
-2 224 288 48 48 ../imgs/enemy.png 368
-2 224 520 48 48 ../imgs/enemy.png 336
-2 112 288 48 48 ../imgs/enemy.png 152
-1 8 336 832 104 ../imgs/platforms/platform.jpg
-1 840 296 200 104 ../imgs/platforms/platform.jpg
-1 1040 192 200 104 ../imgs/platforms/platform.jpg
-1 1168 512 200 104 ../imgs/platforms/platform.jpg
-1 1368 472 200 104 ../imgs/platforms/platform.jpg
-1 1568 432 200 104 ../imgs/platforms/platform.jpg
-1 1768 416 200 104 ../imgs/platforms/platform.jpg
-1 1968 400 200 104 ../imgs/platforms/platform.jpg
-0 16 288 48 48 ../imgs/player.jpg
+1384 768
+1 0 336 104 76 ../imgs/downloads/Walkways/Wall2.png
+1 104 336 104 76 ../imgs/downloads/Walkways/Wall4.png
+1 208 336 104 76 ../imgs/downloads/Walkways/Wall4.png
+1 312 336 104 76 ../imgs/downloads/Walkways/Wall1.png
+1 208 408 104 60 ../imgs/downloads/Walkways/Wall7.png
+1 104 408 104 60 ../imgs/downloads/Walkways/Wall7.png
+1 312 408 96 60 ../imgs/downloads/Walkways/Wall5.png
+1 8 408 96 60 ../imgs/downloads/Walkways/Wall6.png
+1 656 336 104 76 ../imgs/downloads/Walkways/Wall2.png
+1 760 336 104 76 ../imgs/downloads/Walkways/Wall4.png
+1 864 336 104 76 ../imgs/downloads/Walkways/Wall4.png
+1 968 336 104 76 ../imgs/downloads/Walkways/Wall1.png
+1 968 408 96 60 ../imgs/downloads/Walkways/Wall5.png
+1 664 408 96 60 ../imgs/downloads/Walkways/Wall6.png
+1 760 408 104 60 ../imgs/downloads/Walkways/Wall7.png
+1 864 408 104 60 ../imgs/downloads/Walkways/Wall7.png
+1 1232 256 104 76 ../imgs/downloads/Walkways/Walkway3.png
+1 1280 256 104 76 ../imgs/downloads/Walkways/Walkway1.png
+0 24 288 48 48 ../imgs/player.png

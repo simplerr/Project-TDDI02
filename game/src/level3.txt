@@ -14,13 +14,6 @@
 5 1120 1120 560 560 ../imgs/downloads/Other/FarBackground.png
 5 1680 1120 560 560 ../imgs/downloads/Other/FarBackground.png
 5 2240 1120 560 560 ../imgs/downloads/Other/FarBackground.png
-4 0 144 104 48 ../imgs/downloads/Other/Grass.png
-4 72 144 104 48 ../imgs/downloads/Other/Grass.png
-4 136 144 104 48 ../imgs/downloads/Other/Grass.png
-4 208 144 104 48 ../imgs/downloads/Other/Grass.png
-4 280 144 104 48 ../imgs/downloads/Other/Grass.png
-4 352 144 104 48 ../imgs/downloads/Other/Grass.png
-4 416 136 104 48 ../imgs/downloads/Other/Grass.png
 4 2080 640 104 48 ../imgs/downloads/Other/Grass.png
 4 2008 632 104 48 ../imgs/downloads/Other/Grass.png
 4 1936 632 104 48 ../imgs/downloads/Other/Grass.png
@@ -68,4 +61,4 @@
 1 2464 576 104 76 ../imgs/downloads/Walkways/Walkway2.png
 1 2568 576 104 76 ../imgs/downloads/Walkways/Walkway2.png
 1 2672 576 104 76 ../imgs/downloads/Walkways/Walkway1.png
-0 0 0 48 48 ../imgs/player.jpg
+0 40 512 48 48 ../imgs/player.png

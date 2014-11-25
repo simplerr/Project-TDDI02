@@ -15,7 +15,7 @@ static const std::string ROCK_PLATFORM = "../imgs/rock_platform.png";
 
 //###### EDITOR #######
 
-static const std::string FILEPATH_PLAYER = "../imgs/player.jpg";
+static const std::string FILEPATH_PLAYER = "../imgs/player.png";
 static const std::string FILEPATH_ENEMY1 = "../imgs/enemy.png";
 static const std::string FILEPATH_POWERUP1 = "../imgs/powerup.png";
 static const std::string FILEPATH_PLATFORM_1 = "../imgs/platforms/platform.jpg";
@@ -24,6 +24,14 @@ static const std::string FILEPATH_PLATFORM_3 = "../imgs/platforms/block.png";
 static const std::string FILEPATH_PLATFORM_4 = "../imgs/downloads/Walkways/Walkway3.png";
 static const std::string FILEPATH_PLATFORM_5 = "../imgs/downloads/Walkways/Walkway2.png";
 static const std::string FILEPATH_PLATFORM_6 = "../imgs/downloads/Walkways/Walkway1.png";
+static const std::string FILEPATH_PLATFORM_7 = "../imgs/downloads/Walkways/Wall1.png";
+static const std::string FILEPATH_PLATFORM_8 = "../imgs/downloads/Walkways/Wall2.png";
+static const std::string FILEPATH_PLATFORM_9 = "../imgs/downloads/Walkways/Wall3.png";
+static const std::string FILEPATH_PLATFORM_10 = "../imgs/downloads/Walkways/Wall4.png";
+static const std::string FILEPATH_PLATFORM_11 = "../imgs/downloads/Walkways/Wall5.png";
+static const std::string FILEPATH_PLATFORM_12 = "../imgs/downloads/Walkways/Wall6.png";
+static const std::string FILEPATH_PLATFORM_13 = "../imgs/downloads/Walkways/Wall7.png";
+static const std::string FILEPATH_PLATFORM_14 = "../imgs/downloads/Walkways/Wall8.png";
 static const std::string FILEPATH_BACKGROUND_1 = "../imgs/backgrounds/skygrad.jpg";
 static const std::string FILEPATH_BACKGROUND_2 = "../imgs/downloads/Other/FarBackground.png";
 static const std::string FILEPATH_DECORATION_1 = "../imgs/downloads/Other/Grass.png";

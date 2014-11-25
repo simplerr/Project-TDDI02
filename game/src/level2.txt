@@ -87,4 +87,4 @@
 1 2464 576 104 76 ../imgs/downloads/Walkways/Walkway2.png
 1 2568 576 104 76 ../imgs/downloads/Walkways/Walkway2.png
 1 2672 576 104 76 ../imgs/downloads/Walkways/Walkway1.png
-0 0 0 48 48 ../imgs/player.jpg
+0 16 128 48 48 ../imgs/player.png
