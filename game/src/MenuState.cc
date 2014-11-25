@@ -23,8 +23,8 @@ void MenuState::init(string initData)
 		new ButtonImg(Vec2(212, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 1
 		new ButtonImg(Vec2(422, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 2
 		new ButtonImg(Vec2(632, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 3
-		new ButtonImg(Vec2(412, 430), 200, 100, "../imgs/backgrounds/credit.png"), // Credit
-		new ButtonImg(Vec2(412, 550), 200, 100, "../imgs/EXIT.png"), // Exit
+		new ButtonImg(Vec2(412, 430), 200, 80, "../imgs/backgrounds/creditbutton.png"), // Credit
+		new ButtonImg(Vec2(412, 550), 200, 80, "../imgs/backgrounds/exitbutton.png"), // Exit
 		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, "../imgs/toEditor.png")
 	};
 }
@@ -47,7 +47,7 @@ void MenuState::draw(Renderer* renderer)
 	if(mMenu != nullptr)
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mMenu);
 	else
-		mMenu = renderer->loadTexture("../imgs/lilb.jpg");
+		mMenu = renderer->loadTexture("../imgs/backgrounds/mainmenu.jpg");
 
 	if(mAlphaOverlay == nullptr)
 	    mAlphaOverlay = renderer->loadTexture("../imgs/alpha.png");
