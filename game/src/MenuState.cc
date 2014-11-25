@@ -22,8 +22,8 @@ void MenuState::init(string initData)
 {
 	buttonList = {	
 		new ButtonImg(Vec2(212, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 1
-		new ButtonImg(Vec2(422, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 2
-		new ButtonImg(Vec2(632, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 3
+		new ButtonImg(Vec2(422, 200), 200, 200, "../imgs/backgrounds/level2.png"), // Play 2
+		new ButtonImg(Vec2(632, 200), 200, 200, "../imgs/backgrounds/level3.png"), // Play 3
 		new ButtonImg(Vec2(412, 430), 200, 70, "../imgs/backgrounds/creditbutton.png"), // Credit
 		new ButtonImg(Vec2(412, 510), 200, 80, "../imgs/backgrounds/exitbutton.png"), // Exit
 		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, "../imgs/toEditor.png"),
