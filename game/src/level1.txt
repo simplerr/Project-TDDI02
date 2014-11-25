@@ -1,4 +1,26 @@
-1384 768
+1680 1120
+5 0 0 560 560 ../imgs/downloads/Other/FarBackground.png
+5 560 0 560 560 ../imgs/downloads/Other/FarBackground.png
+5 1120 0 560 560 ../imgs/downloads/Other/FarBackground.png
+5 0 560 560 560 ../imgs/downloads/Other/FarBackground.png
+5 560 560 560 560 ../imgs/downloads/Other/FarBackground.png
+5 1120 560 560 560 ../imgs/downloads/Other/FarBackground.png
+4 8 296 104 48 ../imgs/downloads/Other/Grass.png
+4 64 304 104 48 ../imgs/downloads/Other/Grass.png
+4 112 304 104 48 ../imgs/downloads/Other/Grass.png
+4 168 304 104 48 ../imgs/downloads/Other/Grass.png
+4 208 304 104 48 ../imgs/downloads/Other/Grass.png
+4 232 304 104 48 ../imgs/downloads/Other/Grass.png
+4 312 296 104 48 ../imgs/downloads/Other/Grass.png
+4 632 304 104 48 ../imgs/downloads/Other/Grass.png
+4 704 304 104 48 ../imgs/downloads/Other/Grass.png
+4 712 304 104 48 ../imgs/downloads/Other/Grass.png
+4 784 312 104 48 ../imgs/downloads/Other/Grass.png
+4 904 296 104 48 ../imgs/downloads/Other/Grass.png
+4 912 296 104 48 ../imgs/downloads/Other/Grass.png
+4 840 304 104 48 ../imgs/downloads/Other/Grass.png
+4 984 304 104 48 ../imgs/downloads/Other/Grass.png
+2 800 288 48 48 ../imgs/enemy.png 1056
 1 0 336 104 76 ../imgs/downloads/Walkways/Wall2.png
 1 104 336 104 76 ../imgs/downloads/Walkways/Wall4.png
 1 208 336 104 76 ../imgs/downloads/Walkways/Wall4.png

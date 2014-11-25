@@ -125,7 +125,7 @@ void EditorState::draw(Renderer* renderer)
 	    if(mFlagTexture == nullptr)
 	    	mFlagTexture = renderer->loadTexture("../imgs/flag.png");
 	    
-	    renderer->drawTextureScreen(gridPos, 48, 48, mFlagTexture);
+	    renderer->drawTexture(gridPos, 48, 48, mFlagTexture);
 	}
 	
 	//Ritar ut alla oklickbara knappar
