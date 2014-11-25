@@ -38,8 +38,8 @@ void PlayState::init(string initData) // initData will be the filename of the le
 
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, "../imgs/backgrounds/pause.png"),
-		new ButtonText(Vec2(390, 340), 260, 50, "Continue",15,13,15),
-		new ButtonText(Vec2(410, 400), 220, 50, "Menu",15,13,15)
+		new ButtonImg(Vec2(390, 340), 260, 60, "../imgs/backgrounds/continue.png"),
+		new ButtonImg(Vec2(410, 400), 220, 50, "../imgs/backgrounds/quit.png")
 		
 	};
 }

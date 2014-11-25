@@ -26,6 +26,7 @@ private:
     vector<Button*> buttonList;
     Vec2 mousePos;
     Level *level;
+	bool mute;
 };
 
 #endif
