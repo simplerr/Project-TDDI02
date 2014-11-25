@@ -292,9 +292,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 	// Ta bort allt och börja om
 	if(e.key.keysym.sym == SDLK_F12 && e.type == SDL_KEYUP)
     {
-		delete mLevel;
-		mLevel = new Level();
-		currentObject = nullptr;
+		mLevel->clearList();
     }
 	
 	// GÅ tillbaka till menyn
