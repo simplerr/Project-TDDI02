@@ -64,7 +64,7 @@ void PlayState::update(float dt)
 			setNextState(BaseState::MENU_STATE);
 			
 		} 
-		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y || (!mLevel->getalive())) // Trillar spelaren ned, ladda om banan
+		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y || !mLevel->getalive()) // Trillar spelaren ned, ladda om banan
 		    init(mLevel->getCurrentLevel()); // (Kan behövas ändras)
 	}
 }

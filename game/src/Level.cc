@@ -12,6 +12,7 @@
 
 Level::Level()
 {
+	alive = true;
 	camX=SCREEN_WIDTH/2;
 	camY=SCREEN_HEIGHT/2;
 	mFlagTexture = nullptr;
@@ -289,13 +290,12 @@ void Level::update(float dt)
 	}
 	else
 	{
-	    xColID = objectColliedX->getId();
-	    cout << xColID << endl;
-	    if(xColID = 2)
+	    
+	    if(objectColliedX->getId() == 2)
 	    {
 		setalive();
 	    }
-	    else if(xColID = 3)
+	    else if(xColID == 3)
 	    {
 		
 	    }
