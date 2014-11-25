@@ -13,7 +13,7 @@ Credit::~Credit()
 
 void Credit::init(string initData)
 {
-	mBack = new ButtonImg(Vec2(300, SCREEN_HEIGHT-175), 420, 80, "../imgs/backgrounds/creditback.png");
+	mBack = new ButtonImg(Vec2(300, SCREEN_HEIGHT-175), 420, 80, BACKTOMENU_BUTTON);
 }
 
 void Credit::cleanup()
@@ -33,7 +33,7 @@ void Credit::draw(Renderer* renderer)
 	if (mBackground != nullptr) 		
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mBackground);
 	else 		
-		mBackground = renderer->loadTexture("../imgs/backgrounds/credit.jpg");
+		mBackground = renderer->loadTexture(CREDIT_BACKGROUND);
 		
 	mBack->draw(renderer);
 }

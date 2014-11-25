@@ -37,9 +37,9 @@ void PlayState::init(string initData) // initData will be the filename of the le
     mPlayer = mLevel->findPlayer();
 
 	buttonList = {
-		new ButtonImg(Vec2(0, 0), 1024, 768, "../imgs/backgrounds/pause.png"),
-		new ButtonImg(Vec2(390, 340), 260, 60, "../imgs/backgrounds/continue.png"),
-		new ButtonImg(Vec2(410, 400), 220, 50, "../imgs/backgrounds/quit.png")
+		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
+		new ButtonImg(Vec2(390, 310), 260, 60, CONTINUE_BUTTON),
+		new ButtonImg(Vec2(430, 400), 190, 50, TOMENU_BUTTON)
 		
 	};
 }

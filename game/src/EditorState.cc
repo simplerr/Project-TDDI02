@@ -60,13 +60,20 @@ void EditorState::init(string initData)
 		new ButtonImg(Vec2(col3, 25+row*6), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_12),
 		new ButtonImg(Vec2(col1, 30+row*7), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_13),
 		new ButtonImg(Vec2(col2, 30+row*7), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_14),
+		new ButtonImg(Vec2(col3, 30+row*7), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_15),
+		new ButtonImg(Vec2(col1, 35+row*8), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_16),
+		new ButtonImg(Vec2(col2, 35+row*8), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_17),
+		new ButtonImg(Vec2(col3, 35+row*8), buttonSize.x, buttonSize.y, FILEPATH_PLATFORM_18),
 		//###### PLATFORMS ######
 		//###### BACKGROUNDS ######
 		new ButtonImg(Vec2(col1, 10+row*11), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_1),
 		new ButtonImg(Vec2(col2, 10+row*11), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_2),
+		new ButtonImg(Vec2(col3, 10+row*11), buttonSize.x, buttonSize.y, FILEPATH_BACKGROUND_3),
 		//###### BACKGROUNDS ######
 		//###### DECORATIONS ######
 		new ButtonImg(Vec2(col1, 10+row*14), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_1),
+		new ButtonImg(Vec2(col2, 10+row*14), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_2),
+		new ButtonImg(Vec2(col3, 10+row*14), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_3),
 		//###### DECORATIONS ######
 		// //###### OTHERS ######
 		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE),
@@ -235,28 +242,35 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				case 14: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_12 ); break;
 				case 15: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_13 ); break;
 				case 16: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_14 ); break;
-				case 17: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_1 ); break;
-				case 18: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_2 ); break;
-				case 19: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_1 ); break;
-				case 20:
+				case 17: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_15 ); break;
+				case 18: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_16 ); break;
+				case 19: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_17 ); break;
+				case 20: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_18 ); break;
+				case 21: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_1 ); break;
+				case 22: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_2 ); break;
+				case 23: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_3 ); break;
+				case 24: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_1 ); break;
+				case 25: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_2 ); break;
+				case 26: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_3 ); break;
+				case 27:
 				    if ( mLevel->saveLevel(mLevel->getCurrentLevel()) )
 						cout << "Succeeded to save file!\n";
 					else
 						cout << "Failed to save file!\n";
 					break;
-				case 21:
+				case 28:
 						mLevel->setCurrentLevel(FILEPATH_LVL1);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
 						cout << "level: " << mLevel->getCurrentLevel() << endl;
 					break;
-				case 22:
+				case 29:
 						mLevel->setCurrentLevel(FILEPATH_LVL2);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
 						cout << "level: " << mLevel->getCurrentLevel() << endl;
 					break;
-				case 23:
+				case 30:
 						mLevel->setCurrentLevel(FILEPATH_LVL3);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);

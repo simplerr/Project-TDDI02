@@ -21,13 +21,13 @@ MenuState::~MenuState()
 void MenuState::init(string initData)
 {
 	buttonList = {	
-		new ButtonImg(Vec2(212, 200), 200, 200, "../imgs/backgrounds/level1.png"), // Play 1
-		new ButtonImg(Vec2(422, 200), 200, 200, "../imgs/backgrounds/level2.png"), // Play 2
-		new ButtonImg(Vec2(632, 200), 200, 200, "../imgs/backgrounds/level3.png"), // Play 3
-		new ButtonImg(Vec2(412, 430), 200, 70, "../imgs/backgrounds/creditbutton.png"), // Credit
-		new ButtonImg(Vec2(412, 510), 200, 80, "../imgs/backgrounds/exitbutton.png"), // Exit
-		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, "../imgs/toEditor.png"),
-		new ButtonImg(Vec2(492, 660), 48, 48, "../imgs/volume.png")
+		new ButtonImg(Vec2(212, 200), 200, 200, LEVEL1_BUTTON), // Play 1
+		new ButtonImg(Vec2(422, 200), 200, 200, LEVEL2_BUTTON), // Play 2
+		new ButtonImg(Vec2(632, 200), 200, 200, LEVEL3_BUTTON), // Play 3
+		new ButtonImg(Vec2(412, 430), 200, 70, CREDIT_BUTTON), // Credit
+		new ButtonImg(Vec2(412, 510), 200, 80, EXIT_BUTTON), // Exit
+		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, TOEDITOR_BUTTON),
+		new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON)
 	};
 }
 
@@ -49,7 +49,7 @@ void MenuState::draw(Renderer* renderer)
 	if(mMenu != nullptr)
 		renderer->drawTexture(Vec2(0, 0), 1024, 768, mMenu);
 	else
-		mMenu = renderer->loadTexture("../imgs/backgrounds/mainmenu.jpg");
+		mMenu = renderer->loadTexture(MENU_BACKGROUND);
 
 	if(mAlphaOverlay == nullptr)
 	    mAlphaOverlay = renderer->loadTexture("../imgs/alpha.png");
@@ -99,9 +99,9 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 				case 6:
 					mute = !mute;
 					if (mute) {
-						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, "../imgs/volume.png");
+						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON);
 					} else {
-						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, "../imgs/mute.png");
+						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, MUTE_BUTTON);
 					}
 					break;
 				default:
