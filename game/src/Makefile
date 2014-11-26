@@ -4,7 +4,7 @@
 
 CCC	= g++ -std=c++11 -Wall -pedantic 
 LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
-OFILES	= Game.o Enemy.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o Decoration.o Powerup.o Credit.o Timer.o
+OFILES	= Game.o Enemy.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o Decoration.o Powerup.o Credit.o Timer.o Highscores.o
 
 all: main.cc $(OFILES)
 	$(CCC) -o main main.cc $(OFILES) $(LFLAGS)
@@ -62,6 +62,9 @@ Enemy.o: Enemy.cc Enemy.h constants.h
 
 Powerup.o: Powerup.cc Powerup.h constants.h
 	$(CCC) -c Powerup.cc
+
+Highscores.o: Highscores.cc Highscores.h constants.h
+	$(CCC) -c Highscores.cc
 
 Credit.o: Credit.cc Credit.h constants.h
 	$(CCC) -c Credit.cc

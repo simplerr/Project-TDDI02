@@ -16,6 +16,9 @@ class Texture;
 class Player;
 */ 
 
+class Highscores;
+
+
 #define SPEEDBOOSTSEC 6
 #define DEFAULTSPEED 6.0
 #define BOOSTUPSPEED 9.0
@@ -54,6 +57,7 @@ private:
     bool boostEnable;
     Timer mTimer;
     bool mFocus;
+    Highscores* mHighscores;
 };
 
 #endif
