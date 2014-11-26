@@ -8,7 +8,8 @@ Player::Player(Vec2 pos, int width, int height, string filename)
     mVelX = 0;
     setId(0);
     mSpeed = 6;
-	mScore = 0;
+    mScore = 0;
+    mDead = false;
 }
 
 Player::~Player()
@@ -148,4 +149,10 @@ void Player::incScore()
 int Player::getScore()
 {
 	return mScore;
+}
+
+void Player::powerUp()
+{
+    setVel(getVel().x * 2,0);
+    mSpeed = mSpeed * 2;
 }

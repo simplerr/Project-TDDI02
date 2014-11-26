@@ -12,7 +12,6 @@
 
 Level::Level()
 {
-	alive = true;
 	camX=SCREEN_WIDTH/2;
 	camY=SCREEN_HEIGHT/2;
 	mFlagTexture = nullptr;
@@ -255,8 +254,6 @@ void Level::update(float dt)
 	bool x, y = false;
 	Object* objectColliedY;
 	Object* objectColliedX;
-	int yColID;
-	int xColID;
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 		
@@ -293,11 +290,12 @@ void Level::update(float dt)
 	    
 	    if(objectColliedX->getId() == 2)
 	    {
-		setalive();
+		mPlayer->setDead();
 	    }
-	    else if(xColID == 3)
+	    else if(objectColliedX->getId() == 3)
 	    {
-		
+		objectColliedX->setDead();
+		mPlayer->powerUp();
 	    }
 	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
 	    
@@ -327,15 +325,19 @@ void Level::update(float dt)
 	{
 		mPlayer->setjump(2); //Sätter jump till false
 		
-		yColID = objectColliedY->getId();
 		
 		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
 		{
 			if(objectColliedY->getId() == 2)
 			{
 			    objectColliedY->setDead();
-				mPlayer->incScore();
+			    mPlayer->incScore();
 			    mPlayer->setjump(1);
+			}
+			else if(objectColliedY->getId() == 3)
+			{
+			    objectColliedY->setDead();
+			    mPlayer->powerUp();
 			}
 			else
 			{
@@ -345,6 +347,15 @@ void Level::update(float dt)
 		}
 		else
 		{
+		    if(objectColliedY->getId() == 2)
+		    {
+			mPlayer->setDead();
+		    }
+		    else if(objectColliedY->getId() == 3)
+		    {
+			objectColliedY->setDead();
+			mPlayer->powerUp();
+		    }    
 			mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y+objectColliedY->getHeight()+1); // om du ska hamna under
 			mPlayer->setfall(1); //Sätter hopp till true
 		}
@@ -419,12 +430,3 @@ void Level::clearList()
 	}
 }
 
-void Level::setalive()
-{
-    alive = !alive;
-}
-
-bool Level::getalive()
-{
-    return alive;
-}

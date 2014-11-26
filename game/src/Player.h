@@ -22,6 +22,9 @@ public:
     bool getjump();
     void setVel(int x, int y);
     void move(int dir);
+    void powerUp();
+    void setDead() { mDead = !mDead; }
+    bool getDead() { return mDead; }
     
     //void playerJump(int speed)
 	void incScore();
@@ -34,7 +37,8 @@ private:
     bool jumping;
     bool falling;
     int mSpeed;
-	int mScore;
+    int mScore;
+    bool mDead;
 };
 
 #endif
