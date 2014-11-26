@@ -1,6 +1,0 @@
-0 500 400 64 64 ../imgs/player.jpg
-1 100 600 100 100 ../imgs/platforms/platform.jpg
-1 400 500 200 100 ../imgs/platforms/platform.jpg
-1 900 620 100 200 ../imgs/platforms/platform.jpg
-1 0 0 1024 200 ../imgs/platforms/platform.jpg
-1 100 300 100 250 ../imgs/platforms/platform.jpg
