@@ -1,0 +1,3 @@
+1024 768
+1 152 440 104 76 ../imgs/textures/platforms/Wall2.png
+0 184 360 48 48 ../imgs//textures/creatures/player.png
