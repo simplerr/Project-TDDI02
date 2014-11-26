@@ -69,8 +69,10 @@
 5 2208 664 104 64 ../imgs/textures/decorations/Roots.png
 5 2320 664 104 344 ../imgs/textures/decorations/Roots.png
 4 3040 560 40 40 ../imgs/textures/finish.png
-2 480 280 48 48 ../imgs/textures/creatures/enemy.png 752
 3 488 256 40 40 ../imgs/textures/powerups/powerup.png
+3 632 216 40 40 ../imgs/textures/powerups/powerup.png
+3 544 216 40 40 ../imgs/textures/powerups/powerup.png
+2 480 280 48 48 ../imgs/textures/creatures/enemy.png 752
 2 2216 472 48 48 ../imgs/textures/creatures/enemy.png 2456
 2 2336 384 48 48 ../imgs/textures/creatures/enemy.png 2576
 2 1008 576 48 48 ../imgs/textures/creatures/enemy.png 1192

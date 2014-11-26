@@ -364,7 +364,7 @@ void Level::update(float dt)
 			else
 			{
 			    mPlayer->setfall(2); //Sätter fall till false
-			    mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+			    mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()-1); //om du ska hamna över
 			}
 		}
 		else
