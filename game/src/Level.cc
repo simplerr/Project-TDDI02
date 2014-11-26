@@ -63,6 +63,8 @@ bool Level::loadLevel(string filename, int k)
 			}
 			else if (index == Object::POWERUP) // Powerups
 				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
+			else if(index == Object::LAVA_PLATFORM)			
+			    mObjects.push_back(new LavaPlatform(Vec2(posx, posy), width, height, path));	    
 			else if ( k == 1 ) // Play 
 			{
 			    if (index == Object::DECORATION) // Decoration
@@ -76,9 +78,7 @@ bool Level::loadLevel(string filename, int k)
 					mObjects.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
 			    else if (index == Object::BACKGROUND) // Backgrounds
 					mObjects.push_back( new Background(Vec2(posx, posy), width, height, path) );
-			}
-			else if(index == Object::LAVA_PLATFORM)
-			    mObjects.push_back(new LavaPlatform(Vec2(posx, posy), width, height, path));
+			}	   
 			else
 				cerr << "FEL, objekt okänt\n";
 		}
@@ -294,7 +294,7 @@ void Level::update(float dt)
 	else
 	{
 	    
-	    if(objectColliedX->getId() == Object::ENEMY)
+	    if(objectColliedX->getId() == Object::ENEMY || objectColliedX->getId() == Object::LAVA_PLATFORM)
 	    {
 		mPlayer->setDead();
 	    }
@@ -331,6 +331,9 @@ void Level::update(float dt)
 	{
 		mPlayer->setjump(2); //Sätter jump till false
 		
+		// OBS! Temp, flytta till handleCollision()
+		if(objectColliedY->getId() == Object::LAVA_PLATFORM)
+		    mPlayer->setDead();
 		
 		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
 		{
