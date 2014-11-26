@@ -14,7 +14,7 @@ public:
   //Button(Vec2 pos, int width, int height, std::string str);
   virtual ~Button();
   
-  virtual void draw(Renderer* renderer);
+  virtual void draw(Renderer* renderer, std::string newString = "");
   bool mouseOver(Vec2 mousePos);
 
   
@@ -31,7 +31,7 @@ public:
     ButtonText(Vec2 pos, int width, int height, std::string str, const int color1, const int color2, const int color3);
     ~ButtonText();
     
-    void draw(Renderer* renderer);
+    void draw(Renderer* renderer, std::string newString = "");
 private:
     const std::string mFilePath;
     const int mcolor1, mcolor2, mcolor3;
@@ -44,7 +44,7 @@ public:
     ButtonImg(Vec2 pos, int width, int height, const std::string str);
     ~ButtonImg();
     
-    void draw(Renderer* renderer);
+    void draw(Renderer* renderer, std::string newString = "");
 private:
     Texture* mTexture = nullptr;
     const std::string mFilePath;

@@ -176,3 +176,8 @@ void Renderer::updateCamera(int x, int y, int width, int height, int LEVEL_WIDTH
 		camera.y = LEVEL_HEIGHT - camera.h;
 		
 }
+
+Vec2 Renderer::getCameraAdjustment()
+{
+	return Vec2(camera.x, camera.y);
+}

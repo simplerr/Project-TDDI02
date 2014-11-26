@@ -10,7 +10,7 @@ Button::~Button()
     //delete mTexture;
 }
 
-void Button::draw(Renderer* renderer)
+void Button::draw(Renderer* renderer, std::string newString)
 {
     ;
 }
@@ -42,11 +42,16 @@ ButtonText::~ButtonText()
     delete mText;
 }
 
-void ButtonText::draw(Renderer* renderer)
+void ButtonText::draw(Renderer* renderer, std::string newString)
 {
     SDL_Rect rect = getRect();
     if(mText != nullptr)
+    {
+        if (newString != "")
+            mText = renderer->loadTexture(newString, mcolor1, mcolor2, mcolor3);
+            
         renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mText);
+    }
     else
         mText = renderer->loadTexture(mFilePath, mcolor1, mcolor2, mcolor3);
 }
@@ -61,7 +66,7 @@ ButtonImg::~ButtonImg()
     delete mTexture;
 }
 
-void ButtonImg::draw(Renderer* renderer)
+void ButtonImg::draw(Renderer* renderer, std::string newString)
 {
     SDL_Rect rect = getRect();
     if(mTexture != nullptr)

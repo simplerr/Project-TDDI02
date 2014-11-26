@@ -2,6 +2,8 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <sstream>
+
 #include "Platform.h"
 #include "Background.h"
 #include "constants.h"
@@ -15,6 +17,7 @@ EditorState::EditorState()
     mTextPlatformar = nullptr;
     mTextBakgrunder = nullptr;
     mFlagTexture = nullptr;
+	showMousePos = nullptr;
 	setEnemyFlag = false;
 }
 
@@ -90,7 +93,9 @@ void EditorState::init(string initData)
 		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, buttonSize.x-15), 80, 13, TEXT_MENU_3, 0,0,0),
 		new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, row*14), 80, 13, TEXT_MENU_4, 0,0,0)
 	};
-
+	
+	showMousePos = new ButtonText(Vec2(SCREEN_WIDTH-(buttonSize.x*3)-10, row*18), 80, 13, "x: EE y: EE", 0,0,0);
+	
 	mLevel = new Level();
 	mLevel->setCurrentLevel(FILEPATH_LVL1);
 	mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
@@ -147,6 +152,11 @@ void EditorState::draw(Renderer* renderer)
 	{
 		buttonList[p]->draw(renderer);
 	}
+
+	//ritar ut positionen för vart musen befinnder sig...
+	ostringstream converted;
+	converted << "x: "<< mousePos.x+renderer->getCameraAdjustment().x << " y: " << mousePos.y+renderer->getCameraAdjustment().y;
+	showMousePos->draw(renderer, converted.str());
 		
 	
 }
