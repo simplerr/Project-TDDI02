@@ -56,7 +56,7 @@ private:
     int boostSeconds;
     bool boostEnable;
     Timer mTimer;
-    bool mFocus;
+    bool R, L; //Används för Vel bugg...
     Highscores* mHighscores;
 };
 

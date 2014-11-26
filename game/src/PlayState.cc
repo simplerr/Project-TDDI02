@@ -53,7 +53,7 @@ void PlayState::init(string initData) // initData will be the filename of the le
 		new ButtonImg(Vec2(430, 400), 190, 50, TOMENU_BUTTON)
 		
 	};
-	mFocus = false;
+	R = L = false;
 }
 
 void PlayState::cleanup()
@@ -125,11 +125,17 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 			case SDLK_SPACE:
 			    if(!mPlayer->getjump() && !mPlayer->getfall())
 			    {
-					mPlayer->setjump(1); 
+					mPlayer->setjump(1);
 			    }
 			break;
-			case SDLK_LEFT: mPlayer->move(1); break;
-			case SDLK_RIGHT: mPlayer->move(2); break;
+			case SDLK_LEFT:
+					mPlayer->move(1);
+					L = true;
+			break;
+			case SDLK_RIGHT:
+					mPlayer->move(2);
+					R = true;
+			break;
 			default: break;
 			}
 
@@ -138,19 +144,39 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 			{
 			    mPaused = !mPaused;
 			    mTimer.pause();
+				if (L)
+					{
+						mPlayer->move(3);
+					}
+				if (R)
+					{
+						mPlayer->move(4);
+					}
 			}
 		}
 		//If a key was released
 		else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
 		{
-			//Adjust the velocity
-			switch( e.key.keysym.sym )
-			{
-			case SDLK_LEFT: mPlayer->move(3); break;
-			case SDLK_RIGHT: mPlayer->move(4); break;
-			default: break;
-			}
-		}	
+				//Adjust the velocity
+				switch( e.key.keysym.sym )
+				{
+				case SDLK_LEFT:
+					if (L)
+					{
+						mPlayer->move(3);
+						L = false;
+					}
+				break;
+				case SDLK_RIGHT:
+					if (R)
+					{
+						mPlayer->move(4);
+						R = false;
+					}
+				break;
+				default: break;
+				}
+		}
     }
     else
     {
@@ -159,6 +185,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 			{
 			    mPaused = !mPaused;
 			    mTimer.start();
+				L = R = false;
 			}
 
 		if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
@@ -172,6 +199,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 					case 1:
 						mPaused = !mPaused;
 						mTimer.start();
+						L = R = false;
 						break;
 					case 2:
 						setNextState(BaseState::MENU_STATE);
