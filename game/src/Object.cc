@@ -10,6 +10,7 @@ Object::Object(Vec2 pos, int width, int height, string filename)
     mHeight = height;
     mFilename = filename;
     mTexture = nullptr;
+    mDead = false;
 }
 
 Object::~Object()
