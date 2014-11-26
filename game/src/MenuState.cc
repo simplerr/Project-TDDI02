@@ -21,9 +21,10 @@ MenuState::~MenuState()
 void MenuState::init(string initData)
 {
 	buttonList = {	
-		new ButtonImg(Vec2(212, 200), 200, 200, LEVEL1_BUTTON), // Play 1
-		new ButtonImg(Vec2(422, 200), 200, 200, LEVEL2_BUTTON), // Play 2
-		new ButtonImg(Vec2(632, 200), 200, 200, LEVEL3_BUTTON), // Play 3
+		new ButtonImg(Vec2(80, 200), 200, 200, LEVEL1_BUTTON), // Play 1
+		new ButtonImg(Vec2(300, 200), 200, 200, LEVEL2_BUTTON), // Play 2
+		new ButtonImg(Vec2(520, 200), 200, 200, LEVEL3_BUTTON), // Play 3
+		new ButtonImg(Vec2(740, 200), 200, 200, LEVEL3_BUTTON), // Play 3
 		new ButtonImg(Vec2(412, 430), 200, 70, CREDIT_BUTTON), // Credit
 		new ButtonImg(Vec2(412, 510), 200, 80, EXIT_BUTTON), // Exit
 		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, TOEDITOR_BUTTON),
@@ -60,7 +61,7 @@ void MenuState::draw(Renderer* renderer)
 		buttonList[i]->draw(renderer);
 		
 		SDL_Rect rect = buttonList[i]->getRect();
-		if((i == 1 && getLvlUnlocks() < 1) || (i == 2 && getLvlUnlocks() < 2))
+		if((i == 1 && getLvlUnlocks() < 1) || (i == 2 && getLvlUnlocks() < 2) || (i == 3 && getLvlUnlocks() < 3))
 		    renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mAlphaOverlay);
 	}
 }
@@ -81,22 +82,26 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 				    break;
 				case 1:
 				    if (getLvlUnlocks() > 0)
-					setNextState(BaseState::PLAY_STATE, "level2.txt");
+						setNextState(BaseState::PLAY_STATE, "level2.txt");
 				    break;
 				case 2:
 				    if (getLvlUnlocks() > 1)
-					setNextState(BaseState::PLAY_STATE, "level3.txt");
+						setNextState(BaseState::PLAY_STATE, "level3.txt");
 				    break;
 				case 3:
-				    setNextState(BaseState::CREDIT);
+					if (getLvlUnlocks() > 2)
+						setNextState(BaseState::PLAY_STATE, "level3.txt");
 				    break;
 				case 4:
-				    exit = true;
+				    setNextState(BaseState::CREDIT);
 				    break;
 				case 5:
-				    setNextState(BaseState::EDITOR_STATE);
+				    exit = true;
 				    break;
 				case 6:
+				    setNextState(BaseState::EDITOR_STATE);
+				    break;
+				case 7:
 					mute = !mute;
 				setMute(mute);
 				

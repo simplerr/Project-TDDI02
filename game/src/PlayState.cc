@@ -63,6 +63,8 @@ void PlayState::update(float dt)
 				incLvl();
 			else if (getLvlUnlocks() == 1 && mLevel->getCurrentLevel() == FILEPATH_LVL2)
 				incLvl();
+			else if (getLvlUnlocks() == 2 && mLevel->getCurrentLevel() == FILEPATH_LVL3)
+				incLvl();
 			setNextState(BaseState::MENU_STATE);
 			
 		} 
