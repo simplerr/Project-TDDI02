@@ -1,3 +1,6 @@
+#include <iostream>
+#include <sstream>
+#include <iomanip>
 #include "PlayState.h"
 #include "Level.h"
 #include "Renderer.h"
@@ -6,7 +9,6 @@
 #include "Object.h"
 #include "Game.h"
 #include "Enemy.h"
-#include <iostream>
 
 PlayState::PlayState()
 {
@@ -16,6 +18,7 @@ PlayState::PlayState()
     boostSeconds = SPEEDBOOSTSEC;
     boostEnable = false;
     mPaused = false;
+	mTimeOnScreen = nullptr;
 
     mTimer.start();
 }
@@ -35,7 +38,8 @@ void PlayState::init(string initData) // initData will be the filename of the le
     mLevel = new Level();
     mLevel->loadLevel(initData, 1); // 1 för att det är playstate
     mPlayer = mLevel->findPlayer();
-
+	mTimeOnScreen = new ButtonText(Vec2(20, 20), 80, 40, " ", 250,250,250);
+	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
 		new ButtonImg(Vec2(390, 310), 260, 60, CONTINUE_BUTTON),
@@ -91,10 +95,9 @@ void PlayState::draw(Renderer* renderer)
     }
 
     // draw timer progress
-    string t = to_string(mTimer.getSeconds());
-    cout << t << endl;
-    Texture* texture = renderer->loadTexture(t, 255, 255, 255);
-    renderer->drawTexture(Vec2(20, 20), 100, 30, texture);
+    ostringstream currentTime;
+	currentTime << fixed << setw(7) << std::setprecision(1) << left<< mTimer.getSeconds();
+    mTimeOnScreen->draw( renderer, currentTime.str() );
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)
@@ -120,7 +123,10 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 
 			// ENTER PAUSE MENU
 			if(e.key.keysym.sym == SDLK_ESCAPE)
+			{
+				mTimer.pause();
 				mPaused = !mPaused;
+			}
 		}
 		//If a key was released
 		else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
@@ -138,7 +144,10 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
     {
 		if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
 			if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET VIA ESCAPE
+			{
 				mPaused = !mPaused;
+				mTimer.start();
+			}
 
 		if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
 		{
@@ -150,6 +159,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 					switch (i) {
 					case 1:
 						mPaused = !mPaused;
+						mTimer.start();
 						break;
 					case 2:
 						setNextState(BaseState::MENU_STATE);

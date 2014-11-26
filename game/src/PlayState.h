@@ -44,6 +44,7 @@ private:
     Player* mPlayer;
     Texture* mTestBkgd;
     Texture* mPauseMenu;
+    ButtonText* mTimeOnScreen;
     float speed = 6.0;
     bool mPaused;
     vector<Button*> buttonList;
