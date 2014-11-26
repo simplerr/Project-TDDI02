@@ -10,12 +10,14 @@
 #include "Background.h"
 #include "Decoration.h"
 #include "LavaPlatform.h"
+#include "Finish.h"
 
 Level::Level()
 {
 	camX=SCREEN_WIDTH/2;
 	camY=SCREEN_HEIGHT/2;
 	mFlagTexture = nullptr;
+	mLevelFinish = false;
 }
 
 Level::~Level()
@@ -35,9 +37,9 @@ void Level::addObject(Object* object)
     mObjects.push_back(object);
 }
 
-bool Level::loadLevel(string filename, int k)
+bool Level::loadLevel(string filename, int mode)
 {
-	mFilename = filename;
+    mFilename = filename;
     ifstream input (mFilename);
     int index, posx, posy, width, height = 0;
     string path = "";
@@ -51,8 +53,8 @@ bool Level::loadLevel(string filename, int k)
 		{
 			input >> posx >> posy >> width >> height;
 			input >> path;
-			if (index == Object::PLAYER) // Player
-			    mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
+			if (index == Object::PLAYER) // Player 
+			    mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );		    
 			else if (index == Object::PLATFORM) // Platformar
 			    mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
 			else if (index == Object::ENEMY) // Fiender
@@ -62,22 +64,24 @@ bool Level::loadLevel(string filename, int k)
 			    mObjects.push_back( new Enemy(Vec2(posx, posy), width, height, path, endx) );
 			}
 			else if (index == Object::POWERUP) // Powerups
-				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
+			    mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
 			else if(index == Object::LAVA_PLATFORM)			
-			    mObjects.push_back(new LavaPlatform(Vec2(posx, posy), width, height, path));	    
-			else if ( k == 1 ) // Play 
+			    mObjects.push_back(new LavaPlatform(Vec2(posx, posy), width, height, path));      
+			else if (index == Object::FINISH) // Powerups
+			    mObjects.push_back( new Finish(Vec2(posx, posy), width, height, path) );
+			else if ( mode == 1 ) // Play 
 			{
 			    if (index == Object::DECORATION) // Decoration
-					mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
+				mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
 			    else if (index == Object::BACKGROUND) // Backgrounds
-					mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
+				mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
 			}
-			else if ( k == 2 ) // Editor 
+			else if ( mode == 2 ) // Editor 
 			{
 			    if (index == Object::DECORATION) // Decoration
-					mObjects.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
-			    else if (index == Object::BACKGROUND) // Backgrounds
-					mObjects.push_back( new Background(Vec2(posx, posy), width, height, path) );
+				mObjects.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
+			    else if (index == Object::BACKGROUND) // Backgrounds			       
+				mObjects.push_back( new Background(Vec2(posx, posy), width, height, path) );
 			}	   
 			else
 				cerr << "FEL, objekt okänt\n";
@@ -143,11 +147,12 @@ bool Level::saveLevel(string filename)
 		output << "5 ";
 	    else if(mObjects[i]->getId() == Object::LAVA_PLATFORM)
 	    output << "6 ";*/
+
 	    
 	    output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
 		   << mObjects[i]->getHeight() << " " << mObjects[i]->getFilename();
 
-	    if(mObjects[i]->getId() == 2)
+	    if(mObjects[i]->getId() == Object::ENEMY)
 	    {
 		Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
 		output << " " << enemy->getEndX() << "\n"; 
@@ -260,6 +265,13 @@ void Level::update(float dt)
 	bool x, y = false;
 	Object* objectColliedY;
 	Object* objectColliedX;
+
+    if(mPlayer->getPowerUp())
+    {
+	if(mPlayer->getTimer() > 5)
+	    mPlayer->powerDown();
+    }
+    
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 		
@@ -296,19 +308,24 @@ void Level::update(float dt)
 	    
 	    if(objectColliedX->getId() == Object::ENEMY || objectColliedX->getId() == Object::LAVA_PLATFORM)
 	    {
-		mPlayer->setDead();
+			mPlayer->setDead();
 	    }
 	    else if(objectColliedX->getId() == Object::POWERUP)
 	    {
-		objectColliedX->setDead();
-		mPlayer->powerUp();
+			objectColliedX->setDead();
+			mPlayer->powerUp();
 	    }
+	    else if(objectColliedX->getId() == Object::FINISH)
+		{
+			mLevelFinish = true;
+		}
+			
 	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
 	    
 	}
 	
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
-	{
+	{		
 	    if(mPlayer->getjump()) //Hanterar ifall spelaren är inuti ett hopp
 	    {
 			mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y +1);
@@ -329,11 +346,17 @@ void Level::update(float dt)
 	}
 	else
 	{
-		mPlayer->setjump(2); //Sätter jump till false
+	    if (objectColliedY->getId() == Object::FINISH)
+		{
+			mLevelFinish = true;
+		}
 		
 		// OBS! Temp, flytta till handleCollision()
 		if(objectColliedY->getId() == Object::LAVA_PLATFORM)
 		    mPlayer->setDead();
+
+		mPlayer->setjump(2); //Sätter jump till false
+
 		
 		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
 		{
@@ -351,7 +374,7 @@ void Level::update(float dt)
 			else
 			{
 			    mPlayer->setfall(2); //Sätter fall till false
-			    mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+			    mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()-1); //om du ska hamna över
 			}
 		}
 		else
@@ -369,7 +392,6 @@ void Level::update(float dt)
 			mPlayer->setfall(1); //Sätter hopp till true
 		}
 	}
-	
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {

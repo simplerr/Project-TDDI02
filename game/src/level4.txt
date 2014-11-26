@@ -1,3 +1,4 @@
 1024 768
+4 392 520 40 40 ../imgs/textures/finish.png
 1 152 440 104 76 ../imgs/textures/platforms/Wall2.png
 0 184 360 48 48 ../imgs//textures/creatures/player.png

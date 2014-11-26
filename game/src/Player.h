@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include "Vec2.h"
+#include "Timer.h"
 
 class Player : public Object
 {
@@ -23,8 +24,11 @@ public:
     void setVel(int x, int y);
     void move(int dir);
     void powerUp();
+    void powerDown();
     void setDead() { mDead = !mDead; }
     bool getDead() { return mDead; }
+    bool getPowerUp() { return mPowerUp; }
+    float getTimer() { return mPowerUptime.getSeconds(); }
     
     //void playerJump(int speed)
 	void incScore();
@@ -39,6 +43,8 @@ private:
     int mSpeed;
     int mScore;
     bool mDead;
+    bool mPowerUp;
+    Timer mPowerUptime;
 };
 
 #endif

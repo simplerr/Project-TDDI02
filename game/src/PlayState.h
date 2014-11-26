@@ -49,6 +49,7 @@ private:
     Texture* mPauseMenu;
     ButtonText* mTimeOnScreen;
     ButtonText* mKilledCreaturesScreen;
+    ButtonText* PowerupTimer;
     float speed = 6.0;
     bool mPaused;
     vector<Button*> buttonList;

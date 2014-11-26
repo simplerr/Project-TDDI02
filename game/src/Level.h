@@ -32,15 +32,14 @@ public:
 
     
   Player* findPlayer();
-  bool loadLevel(string filename, int k);
+  bool loadLevel(string filename, int k = 1);
   void update(float dt);
   void draw(Renderer* renderer, bool flags = false);
 
   void setCurrentLevel(string f) { mFilename = f; }
   string getCurrentLevel() { return mFilename; }
   Object* getObjectAt(float x, float y);
-  bool getKeyPressed(){ return mKeyPressed; }
-  void setKeyPressed(bool keypressed){ mKeyPressed = keypressed; }
+  bool getLevelFinish(){ return mLevelFinish; }
  
 private:
   vector<Object*> mObjects;
@@ -53,6 +52,7 @@ private:
   unsigned int camY;
   Texture* mFlagTexture;
   bool mKeyPressed = false;
+  bool mLevelFinish;
 };
 
 #endif

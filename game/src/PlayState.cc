@@ -22,6 +22,7 @@ PlayState::PlayState()
     mPaused = false;
 	mTimeOnScreen = nullptr;
 	mKilledCreaturesScreen = nullptr;
+	PowerupTimer = nullptr;;
     mTimer.start();
     mHighscores = new Highscores("highscores.txt");
 }
@@ -46,6 +47,7 @@ void PlayState::init(string initData) // initData will be the filename of the le
     mPlayer = mLevel->findPlayer();
 	mTimeOnScreen = new ButtonText(Vec2(20, 20), 80, 40, " ", 250,250,250);
 	mKilledCreaturesScreen = new ButtonText(Vec2(20, 55), 70, 30, " ", 250,250,250);
+	PowerupTimer = new ButtonText(Vec2((SCREEN_WIDTH/2)-50, 10), 100, 50, " ", 250,250,250);
 	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
@@ -70,7 +72,7 @@ void PlayState::update(float dt)
 			speedUp(); // speedUp varar i SPEEDBOOSTSEC sekunder
 
 		
-		if ( mPlayer->getPosition().x + mPlayer->getWidth() > mLevel->getLevelSize().x) { // Om spelaren klarat banan;
+		if ( mLevel->getLevelFinish() ) { // Om spelaren klarat banan;
 			if (getLvlUnlocks() == 0 && mLevel->getCurrentLevel() == FILEPATH_LVL1)
 				incLvl();
 			else if (getLvlUnlocks() == 1 && mLevel->getCurrentLevel() == FILEPATH_LVL2)
@@ -105,11 +107,16 @@ void PlayState::draw(Renderer* renderer)
     }
 
     // draw timer progress
-    ostringstream currentTime, currentKilledCreatures;
+    ostringstream currentTime, currentKilledCreatures, currentPowerupTime;
 	currentTime << fixed << setw(7) << std::setprecision(1) << left<< mTimer.getSeconds();
     mTimeOnScreen->draw( renderer, currentTime.str() );
 	currentKilledCreatures << setw(10) << left << "Score:" <<  left << mPlayer->getScore();
 	mKilledCreaturesScreen->draw( renderer, currentKilledCreatures.str() );
+	if (mPlayer->getPowerUp())
+	{
+		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << mPlayer->getTimer();
+		PowerupTimer->draw( renderer, currentPowerupTime.str() );
+	}
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)

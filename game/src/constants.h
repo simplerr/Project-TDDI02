@@ -36,6 +36,7 @@ static const std::string BACKTOMENU_BUTTON = "../imgs/buttons/credit/creditback.
 static const std::string FILEPATH_GRID = "../imgs/backgrounds/grid8px.png";
 static const std::string FILEPATH_PLAYER = "../imgs//textures/creatures/player.png";
 static const std::string FILEPATH_ENEMY1 = "../imgs/textures/creatures/enemy.png";
+static const std::string FILEPATH_FINISH = "../imgs/textures/finish.png";
 static const std::string FILEPATH_POWERUP1 = "../imgs/textures/powerups/powerup.png";
 static const std::string FILEPATH_PLATFORM_1 = "../imgs/textures/platforms/platform.jpg";
 static const std::string FILEPATH_PLATFORM_2 = "../imgs/textures/platforms/lava.png";

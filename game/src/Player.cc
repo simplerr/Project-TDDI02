@@ -10,6 +10,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
     mSpeed = 6;
     mScore = 0;
     mDead = false;
+    mPowerUp = false;
 }
 
 Player::~Player()
@@ -27,6 +28,7 @@ void Player::update(float dt)
 void Player::draw(Renderer* renderer)
 {
     Object::draw(renderer);
+    //cout << "x: " << getPosition().x << "y: " << getPosition().y << endl;
 }
 
 void Player::handleCollision(Object* object)
@@ -153,6 +155,24 @@ int Player::getScore()
 
 void Player::powerUp()
 {
-    setVel(getVel().x * 2,0);
-    mSpeed = mSpeed * 2;
+    if(mPowerUp == false)
+    {
+	mPowerUptime.start();
+	mPowerUp = true;
+	setVel(getVel().x * 2,0);
+	mSpeed = mSpeed * 2;
+    }
+    if(mPowerUp == true)
+    {
+	mPowerUptime.reset();
+	mPowerUptime.start();
+    }
+}
+
+void Player::powerDown()
+{
+    mPowerUp = false;
+    mPowerUptime.reset();
+    setVel(getVel().x/2, getVel().y);
+    mSpeed = mSpeed / 2;
 }
