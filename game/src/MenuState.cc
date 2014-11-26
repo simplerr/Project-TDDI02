@@ -5,10 +5,10 @@ using namespace std;
 
 MenuState::MenuState()
 {
-	mute = false;
+    mute = false;
     mMenu = nullptr;
     mAlphaOverlay = nullptr;
-    mHighscores = new Highscores("highscores.txt");
+    
     mHooverLevel = "none";
     mHighscoreButton = new ButtonText(Vec2(85, 400), 150, 50, "Best time: ", 0, 0, 0);
 }
@@ -26,16 +26,18 @@ MenuState::~MenuState()
 
 void MenuState::init(string initData)
 {
-	buttonList = {	
-		new ButtonImg(Vec2(80, 200), 200, 200, LEVEL1_BUTTON), // Play 1
-		new ButtonImg(Vec2(300, 200), 200, 200, LEVEL2_BUTTON), // Play 2
-		new ButtonImg(Vec2(520, 200), 200, 200, LEVEL3_BUTTON), // Play 3
-		new ButtonImg(Vec2(740, 200), 200, 200, LEVEL3_BUTTON), // Play 3
-		new ButtonImg(Vec2(412, 430), 200, 70, CREDIT_BUTTON), // Credit
-		new ButtonImg(Vec2(412, 510), 200, 80, EXIT_BUTTON), // Exit
-		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, TOEDITOR_BUTTON),
-		new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON)
-	};
+    buttonList = {	
+	new ButtonImg(Vec2(80, 200), 200, 200, LEVEL1_BUTTON), // Play 1
+	new ButtonImg(Vec2(300, 200), 200, 200, LEVEL2_BUTTON), // Play 2
+	new ButtonImg(Vec2(520, 200), 200, 200, LEVEL3_BUTTON), // Play 3
+	new ButtonImg(Vec2(740, 200), 200, 200, LEVEL3_BUTTON), // Play 3
+	new ButtonImg(Vec2(412, 430), 200, 70, CREDIT_BUTTON), // Credit
+	new ButtonImg(Vec2(412, 510), 200, 80, EXIT_BUTTON), // Exit
+	new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, TOEDITOR_BUTTON),
+	new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON)
+    };
+    
+    mHighscores = new Highscores("highscores.txt");
 }
 
 void MenuState::cleanup()
