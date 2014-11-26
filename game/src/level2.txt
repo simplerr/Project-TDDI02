@@ -1,16 +1,33 @@
-3360 1128
+6712 1672
 6 0 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 560 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 1120 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 1680 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 2240 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 2800 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 2800 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 2240 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 1680 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 1120 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
-6 560 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 448 520 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 448 520 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 448 520 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 448 520 560 560 ../imgs/textures/backgrounds/FarBackground.png
 6 0 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 0 1112 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 560 1080 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 560 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 1008 656 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 1120 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 1568 656 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 1680 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 2128 648 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 2240 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 2688 648 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 2800 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 3248 656 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 3360 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 3920 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 3808 656 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 4480 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 4352 656 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 5040 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 4912 656 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 4928 656 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 5600 96 560 560 ../imgs/textures/backgrounds/FarBackground.png
+6 5488 656 672 560 ../imgs/textures/backgrounds/FarBackground.png
+6 6152 96 560 1080 ../imgs/textures/backgrounds/skygrad.jpg
 5 112 240 400 264 ../imgs/textures/decorations/CatEyes.png
 5 1176 648 40 32 ../imgs/textures/decorations/Grass.png
 5 1352 648 40 32 ../imgs/textures/decorations/Grass.png
@@ -26,73 +43,26 @@
 5 1640 656 40 32 ../imgs/textures/decorations/Grass.png
 5 1728 656 40 32 ../imgs/textures/decorations/Grass.png
 5 1672 656 40 32 ../imgs/textures/decorations/Grass.png
-5 2288 768 104 112 ../imgs/textures/decorations/Roots.png
-5 2112 760 104 368 ../imgs/textures/decorations/Roots.png
-5 2200 768 104 72 ../imgs/textures/decorations/Roots.png
-5 1904 768 104 88 ../imgs/textures/decorations/Roots.png
-5 2000 768 104 120 ../imgs/textures/decorations/Roots.png
-5 1888 584 104 48 ../imgs/textures/decorations/Grass.png
-5 1992 600 104 48 ../imgs/textures/decorations/Grass.png
-5 2128 592 104 48 ../imgs/textures/decorations/Grass.png
-5 2048 584 104 48 ../imgs/textures/decorations/Grass.png
-5 2248 592 104 48 ../imgs/textures/decorations/Grass.png
-5 2320 480 104 48 ../imgs/textures/decorations/Grass.png
-5 2312 504 104 48 ../imgs/textures/decorations/Grass.png
-5 2296 536 104 48 ../imgs/textures/decorations/Grass.png
-5 2296 528 104 48 ../imgs/textures/decorations/Grass.png
-5 2280 560 104 48 ../imgs/textures/decorations/Grass.png
-5 2280 544 104 48 ../imgs/textures/decorations/Grass.png
-5 2272 568 104 48 ../imgs/textures/decorations/Grass.png
-5 2256 576 104 48 ../imgs/textures/decorations/Grass.png
-5 2248 608 104 48 ../imgs/textures/decorations/Grass.png
-5 2344 504 104 48 ../imgs/textures/decorations/Grass.png
-5 2344 528 104 48 ../imgs/textures/decorations/Grass.png
-5 2336 536 104 48 ../imgs/textures/decorations/Grass.png
-5 2336 552 104 48 ../imgs/textures/decorations/Grass.png
-5 2344 568 104 48 ../imgs/textures/decorations/Grass.png
-5 2344 584 104 48 ../imgs/textures/decorations/Grass.png
-5 2344 592 104 48 ../imgs/textures/decorations/Grass.png
-5 2336 608 104 48 ../imgs/textures/decorations/Grass.png
-5 2328 616 104 48 ../imgs/textures/decorations/Grass.png
-5 2304 632 104 48 ../imgs/textures/decorations/Grass.png
-5 2296 640 104 48 ../imgs/textures/decorations/Grass.png
-5 2304 568 104 48 ../imgs/textures/decorations/Grass.png
-5 2288 592 104 48 ../imgs/textures/decorations/Grass.png
-5 2280 608 104 48 ../imgs/textures/decorations/Grass.png
-5 2344 632 104 48 ../imgs/textures/decorations/Grass.png
-5 2336 656 104 48 ../imgs/textures/decorations/Grass.png
-5 2336 672 104 48 ../imgs/textures/decorations/Grass.png
-5 2328 688 104 48 ../imgs/textures/decorations/Grass.png
-5 2320 696 104 48 ../imgs/textures/decorations/Grass.png
-5 2312 712 104 48 ../imgs/textures/decorations/Grass.png
-5 2280 720 104 48 ../imgs/textures/decorations/Grass.png
-4 3272 648 40 40 ../imgs/textures/finish.png
-2 3168 656 48 48 ../imgs/textures/creatures/enemy.png 3000
-2 2608 656 48 48 ../imgs/textures/creatures/enemy.png 2816
-2 2768 552 48 48 ../imgs/textures/creatures/enemy.png 3008
-2 1904 576 48 48 ../imgs/textures/creatures/enemy.png 2064
+5 56 624 104 48 ../imgs/textures/decorations/Grass.png
+5 104 624 104 48 ../imgs/textures/decorations/Grass.png
+5 152 624 104 48 ../imgs/textures/decorations/Grass.png
+5 208 624 104 48 ../imgs/textures/decorations/Grass.png
+3 4416 552 40 40 ../imgs/textures/powerups/powerup.png
 2 1192 624 48 48 ../imgs/textures/creatures/enemy.png 1400
-2 1568 624 48 48 ../imgs/textures/creatures/enemy.png 1408
-1 96 384 104 76 ../imgs/textures/platforms/Totem1.png
-1 200 384 104 76 ../imgs/textures/platforms/Totem1.png
-1 304 384 104 76 ../imgs/textures/platforms/Totem1.png
-1 408 384 104 76 ../imgs/textures/platforms/Totem1.png
-1 408 456 104 76 ../imgs/textures/platforms/Totem4.png
-1 304 456 104 76 ../imgs/textures/platforms/Totem4.png
-1 200 456 104 76 ../imgs/textures/platforms/Totem4.png
-1 96 456 104 76 ../imgs/textures/platforms/Totem4.png
-1 96 528 104 76 ../imgs/textures/platforms/Totem3.png
-1 200 528 104 76 ../imgs/textures/platforms/Totem3.png
-1 304 528 104 76 ../imgs/textures/platforms/Totem3.png
-1 408 528 104 76 ../imgs/textures/platforms/Totem3.png
-1 408 600 104 76 ../imgs/textures/platforms/Totem4.png
-1 304 600 104 76 ../imgs/textures/platforms/Totem4.png
-1 200 600 104 76 ../imgs/textures/platforms/Totem4.png
-1 96 600 104 76 ../imgs/textures/platforms/Totem4.png
+2 1328 528 48 48 ../imgs/textures/creatures/enemy.png 1704
+2 1896 648 48 48 ../imgs/textures/creatures/enemy.png 2232
+2 2064 552 48 48 ../imgs/textures/creatures/enemy.png 2360
+2 2224 496 48 48 ../imgs/textures/creatures/enemy.png 2480
+2 2416 448 48 48 ../imgs/textures/creatures/enemy.png 2640
+2 2600 568 48 48 ../imgs/textures/creatures/enemy.png 3184
+2 3136 568 48 48 ../imgs/textures/creatures/enemy.png 2648
+2 3488 576 48 48 ../imgs/textures/creatures/enemy.png 3744
+2 3280 576 48 48 ../imgs/textures/creatures/enemy.png 3504
+2 3736 584 48 48 ../imgs/textures/creatures/enemy.png 3952
+2 4032 456 48 48 ../imgs/textures/creatures/enemy.png 4712
 1 64 672 104 76 ../imgs/textures/platforms/Wall2.png
 1 168 672 104 76 ../imgs/textures/platforms/Wall4.png
 1 272 672 104 76 ../imgs/textures/platforms/Wall4.png
-1 376 672 104 76 ../imgs/textures/platforms/Wall4.png
 1 480 672 104 76 ../imgs/textures/platforms/Wall1.png
 1 72 744 104 76 ../imgs/textures/platforms/Wall6.png
 1 472 744 104 76 ../imgs/textures/platforms/Wall5.png
@@ -100,30 +70,52 @@
 1 264 744 104 76 ../imgs/textures/platforms/Wall7.png
 1 168 744 104 76 ../imgs/textures/platforms/Wall7.png
 1 712 736 8 8 ../imgs/textures/platforms/platform.jpg
-1 712 736 8 128 ../imgs/textures/platforms/lava.png
-1 848 784 8 128 ../imgs/textures/platforms/lava.png
-1 968 760 8 128 ../imgs/textures/platforms/lava.png
-1 1096 712 8 128 ../imgs/textures/platforms/lava.png
 1 1176 672 104 76 ../imgs/textures/platforms/Walkway3.png
 1 1280 672 104 76 ../imgs/textures/platforms/Walkway2.png
 1 1384 672 104 76 ../imgs/textures/platforms/Walkway2.png
 1 1488 672 104 76 ../imgs/textures/platforms/Walkway2.png
 1 1592 672 104 76 ../imgs/textures/platforms/Walkway2.png
 1 1688 672 104 76 ../imgs/textures/platforms/Walkway1.png
-1 1880 624 104 76 ../imgs/textures/platforms/Wall2.png
-1 1984 624 104 76 ../imgs/textures/platforms/Wall4.png
-1 2088 624 104 76 ../imgs/textures/platforms/Wall4.png
-1 2192 624 104 76 ../imgs/textures/platforms/Wall4.png
-1 2296 624 104 76 ../imgs/textures/platforms/Wall1.png
-1 2288 696 104 76 ../imgs/textures/platforms/Wall5.png
-1 2184 696 104 76 ../imgs/textures/platforms/Wall7.png
-1 2080 696 104 76 ../imgs/textures/platforms/Wall7.png
-1 1984 696 104 76 ../imgs/textures/platforms/Wall7.png
-1 1888 696 104 76 ../imgs/textures/platforms/Wall6.png
 1 2600 704 104 76 ../imgs/textures/platforms/Walkway3.png
 1 2704 704 104 76 ../imgs/textures/platforms/Walkway2.png
 1 2808 704 104 76 ../imgs/textures/platforms/Walkway2.png
 1 2912 704 104 76 ../imgs/textures/platforms/Walkway2.png
 1 3016 704 104 76 ../imgs/textures/platforms/Walkway2.png
 1 3112 704 104 76 ../imgs/textures/platforms/Walkway1.png
-0 120 328 48 48 ../imgs//textures/creatures/player.png
+1 376 672 104 76 ../imgs/textures/platforms/Wall4.png
+1 696 600 8 128 ../imgs/textures/platforms/lava.png
+1 824 712 8 128 ../imgs/textures/platforms/lava.png
+1 960 672 8 128 ../imgs/textures/platforms/lava.png
+1 2712 648 64 56 ../imgs/textures/platforms/lava.png
+1 2880 648 64 56 ../imgs/textures/platforms/lava.png
+1 3048 648 64 56 ../imgs/textures/platforms/lava.png
+1 3384 688 48 40 ../imgs/textures/platforms/platform.jpg
+1 3608 688 48 40 ../imgs/textures/platforms/platform.jpg
+1 3832 688 48 40 ../imgs/textures/platforms/platform.jpg
+1 4024 632 104 76 ../imgs/textures/platforms/Wall2.png
+1 4128 632 104 76 ../imgs/textures/platforms/Wall4.png
+1 4232 632 104 76 ../imgs/textures/platforms/Wall3.png
+1 4336 632 104 76 ../imgs/textures/platforms/Wall4.png
+1 4440 632 104 76 ../imgs/textures/platforms/Wall4.png
+1 4544 632 104 76 ../imgs/textures/platforms/Wall4.png
+1 4648 632 104 76 ../imgs/textures/platforms/Wall1.png
+1 4128 704 104 76 ../imgs/textures/platforms/Wall7.png
+1 4232 704 104 76 ../imgs/textures/platforms/Wall7.png
+1 4336 704 104 76 ../imgs/textures/platforms/Wall7.png
+1 4440 704 104 76 ../imgs/textures/platforms/Wall7.png
+1 4544 704 104 76 ../imgs/textures/platforms/Wall7.png
+1 4640 704 104 76 ../imgs/textures/platforms/Wall5.png
+1 4032 704 96 76 ../imgs/textures/platforms/Wall6.png
+1 4128 528 24 104 ../imgs/textures/platforms/lava.png
+1 3992 376 104 76 ../imgs/textures/platforms/Walkway3.png
+1 4096 376 104 76 ../imgs/textures/platforms/Walkway2.png
+1 4200 376 104 76 ../imgs/textures/platforms/Walkway2.png
+1 4304 376 104 76 ../imgs/textures/platforms/Walkway2.png
+1 4408 376 104 76 ../imgs/textures/platforms/Walkway2.png
+1 4512 376 104 76 ../imgs/textures/platforms/Walkway2.png
+1 4616 376 104 76 ../imgs/textures/platforms/Walkway2.png
+1 4248 528 24 104 ../imgs/textures/platforms/lava.png
+1 4360 528 24 104 ../imgs/textures/platforms/lava.png
+1 4480 528 24 104 ../imgs/textures/platforms/lava.png
+1 4600 528 24 104 ../imgs/textures/platforms/lava.png
+0 96 576 48 48 ../imgs//textures/creatures/player.png
