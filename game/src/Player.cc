@@ -153,6 +153,24 @@ int Player::getScore()
 
 void Player::powerUp()
 {
-    setVel(getVel().x * 2,0);
-    mSpeed = mSpeed * 2;
+    if(mPowerUp == false)
+    {
+	mPowerUptime.start();
+	mPowerUp = true;
+	setVel(getVel().x * 2,0);
+	mSpeed = mSpeed * 2;
+    }
+    if(mPowerUp == true)
+    {
+	mPowerUptime.reset();
+	mPowerUptime.start();
+    }
+}
+
+void Player::powerDown()
+{
+    mPowerUp = false;
+    mPowerUptime.reset();
+    setVel(getVel().x/2, getVel().y);
+    mSpeed = mSpeed / 2;
 }

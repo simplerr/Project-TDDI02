@@ -254,6 +254,13 @@ void Level::update(float dt)
 	bool x, y = false;
 	Object* objectColliedY;
 	Object* objectColliedX;
+	
+    if(mPlayer->getPowerUp())
+    {
+	if(mPlayer->getTimer() > 10)
+	    mPlayer->powerDown();
+    }
+    
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 		
