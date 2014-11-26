@@ -10,6 +10,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
     mSpeed = 6;
     mScore = 0;
     mDead = false;
+    mPowerUp = false;
 }
 
 Player::~Player()

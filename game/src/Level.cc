@@ -263,7 +263,7 @@ void Level::update(float dt)
 
     if(mPlayer->getPowerUp())
     {
-	if(mPlayer->getTimer() > 10)
+	if(mPlayer->getTimer() > 5)
 	    mPlayer->powerDown();
     }
     
