@@ -19,7 +19,7 @@ PlayState::PlayState()
     boostEnable = false;
     mPaused = false;
 	mTimeOnScreen = nullptr;
-
+	mKilledCreaturesScreen = nullptr;
     mTimer.start();
 }
 
@@ -39,6 +39,7 @@ void PlayState::init(string initData) // initData will be the filename of the le
     mLevel->loadLevel(initData, 1); // 1 för att det är playstate
     mPlayer = mLevel->findPlayer();
 	mTimeOnScreen = new ButtonText(Vec2(20, 20), 80, 40, " ", 250,250,250);
+	mKilledCreaturesScreen = new ButtonText(Vec2(20, 55), 70, 30, " ", 250,250,250);
 	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
@@ -95,9 +96,11 @@ void PlayState::draw(Renderer* renderer)
     }
 
     // draw timer progress
-    ostringstream currentTime;
+    ostringstream currentTime, currentKilledCreatures;
 	currentTime << fixed << setw(7) << std::setprecision(1) << left<< mTimer.getSeconds();
     mTimeOnScreen->draw( renderer, currentTime.str() );
+	currentKilledCreatures << setw(10) << left << "Score:" << mPlayer->getScore();
+	mKilledCreaturesScreen->draw( renderer, currentKilledCreatures.str() );
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)

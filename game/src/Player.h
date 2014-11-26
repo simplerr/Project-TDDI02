@@ -24,6 +24,8 @@ public:
     void move(int dir);
     
     //void playerJump(int speed)
+	void incScore();
+	int getScore();
 
     Vec2 getVel();
 private:
@@ -32,6 +34,7 @@ private:
     bool jumping;
     bool falling;
     int mSpeed;
+	int mScore;
 };
 
 #endif
