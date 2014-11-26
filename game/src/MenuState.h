@@ -8,6 +8,8 @@
 #include "Level.h"
 #include <vector>
 
+class Highscores;
+
 class MenuState : public BaseState {
 public:
     MenuState();
@@ -27,7 +29,10 @@ private:
     vector<Button*> buttonList;
     Vec2 mousePos;
     Level *level;
-	bool mute;
+    bool mute;
+    Highscores* mHighscores;
+    string mHooverLevel;
+    ButtonText* mHighscoreButton;
 };
 
 #endif

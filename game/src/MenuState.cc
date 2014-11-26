@@ -1,4 +1,5 @@
 #include "MenuState.h"
+#include "Highscores.h"
 #include <iostream>
 using namespace std;
 
@@ -7,15 +8,20 @@ MenuState::MenuState()
 	mute = false;
     mMenu = nullptr;
     mAlphaOverlay = nullptr;
+    mHighscores = new Highscores("highscores.txt");
+    mHooverLevel = "none";
+    mHighscoreButton = new ButtonText(Vec2(85, 400), 100, 30, "Best time: ", 0, 0, 0);
 }
 
 MenuState::~MenuState()
 {
-	for (unsigned int i = 0; i < buttonList.size(); i++)
-		delete buttonList.at(i);
-
+    for (unsigned int i = 0; i < buttonList.size(); i++)
+	delete buttonList.at(i);
+    
     delete mMenu;
     delete mAlphaOverlay;
+    delete mHighscores;
+    delete mHighscoreButton;
 }
 
 void MenuState::init(string initData)
@@ -64,10 +70,43 @@ void MenuState::draw(Renderer* renderer)
 		if((i == 1 && getLvlUnlocks() < 1) || (i == 2 && getLvlUnlocks() < 2) || (i == 3 && getLvlUnlocks() < 3))
 		    renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mAlphaOverlay);
 	}
+
+	// rita ut highscore för den level man har musen över
+	string text = "none";
+	if(mHooverLevel != "none")
+	    text = "Best time: " + to_string(mHighscores->getHighscore(mHooverLevel));
+
+	mHighscoreButton->draw(renderer);
+	cout << text << endl;
 }
 
 void MenuState::handleEvent(SDL_Event e, bool& exit)
 {
+    // för att se vilken karta highscore ska visas för
+    SDL_GetMouseState(&mousePos.x, &mousePos.y);
+    for (unsigned int i = 0; i < buttonList.size(); i++) {
+			
+	if (buttonList.at(i)->mouseOver(mousePos)) {
+
+	    switch (i) {
+	    case 0:
+		mHooverLevel = "level1.txt";	
+		break;
+	    case 1:	   
+		mHooverLevel = "level2.txt";	
+		break;
+	    case 2:
+		mHooverLevel = "level3.txt";	
+		break;
+	    case 3:		
+		mHooverLevel = "level4.txt";	
+		break;
+	    default:
+		mHooverLevel = "none";
+	    }
+	}
+    }
+
 
     if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
     {

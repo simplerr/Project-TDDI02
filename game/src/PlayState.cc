@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "Enemy.h"
 #include <iostream>
+#include "Highscores.h"
 
 PlayState::PlayState()
 {
@@ -18,6 +19,7 @@ PlayState::PlayState()
     mPaused = false;
 
     mTimer.start();
+    mHighscores = new Highscores("highscores.txt");
 }
 
 PlayState::~PlayState()
@@ -25,9 +27,12 @@ PlayState::~PlayState()
     for (unsigned int i = 0; i < buttonList.size(); i++)
 	delete buttonList.at(i);
 
+    mHighscores->save();
+    
     delete mLevel;
     delete mTestBkgd;
     delete mPauseMenu;
+    delete mHighscores;
 }
 
 void PlayState::init(string initData) // initData will be the filename of the level
@@ -66,6 +71,8 @@ void PlayState::update(float dt)
 			else if (getLvlUnlocks() == 2 && mLevel->getCurrentLevel() == FILEPATH_LVL3)
 				incLvl();
 			setNextState(BaseState::MENU_STATE);
+
+			mHighscores->updateHighscore(mLevel->getCurrentLevel(), mTimer.getSeconds());
 			
 		} 
 		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y || !mLevel->getalive()) // Trillar spelaren ned, ladda om banan
@@ -120,7 +127,10 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 
 			// ENTER PAUSE MENU
 			if(e.key.keysym.sym == SDLK_ESCAPE)
-				mPaused = !mPaused;
+			{
+			    mPaused = !mPaused;
+			    mTimer.pause();
+			}
 		}
 		//If a key was released
 		else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
@@ -138,8 +148,11 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
     {
 		if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
 			if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET VIA ESCAPE
-				mPaused = !mPaused;
-
+			{
+			    mPaused = !mPaused;
+			    mTimer.start();
+			}
+		
 		if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
 		{
 			SDL_GetMouseState(&mousePos.x, &mousePos.y);
