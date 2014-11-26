@@ -29,6 +29,8 @@ public:
     void setWidth( int newW) { mWidth = newW; }
     void setHeight( int newH){ mHeight = newH; }
     string getFilename() { return mFilename; }
+    void setDead() { mDead = !mDead; }
+    bool getDead() { return mDead; }
 
     void setPosition(Vec2 pos);
     void setPosition(float x, float y);
@@ -42,6 +44,7 @@ private:
     string mFilename;
     int mWidth, mHeight;
     int mId;
+    bool mDead;
 };
 
 #endif

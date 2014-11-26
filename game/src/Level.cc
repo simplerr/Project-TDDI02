@@ -260,7 +260,7 @@ void Level::update(float dt)
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 		
-		if(mPlayer == mObjects[i]) //Så att den inte kollar kollision med sig själv...
+		if(mPlayer == mObjects[i] || mObjects[i]->getDead()) //Så att den inte kollar kollision med sig själv...
 			continue;
 		
 		//##############
@@ -331,8 +331,16 @@ void Level::update(float dt)
 		
 		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
 		{
-			mPlayer->setfall(2); //Sätter hopp till false
-			mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+			if(objectColliedY->getId() == 2)
+			{
+			    objectColliedY->setDead();
+			    mPlayer->setjump(1);
+			}
+			else
+			{
+			    mPlayer->setfall(2); //Sätter hopp till false
+			    mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
+			}
 		}
 		else
 		{
@@ -344,8 +352,11 @@ void Level::update(float dt)
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
+	if(!mObjects[i]->getDead())
+	    {
 		mObjects[i]->update(dt);
-	}
+	    }
+    }
 } // END OF UPDATE
 
 void Level::draw(Renderer* renderer, bool flags)
@@ -359,17 +370,20 @@ void Level::draw(Renderer* renderer, bool flags)
 		mBackgrounds[i]->draw(renderer);
     for(unsigned int i = 0; i < mObjects.size(); i++)
 	{
-		mObjects[i]->draw(renderer);
-		if (mObjects[i]->getId() == 2 && flags == true)
+		if(!mObjects[i]->getDead())
 		{
+		    mObjects[i]->draw(renderer);
+		    if (mObjects[i]->getId() == 2 && flags == true)
+		    {
 			Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
 			if (enemy->getEndX() != enemy->getPosition().x)
 			{
-				if(mFlagTexture == nullptr)
-					mFlagTexture = renderer->loadTexture("../imgs/flag.png");
+			    if(mFlagTexture == nullptr)
+				mFlagTexture = renderer->loadTexture("../imgs/flag.png");
 	
-				renderer->drawTexture(Vec2(enemy->getEndX(), enemy->getPosition().y), 48, 48, mFlagTexture);
+			    renderer->drawTexture(Vec2(enemy->getEndX(), enemy->getPosition().y), 48, 48, mFlagTexture);
 			}
+		    }
 		}
     }
 } // END OF DRAW()
