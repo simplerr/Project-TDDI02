@@ -325,7 +325,7 @@ void Level::update(float dt)
 	}
 	else
 	{
-		mPlayer->setjump(2); //Sätter fall till false
+		mPlayer->setjump(2); //Sätter jump till false
 		
 		yColID = objectColliedY->getId();
 		
@@ -338,7 +338,7 @@ void Level::update(float dt)
 			}
 			else
 			{
-			    mPlayer->setfall(2); //Sätter hopp till false
+			    mPlayer->setfall(2); //Sätter fall till false
 			    mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()); //om du ska hamna över
 			}
 		}

@@ -7,6 +7,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
     mVelY = 0;
     mVelX = 0;
     setId(0);
+    mSpeed = 6;
 }
 
 Player::~Player()
@@ -124,4 +125,16 @@ void Player::setVel(int x, int y)
 {
     mVelX = x;
     mVelY = y;
+}
+
+void Player::move(int dir)
+{
+    if(dir == 1)
+	addVel(-mSpeed, 0);
+    else if(dir == 2)
+	addVel(+mSpeed, 0);
+    else if(dir == 3)
+	addVel(+mSpeed, 0);
+    else if(dir == 4)
+	addVel(-mSpeed, 0);
 }

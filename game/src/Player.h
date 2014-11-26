@@ -21,7 +21,7 @@ public:
     bool getfall();
     bool getjump();
     void setVel(int x, int y);
-    
+    void move(int dir);
     //void playerJump(int speed)
 
     Vec2 getVel();
@@ -30,6 +30,7 @@ private:
     int mVelY;
     bool jumping;
     bool falling;
+    int mSpeed;
 };
 
 #endif
