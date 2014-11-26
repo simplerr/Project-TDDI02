@@ -55,6 +55,7 @@ static const std::string FILEPATH_PLATFORM_15 = "../imgs/textures/platforms/Tote
 static const std::string FILEPATH_PLATFORM_16 = "../imgs/textures/platforms/Totem2.png";
 static const std::string FILEPATH_PLATFORM_17 = "../imgs/textures/platforms/Totem3.png";
 static const std::string FILEPATH_PLATFORM_18 = "../imgs/textures/platforms/Totem4.png";
+static const std::string FILEPATH_PLATFORM_19 = "../imgs/textures/platforms/lava.jpg";
 static const std::string FILEPATH_BACKGROUND_1 = "../imgs/textures/backgrounds/skygrad.jpg";
 static const std::string FILEPATH_BACKGROUND_2 = "../imgs/textures/backgrounds/FarBackground.png";
 static const std::string FILEPATH_BACKGROUND_3 = "../imgs/textures/backgrounds/NearBackground.png";

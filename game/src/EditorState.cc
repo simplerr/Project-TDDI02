@@ -10,6 +10,7 @@
 #include "Decoration.h"
 #include "Enemy.h"
 #include "Powerup.h"
+#include "LavaPlatform.h"
 
 EditorState::EditorState()
 {
@@ -171,6 +172,8 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 			currentObject->setPosition(gridPos);
 			mLevel->addObject( currentObject->clone() );
 
+			cout << "id: " << currentObject->getId() << endl;
+
 			if (currentObject->getId() == 2)
 			{
 				setEnemyFlag = true;
@@ -240,7 +243,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, mousePos.x); break;
 				case 2: currentObject = new Powerup(mousePos, 40, 40, FILEPATH_POWERUP1); break;
 				case 3:	currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_1 ); break;
-				case 4: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
+				case 4: currentObject = new LavaPlatform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
 				case 5: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_3 ); break;
 				case 6: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_4 ); break;
 				case 7: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_5 ); break;
