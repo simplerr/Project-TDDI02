@@ -22,6 +22,7 @@ public:
     bool getjump();
     void setVel(int x, int y);
     void move(int dir);
+    
     //void playerJump(int speed)
 
     Vec2 getVel();

@@ -39,8 +39,9 @@ public:
 
   void setCurrentLevel(string f) { mFilename = f; }
   string getCurrentLevel() { return mFilename; }
-
   Object* getObjectAt(float x, float y);
+  bool getKeyPressed(){ return mKeyPressed; }
+  void setKeyPressed(bool keypressed){ mKeyPressed = keypressed; }
  
 private:
   vector<Object*> mObjects;
@@ -53,6 +54,7 @@ private:
   unsigned int camY;
   Texture* mFlagTexture;
   bool alive;
+  bool mKeyPressed = false;
 };
 
 #endif

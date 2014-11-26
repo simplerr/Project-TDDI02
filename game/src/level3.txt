@@ -16,10 +16,13 @@
 5 560 560 560 560 ../imgs/textures/backgrounds/NearBackground.png
 5 1104 560 560 560 ../imgs/textures/backgrounds/NearBackground.png
 5 1664 560 560 560 ../imgs/textures/backgrounds/NearBackground.png
-2 216 752 48 48 ../imgs/textures/creatures/enemy.png 824
 2 1888 544 48 48 ../imgs/textures/creatures/enemy.png 2176
 2 2096 480 48 48 ../imgs/textures/creatures/enemy.png 1944
 2 1968 416 48 48 ../imgs/textures/creatures/enemy.png 2064
+2 256 744 48 48 ../imgs/textures/creatures/enemy.png 352
+2 376 744 48 48 ../imgs/textures/creatures/enemy.png 488
+2 504 744 48 48 ../imgs/textures/creatures/enemy.png 640
+2 664 744 48 48 ../imgs/textures/creatures/enemy.png 776
 1 40 752 104 76 ../imgs/textures/platforms/Walkway3.png
 1 88 752 104 76 ../imgs/textures/platforms/Walkway1.png
 1 912 752 104 76 ../imgs/textures/platforms/Walkway3.png
