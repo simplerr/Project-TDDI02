@@ -53,6 +53,7 @@ private:
     int boostSeconds;
     bool boostEnable;
     Timer mTimer;
+    bool mFocus;
 };
 
 #endif

@@ -47,6 +47,7 @@ void PlayState::init(string initData) // initData will be the filename of the le
 		new ButtonImg(Vec2(430, 400), 190, 50, TOMENU_BUTTON)
 		
 	};
+	mFocus = false;
 }
 
 void PlayState::cleanup()
@@ -99,7 +100,7 @@ void PlayState::draw(Renderer* renderer)
     ostringstream currentTime, currentKilledCreatures;
 	currentTime << fixed << setw(7) << std::setprecision(1) << left<< mTimer.getSeconds();
     mTimeOnScreen->draw( renderer, currentTime.str() );
-	currentKilledCreatures << setw(10) << left << "Score:" << mPlayer->getScore();
+	currentKilledCreatures << setw(10) << left << "Score:" <<  left << mPlayer->getScore();
 	mKilledCreaturesScreen->draw( renderer, currentKilledCreatures.str() );
 }
 
