@@ -1,22 +1,24 @@
 #ifndef TIMER_H
 #define TIMER_H
-
+#include <chrono>
 
 class Timer {
  public:
 	
-	Timer();
-	~Timer();
-
-	void start();
-	void pause();
-
-	void reset();
-
-	Uint32 getTimer();
+    Timer();
+    ~Timer();
+    
+    void start();
+    void pause();
+    
+    void reset();
+    
+    int getTimer();
 
  private:
-	Uint32 mTimer, mLastTime;
+    std::chrono::high_resolution_clock::time_point mStartTime;
+    bool mPaused;
+    int mPauseSum;
 };
 
 #endif
