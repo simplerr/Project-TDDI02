@@ -30,7 +30,7 @@ static const std::string TOMENU_BUTTON = "../imgs/buttons/pause/quit.png";
 
 //###### CREDITS //##### 
 static const std::string CREDIT_BACKGROUND = "../imgs/backgrounds/credit.jpg";
-static const std::string BACKTOMENU_BUTTON = "../imgs/backgrounds/creditback.png";
+static const std::string BACKTOMENU_BUTTON = "../imgs/buttons/credit/creditback.png";
 
 //###### EDITOR #######
 static const std::string FILEPATH_GRID = "../imgs/backgrounds/grid8px.png";

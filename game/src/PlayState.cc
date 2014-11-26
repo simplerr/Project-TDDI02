@@ -94,6 +94,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 		//If a key was pressed
 		if( e.type == SDL_KEYDOWN && e.key.repeat == 0 && !mPaused) 
 		{
+			mLevel->setKeyPressed(true);
 			//Adjust the velocity
 			switch( e.key.keysym.sym )
 			{
@@ -113,15 +114,17 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 				mPaused = !mPaused;
 		}
 		//If a key was released
-		else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+		else if( e.type == SDL_KEYUP && e.key.repeat == 0 && !mPaused)
 		{
-			//Adjust the velocity
-			switch( e.key.keysym.sym )
-			{
-			case SDLK_LEFT: mPlayer->addVel(+speed, 0); break;
-			case SDLK_RIGHT: mPlayer->addVel(-speed, 0); break;
-			default: break;
-			}
+				//Adjust the velocity
+				switch( e.key.keysym.sym )
+				{
+				case SDLK_LEFT: mPlayer->addVel(+speed, 0); break;
+				case SDLK_RIGHT: mPlayer->addVel(-speed, 0); break;
+				default: break;
+				}
+				if (!mLevel->getKeyPressed())
+					mPlayer->setVel(0,0);
 		}	
     }
     else
