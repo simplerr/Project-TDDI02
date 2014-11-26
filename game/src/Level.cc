@@ -334,6 +334,7 @@ void Level::update(float dt)
 			if(objectColliedY->getId() == 2)
 			{
 			    objectColliedY->setDead();
+				mPlayer->incScore();
 			    mPlayer->setjump(1);
 			}
 			else

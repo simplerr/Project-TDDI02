@@ -92,9 +92,13 @@ void PlayState::draw(Renderer* renderer)
 
     // draw timer progress
     string t = to_string(mTimer.getSeconds());
-    cout << t << endl;
+	string t2 = "Score: " + to_string(mPlayer->getScore());
+    //cout << t << endl;
+	cout << t2 << endl;
     Texture* texture = renderer->loadTexture(t, 255, 255, 255);
     renderer->drawTexture(Vec2(20, 20), 100, 30, texture);
+	Texture* texture2 = renderer->loadTexture(t2, 255, 255, 255);
+	renderer->drawTexture(Vec2(20, 55), 70, 30, texture2);
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)
