@@ -2,27 +2,52 @@
 
 Timer::Timer()
 {
-	mTimer = 0;
-	mLastTime = 0;
+    mPaused = true;
+    mPauseSum = 0;
+}
+
+Timer::~Timer()
+{
+
 }
 
 void Timer::start()
 {
-	mTimer = SDL_GetTicks();
+    mPaused = false;
+    mStartTime = std::chrono::high_resolution_clock::now();
 }
 
 void Timer::pause()
 {
-	mLastTime = mTimer;
+    auto now  = std::chrono::high_resolution_clock::now();
+    auto sum = std::chrono::duration_cast<std::chrono::milliseconds>(now - mStartTime).count();
+    mPauseSum += sum;
+    mPaused = true;
 }
 
 void Timer::reset()
 {
-	// todo
-	mLastTime = 0;
+    // todo
+    mStartTime = std::chrono::high_resolution_clock::now();
+    mPauseSum = 0;
+    mPaused = false;
 }
 
-Uint32 Timer::getTimer()
+int Timer::getMilliseconds()
 {
-	return mLastTime;
+    if(mPaused)
+	return mPauseSum;
+    else
+    {
+	auto now  = std::chrono::high_resolution_clock::now();
+	return std::chrono::duration_cast<std::chrono::milliseconds>(now - mStartTime).count() + mPauseSum;
+    }
+}
+
+float Timer::getSeconds()
+{
+    int millis = getMilliseconds();
+    float seconds = millis / 1000.0;
+    seconds = int(seconds * 100) / 100.0;
+    return seconds;
 }

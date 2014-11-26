@@ -12,18 +12,18 @@ PlayState::PlayState()
 {
     mTestBkgd = nullptr;
     mPlayer = nullptr;
-    mPauseMenu = nullptr;
-	mLastTime = 0;
-	mTimer = 0;
-	boostSeconds = SPEEDBOOSTSEC;
-	boostEnable = false;
+    mPauseMenu = nullptr;;
+    boostSeconds = SPEEDBOOSTSEC;
+    boostEnable = false;
     mPaused = false;
+
+    mTimer.start();
 }
 
 PlayState::~PlayState()
 {
-	for (unsigned int i = 0; i < buttonList.size(); i++)
-		delete buttonList.at(i);
+    for (unsigned int i = 0; i < buttonList.size(); i++)
+	delete buttonList.at(i);
 
     delete mLevel;
     delete mTestBkgd;
@@ -71,6 +71,8 @@ void PlayState::update(float dt)
 		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y || !mLevel->getalive()) // Trillar spelaren ned, ladda om banan
 		    init(mLevel->getCurrentLevel()); // (Kan behövas ändras)
 	}
+
+    //cout << "timer: " << mTimer.getTimer() << endl;
 }
 
 void PlayState::draw(Renderer* renderer)
@@ -81,12 +83,18 @@ void PlayState::draw(Renderer* renderer)
     else
 	mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg"); */
 
-	mLevel->draw(renderer);
-	
-	if (mPaused) {
-		for (unsigned int i = 0; i < buttonList.size(); i++)
-			buttonList.at(i)->draw(renderer);
-	}
+    mLevel->draw(renderer);
+    
+    if (mPaused) {
+	for (unsigned int i = 0; i < buttonList.size(); i++)
+	    buttonList.at(i)->draw(renderer);
+    }
+
+    // draw timer progress
+    string t = to_string(mTimer.getSeconds());
+    cout << t << endl;
+    Texture* texture = renderer->loadTexture(t, 255, 255, 255);
+    renderer->drawTexture(Vec2(20, 20), 100, 30, texture);
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)
@@ -173,17 +181,17 @@ float PlayState::getSpeed()
 
 void PlayState::setTimer(Uint32 t)
 {
-	mTimer = t;
+    //mTimer = t;
 }
 
 Uint32 PlayState::getTimer()
 {
-	return mTimer;
+//	return mTimer;
 }
 
 void PlayState::speedUp()
 {
-	if (boostSeconds > 0) {
+/*	if (boostSeconds > 0) {
 		setSpeed(BOOSTUPSPEED);
 		mTimer = SDL_GetTicks();
 		if (mTimer > mLastTime + 1000) {
@@ -196,5 +204,5 @@ void PlayState::speedUp()
 		boostEnable = false;
 		speed = DEFAULTSPEED;
 		boostSeconds = SPEEDBOOSTSEC;
-	}
+		}*/
 }

@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "Texture.h"
 #include "Button.h"
+#include "Timer.h"
 #include <vector>
 
 /*
@@ -45,11 +46,11 @@ private:
     Texture* mPauseMenu;
     float speed = 6.0;
     bool mPaused;
-	vector<Button*> buttonList;
-	Vec2 mousePos;
-	Uint32 mTimer, mLastTime;
-	int boostSeconds;
-	bool boostEnable;
+    vector<Button*> buttonList;
+    Vec2 mousePos;
+    int boostSeconds;
+    bool boostEnable;
+    Timer mTimer;
 };
 
 #endif
