@@ -70,11 +70,13 @@ static const std::string FILEPATH_SAVE = "../imgs/buttons/editor/SAVE.png";
 static const std::string FILEPATH_LEVEL_1 = "1";
 static const std::string FILEPATH_LEVEL_2 = "2";
 static const std::string FILEPATH_LEVEL_3 = "3";
+static const std::string FILEPATH_LEVEL_4 = "4";
 
 
 //###### MAPS #####
 static const std::string FILEPATH_LVL1 = "level1.txt";
 static const std::string FILEPATH_LVL2 = "level2.txt";
 static const std::string FILEPATH_LVL3 = "level3.txt";
+static const std::string FILEPATH_LVL4 = "level4.txt";
 
 static int lvlUnlocks = 0;

@@ -77,9 +77,10 @@ void EditorState::init(string initData)
 		//###### DECORATIONS ######
 		// //###### OTHERS ######
 		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE),
-		new ButtonText(Vec2(col1, SCREEN_HEIGHT-70-buttonSize.y), buttonSize.x, buttonSize.y, FILEPATH_LEVEL_1,0,0,0),
-		new ButtonText(Vec2(col2, SCREEN_HEIGHT-70-buttonSize.y), buttonSize.x, buttonSize.y, FILEPATH_LEVEL_2,0,0,0),
-		new ButtonText(Vec2(col3, SCREEN_HEIGHT-70-buttonSize.y), buttonSize.x, buttonSize.y, FILEPATH_LEVEL_3,0,0,0)
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*4)-20, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_1,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*3)-10, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_2,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*2)-7, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_3,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*1)-3, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_4,0,0,0)
 	};
 	buttonListUnclickable = { //VIKTIGT ATT DET SOM SKALL VARA LÄNGST BAK ÄR FÖRST OSV.
 		new ButtonImg(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, FILEPATH_GRID),
@@ -272,6 +273,12 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 					break;
 				case 30:
 						mLevel->setCurrentLevel(FILEPATH_LVL3);
+						mLevel->clearList();
+						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
+						cout << "level: " << mLevel->getCurrentLevel() << endl;
+					break;
+				case 31:
+						mLevel->setCurrentLevel(FILEPATH_LVL4);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
 						cout << "level: " << mLevel->getCurrentLevel() << endl;
