@@ -33,7 +33,7 @@ void Timer::reset()
     mPaused = false;
 }
 
-int Timer::getTimer()
+int Timer::getMilliseconds()
 {
     if(mPaused)
 	return mPauseSum;
@@ -42,4 +42,12 @@ int Timer::getTimer()
 	auto now  = std::chrono::high_resolution_clock::now();
 	return std::chrono::duration_cast<std::chrono::milliseconds>(now - mStartTime).count() + mPauseSum;
     }
+}
+
+float Timer::getSeconds()
+{
+    int millis = getMilliseconds();
+    float seconds = millis / 1000.0;
+    seconds = int(seconds * 100) / 100.0;
+    return seconds;
 }

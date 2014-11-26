@@ -83,12 +83,18 @@ void PlayState::draw(Renderer* renderer)
     else
 	mTestBkgd = renderer->loadTexture("../imgs/backgrounds/skygrad.jpg"); */
 
-	mLevel->draw(renderer);
-	
-	if (mPaused) {
-		for (unsigned int i = 0; i < buttonList.size(); i++)
-			buttonList.at(i)->draw(renderer);
-	}
+    mLevel->draw(renderer);
+    
+    if (mPaused) {
+	for (unsigned int i = 0; i < buttonList.size(); i++)
+	    buttonList.at(i)->draw(renderer);
+    }
+
+    // draw timer progress
+    string t = to_string(mTimer.getSeconds());
+    cout << t << endl;
+    Texture* texture = renderer->loadTexture(t, 255, 255, 255);
+    renderer->drawTexture(Vec2(20, 20), 100, 30, texture);
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)

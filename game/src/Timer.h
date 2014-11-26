@@ -13,7 +13,8 @@ class Timer {
     
     void reset();
     
-    int getTimer();
+    int getMilliseconds();
+    float getSeconds();
 
  private:
     std::chrono::high_resolution_clock::time_point mStartTime;
