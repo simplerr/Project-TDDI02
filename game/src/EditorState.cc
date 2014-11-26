@@ -123,14 +123,14 @@ void EditorState::draw(Renderer* renderer)
 {
 	//renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), 9000, 9000);
 	//Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
-	if (currentObject != nullptr && currentObject->getId() == 5)
+    if (currentObject != nullptr && currentObject->getId() == Object::BACKGROUND)
 		currentObject->draw(renderer, gridPos);
 
 	//Ritar ut alla object (platformar osv....)
 	mLevel->draw(renderer, true); //Rita ut alla skapade objekt
 
 	//Ritar ut markerat objekt om det inte är en bakgrund
-	if (currentObject != nullptr && currentObject->getId() != 5 && setEnemyFlag == false)
+	if (currentObject != nullptr && currentObject->getId() != Object::BACKGROUND && setEnemyFlag == false)
 	    currentObject->draw(renderer, gridPos);
 
 	// Rita ut slutpositionen för fienders patrullering
@@ -174,7 +174,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 
 			cout << "id: " << currentObject->getId() << endl;
 
-			if (currentObject->getId() == 2)
+			if (currentObject->getId() == Object::ENEMY)
 			{
 				setEnemyFlag = true;
 			}

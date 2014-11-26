@@ -1,20 +1,5 @@
 6760 2216
 5 0 0 6760 2216 ../imgs/textures/backgrounds/skygrad.jpg
-4 592 472 104 88 ../imgs/textures/decorations/Roots.png
-4 536 472 104 88 ../imgs/textures/decorations/Roots.png
-4 480 472 104 88 ../imgs/textures/decorations/Roots.png
-4 416 472 104 88 ../imgs/textures/decorations/Roots.png
-4 360 472 104 88 ../imgs/textures/decorations/Roots.png
-4 16 472 104 88 ../imgs/textures/decorations/Roots.png
-4 80 472 104 88 ../imgs/textures/decorations/Roots.png
-4 648 296 104 48 ../imgs/textures/decorations/Grass.png
-4 576 296 104 48 ../imgs/textures/decorations/Grass.png
-4 504 296 104 48 ../imgs/textures/decorations/Grass.png
-4 440 296 104 48 ../imgs/textures/decorations/Grass.png
-4 384 288 104 48 ../imgs/textures/decorations/Grass.png
-4 56 296 104 48 ../imgs/textures/decorations/Grass.png
-4 648 472 104 88 ../imgs/textures/decorations/Roots.png
-4 2864 232 248 192 ../imgs/textures/decorations/CatEyes.png
 2 2360 440 48 48 ../imgs/textures/creatures/enemy.png 2480
 2 2872 616 48 48 ../imgs/textures/creatures/enemy.png 3024
 1 0 328 104 76 ../imgs/textures/platforms/Wall2.png

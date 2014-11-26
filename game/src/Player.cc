@@ -6,7 +6,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
 {
     mVelY = 0;
     mVelX = 0;
-    setId(0);
+    setId(Object::PLAYER);
     mSpeed = 6;
     mScore = 0;
     mDead = false;

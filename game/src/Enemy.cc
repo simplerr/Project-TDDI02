@@ -5,7 +5,7 @@
 Enemy::Enemy(Vec2 pos, int width, int height, string filename, float endx)
     : Object(pos, width, height, filename)
 {
-    setId(2);
+    setId(Object::ENEMY);
     mMoveSpeed = 2.0f;
     mEndX = endx;
 
