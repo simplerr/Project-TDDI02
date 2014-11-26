@@ -47,6 +47,7 @@
 5 104 624 104 48 ../imgs/textures/decorations/Grass.png
 5 152 624 104 48 ../imgs/textures/decorations/Grass.png
 5 208 624 104 48 ../imgs/textures/decorations/Grass.png
+4 4696 592 40 40 ../imgs/textures/finish.png
 3 4416 552 40 40 ../imgs/textures/powerups/powerup.png
 2 1192 624 48 48 ../imgs/textures/creatures/enemy.png 1400
 2 1328 528 48 48 ../imgs/textures/creatures/enemy.png 1704

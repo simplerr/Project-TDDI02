@@ -1,5 +1,4 @@
 3112 1120
-<<<<<<< HEAD
 6 0 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
 6 560 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
 6 1120 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
