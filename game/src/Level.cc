@@ -9,6 +9,7 @@
 #include "Platform.h"
 #include "Background.h"
 #include "Decoration.h"
+#include "Finish.h"
 
 Level::Level()
 {
@@ -16,6 +17,7 @@ Level::Level()
 	camX=SCREEN_WIDTH/2;
 	camY=SCREEN_HEIGHT/2;
 	mFlagTexture = nullptr;
+	mLevelFinish = false;
 }
 
 Level::~Level()
@@ -35,7 +37,7 @@ void Level::addObject(Object* object)
     mObjects.push_back(object);
 }
 
-bool Level::loadLevel(string filename, int k)
+bool Level::loadLevel(string filename, int mode)
 {
 	mFilename = filename;
     ifstream input (mFilename);
@@ -63,18 +65,20 @@ bool Level::loadLevel(string filename, int k)
 			}
 			else if (index == 3) // Powerups
 				mObjects.push_back( new Powerup(Vec2(posx, posy), width, height, path) );
-			else if ( k == 1 ) // Play 
+			else if (index == 4) // Powerups
+				mObjects.push_back( new Finish(Vec2(posx, posy), width, height, path) );
+			else if ( mode == 1 ) // Play 
 			{
-				if (index == 4) // Decoration
+				if (index == 5) // Decoration
 					mBackgrounds.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
-				else if (index == 5) // Backgrounds
+				else if (index == 6) // Backgrounds
 					mBackgrounds.push_back( new Background(Vec2(posx, posy), width, height, path) );
 			}
-			else if ( k == 2 ) // Editor 
+			else if ( mode == 2 ) // Editor 
 			{
-				if (index == 4) // Decoration
+				if (index == 5) // Decoration
 					mObjects.push_back( new Decoration(Vec2(posx, posy), width, height, path) );
-				else if (index == 5) // Backgrounds
+				else if (index == 6) // Backgrounds
 					mObjects.push_back( new Background(Vec2(posx, posy), width, height, path) );
 			}
 			else
@@ -138,6 +142,8 @@ bool Level::saveLevel(string filename)
 		output << "4 ";
 		else if (mObjects[i]->getId() == 5)
 		output << "5 ";
+		else if (mObjects[i]->getId() == 6)
+		output << "6 ";
 	    
 	    output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
 		   << mObjects[i]->getHeight() << " " << mObjects[i]->getFilename();
@@ -255,8 +261,6 @@ void Level::update(float dt)
 	bool x, y = false;
 	Object* objectColliedY;
 	Object* objectColliedX;
-	int yColID;
-	int xColID;
     for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 		
@@ -293,18 +297,19 @@ void Level::update(float dt)
 	    
 	    if(objectColliedX->getId() == 2)
 	    {
-		setalive();
+			setalive();
 	    }
-	    else if(xColID == 3)
-	    {
-		
-	    }
+	    else if(objectColliedX->getId() == 4)
+		{
+			mLevelFinish = true;
+		}
+			
 	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
 	    
 	}
 	
 	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
-	{
+	{		
 	    if(mPlayer->getjump()) //Hanterar ifall spelaren är inuti ett hopp
 	    {
 			mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y +1);
@@ -325,9 +330,13 @@ void Level::update(float dt)
 	}
 	else
 	{
-		mPlayer->setjump(2); //Sätter jump till false
 		
-		yColID = objectColliedY->getId();
+		if (objectColliedY->getId() == 4)
+		{
+			mLevelFinish = true;
+		}
+		
+		mPlayer->setjump(2); //Sätter jump till false
 		
 		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
 		{
@@ -349,7 +358,6 @@ void Level::update(float dt)
 			mPlayer->setfall(1); //Sätter hopp till true
 		}
 	}
-	
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
