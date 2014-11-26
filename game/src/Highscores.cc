@@ -23,7 +23,6 @@ void Highscores::save()
 
     for(auto iter = mHighscores.begin(); iter != mHighscores.end(); iter++)
     {
-	cout << (*iter).first << " " << (*iter).second << endl;
 	fout << (*iter).first << " " << (*iter).second << endl;
     }
 

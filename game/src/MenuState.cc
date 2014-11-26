@@ -10,7 +10,7 @@ MenuState::MenuState()
     mAlphaOverlay = nullptr;
     mHighscores = new Highscores("highscores.txt");
     mHooverLevel = "none";
-    mHighscoreButton = new ButtonText(Vec2(85, 400), 100, 30, "Best time: ", 0, 0, 0);
+    mHighscoreButton = new ButtonText(Vec2(85, 400), 150, 50, "Best time: ", 0, 0, 0);
 }
 
 MenuState::~MenuState()
@@ -72,18 +72,18 @@ void MenuState::draw(Renderer* renderer)
 	}
 
 	// rita ut highscore för den level man har musen över
-	string text = "none";
 	if(mHooverLevel != "none")
-	    text = "Best time: " + to_string(mHighscores->getHighscore(mHooverLevel));
-
-	mHighscoreButton->draw(renderer);
-	cout << text << endl;
+	{
+	    string text = "Best time: " + to_string(mHighscores->getHighscore(mHooverLevel));
+	    mHighscoreButton->draw(renderer, text);
+	}
 }
 
 void MenuState::handleEvent(SDL_Event e, bool& exit)
 {
     // för att se vilken karta highscore ska visas för
     SDL_GetMouseState(&mousePos.x, &mousePos.y);
+    mHooverLevel = "none";
     for (unsigned int i = 0; i < buttonList.size(); i++) {
 			
 	if (buttonList.at(i)->mouseOver(mousePos)) {
