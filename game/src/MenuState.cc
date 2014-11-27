@@ -30,7 +30,7 @@ void MenuState::init(string initData)
 	new ButtonImg(Vec2(80, 200), 200, 200, LEVEL1_BUTTON), // Play 1
 	new ButtonImg(Vec2(300, 200), 200, 200, LEVEL2_BUTTON), // Play 2
 	new ButtonImg(Vec2(520, 200), 200, 200, LEVEL3_BUTTON), // Play 3
-	new ButtonImg(Vec2(740, 200), 200, 200, LEVEL3_BUTTON), // Play 3
+	new ButtonImg(Vec2(740, 200), 200, 200, LEVEL4_BUTTON), // Play 3
 	new ButtonImg(Vec2(412, 430), 200, 70, CREDIT_BUTTON), // Credit
 	new ButtonImg(Vec2(412, 510), 200, 80, EXIT_BUTTON), // Exit
 	new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, TOEDITOR_BUTTON),

@@ -18,6 +18,7 @@ static const std::string MENU_BACKGROUND = "../imgs/backgrounds/mainmenu.jpg";
 static const std::string LEVEL1_BUTTON = "../imgs/buttons/menu/level1.png";
 static const std::string LEVEL2_BUTTON = "../imgs/buttons/menu/level2.png";
 static const std::string LEVEL3_BUTTON = "../imgs/buttons/menu/level3.png";
+static const std::string LEVEL4_BUTTON = "../imgs/buttons/menu/level4.png";
 static const std::string CREDIT_BUTTON = "../imgs/buttons/menu/creditbutton.png";
 static const std::string EXIT_BUTTON = "../imgs/buttons/menu/exitbutton.png";
 static const std::string TOEDITOR_BUTTON = "../imgs/buttons/menu/toEditor.png";

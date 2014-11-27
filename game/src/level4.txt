@@ -4,7 +4,6 @@
 7 1792 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
 7 2688 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
 7 3584 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
-7 4480 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
 7 5376 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
 7 7168 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
 7 6840 880 848 896 ../imgs/textures/backgrounds/skygrad.jpg
@@ -21,6 +20,7 @@
 7 4224 880 848 896 ../imgs/textures/backgrounds/skygrad.jpg
 7 5056 880 848 896 ../imgs/textures/backgrounds/skygrad.jpg
 7 5904 880 848 896 ../imgs/textures/backgrounds/skygrad.jpg
+7 4480 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
 6 176 24 432 240 ../imgs/textures/decorations/CatEyes.png
 6 864 496 24 24 ../imgs/textures/decorations/Grass.png
 6 872 496 24 24 ../imgs/textures/decorations/Grass.png
@@ -277,6 +277,6 @@
 1 6240 440 24 112 ../imgs/textures/platforms/platform.jpg
 1 6928 440 24 112 ../imgs/textures/platforms/platform.jpg
 1 6656 552 296 24 ../imgs/textures/platforms/platform.jpg
-1 5024 272 104 80 ../imgs/textures/platforms/Walkway3.png
-1 5128 272 104 80 ../imgs/textures/platforms/Walkway1.png
+1 5000 272 104 80 ../imgs/textures/platforms/Walkway3.png
+1 5104 272 104 80 ../imgs/textures/platforms/Walkway1.png
 0 376 64 48 48 ../imgs//textures/creatures/player.png
