@@ -9,7 +9,7 @@
 6 312 552 56 16 ../imgs/textures/decorations/Grass.png
 6 328 536 80 32 ../imgs/textures/decorations/Grass.png
 6 400 544 32 24 ../imgs/textures/decorations/Grass.png
-5 360 528 40 40 ../imgs/textures/finish.png
+5 368 520 40 40 ../imgs/textures/finish.png
 3 592 664 32 40 ../imgs/textures/powerups/powerup.png
 3 864 1320 40 40 ../imgs/textures/powerups/powerup.png
 2 832 664 48 48 ../imgs/textures/creatures/enemy.png 832
