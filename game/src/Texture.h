@@ -12,7 +12,7 @@ class Texture
 {
 public:
     Texture(SDL_Texture* texture); // correct argument?
-
+    ~Texture();
     string getFilename();
     SDL_Texture* getData();
 private:

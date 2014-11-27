@@ -9,6 +9,11 @@ Texture::Texture(SDL_Texture* texture)
     //mFilename = filename;
 }
 
+Texture::~Texture()
+{
+    SDL_DestroyTexture(mTexture);
+}
+
 string Texture::getFilename()
 {
     return mFilename;

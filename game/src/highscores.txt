@@ -1,4 +1,4 @@
-level1.txt 0
+level1.txt 11.17
 level2.txt 0.46
-level3.txt 0
+level3.txt 37.45
 level4.txt 0

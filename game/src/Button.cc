@@ -47,8 +47,10 @@ void ButtonText::draw(Renderer* renderer, std::string newString)
     SDL_Rect rect = getRect();
     if(mText != nullptr)
     {
-        if (newString != "")
+        if (newString != ""){
+            delete mText;
             mText = renderer->loadTexture(newString, mcolor1, mcolor2, mcolor3);
+        }
             
         renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mText);
     }
