@@ -47,7 +47,7 @@ void PlayState::init(string initData) // initData will be the filename of the le
     mPlayer = mLevel->findPlayer();
 	mTimeOnScreen = new ButtonText(Vec2(20, 20), 80, 40, " ", 250,250,250);
 	mKilledCreaturesScreen = new ButtonText(Vec2(20, 55), 70, 30, " ", 250,250,250);
-	PowerupTimer = new ButtonText(Vec2((SCREEN_WIDTH/2)-50, 10), 100, 50, " ", 250,250,250);
+	PowerupTimer = new ButtonText(Vec2((SCREEN_WIDTH/2)-75, 10), 150, 75, " ", 174,0,0);
 	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
@@ -115,7 +115,7 @@ void PlayState::draw(Renderer* renderer)
 	mKilledCreaturesScreen->draw( renderer, currentKilledCreatures.str() );
 	if (mPlayer->getPowerUp())
 	{
-		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << mPlayer->getTimer()-5;
+		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << -1*(mPlayer->getTimer()-mLevel->getPowerupTime());
 		PowerupTimer->draw( renderer, currentPowerupTime.str() );
 	}
 }

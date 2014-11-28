@@ -40,6 +40,7 @@ public:
   string getCurrentLevel() { return mFilename; }
   Object* getObjectAt(float x, float y);
   bool getLevelFinish(){ return mLevelFinish; }
+  int getPowerupTime(){return mPowerupTime;}
  
 private:
   vector<Object*> mObjects;
@@ -53,6 +54,7 @@ private:
   Texture* mFlagTexture;
   bool mKeyPressed = false;
   bool mLevelFinish;
+  const int mPowerupTime = 5; //5 seconds powerup
 };
 
 #endif
