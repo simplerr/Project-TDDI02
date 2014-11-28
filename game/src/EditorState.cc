@@ -10,6 +10,7 @@
 #include "Decoration.h"
 #include "Enemy.h"
 #include "Powerup.h"
+#include "LavaPlatform.h"
 #include "Finish.h"
 
 EditorState::EditorState()
@@ -82,10 +83,10 @@ void EditorState::init(string initData)
 		//###### DECORATIONS ######
 		// //###### OTHERS ######
 		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*4)-20, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_1,0,0,0),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*3)-10, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_2,0,0,0),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*2)-7, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_3,0,0,0),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*1)-3, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_4,0,0,0)
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*4)-16, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_1,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*3)-12, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_2,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*2)-8, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_3,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*1)-4, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_4,0,0,0)
 	};
 	buttonListUnclickable = { //VIKTIGT ATT DET SOM SKALL VARA LÄNGST BAK ÄR FÖRST OSV.
 		new ButtonImg(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, FILEPATH_GRID),
@@ -122,16 +123,16 @@ void EditorState::update(float dt)
 
 void EditorState::draw(Renderer* renderer)
 {
-	//renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), 9000, 9000);
-	//Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
-	if (currentObject != nullptr && currentObject->getId() == 6)
-		currentObject->draw(renderer, gridPos);
+    //renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), 9000, 9000);
+    //Ritar ut markerat objekt om det är en bakgrund (Vi vill ha det längs bak)
+    if (currentObject != nullptr && currentObject->getId() == Object::BACKGROUND)
+	currentObject->draw(renderer, gridPos);
 
 	//Ritar ut alla object (platformar osv....)
 	mLevel->draw(renderer, true); //Rita ut alla skapade objekt
 
 	//Ritar ut markerat objekt om det inte är en bakgrund
-	if (currentObject != nullptr && currentObject->getId() != 6 && setEnemyFlag == false)
+	if (currentObject != nullptr && currentObject->getId() != Object::BACKGROUND && setEnemyFlag == false)
 	    currentObject->draw(renderer, gridPos);
 
 	// Rita ut slutpositionen för fienders patrullering
@@ -146,12 +147,14 @@ void EditorState::draw(Renderer* renderer)
 	//Ritar ut alla oklickbara knappar
 	for (unsigned int c{0}; c < buttonListUnclickable.size(); ++c)
 	{
+		buttonListUnclickable[c]->setHighlightOn();
 		buttonListUnclickable[c]->draw(renderer);
 	}
 	
 	//Ritar ut alla knappar
 	for (unsigned int p{0}; p < buttonList.size(); ++p)
 	{
+		buttonList[p]->setHighlightOn();
 		buttonList[p]->draw(renderer);
 	}
 
@@ -173,7 +176,9 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 			currentObject->setPosition(gridPos);
 			mLevel->addObject( currentObject->clone() );
 
-			if (currentObject->getId() == 2)
+			cout << "id: " << currentObject->getId() << endl;
+
+			if (currentObject->getId() == Object::ENEMY)
 			{
 				setEnemyFlag = true;
 			}
@@ -240,26 +245,26 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				switch(i) {
 				case 0: currentObject = new Player(mousePos, 48, 48, FILEPATH_PLAYER); break;
 				case 1: currentObject = new Enemy(mousePos, 48, 48, FILEPATH_ENEMY1, mousePos.x); break;
-				case 2: currentObject = new Powerup(mousePos, 40, 40, FILEPATH_POWERUP1); break;
+				case 2: currentObject = new Powerup(mousePos, 40, 40, FILEPATH_POWERUP1); break;				   
 				case 3: currentObject = new Finish(mousePos, 40, 40, FILEPATH_FINISH); break;
 				case 4:	currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_1 ); break;
-				case 5: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
+				case 5: currentObject = new LavaPlatform( mousePos, 200, 104, FILEPATH_PLATFORM_2 ); break;
 				case 6: currentObject = new Platform( mousePos, 200, 104, FILEPATH_PLATFORM_3 ); break;
-				case 7: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_4 ); break;
-				case 8: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_5 ); break;
-				case 9: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_6 ); break;
-				case 10: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_7 ); break;
-				case 11: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_8 ); break;
-				case 12: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_9 ); break;
-				case 13: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_10 ); break;
-				case 14: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_11 ); break;
-				case 15: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_12 ); break;
-				case 16: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_13 ); break;
-				case 17: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_14 ); break;
-				case 18: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_15 ); break;
-				case 19: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_16 ); break;
-				case 20: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_17 ); break;
-				case 21: currentObject = new Platform( mousePos, 104, 76, FILEPATH_PLATFORM_18 ); break;
+				case 7: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_4 ); break;
+				case 8: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_5 ); break;
+				case 9: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_6 ); break;
+				case 10: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_7 ); break;
+				case 11: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_8 ); break;
+				case 12: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_9 ); break;
+				case 13: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_10 ); break;
+				case 14: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_11 ); break;
+				case 15: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_12 ); break;
+				case 16: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_13 ); break;
+				case 17: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_14 ); break;
+				case 18: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_15 ); break;
+				case 19: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_16 ); break;
+				case 20: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_17 ); break;
+				case 21: currentObject = new Platform( mousePos, 104, 80, FILEPATH_PLATFORM_18 ); break;
 				case 22: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_1 ); break;
 				case 23: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_2 ); break;
 				case 24: currentObject = new Background( mousePos, 560, 560, FILEPATH_BACKGROUND_3 ); break;
@@ -267,6 +272,7 @@ void EditorState::handleEvent(SDL_Event e, bool& exit)
 				case 26: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_2 ); break;
 				case 27: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_3 ); break;
 				case 28:
+
 				    if ( mLevel->saveLevel(mLevel->getCurrentLevel()) )
 						cout << "Succeeded to save file!\n";
 					else

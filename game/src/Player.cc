@@ -6,7 +6,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
 {
     mVelY = 0;
     mVelX = 0;
-    setId(0);
+    setId(Object::PLAYER);
     mSpeed = 6;
     mScore = 0;
     mDead = false;
@@ -28,6 +28,7 @@ void Player::update(float dt)
 void Player::draw(Renderer* renderer)
 {
     Object::draw(renderer);
+    //cout << "x: " << getPosition().x << "y: " << getPosition().y << endl;
 }
 
 void Player::handleCollision(Object* object)

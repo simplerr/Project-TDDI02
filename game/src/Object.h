@@ -8,10 +8,11 @@
 
 using namespace std;
 
-
 class Object
 {
 public:
+    enum ObjectId { PLAYER, PLATFORM, ENEMY, POWERUP, LAVA_PLATFORM, FINISH, DECORATION, BACKGROUND };
+
     Object(Vec2 pos, int width, int height, std::string filename);
     virtual ~Object();
 

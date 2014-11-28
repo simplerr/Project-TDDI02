@@ -3,7 +3,7 @@
 Finish::Finish(Vec2 pos, int width, int height, string filename)
     : Object(pos, width, height, filename)
 {
-    setId(4);
+    setId(Object::FINISH);
 }
 
 Finish::~Finish()

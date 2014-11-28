@@ -3,7 +3,7 @@
 Platform::Platform(Vec2 pos, int width, int height, string filename)
     : Object(pos, width, height, filename)
 {
-    setId(1);
+    setId(Object::PLATFORM);
 }
 
 Platform::~Platform()

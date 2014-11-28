@@ -38,7 +38,6 @@ public:
 	void setSpeed(float);
 	float getSpeed();
 	void setTimer(Uint32);
-	Uint32 getTimer();
 	void speedUp();
 
     StateId getStateId() { return PLAY_STATE; }
