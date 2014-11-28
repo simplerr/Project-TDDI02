@@ -114,7 +114,7 @@ void PlayState::draw(Renderer* renderer)
 	mKilledCreaturesScreen->draw( renderer, currentKilledCreatures.str() );
 	if (mPlayer->getPowerUp())
 	{
-		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << mPlayer->getTimer();
+		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << mPlayer->getTimer()-5;
 		PowerupTimer->draw( renderer, currentPowerupTime.str() );
 	}
 }
