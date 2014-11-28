@@ -51,11 +51,18 @@ void ButtonText::draw(Renderer* renderer, std::string newString)
             delete mText;
             mText = renderer->loadTexture(newString, mcolor1, mcolor2, mcolor3);
         }
-            
+        if (getHighlightOn())
+        {
+            renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mHighlight);
+            setHighlightOn();
+        }
         renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mText);
     }
     else
+    {
         mText = renderer->loadTexture(mFilePath, mcolor1, mcolor2, mcolor3);
+        mHighlight = renderer->loadTexture("../imgs/highlight.png");
+    }
 }
 
 

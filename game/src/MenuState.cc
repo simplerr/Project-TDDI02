@@ -1,6 +1,8 @@
 #include "MenuState.h"
 #include "Highscores.h"
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 MenuState::MenuState()
@@ -10,7 +12,7 @@ MenuState::MenuState()
     mAlphaOverlay = nullptr;
     
     mHooverLevel = "none";
-    mHighscoreButton = new ButtonText(Vec2(85, 400), 150, 50, "Best time: ", 0, 0, 0);
+    mHighscoreButton = new ButtonText(Vec2(85, 400), 160, 30, "Best time: ", 0, 0, 0);
 }
 
 MenuState::~MenuState()
@@ -76,8 +78,17 @@ void MenuState::draw(Renderer* renderer)
 	// rita ut highscore för den level man har musen över
 	if(mHooverLevel != "none")
 	{
-	    string text = "Best time: " + to_string(mHighscores->getHighscore(mHooverLevel));
-	    mHighscoreButton->draw(renderer, text);
+		if (mHooverLevel == "level1.txt")
+				mHighscoreButton->setPosition(Vec2(80,400));
+		if (mHooverLevel == "level2.txt")
+				mHighscoreButton->setPosition(Vec2(300,400));
+		if (mHooverLevel == "level3.txt")
+				mHighscoreButton->setPosition(Vec2(520,400));
+		if (mHooverLevel == "level4.txt")
+				mHighscoreButton->setPosition(Vec2(740,400));
+	    ostringstream converted;
+		converted << fixed << std::setprecision(1) << left << "Best Time: " << mHighscores->getHighscore(mHooverLevel) << " s";
+	    mHighscoreButton->draw(renderer, converted.str());
 	}
 }
 

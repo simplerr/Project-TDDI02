@@ -51,8 +51,8 @@ void PlayState::init(string initData) // initData will be the filename of the le
 	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
-		new ButtonImg(Vec2(390, 310), 260, 60, CONTINUE_BUTTON),
-		new ButtonImg(Vec2(430, 400), 190, 50, TOMENU_BUTTON)
+		new ButtonImg(Vec2((SCREEN_WIDTH/2)-100, 310), 200, 40, CONTINUE_BUTTON),
+		new ButtonImg(Vec2((SCREEN_WIDTH/2)-60, 370), 120, 40, TOMENU_BUTTON)
 		
 	};
 	R = L = false;
@@ -102,8 +102,9 @@ void PlayState::draw(Renderer* renderer)
     mLevel->draw(renderer);
     
     if (mPaused) {
-	for (unsigned int i = 0; i < buttonList.size(); i++)
+	for (unsigned int i = 0; i < buttonList.size(); i++){
 	    buttonList.at(i)->draw(renderer);
+	}
     }
 
     // draw timer progress
@@ -201,7 +202,6 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 			for (unsigned int i = 0; i < buttonList.size(); i++) {
 			
 				if (buttonList.at(i)->mouseOver(mousePos)) {
-
 					switch (i) {
 					case 1:
 						mPaused = !mPaused;
@@ -239,11 +239,6 @@ float PlayState::getSpeed()
 void PlayState::setTimer(Uint32 t)
 {
     //mTimer = t;
-}
-
-Uint32 PlayState::getTimer()
-{
-//	return mTimer;
 }
 
 void PlayState::speedUp()

@@ -83,10 +83,10 @@ void EditorState::init(string initData)
 		//###### DECORATIONS ######
 		// //###### OTHERS ######
 		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*4)-20, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_1,0,0,0),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*3)-10, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_2,0,0,0),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*2)-7, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_3,0,0,0),
-		new ButtonText(Vec2(SCREEN_WIDTH-(25*1)-3, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_4,0,0,0)
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*4)-16, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_1,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*3)-12, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_2,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*2)-8, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_3,0,0,0),
+		new ButtonText(Vec2(SCREEN_WIDTH-(25*1)-4, SCREEN_HEIGHT-70-buttonSize.y), 25, 25, FILEPATH_LEVEL_4,0,0,0)
 	};
 	buttonListUnclickable = { //VIKTIGT ATT DET SOM SKALL VARA LÄNGST BAK ÄR FÖRST OSV.
 		new ButtonImg(Vec2(0,0), SCREEN_WIDTH, SCREEN_HEIGHT, FILEPATH_GRID),
@@ -147,12 +147,14 @@ void EditorState::draw(Renderer* renderer)
 	//Ritar ut alla oklickbara knappar
 	for (unsigned int c{0}; c < buttonListUnclickable.size(); ++c)
 	{
+		buttonListUnclickable[c]->setHighlightOn();
 		buttonListUnclickable[c]->draw(renderer);
 	}
 	
 	//Ritar ut alla knappar
 	for (unsigned int p{0}; p < buttonList.size(); ++p)
 	{
+		buttonList[p]->setHighlightOn();
 		buttonList[p]->draw(renderer);
 	}
 

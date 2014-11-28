@@ -15,14 +15,18 @@ public:
   virtual ~Button();
   
   virtual void draw(Renderer* renderer, std::string newString = "");
+  
   bool mouseOver(Vec2 mousePos);
-
+  void setPosition( Vec2 NewPos ){ mPos = NewPos; }
+  bool getHighlightOn(){ return mHighlightOn; }
+  void setHighlightOn(){ mHighlightOn = !mHighlightOn; }
   
   SDL_Rect getRect();
   
 private:
     Vec2 mPos;
     int mWidth, mHeight;
+    bool mHighlightOn = false;
 };
   
 class ButtonText : public Button
@@ -32,10 +36,12 @@ public:
     ~ButtonText();
     
     void draw(Renderer* renderer, std::string newString = "");
+    
 private:
     const std::string mFilePath;
     const int mcolor1, mcolor2, mcolor3;
     Texture* mText = nullptr;
+    Texture* mHighlight = nullptr;
 };
 
 class ButtonImg : public Button
