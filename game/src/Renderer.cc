@@ -110,6 +110,15 @@ void Renderer::drawTextureScreen(Vec2 pos, int width, int height, Texture* textu
 	SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
 }
 
+void Renderer::drawTextureAnimation(Vec2 pos, int width, int height, Texture* texture, Vec2 clip)
+{
+    SDL_Rect offset{pos.x-camera.x, pos.y-camera.y, width, height};
+	SDL_Rect Clip{clip.x, clip.y, clip.w, clip.h};
+	
+	SDL_RenderCopy( mRenderer, texture->getData(), &Clip, &offset ); //Render texture to screen
+	//SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
+}
+
 
 Texture* Renderer::loadTexture(std::string filename)
 {

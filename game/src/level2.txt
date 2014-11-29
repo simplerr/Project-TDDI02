@@ -119,4 +119,4 @@
 1 4360 528 24 104 ../imgs/textures/platforms/lava.png
 1 4480 528 24 104 ../imgs/textures/platforms/lava.png
 1 4600 528 24 104 ../imgs/textures/platforms/lava.png
-0 96 576 48 48 ../imgs//textures/creatures/player.png
+0 88 568 48 48 ../imgs/textures/creatures/student.png

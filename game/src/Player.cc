@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <iostream>
+#include "constants.h"
 
 Player::Player(Vec2 pos, int width, int height, string filename)
     : Object(pos, width, height, filename)
@@ -11,6 +12,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
     mScore = 0;
     mDead = false;
     mPowerUp = false;
+    mPlayerClip = 0;
 }
 
 Player::~Player()
@@ -20,50 +22,48 @@ Player::~Player()
 
 void Player::update(float dt)
 {
-    //Updaterar pos efter mVel från PlayState
-    //setPosition(getPosition().x + mVelX, getPosition().y + mVelY);
     
+    //Animation
+    ++mClipcounter;
+        if (jumping)
+            mPlayerClip = 1;
+        else if (mVelX == 0)
+        {
+            mPlayerClip = 0;
+        }
+        else
+        {
+            if (mClipcounter > 2){
+                ++mPlayerClip;
+                mClipcounter = 0;
+                if (mPlayerClip >= 10)
+                    mPlayerClip = 2;
+            }
+        }
+    // Animation slut
 }
 
 void Player::draw(Renderer* renderer)
 {
-    Object::draw(renderer);
-    //cout << "x: " << getPosition().x << "y: " << getPosition().y << endl;
+    if(mTexture != nullptr)
+    {
+        if ( mVelX < 0 ) // if moving left
+            leftOrRight = false;
+        else if ( mVelX > 0 ) // if moving right
+            leftOrRight = true;
+       
+        if ( !leftOrRight ) // if moving left
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_LEFT[mPlayerClip]);
+        else // if moving right
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_RIGHT[mPlayerClip]);
+    }
+    else
+      mTexture = renderer->loadTexture(getFilename());
 }
 
 void Player::handleCollision(Object* object)
 {
-    //if(object->getId() = 3)
-    
-    
-    
-    
-    /* 
-    //Move the dot left or right
-    setPosition(getPosition().x + mVelX, getPosition().y);
-	//mCollider.x = mPosX;
-
-    //If the dot collided or went too far to the left or right
-    if( collision(this, object) )
-    {
-        //Move back
-        setPosition(getPosition().x - mVelX, getPosition().y);
-		//mCollider.x = mPosX;
-    }
-
-    //Move the dot up or down
-    setPosition(getPosition().x, getPosition().y + mVelY);
-	//mCollider.y = mPosY;
-
-    //If the dot collided or went too far up or down
-    if( collision(this, object) )
-    {
-        //Move back
-        setPosition(getPosition().x, getPosition().y - mVelY);
-		//mCollider.y = mPosY;
-    }
-    
-    return cDetected; */
+    ;
 }
 
 void Player::addVel(int VelX, int VelY)
@@ -72,13 +72,6 @@ void Player::addVel(int VelX, int VelY)
     mVelY += VelY;
 }
 
-/*void Player::playerJump(int speed)
-{
-    if(jumpEnable)
-    {
-        
-    }
-}*/
 
 Vec2 Player::getVel()
 {

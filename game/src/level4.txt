@@ -279,4 +279,4 @@
 1 6656 552 296 24 ../imgs/textures/platforms/platform.jpg
 1 5000 272 104 80 ../imgs/textures/platforms/Walkway3.png
 1 5104 272 104 80 ../imgs/textures/platforms/Walkway1.png
-0 376 64 48 48 ../imgs//textures/creatures/player.png
+0 368 56 48 48 ../imgs/textures/creatures/student.png

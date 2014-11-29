@@ -13,7 +13,7 @@ all: main.cc $(OFILES)
 	$(CCC) -o main main.cc $(OFILES) $(LFLAGS)
 
 win: main.cc $(OFILES)
-	$(CCC) -o main.exe main.cc $(OFILES) $(LFLAGS)
+	$(WIN) -o main.exe main.cc $(OFILES) $(LFLAGS)
 
 Game.o: Game.cc Game.h constants.h
 	$(CCC) -c Game.cc		

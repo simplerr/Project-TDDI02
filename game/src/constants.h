@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "Vec2.h"
 
 static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
@@ -25,6 +26,32 @@ static const std::string TOEDITOR_BUTTON = "../imgs/buttons/menu/toEditor.png";
 
 
 //###### PLAY //#####
+ // Animation för player
+static const Vec2 PLAYER_CLIP_LEFT[] {
+  {36,0,37,55}, // STANDING
+  {120,0,37,55}, //Jumping
+  {343,118,44,55}, //RUNNING
+  {298,118,44,55}, //RUNNING
+  {248,118,44,55}, //RUNNING
+  {197,118,44,55}, //RUNNING
+  {145,118,44,55}, //RUNNING
+  {93,118,44,55}, //RUNNING
+  {44,118,44,55}, //RUNNING
+  {0,118,44,55} //RUNNING
+};
+ // Animation för player
+static const Vec2 PLAYER_CLIP_RIGHT[] {
+  {0,0,37,55}, // STANDING
+  {75,0,37,55}, //Jumping
+  {0,60,44,55}, //RUNNING
+  {50,60,44,55}, //RUNNING
+  {93,60,44,55}, //RUNNING
+  {141,60,44,55}, //RUNNING
+  {191,60,44,55}, //RUNNING
+  {243,60,44,55}, //RUNNING
+  {290,60,44,55}, //RUNNING
+  {344,60,44,55} //RUNNING
+};
 static const std::string PAUSE_BACKGROUND = "../imgs/backgrounds/pause.png";
 static const std::string CONTINUE_BUTTON = "../imgs/buttons/pause/continue.png";
 static const std::string TOMENU_BUTTON = "../imgs/buttons/pause/quit.png";
@@ -35,7 +62,7 @@ static const std::string BACKTOMENU_BUTTON = "../imgs/buttons/credit/creditback.
 
 //###### EDITOR #######
 static const std::string FILEPATH_GRID = "../imgs/backgrounds/grid8px.png";
-static const std::string FILEPATH_PLAYER = "../imgs//textures/creatures/player.png";
+static const std::string FILEPATH_PLAYER = "../imgs/textures/creatures/student.png";
 static const std::string FILEPATH_ENEMY1 = "../imgs/textures/creatures/enemy.png";
 static const std::string FILEPATH_FINISH = "../imgs/textures/finish.png";
 static const std::string FILEPATH_POWERUP1 = "../imgs/textures/powerups/powerup.png";

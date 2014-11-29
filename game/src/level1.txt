@@ -38,4 +38,4 @@
 1 4240 928 32 96 ../imgs/textures/platforms/platform.jpg
 1 4440 1048 32 96 ../imgs/textures/platforms/platform.jpg
 1 4568 912 32 96 ../imgs/textures/platforms/platform.jpg
-0 56 280 48 48 ../imgs//textures/creatures/player.png
+0 56 280 48 48 ../imgs/textures/creatures/student.png

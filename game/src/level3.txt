@@ -182,4 +182,4 @@
 1 2448 1384 16 20 ../imgs/textures/platforms/Walkway2.png
 1 2624 1384 16 20 ../imgs/textures/platforms/Walkway2.png
 1 2824 1384 16 20 ../imgs/textures/platforms/Walkway2.png
-0 1968 1296 48 48 ../imgs//textures/creatures/player.png
+0 640 1312 48 48 ../imgs/textures/creatures/student.png
