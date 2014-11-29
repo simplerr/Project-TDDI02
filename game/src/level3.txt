@@ -12,6 +12,9 @@
 5 3704 416 40 40 ../imgs/textures/finish.png
 4 1448 744 792 8 ../imgs/textures/platforms/lava.png
 4 2240 744 776 8 ../imgs/textures/platforms/lava.png
+4 1032 744 128 8 ../imgs/textures/platforms/lava.png
+4 608 792 8 456 ../imgs/textures/platforms/lava.png
+4 720 792 8 456 ../imgs/textures/platforms/lava.png
 3 592 664 32 40 ../imgs/textures/powerups/powerup.png
 3 864 1320 40 40 ../imgs/textures/powerups/powerup.png
 2 832 664 48 48 ../imgs/textures/creatures/enemy.png 832
@@ -184,4 +187,6 @@
 1 2448 1384 16 20 ../imgs/textures/platforms/Walkway2.png
 1 2624 1384 16 20 ../imgs/textures/platforms/Walkway2.png
 1 2824 1384 16 20 ../imgs/textures/platforms/Walkway2.png
+1 728 792 8 456 ../imgs/textures/platforms/platform.jpg
+1 600 792 8 456 ../imgs/textures/platforms/platform.jpg
 0 40 120 48 48 ../imgs/textures/creatures/student.png
