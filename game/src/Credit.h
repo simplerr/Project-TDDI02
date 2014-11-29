@@ -17,6 +17,8 @@ public:
     void draw(Renderer* renderer);
     void handleEvent(SDL_Event e, bool& exit);
     
+	bool getMute() { return mmMute; }
+
     StateId getStateId() { return CREDIT; }
 private:
     Texture* mBackground;

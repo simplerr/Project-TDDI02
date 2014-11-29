@@ -5,6 +5,8 @@
 #include "Renderer.h"
 #include "BaseState.h"
 #include "Credit.h"
+#include "EditorState.h"
+#include "constants.h"
 #include <iostream>
 
 Game::Game()

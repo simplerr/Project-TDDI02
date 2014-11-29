@@ -1,4 +1,4 @@
 level1.txt 11.17
 level2.txt 0.46
-level3.txt 37.42
-level4.txt 39.53
+level3.txt 21.67
+level4.txt 33.45

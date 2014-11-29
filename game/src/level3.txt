@@ -1,15 +1,17 @@
 3776 1688
-7 0 0 3776 1688 ../imgs/textures/backgrounds/skygrad.jpg
+6 0 0 3776 1688 ../imgs/textures/backgrounds/skygrad.jpg
 6 96 144 104 48 ../imgs/textures/decorations/Grass.png
 6 128 336 104 48 ../imgs/textures/decorations/Roots.png
-6 104 128 104 48 ../imgs/textures/decorations/CatEyes.png
 6 1344 600 104 48 ../imgs/textures/decorations/CatEyes.png
 6 880 544 48 24 ../imgs/textures/decorations/Grass.png
 6 896 536 88 32 ../imgs/textures/decorations/Grass.png
 6 312 552 56 16 ../imgs/textures/decorations/Grass.png
 6 328 536 80 32 ../imgs/textures/decorations/Grass.png
 6 400 544 32 24 ../imgs/textures/decorations/Grass.png
-5 368 520 40 40 ../imgs/textures/finish.png
+6 616 688 104 80 ../imgs/textures/decorations/CatEyes.png
+5 3704 416 40 40 ../imgs/textures/finish.png
+4 1448 744 792 8 ../imgs/textures/platforms/lava.png
+4 2240 744 776 8 ../imgs/textures/platforms/lava.png
 3 592 664 32 40 ../imgs/textures/powerups/powerup.png
 3 864 1320 40 40 ../imgs/textures/powerups/powerup.png
 2 832 664 48 48 ../imgs/textures/creatures/enemy.png 832
@@ -182,4 +184,4 @@
 1 2448 1384 16 20 ../imgs/textures/platforms/Walkway2.png
 1 2624 1384 16 20 ../imgs/textures/platforms/Walkway2.png
 1 2824 1384 16 20 ../imgs/textures/platforms/Walkway2.png
-0 1968 1296 48 48 ../imgs//textures/creatures/player.png
+0 40 120 48 48 ../imgs//textures/creatures/player.png

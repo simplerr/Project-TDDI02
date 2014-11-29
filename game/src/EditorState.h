@@ -26,6 +26,8 @@ public:
     void draw(Renderer* renderer);
     void handleEvent(SDL_Event e, bool& exit);
     
+	bool getMute() { return mmMute; }
+
     StateId getStateId() { return EDITOR_STATE; }
 private:
     Texture* mFlagTexture;

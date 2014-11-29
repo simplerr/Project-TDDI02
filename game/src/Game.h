@@ -6,8 +6,6 @@
 #include "BaseState.h"
 #include "Renderer.h"
 //...
-#include "BaseState.h"
-#include "EditorState.h"
 
 class Game
 {
