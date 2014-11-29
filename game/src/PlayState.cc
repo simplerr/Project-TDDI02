@@ -79,7 +79,11 @@ void PlayState::update(float dt)
 				incLvl();
 			else if (getLvlUnlocks() == 2 && mLevel->getCurrentLevel() == FILEPATH_LVL3)
 				incLvl();
-			setNextState(BaseState::MENU_STATE);
+			
+			if (mLevel->getCurrentLevel() == FILEPATH_LVL4)
+				setNextState(BaseState::CREDIT);
+			else
+				setNextState(BaseState::MENU_STATE);
 
 			mHighscores->updateHighscore(mLevel->getCurrentLevel(), mTimer.getSeconds());
 			mHighscores->save();		       
