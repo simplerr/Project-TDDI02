@@ -21,6 +21,8 @@ Game::Game()
 Game::~Game()
 {
     delete mActiveState;
+	delete mRenderer;
+	Mix_FreeMusic(mMusic);
 }
 
 bool Game::initWindow()

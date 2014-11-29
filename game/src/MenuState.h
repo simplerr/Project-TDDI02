@@ -29,7 +29,6 @@ private:
     Texture *mAlphaOverlay;
     vector<Button*> buttonList;
     Vec2 mousePos;
-    Level *level;
     bool mute;
     Highscores* mHighscores;
     string mHooverLevel;

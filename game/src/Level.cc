@@ -24,12 +24,13 @@ Level::~Level()
 {
     for(unsigned int i{}; i < mObjects.size(); ++i)
     {
-	delete mObjects[i];
+		delete mObjects[i];
     }
 	for(unsigned int i{}; i < mBackgrounds.size(); ++i)
     {
-	delete mBackgrounds[i];
+		delete mBackgrounds[i];
     }
+	delete mFlagTexture;
 }
 
 void Level::addObject(Object* object)
@@ -95,8 +96,6 @@ bool Level::loadLevel(string filename, int mode)
 	cerr << "Error, kunde inte hitta eller öppna kartan. Filnamn som söktes: " << mFilename << "\n";
 	return false;
     }
-    //vector<Object> Creatures;
-    //vector<Object> Platforms;
 }
 
 bool Level::saveLevel(string filename)
@@ -132,23 +131,6 @@ bool Level::saveLevel(string filename)
 	for(unsigned int i{}; i < mObjects.size(); ++i)
 	{
 	    output << mObjects[i]->getId() << " ";
-	    
-	    /*if (mObjects[i]->getId() == Object::PLAYER)
-		output << "0 ";
-	    else if (mObjects[i]->getId() == Object::PLATFORM)
-		output << "1 ";
-	    else if (mObjects[i]->getId() == Object::ENEMY)
-		output << "2 ";
-	    else if (mObjects[i]->getId() == Object::POWERUP)
-		output << "3 ";
-	    else if (mObjects[i]->getId() == Object::DECORATION)
-		output << "4 ";
-	    else if (mObjects[i]->getId() == Object::BACKGROUND)
-		output << "5 ";
-	    else if(mObjects[i]->getId() == Object::LAVA_PLATFORM)
-	    output << "6 ";*/
-
-	    
 	    output << mObjects[i]->getPosition().x << " " << mObjects[i]->getPosition().y << " " << mObjects[i]->getWidth() << " "
 		   << mObjects[i]->getHeight() << " " << mObjects[i]->getFilename();
 

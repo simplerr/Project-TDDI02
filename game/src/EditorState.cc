@@ -15,7 +15,6 @@
 
 EditorState::EditorState()
 {
-
     mTextPlatformar = nullptr;
     mTextBakgrunder = nullptr;
     mFlagTexture = nullptr;
@@ -27,14 +26,20 @@ EditorState::~EditorState()
 {
     for (unsigned int i{}; i < buttonList.size(); ++i)
     {
-	delete buttonList[i];
+		delete buttonList[i];
+    }
+	for (unsigned int j{}; j < buttonListUnclickable.size(); ++j)
+    {
+		delete buttonListUnclickable[j];
     }
     delete mLevel;
     delete mTextPlatformar;
     delete mTextBakgrunder;
+	delete mFlagTexture;
+	delete showMousePos;
     //delete mFlagTexture;
     if ( currentObject != nullptr )
-	delete currentObject;
+		delete currentObject;
 }
 
 void EditorState::init(string initData)

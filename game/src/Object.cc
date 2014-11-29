@@ -15,7 +15,7 @@ Object::Object(Vec2 pos, int width, int height, string filename)
 
 Object::~Object()
 {
-    // cleanup texture
+    delete mTexture;
 }
 
 void Object::draw(Renderer* renderer)

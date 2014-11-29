@@ -40,6 +40,7 @@ ButtonText::ButtonText(Vec2 pos, int width, int height, const std::string str, c
 ButtonText::~ButtonText()
 {
     delete mText;
+    delete mHighlight;
 }
 
 void ButtonText::draw(Renderer* renderer, std::string newString)

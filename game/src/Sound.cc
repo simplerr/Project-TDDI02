@@ -7,7 +7,7 @@ Sound::Sound(const char *str)
 
 Sound::~Sound()
 {
-	;
+	Mix_FreeMusic(mMusic);
 }
 
 void Sound::play()
