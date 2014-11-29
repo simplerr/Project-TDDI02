@@ -13,7 +13,7 @@ class BaseState
 public:
     enum StateId {BASE_STATE, PLAY_STATE, MENU_STATE, PAUSE_STATE, EDITOR_STATE, CREDIT};
 
-BaseState() : mChangeStateTo(BASE_STATE), mNextStateData("") {};
+ BaseState() : mChangeStateTo(BASE_STATE), mNextStateData("") {};
     virtual ~BaseState() {};
 
     virtual void init(string initData = "") = 0;
@@ -29,13 +29,11 @@ BaseState() : mChangeStateTo(BASE_STATE), mNextStateData("") {};
 	void incLvl() { lvlUnlocks++; }
 	int getLvlUnlocks() { return lvlUnlocks; }
 
-	void setMute(bool m) { mBaseMute = m; }
-	bool getMute() { return mBaseMute; }
-
+	void setMute(bool m) { mmMute = m; }
+	virtual bool getMute() = 0;
 private:
     StateId mChangeStateTo;
     string mNextStateData;
-	bool mBaseMute;
 };
 
 #endif  

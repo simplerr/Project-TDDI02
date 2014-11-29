@@ -40,6 +40,8 @@ public:
 	void setTimer(Uint32);
 	void speedUp();
 
+	bool getMute() { return mmMute; }
+
     StateId getStateId() { return PLAY_STATE; }
 private:
     Level* mLevel;
