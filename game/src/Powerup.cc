@@ -19,7 +19,8 @@ void Powerup::update(float dt)
 
 void Powerup::draw(Renderer* renderer)
 {
-    Object::draw(renderer);
+    if (!getDead())
+        Object::draw(renderer);
 }
 
 void Powerup::handleCollision(Object* object)

@@ -32,7 +32,7 @@ public:
     string getFilename() { return mFilename; }
     void setDead() { mDead = !mDead; }
     bool getDead() { return mDead; }
-    void getDeadAnimationCounter() { return mDeadAnimationCounter; }
+    int getDeadAnimationCounter() { return mDeadAnimationCounter; }
     void decDeadAnimationCounter() { --mDeadAnimationCounter; }
     
     void setPosition(Vec2 pos);
@@ -41,6 +41,7 @@ public:
     int getId(){return mId;}
     void setId(int id){ mId = id;}
     Texture* mTexture;
+    Texture* mTextureDead;
 private:
     
     Vec2 mPosition;

@@ -58,6 +58,7 @@ static const Vec2 ENEMY_CLIPS[] {
   {780,0,390,454},
   {1170,0,390,454}, 
 };
+static const std::string ENEMY_DEAD = "../imgs/textures/bloodsplatter.png";
 static const std::string PAUSE_BACKGROUND = "../imgs/backgrounds/pause.png";
 static const std::string CONTINUE_BUTTON = "../imgs/buttons/pause/continue.png";
 static const std::string TOMENU_BUTTON = "../imgs/buttons/pause/quit.png";

@@ -395,20 +395,18 @@ void Level::draw(Renderer* renderer, bool flags)
 		mBackgrounds[i]->draw(renderer);
     for(unsigned int i = 0; i < mObjects.size(); i++)
 	{
-		if(!mObjects[i]->getDead())
+		
+		mObjects[i]->draw(renderer);
+		if (mObjects[i]->getId() == Object::ENEMY && flags == true)
 		{
-		    mObjects[i]->draw(renderer);
-		    if (mObjects[i]->getId() == Object::ENEMY && flags == true)
-		    {
 			Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
 			if (enemy->getEndX() != enemy->getPosition().x)
 			{
-			    if(mFlagTexture == nullptr)
-				mFlagTexture = renderer->loadTexture("../imgs/flag.png");
-	
-			    renderer->drawTexture(Vec2(enemy->getEndX(), enemy->getPosition().y), 48, 48, mFlagTexture);
+				if(mFlagTexture == nullptr)
+					mFlagTexture = renderer->loadTexture("../imgs/flag.png");
+		
+				renderer->drawTexture(Vec2(enemy->getEndX(), enemy->getPosition().y), 48, 48, mFlagTexture);
 			}
-		    }
 		}
     }
 } // END OF DRAW()

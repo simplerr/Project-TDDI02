@@ -60,12 +60,31 @@ void Enemy::update(float dt)
 
 void Enemy::draw(Renderer* renderer)
 {
-	if(mTexture != nullptr)
+	if (!getDead())
 	{
-		renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, ENEMY_CLIPS[mEnemyClip]);
-    }
-    else
-      mTexture = renderer->loadTexture(getFilename());
+		if(mTexture != nullptr)
+		{
+			renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, ENEMY_CLIPS[mEnemyClip]);
+		}
+		else
+		  mTexture = renderer->loadTexture(getFilename());
+	}
+	else
+	{
+		
+		if (getDeadAnimationCounter() != 0)
+		{
+			decDeadAnimationCounter();
+			if(mTextureDead != nullptr)
+			{
+				renderer->drawTexture(getPosition(), getWidth(), getHeight(), mTextureDead);
+			}
+			else
+			{
+				 mTextureDead = renderer->loadTexture(ENEMY_DEAD);
+			}
+		}
+	}
 }
 
 void Enemy::handleCollision(Object* object)
