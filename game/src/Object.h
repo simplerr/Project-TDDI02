@@ -32,7 +32,9 @@ public:
     string getFilename() { return mFilename; }
     void setDead() { mDead = !mDead; }
     bool getDead() { return mDead; }
-
+    void getDeadAnimationCounter() { return mDeadAnimationCounter; }
+    void decDeadAnimationCounter() { --mDeadAnimationCounter; }
+    
     void setPosition(Vec2 pos);
     void setPosition(float x, float y);
     void setSize(Vec2 newSize) { mWidth = newSize.x; mHeight = newSize.y; } //FÖR EDITOR
@@ -46,6 +48,7 @@ private:
     int mWidth, mHeight;
     int mId;
     bool mDead;
+    int mDeadAnimationCounter{40}; //How long dead object is visable;
 };
 
 #endif
