@@ -52,6 +52,12 @@ static const Vec2 PLAYER_CLIP_RIGHT[] {
   {290,60,44,55}, //RUNNING
   {344,60,44,55} //RUNNING
 };
+static const Vec2 ENEMY_CLIPS[] {
+  {0,0,390,454},
+  {390,0,390,454},
+  {780,0,390,454},
+  {1170,0,390,454}, 
+};
 static const std::string PAUSE_BACKGROUND = "../imgs/backgrounds/pause.png";
 static const std::string CONTINUE_BUTTON = "../imgs/buttons/pause/continue.png";
 static const std::string TOMENU_BUTTON = "../imgs/buttons/pause/quit.png";

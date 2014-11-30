@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include <iostream>
+#include "constants.h"
 
 Enemy::Enemy(Vec2 pos, int width, int height, string filename, float endx)
     : Object(pos, width, height, filename)
@@ -45,11 +46,26 @@ void Enemy::update(float dt)
 
     // tmp
     setPosition(getPosition().x + getVel().x, getPosition().y + getVel().y);
+	
+	    //Animation
+    ++mClipcounter;
+    if (mClipcounter > 4){
+		++mEnemyClip;
+		mClipcounter = 0;
+		if (mEnemyClip >= 4)
+            mEnemyClip = 2;
+    }
+    // Animation slut
 }
 
 void Enemy::draw(Renderer* renderer)
 {
-    Object::draw(renderer);
+	if(mTexture != nullptr)
+	{
+		renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, ENEMY_CLIPS[mEnemyClip]);
+    }
+    else
+      mTexture = renderer->loadTexture(getFilename());
 }
 
 void Enemy::handleCollision(Object* object)

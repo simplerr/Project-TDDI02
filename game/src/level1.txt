@@ -2,8 +2,8 @@
 7 0 0 4672 1432 ../imgs/textures/backgrounds/skygrad.jpg
 5 3312 640 40 40 ../imgs/textures/finish.png
 4 320 536 200 104 ../imgs/textures/platforms/lava.png
-2 2360 440 48 48 ../imgs/textures/creatures/enemy.png 2480
 2 2872 616 48 48 ../imgs/textures/creatures/enemy.png 3024
+2 2360 432 48 48 ../imgs/textures/creatures/enemy.png 2504
 1 0 328 104 76 ../imgs/textures/platforms/Wall2.png
 1 104 328 104 76 ../imgs/textures/platforms/Wall1.png
 1 96 400 104 76 ../imgs/textures/platforms/Wall5.png

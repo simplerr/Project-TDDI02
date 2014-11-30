@@ -33,7 +33,7 @@ void Player::update(float dt)
         }
         else
         {
-            if (mClipcounter > 2){
+            if (mClipcounter > 1){
                 ++mPlayerClip;
                 mClipcounter = 0;
                 if (mPlayerClip >= 10)
