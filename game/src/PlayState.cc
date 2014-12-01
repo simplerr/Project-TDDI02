@@ -50,7 +50,7 @@ void PlayState::init(string initData) // initData will be the filename of the le
 	mTimeOnScreen = new ButtonText(Vec2(20, 20), 80, 40, " ", 250,250,250);
 	mKilledCreaturesScreen = new ButtonText(Vec2(20, 55), 70, 30, " ", 250,250,250);
 	PowerupTimer = new ButtonText(Vec2((SCREEN_WIDTH/2)-75, 10), 150, 75, " ", 174,0,0);
-	FPSTimer = new ButtonText(Vec2(SCREEN_WIDTH - 200, 10), 100, 50, " ", 250,250,250);
+	FPSTimer = new ButtonText(Vec2(SCREEN_WIDTH - 90, 10), 70, 25, " ", 250,250,250);
 	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),

@@ -26,7 +26,6 @@ public:
     void setCam(int x, int y);
     Vec2 getCam(){ return Vec2(camX, camY); }
     void clearList();
-    
 
     Vec2 getLevelSize(){ return Vec2(mLEVEL_WIDTH, mLEVEL_HEIGHT); }
 

@@ -2,7 +2,7 @@
 # Makefile
 #
 
-CCC	= g++ -std=c++11 -Wall -pedantic
+CCC	= g++ -std=c++11 -Wall -pedantic 
 WIN	= i586-mingw32msvc-g++ -std=c++11 -Wall -pedantic
 LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 

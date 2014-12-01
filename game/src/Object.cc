@@ -11,13 +11,11 @@ Object::Object(Vec2 pos, int width, int height, string filename)
     mFilename = filename;
     mTexture = nullptr;
     mDead = false;
-	mTextureDead = nullptr;
 }
 
 Object::~Object()
 {
     delete mTexture;
-	delete mTextureDead;
 }
 
 void Object::draw(Renderer* renderer)
