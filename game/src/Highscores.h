@@ -1,7 +1,15 @@
-#pragma once
-#include <map>
+#ifndef HIGHSCORE_H
+#define HIGHSCORE_H
+
+#include <vector>
 #include <string>
 using namespace std;
+
+struct scoremap {
+	string level;
+	float time;
+	int score;
+};
 
 class Highscores
 {
@@ -10,10 +18,13 @@ public:
     ~Highscores() {};
     
     void save();
-    float getHighscore(string level);
-    void updateHighscore(string level, float time);
+    float getHighscoreTime(string level);
+	int getHighscoreScore(string level);
+    void updateHighscore(string level, float time, int score);
 
 private:
-    map<string, float> mHighscores;
+    vector<scoremap> mHighscores;
     string mFilename;
 };
+
+#endif

@@ -32,7 +32,8 @@ private:
     bool mute;
     Highscores* mHighscores;
     string mHooverLevel;
-    ButtonText* mHighscoreButton;
+    ButtonText* mHighscoreButtonT;
+	ButtonText* mHighscoreButtonS;
 };
 
 #endif

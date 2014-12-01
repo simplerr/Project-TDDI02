@@ -31,7 +31,7 @@ PlayState::PlayState()
 PlayState::~PlayState()
 {
     for (unsigned int i = 0; i < buttonList.size(); i++)
-	delete buttonList.at(i);
+		delete buttonList.at(i);
 
     mHighscores->save();
     
@@ -88,7 +88,7 @@ void PlayState::update(float dt)
 			else
 				setNextState(BaseState::MENU_STATE);
 
-			mHighscores->updateHighscore(mLevel->getCurrentLevel(), mTimer.getSeconds());
+			mHighscores->updateHighscore(mLevel->getCurrentLevel(), mTimer.getSeconds(), mPlayer->getScore());
 			mHighscores->save();		       
 		} 
 		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y || mPlayer->getDead()) // Trillar spelaren ned, ladda om banan
@@ -109,9 +109,9 @@ void PlayState::draw(Renderer* renderer)
     mLevel->draw(renderer);
     
     if (mPaused) {
-	for (unsigned int i = 0; i < buttonList.size(); i++){
-	    buttonList.at(i)->draw(renderer);
-	}
+		for (unsigned int i = 0; i < buttonList.size(); i++){
+			buttonList.at(i)->draw(renderer);
+		}
     }
 
     // draw timer progress

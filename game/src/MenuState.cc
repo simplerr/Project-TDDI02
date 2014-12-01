@@ -12,7 +12,8 @@ MenuState::MenuState()
     mAlphaOverlay = nullptr;
     
     mHooverLevel = "none";
-    mHighscoreButton = new ButtonText(Vec2(85, 400), 160, 30, "Best time: ", 0, 0, 0);
+    mHighscoreButtonT = new ButtonText(Vec2(85, 400), 160, 30, "Best time: ", 0, 0, 0);
+	mHighscoreButtonS = new ButtonText(Vec2(85, 430), 160, 30, "Best score: ", 0, 0, 0);
 }
 
 MenuState::~MenuState()
@@ -23,7 +24,8 @@ MenuState::~MenuState()
     delete mMenu;
     delete mAlphaOverlay;
     delete mHighscores;
-    delete mHighscoreButton;
+    delete mHighscoreButtonT;
+	delete mHighscoreButtonS;
 }
 
 void MenuState::init(string initData)
@@ -33,8 +35,8 @@ void MenuState::init(string initData)
 		new ButtonImg(Vec2(300, 200), 200, 200, LEVEL2_BUTTON), // Play 2
 		new ButtonImg(Vec2(520, 200), 200, 200, LEVEL3_BUTTON), // Play 3
 		new ButtonImg(Vec2(740, 200), 200, 200, LEVEL4_BUTTON), // Play 3
-		new ButtonImg(Vec2(412, 430), 200, 70, CREDIT_BUTTON), // Credit
-		new ButtonImg(Vec2(412, 510), 200, 80, EXIT_BUTTON), // Exit
+		new ButtonImg(Vec2(412, 450), 200, 70, CREDIT_BUTTON), // Credit
+		new ButtonImg(Vec2(412, 530), 200, 80, EXIT_BUTTON), // Exit
 		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, TOEDITOR_BUTTON),
 		//new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON)
     };
@@ -84,17 +86,28 @@ void MenuState::draw(Renderer* renderer)
 	// rita ut highscore för den level man har musen över
 	if(mHooverLevel != "none")
 	{
-		if (mHooverLevel == "level1.txt")
-			mHighscoreButton->setPosition(Vec2(80,400));
-		if (mHooverLevel == "level2.txt")
-			mHighscoreButton->setPosition(Vec2(300,400));
-		if (mHooverLevel == "level3.txt")
-			mHighscoreButton->setPosition(Vec2(520,400));
-		if (mHooverLevel == "level4.txt")
-			mHighscoreButton->setPosition(Vec2(740,400));
-	    ostringstream converted;
-		converted << fixed << std::setprecision(1) << left << "Best Time: " << mHighscores->getHighscore(mHooverLevel) << " s";
-	    mHighscoreButton->draw(renderer, converted.str());
+		if (mHooverLevel == "level1.txt") {
+			mHighscoreButtonT->setPosition(Vec2(80,400));
+			mHighscoreButtonS->setPosition(Vec2(80,425));
+		}
+		if (mHooverLevel == "level2.txt") {
+			mHighscoreButtonT->setPosition(Vec2(300,400));
+			mHighscoreButtonS->setPosition(Vec2(300,425));
+		}
+		if (mHooverLevel == "level3.txt") {
+			mHighscoreButtonT->setPosition(Vec2(520,400));
+			mHighscoreButtonS->setPosition(Vec2(520,425));
+		}
+		if (mHooverLevel == "level4.txt") {
+			mHighscoreButtonT->setPosition(Vec2(740,400));
+			mHighscoreButtonS->setPosition(Vec2(740,425));
+		}
+		
+	    ostringstream convertedT, convertedS;
+		convertedT << fixed << std::setprecision(1) << left << "Best Time: " << mHighscores->getHighscoreTime(mHooverLevel) << " s";
+		convertedS << fixed << std::setprecision(1) << left << "Best Score: " << mHighscores->getHighscoreScore(mHooverLevel);
+	    mHighscoreButtonT->draw(renderer, convertedT.str());
+		mHighscoreButtonS->draw(renderer, convertedS.str());
 	}
 }
 

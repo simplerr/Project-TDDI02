@@ -10,10 +10,16 @@ Highscores::Highscores(string filename)
 
     string level;
     float time;
+	int score;
 
-    while(fin >> level >> time)
-	mHighscores[level] = time;
-
+    while(fin >> level >> time >> score) {
+		scoremap s;
+		s.level = level;
+		s.time = time;
+		s.score = score;
+		mHighscores.push_back(s);
+	}
+	
     fin.close();
 }
 
@@ -21,21 +27,47 @@ void Highscores::save()
 {
     ofstream fout(mFilename);
 
-    for(auto iter = mHighscores.begin(); iter != mHighscores.end(); iter++)
-    {
-	fout << (*iter).first << " " << (*iter).second << endl;
-    }
+    for(unsigned int i = 0; i < mHighscores.size(); i++)
+		fout << mHighscores.at(i).level << " " <<  mHighscores.at(i).time << " " << mHighscores.at(i).score << endl;
 
     fout.close();
 }
 
-float Highscores::getHighscore(string level)
+float Highscores::getHighscoreTime(string level)
 {
-    return mHighscores[level];
+	for (unsigned int i = 0; i < mHighscores.size(); i++)
+		if (mHighscores.at(i).level == level)
+			return mHighscores.at(i).time;
+	
+    return 0;
 }
 
-void Highscores::updateHighscore(string level, float time)
+int Highscores::getHighscoreScore(string level)
 {
-    if(mHighscores[level] > time || mHighscores[level] == 0)
-	mHighscores[level] = time;
+	for (unsigned int i = 0; i < mHighscores.size(); i++)
+		if (mHighscores.at(i).level == level)
+			return mHighscores.at(i).score;
+	
+    return 0;
+}
+
+
+
+void Highscores::updateHighscore(string level, float time, int score)
+{
+	for (unsigned int i = 0; i < mHighscores.size(); i++) {
+		
+		if (mHighscores.at(i).level == level) {
+		
+			if (mHighscores.at(i).time < time || mHighscores.at(i).time == 0)
+				mHighscores.at(i).time = time;
+			if (mHighscores.at(i).score < score || mHighscores.at(i).time == 0)
+				mHighscores.at(i).score = score;
+			
+			return;
+		}
+
+	}
+    /*if(mHighscores[level] > time || mHighscores[level] == 0)
+	  mHighscores[level] = time;*/
 }
