@@ -14,6 +14,7 @@ Renderer::Renderer()
     mRenderer = nullptr;
     mWindow = nullptr;
 	FPStimer.start();
+	FPScalc.start();
 }
 
 Renderer::~Renderer()
@@ -88,21 +89,25 @@ bool Renderer::initSDL()
 
 void Renderer::beginScene()
 {
-	FPScalc.start();
     SDL_RenderClear(mRenderer);
 }
 
 void Renderer::endScene()
 {
-     SDL_RenderPresent(mRenderer);
-     SDL_Delay(1000/(60+FPScalc.getMilliseconds())); // 60 FPS
-	 FPScalc.reset();
-	 ++mCountedFrames;
+    SDL_RenderPresent(mRenderer);
+    //SDL_Delay(1000/(60+FPScalc.getMilliseconds())); // 60 FPS
+	while (1000/60 > FPScalc.getMilliseconds())
+	{
+		;
+	}
+	++mCountedFrames;
+	mCurrentFPS = (FPScalc.getMilliseconds()/1000.0)*60.0*60.0;
+	FPScalc.reset();
 }
 
 float Renderer::getAvgFPS()
 {
-	return mCountedFrames / ( FPStimer.getSeconds() );
+	return mCurrentFPS;
 }
 
 void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)

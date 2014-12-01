@@ -37,6 +37,7 @@ private:
     Timer FPStimer;
     Timer FPScalc;
     int mCountedFrames{};
+    float mCurrentFPS{};
     
 };
 

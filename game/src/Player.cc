@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include "constants.h"
+#include <SDL2/SDL.h>
 
 Player::Player(Vec2 pos, int width, int height, string filename)
     : Object(pos, width, height, filename)
@@ -17,7 +18,7 @@ Player::Player(Vec2 pos, int width, int height, string filename)
 
 Player::~Player()
 {
-
+    ;
 }
 
 void Player::update(float dt)
@@ -169,3 +170,4 @@ void Player::powerDown()
     setVel(getVel().x/2, getVel().y);
     mSpeed = mSpeed / 2;
 }
+

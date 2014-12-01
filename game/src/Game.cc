@@ -50,9 +50,6 @@ void Game::changeState(BaseState* state)
 
 void Game::run()
 {
-	// all rendering should happen between beginScene() and endScene()
-    mRenderer->beginScene();
-
     // TODO
     // make sure the game runs at 60 fps
     float dt = 0.0f;
@@ -74,6 +71,9 @@ void Game::run()
     // update the current gamestate
     mActiveState->update(dt);
 
+	// all rendering should happen between beginScene() and endScene()
+    mRenderer->beginScene();
+	
     // draw the current gamestate
     mActiveState->draw(mRenderer);
 	
