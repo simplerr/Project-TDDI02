@@ -22,7 +22,8 @@ PlayState::PlayState()
     mPaused = false;
 	mTimeOnScreen = nullptr;
 	mKilledCreaturesScreen = nullptr;
-	PowerupTimer = nullptr;;
+	PowerupTimer = nullptr;
+	FPSTimer = nullptr;
     mTimer.start();
     mHighscores = new Highscores("highscores.txt");
 }
@@ -38,6 +39,7 @@ PlayState::~PlayState()
     delete mTestBkgd;
     delete mPauseMenu;
     delete mHighscores;
+	delete FPSTimer;
 }
 
 void PlayState::init(string initData) // initData will be the filename of the level
@@ -48,6 +50,7 @@ void PlayState::init(string initData) // initData will be the filename of the le
 	mTimeOnScreen = new ButtonText(Vec2(20, 20), 80, 40, " ", 250,250,250);
 	mKilledCreaturesScreen = new ButtonText(Vec2(20, 55), 70, 30, " ", 250,250,250);
 	PowerupTimer = new ButtonText(Vec2((SCREEN_WIDTH/2)-75, 10), 150, 75, " ", 174,0,0);
+	FPSTimer = new ButtonText(Vec2(SCREEN_WIDTH - 200, 10), 100, 50, " ", 250,250,250);
 	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
@@ -112,16 +115,22 @@ void PlayState::draw(Renderer* renderer)
     }
 
     // draw timer progress
-    ostringstream currentTime, currentKilledCreatures, currentPowerupTime;
+    ostringstream currentTime, currentKilledCreatures, currentPowerupTime, currentFPS;
 	currentTime << fixed << setw(7) << std::setprecision(1) << left<< mTimer.getSeconds();
     mTimeOnScreen->draw( renderer, currentTime.str() );
+	
 	currentKilledCreatures << setw(10) << left << "Score:" <<  left << mPlayer->getScore();
 	mKilledCreaturesScreen->draw( renderer, currentKilledCreatures.str() );
+	
 	if (mPlayer->getPowerUp())
 	{
 		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << -1*(mPlayer->getTimer()-mLevel->getPowerupTime());
 		PowerupTimer->draw( renderer, currentPowerupTime.str() );
 	}
+	
+	currentFPS << fixed << setw(7) << std::setprecision(1) << left << "FPS:" <<  left << renderer->getAvgFPS();
+	FPSTimer->draw( renderer, currentFPS.str() );
+	
 }
 
 void PlayState::handleEvent(SDL_Event e, bool& exit)

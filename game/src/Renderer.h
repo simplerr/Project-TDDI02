@@ -6,6 +6,7 @@
 #include <string>
 #include "Vec2.h"
 #include "Texture.h"
+#include "Timer.h"
 
 // handles all SDL code
 class Renderer
@@ -26,12 +27,16 @@ public:
     Texture* loadTexture(string text, unsigned int color1, unsigned int color2, unsigned int color3);
     void updateCamera(int x, int y, int width, int height, int, int);
     Vec2 getCameraAdjustment();
+    float getAvgFPS();
     
 private:
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
     TTF_Font * mFont;
     SDL_Rect camera;
+    Timer FPStimer;
+    Timer FPScalc;
+    int mCountedFrames{};
     
 };
 
