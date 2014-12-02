@@ -1,11 +1,5 @@
 9112 1776
-7 0 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
-7 896 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
-7 1792 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
-7 2688 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
-7 3584 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
-7 5376 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
-7 7168 0 896 880 ../imgs/textures/backgrounds/skygrad.jpg
+7 0 0 9112 1776 ../imgs/textures/backgrounds/skygrad.jpg
 7 6840 880 848 896 ../imgs/textures/backgrounds/skygrad.jpg
 7 7688 880 376 896 ../imgs/textures/backgrounds/skygrad.jpg
 7 8064 880 376 896 ../imgs/textures/backgrounds/skygrad.jpg
