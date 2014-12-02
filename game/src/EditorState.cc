@@ -85,6 +85,7 @@ void EditorState::init(string initData)
 		new ButtonImg(Vec2(col1, 10+row*15), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_1),
 		new ButtonImg(Vec2(col2, 10+row*15), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_2),
 		new ButtonImg(Vec2(col3, 10+row*15), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_3),
+		new ButtonImg(Vec2(col1, 10+row*16), buttonSize.x, buttonSize.y, FILEPATH_DECORATION_4),
 		//###### DECORATIONS ######
 		// //###### OTHERS ######
 		new ButtonImg(Vec2(SCREEN_WIDTH-110, SCREEN_HEIGHT-60), 100, 50, FILEPATH_SAVE),
@@ -276,32 +277,33 @@ void EditorState::handleEvent(SDL_Event e, bool& exit, bool& mMuteSound)
 				case 25: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_1 ); break;
 				case 26: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_2 ); break;
 				case 27: currentObject = new Decoration( mousePos, 104, 48, FILEPATH_DECORATION_3 ); break;
-				case 28:
+				case 28: currentObject = new Decoration( mousePos, 400, 184, FILEPATH_DECORATION_4 ); break;
+				case 29:
 
 				    if ( mLevel->saveLevel(mLevel->getCurrentLevel()) )
 						cout << "Succeeded to save file!\n";
 					else
 						cout << "Failed to save file!\n";
 					break;
-				case 29:
+				case 30:
 						mLevel->setCurrentLevel(FILEPATH_LVL1);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
 						cout << "level: " << mLevel->getCurrentLevel() << endl;
 					break;
-				case 30:
+				case 31:
 						mLevel->setCurrentLevel(FILEPATH_LVL2);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
 						cout << "level: " << mLevel->getCurrentLevel() << endl;
 					break;
-				case 31:
+				case 32:
 						mLevel->setCurrentLevel(FILEPATH_LVL3);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
 						cout << "level: " << mLevel->getCurrentLevel() << endl;
 					break;
-				case 32:
+				case 33:
 						mLevel->setCurrentLevel(FILEPATH_LVL4);
 						mLevel->clearList();
 						mLevel->loadLevel(mLevel->getCurrentLevel(), 2);

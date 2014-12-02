@@ -99,6 +99,7 @@ static const std::string FILEPATH_BACKGROUND_3 = "../imgs/textures/backgrounds/N
 static const std::string FILEPATH_DECORATION_1 = "../imgs/textures/decorations/Grass.png";
 static const std::string FILEPATH_DECORATION_2 = "../imgs/textures/decorations/CatEyes.png";
 static const std::string FILEPATH_DECORATION_3 = "../imgs/textures/decorations/Roots.png";
+static const std::string FILEPATH_DECORATION_4 = "../imgs/textures/decorations/cloud.png";
 static const std::string TEXT_MENU_1 = "..Platforms..";
 static const std::string TEXT_MENU_2 = "..Backgrounds..";
 static const std::string TEXT_MENU_3 = "..Creatures..";
