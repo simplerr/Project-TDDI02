@@ -63,9 +63,9 @@ void Highscores::updateHighscore(string level, float time, int score)
 		
 		if (mHighscores.at(i).level == level) {
 		
-			if (mHighscores.at(i).time < time || mHighscores.at(i).time == 0)
+			if (mHighscores.at(i).time > time || mHighscores.at(i).time == 0)
 				mHighscores.at(i).time = time;
-			if (mHighscores.at(i).score < score || mHighscores.at(i).time == 0)
+			if (mHighscores.at(i).score < score || mHighscores.at(i).score == 0)
 				mHighscores.at(i).score = score;
 			
 			return;
