@@ -30,7 +30,7 @@ public:
     void setWidth( int newW) { mWidth = newW; }
     void setHeight( int newH){ mHeight = newH; }
     string getFilename() { return mFilename; }
-    void setDead() { mDead = !mDead; }
+    void setDead() { mDead = true; }
     bool getDead() { return mDead; }
     int getDeadAnimationCounter() { return mDeadAnimationCounter; }
     void decDeadAnimationCounter() { --mDeadAnimationCounter; }
@@ -42,6 +42,8 @@ public:
     void setId(int id){ mId = id;}
     Texture* mTexture;
     Texture* mTextureDead;
+    
+    bool directionRight{false};
 private:
     
     Vec2 mPosition;

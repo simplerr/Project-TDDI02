@@ -30,6 +30,10 @@ Level::~Level()
     {
 		delete mBackgrounds[i];
     }
+	for(unsigned int i{}; i < mProjectiles.size(); ++i)
+    {
+		delete mProjectiles[i];
+    }
 	delete mFlagTexture;
 }
 
@@ -260,6 +264,11 @@ void Level::update(float dt)
 		if(mPlayer == mObjects[i] || mObjects[i]->getDead()) //Så att den inte kollar kollision med sig själv...
 			continue;
 		
+		for(unsigned int p = 0; p < mProjectiles.size(); p++)
+		{
+			mProjectiles[p]->handleCollision(mObjects[i]);
+		}
+		
 		//##############
 		// KOLLA OM KOLLISION FÖR PLAYER X-LED3
 		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA FRAM
@@ -278,8 +287,6 @@ void Level::update(float dt)
 		}
 		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
 		//##############
-		
-		
     }
 	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
 	{
@@ -374,6 +381,12 @@ void Level::update(float dt)
 			mPlayer->setfall(1); //Sätter hopp till true
 		}
 	}
+	
+	for(unsigned int p = 0; p < mProjectiles.size(); p++)
+	{
+		mProjectiles[p]->update(dt);
+	}
+	
 	//Uppdatering för enskild objekt
     for(unsigned int i = 0; i < mObjects.size(); i++)
     {
@@ -409,6 +422,11 @@ void Level::draw(Renderer* renderer, bool flags)
 			}
 		}
     }
+	for(unsigned int p = 0; p < mProjectiles.size(); p++)
+	{
+		mProjectiles[p]->draw(renderer);
+	}
+	
 } // END OF DRAW()
 
 Object* Level::getObjectAt(float x, float y)
@@ -441,3 +459,10 @@ void Level::clearList()
 	}
 }
 
+void Level::addProjectile(Object* shooter)
+{
+	if(shooter->directionRight)
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+20 ), shooter->directionRight ));
+	else
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+20 ), shooter->directionRight ));
+}

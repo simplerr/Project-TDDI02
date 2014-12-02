@@ -47,7 +47,7 @@ private:
     Timer mPowerUptime;
     int mClipcounter{}; // == EN DELAY FÖR ANIMATIONEN
     int mPlayerClip;
-    bool leftOrRight = false;
+    
 };
 
 #endif

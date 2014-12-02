@@ -5,6 +5,7 @@
 #include <vector>
 #include "Player.h"
 #include "Texture.h"
+#include "Projectile.h"
 using namespace std;
 
 class Object;
@@ -26,7 +27,6 @@ public:
     void setCam(int x, int y);
     Vec2 getCam(){ return Vec2(camX, camY); }
     void clearList();
-
     Vec2 getLevelSize(){ return Vec2(mLEVEL_WIDTH, mLEVEL_HEIGHT); }
 
     
@@ -40,10 +40,12 @@ public:
   Object* getObjectAt(float x, float y);
   bool getLevelFinish(){ return mLevelFinish; }
   int getPowerupTime(){return mPowerupTime;}
+  void addProjectile(Object* shooter);
  
 private:
   vector<Object*> mObjects;
   vector<Object*> mBackgrounds;
+  vector<Projectile*> mProjectiles;
   Player* mPlayer = nullptr;
   string mFilename;
   int mLEVEL_WIDTH;

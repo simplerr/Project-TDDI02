@@ -151,7 +151,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 			//Adjust the velocity
 			switch( e.key.keysym.sym )
 			{
-			case SDLK_SPACE:
+			case SDLK_UP:
 			    if(!mPlayer->getjump() && !mPlayer->getfall())
 			    {
 					mPlayer->setjump(1);
@@ -164,6 +164,11 @@ void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 			case SDLK_RIGHT:
 					mPlayer->move(2);
 					R = true;
+			break;
+			case SDLK_SPACE:
+				//Object* toobject = dynamic_cast<Object*>(mPlayer);
+				mLevel->addProjectile(mPlayer);
+				
 			break;
 			default: break;
 			}

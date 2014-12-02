@@ -48,12 +48,12 @@ void Enemy::update(float dt)
     setPosition(getPosition().x + getVel().x, getPosition().y + getVel().y);
 	
 	    //Animation
-    ++mClipcounter;
-    if (mClipcounter > 4){
+    ++mClipDelay;
+    if (mClipDelay > 2){
 		++mEnemyClip;
-		mClipcounter = 0;
+		mClipDelay = 0;
 		if (mEnemyClip >= 4)
-            mEnemyClip = 2;
+            mEnemyClip = 0;
     }
     // Animation slut
 }

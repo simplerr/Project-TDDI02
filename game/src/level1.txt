@@ -41,12 +41,6 @@
 6 1992 368 32 32 ../imgs/textures/decorations/Grass.png
 6 2016 360 32 32 ../imgs/textures/decorations/Grass.png
 6 2040 368 32 32 ../imgs/textures/decorations/Grass.png
-6 2288 408 88 88 ../imgs/textures/decorations/Grass.png
-6 2336 400 88 88 ../imgs/textures/decorations/Grass.png
-6 2360 424 88 88 ../imgs/textures/decorations/Grass.png
-6 2408 416 88 88 ../imgs/textures/decorations/Grass.png
-6 2456 400 88 88 ../imgs/textures/decorations/Grass.png
-6 2480 424 88 88 ../imgs/textures/decorations/Grass.png
 6 2808 632 40 40 ../imgs/textures/decorations/Grass.png
 6 2832 640 40 40 ../imgs/textures/decorations/Grass.png
 6 2864 640 40 40 ../imgs/textures/decorations/Grass.png
@@ -86,6 +80,8 @@
 5 4568 864 40 40 ../imgs/textures/finish.png
 2 2872 616 48 48 ../imgs/textures/creatures/enemy.png 3024
 2 2360 432 48 48 ../imgs/textures/creatures/enemy.png 2504
+2 2368 384 48 48 ../imgs/textures/creatures/enemy.png 2512
+2 2424 408 48 48 ../imgs/textures/creatures/enemy.png 2480
 1 1544 536 104 76 ../imgs/textures/platforms/Totem1.png
 1 1768 448 104 76 ../imgs/textures/platforms/Totem1.png
 1 1984 384 104 76 ../imgs/textures/platforms/Totem1.png
@@ -152,4 +148,4 @@
 1 3496 880 104 80 ../imgs/textures/platforms/Wall1.png
 1 3496 960 104 80 ../imgs/textures/platforms/Wall5.png
 1 3392 960 104 80 ../imgs/textures/platforms/Wall6.png
-0 56 280 48 48 ../imgs/textures/creatures/student.png
+0 72 264 48 48 ../imgs/textures/creatures/student.png

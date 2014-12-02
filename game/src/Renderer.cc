@@ -114,7 +114,7 @@ void Renderer::drawTexture(Vec2 pos, int width, int height, Texture* texture, SD
 {
     SDL_Rect SDLRect{pos.x-camera.x, pos.y-camera.y, width, height};
 	
-	SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
+	SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, SDL_FLIP_NONE );
 }
 
 void Renderer::drawTextureScreen(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
@@ -124,12 +124,19 @@ void Renderer::drawTextureScreen(Vec2 pos, int width, int height, Texture* textu
 	SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
 }
 
-void Renderer::drawTextureAnimation(Vec2 pos, int width, int height, Texture* texture, Vec2 clip)
+void Renderer::drawTextureAnimation(Vec2 pos, int width, int height, Texture* texture, Vec2 clip, bool flip)
 {
     SDL_Rect offset{pos.x-camera.x, pos.y-camera.y, width, height};
 	SDL_Rect Clip{clip.x, clip.y, clip.w, clip.h};
+	SDL_RendererFlip SDLflip;
 	
-	SDL_RenderCopy( mRenderer, texture->getData(), &Clip, &offset ); //Render texture to screen
+	if (flip == false)
+		SDLflip = SDL_FLIP_NONE;
+	else
+		SDLflip = SDL_FLIP_HORIZONTAL;
+		
+	//SDL_RenderCopy( mRenderer, texture->getData(), &Clip, &offset ); //Render texture to screen
+	SDL_RenderCopyEx( mRenderer, texture->getData(), &Clip, &offset, 0, NULL, SDLflip );
 	//SDL_RenderCopyEx( mRenderer, texture->getData(), 0, &SDLRect, angle, center, flip );
 }
 

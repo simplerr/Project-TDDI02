@@ -31,6 +31,6 @@ private:
     float mEndX;
     Direction mDirection;
     float mVelX, mVelY;
-    int mClipcounter{}; // == EN DELAY FÖR ANIMATIONEN
+    int mClipDelay{}; // == EN DELAY FÖR ANIMATIONEN
     int mEnemyClip{};
 };

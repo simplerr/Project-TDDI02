@@ -26,6 +26,7 @@ static const std::string TOEDITOR_BUTTON = "../imgs/buttons/menu/toEditor.png";
 
 
 //###### PLAY //#####
+
  // Animation för player
 static const Vec2 PLAYER_CLIP_LEFT[] {
   {36,0,37,55}, // STANDING
@@ -39,25 +40,43 @@ static const Vec2 PLAYER_CLIP_LEFT[] {
   {44,118,44,55}, //RUNNING
   {0,118,44,55} //RUNNING
 };
- // Animation för player
-static const Vec2 PLAYER_CLIP_RIGHT[] {
-  {0,0,37,55}, // STANDING
-  {75,0,37,55}, //Jumping
-  {0,60,44,55}, //RUNNING
-  {50,60,44,55}, //RUNNING
-  {93,60,44,55}, //RUNNING
-  {141,60,44,55}, //RUNNING
-  {191,60,44,55}, //RUNNING
-  {243,60,44,55}, //RUNNING
-  {290,60,44,55}, //RUNNING
-  {344,60,44,55} //RUNNING
-};
 static const Vec2 ENEMY_CLIPS[] {
   {0,0,390,454},
   {390,0,390,454},
   {780,0,390,454},
   {1170,0,390,454}, 
 };
+
+static const std::string PROJECTILE_FILEPATH = "../imgs/textures/projectile1.png";
+static const int PROJECTILE_WIDTH = 60;
+static const int PROJECTILE_HEIGHT = 30;
+static const int PROJECTILE_LENGTH = 350;
+static const int PROJECTILE_NUM_CLIPS = 15;
+static const Vec2 PROJECTILE_CLIPS[] {
+  {0,0,30,15},
+  {30,0,30,15},
+  {60,0,30,15},
+  {0,15,30,15},
+  {30,15,30,15},
+  {60,15,30,15},
+  {0,30,30,15},
+  {30,30,30,15},
+  {60,30,30,15},
+  {0,45,30,15},
+  {30,45,30,15},
+  {60,45,30,15},
+  {0,60,30,15},
+  {30,60,30,15},
+  {60,60,30,15}
+};
+/*
+static const Vec2 PROJECTILE_CLIPS[] {
+  {0,0,64,64},
+  {64,0,64,64},
+  {128,0,64,64},
+  {192,0,64,64}
+};
+*/
 static const std::string DEAD_SCREEN = "../imgs/backgrounds/yourdead.png";
 static const std::string ENEMY_DEAD = "../imgs/textures/bloodsplatter.png";
 static const std::string PAUSE_BACKGROUND = "../imgs/backgrounds/pause.png";

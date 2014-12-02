@@ -49,14 +49,14 @@ void Player::draw(Renderer* renderer)
     if(mTexture != nullptr)
     {
         if ( mVelX < 0 ) // if moving left
-            leftOrRight = false;
+            directionRight = false;
         else if ( mVelX > 0 ) // if moving right
-            leftOrRight = true;
+            directionRight = true;
        
-        if ( !leftOrRight ) // if moving left
-            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_LEFT[mPlayerClip]);
+        if ( !directionRight ) // if moving left
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_LEFT[mPlayerClip], false);
         else // if moving right
-            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_RIGHT[mPlayerClip]);
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_LEFT[mPlayerClip], true);
     }
     else
       mTexture = renderer->loadTexture(getFilename());

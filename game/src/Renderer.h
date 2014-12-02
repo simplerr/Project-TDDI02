@@ -22,7 +22,7 @@ public:
 
     void drawTexture(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void drawTextureScreen(Vec2 pos, int width, int height, Texture* texture, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void drawTextureAnimation(Vec2 pos, int width, int height, Texture* texture, Vec2 clip);
+    void drawTextureAnimation(Vec2 pos, int width, int height, Texture* texture, Vec2 clip, bool flip = false);
     Texture* loadTexture(std::string filename);
     Texture* loadTexture(string text, unsigned int color1, unsigned int color2, unsigned int color3);
     void updateCamera(int x, int y, int width, int height, int, int);
