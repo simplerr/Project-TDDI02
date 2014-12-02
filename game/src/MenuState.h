@@ -19,9 +19,7 @@ public:
     void cleanup();
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleEvent(SDL_Event e, bool& exit);
-	
-	bool getMute() { return mmMute; }
+    void handleEvent(SDL_Event e, bool& exit, bool& mMuteSound);
 	
     StateId getStateId() { return MENU_STATE; }
 private:
@@ -34,6 +32,7 @@ private:
     string mHooverLevel;
     ButtonText* mHighscoreButtonT;
 	ButtonText* mHighscoreButtonS;
+    bool mSoundMuted{false};
 };
 
 #endif

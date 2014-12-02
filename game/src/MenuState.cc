@@ -38,14 +38,10 @@ void MenuState::init(string initData)
 		new ButtonImg(Vec2(412, 450), 200, 70, CREDIT_BUTTON), // Credit
 		new ButtonImg(Vec2(412, 530), 200, 80, EXIT_BUTTON), // Exit
 		new ButtonImg(Vec2(SCREEN_WIDTH-100, SCREEN_HEIGHT-100), 100, 100, TOEDITOR_BUTTON),
+		new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON),
+		new ButtonImg(Vec2(492, 660), 48, 48, MUTE_BUTTON)
 		//new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON)
     };
-
-	if (!mmMute) {
-		buttonList.push_back(new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON));
-	} else {
-		buttonList.push_back(new ButtonImg(Vec2(492, 660), 48, 48, MUTE_BUTTON));
-	}
     
     mHighscores = new Highscores("highscores.txt");
 }
@@ -74,7 +70,7 @@ void MenuState::draw(Renderer* renderer)
 	    mAlphaOverlay = renderer->loadTexture("../imgs/alpha.png");
 	
 	// Renderera ut knapparna
-	for (unsigned int i = 0; i < buttonList.size(); i++)
+	for (unsigned int i = 0; i < buttonList.size()-2; i++) // -2 Cuz the 2 last is for volume and we renderer them later
 	{
 		buttonList[i]->draw(renderer);
 		
@@ -82,6 +78,10 @@ void MenuState::draw(Renderer* renderer)
 		if((i == 1 && getLvlUnlocks() < 1) || (i == 2 && getLvlUnlocks() < 2) || (i == 3 && getLvlUnlocks() < 3))
 		    renderer->drawTextureScreen(Vec2(rect.x, rect.y), rect.w, rect.h, mAlphaOverlay);
 	}
+	if (!mSoundMuted)
+		buttonList.at(buttonList.size()-2)->draw(renderer);
+    else
+		buttonList.at(buttonList.size()-1)->draw(renderer);
 
 	// rita ut highscore för den level man har musen över
 	if(mHooverLevel != "none")
@@ -111,8 +111,9 @@ void MenuState::draw(Renderer* renderer)
 	}
 }
 
-void MenuState::handleEvent(SDL_Event e, bool& exit)
+void MenuState::handleEvent(SDL_Event e, bool& exit, bool& mMuteSound)
 {
+		mSoundMuted = mMuteSound;
     // för att se vilken karta highscore ska visas för
     SDL_GetMouseState(&mousePos.x, &mousePos.y);
     mHooverLevel = "none";
@@ -173,9 +174,9 @@ void MenuState::handleEvent(SDL_Event e, bool& exit)
 				    setNextState(BaseState::EDITOR_STATE);
 				    break;
 				case 7:
-					setMute(!mmMute);
+					mMuteSound = !mMuteSound;
 				
-					if (!mmMute) {
+					if (!mMuteSound) {
 						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, VOLUME_BUTTON);
 					} else {
 						buttonList.at(buttonList.size()-1) = new ButtonImg(Vec2(492, 660), 48, 48, MUTE_BUTTON);

@@ -38,7 +38,7 @@ void Credit::draw(Renderer* renderer)
 	mBack->draw(renderer);
 }
 
-void Credit::handleEvent(SDL_Event e, bool& exit)
+void Credit::handleEvent(SDL_Event e, bool& exit, bool& mMuteSound)
 {
     if(e.type == SDL_MOUSEBUTTONDOWN)
     {

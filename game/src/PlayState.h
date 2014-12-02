@@ -33,14 +33,12 @@ public:
     void cleanup();
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleEvent(SDL_Event e, bool& exit);
+    void handleEvent(SDL_Event e, bool& exit, bool& mMuteSound);
 
 	void setSpeed(float);
 	float getSpeed();
 	void setTimer(Uint32);
 	void speedUp();
-
-	bool getMute() { return mmMute; }
 
     StateId getStateId() { return PLAY_STATE; }
 private:
@@ -61,6 +59,7 @@ private:
     Timer mTimer;
     bool R, L; //Används för Vel bugg...
     Highscores* mHighscores;
+    bool mSoundMuted{true};
 };
 
 #endif

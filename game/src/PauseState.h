@@ -17,7 +17,7 @@ class PauseState : public BaseState {
     void cleanup();
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleEvent(SDL_Event e, bool& exit);
+    void handleEvent(SDL_Event e, bool& exit, bool& mMuteSound);
 
     StateId getStateId() { return PAUSE_STATE; }
  private:

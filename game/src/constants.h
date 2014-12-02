@@ -118,4 +118,3 @@ static const std::string FILEPATH_LVL3 = "level3.txt";
 static const std::string FILEPATH_LVL4 = "level4.txt";
 
 static int lvlUnlocks = 0;
-static bool mmMute = false;

@@ -35,7 +35,7 @@ void PauseState::draw(Renderer* renderer)
 		buttonList.at(i)->draw(renderer);
 }
 
-void PauseState::handleEvent(SDL_Event e, bool& exit)
+void PauseState::handleEvent(SDL_Event e, bool& exit, bool& mMuteSound)
 {
 	if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
     {

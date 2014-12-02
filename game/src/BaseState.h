@@ -20,7 +20,7 @@ public:
     virtual void cleanup() = 0;
     virtual void update(float dt) = 0;
     virtual void draw(Renderer* renderer) = 0;
-    virtual void handleEvent(SDL_Event e, bool& exit) = 0;  
+    virtual void handleEvent(SDL_Event e, bool& exit, bool& mMuteSound) = 0;  
 
     StateId changeStateTo() { return mChangeStateTo; } // BASE_STATE don't do anything
     string getNextStateData() { return mNextStateData; }
@@ -28,9 +28,6 @@ public:
 
 	void incLvl() { lvlUnlocks++; }
 	int getLvlUnlocks() { return lvlUnlocks; }
-
-	void setMute(bool m) { mmMute = m; }
-	virtual bool getMute() = 0;
 private:
     StateId mChangeStateTo;
     string mNextStateData;

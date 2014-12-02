@@ -24,9 +24,7 @@ public:
     void cleanup();
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleEvent(SDL_Event e, bool& exit);
-    
-	bool getMute() { return mmMute; }
+    void handleEvent(SDL_Event e, bool& exit, bool& mMuteSound);
 
     StateId getStateId() { return EDITOR_STATE; }
 private:

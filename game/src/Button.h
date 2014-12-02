@@ -20,7 +20,7 @@ public:
   void setPosition( Vec2 NewPos ){ mPos = NewPos; }
   bool getHighlightOn(){ return mHighlightOn; }
   void setHighlightOn(){ mHighlightOn = !mHighlightOn; }
-  
+  virtual std::string getFilename() {return " ";}
   SDL_Rect getRect();
   
 private:
@@ -36,6 +36,7 @@ public:
     ~ButtonText();
     
     void draw(Renderer* renderer, std::string newString = "");
+    std::string getFilename() {return mFilePath;}
     
 private:
     const std::string mFilePath;
@@ -51,6 +52,7 @@ public:
     ~ButtonImg();
     
     void draw(Renderer* renderer, std::string newString = "");
+    std::string getFilename(){  return mFilePath; } 
 private:
     Texture* mTexture = nullptr;
     const std::string mFilePath;

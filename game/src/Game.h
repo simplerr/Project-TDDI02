@@ -26,7 +26,7 @@ private:
     BaseState* mActiveState;
     Renderer* mRenderer;
     Mix_Music *mMusic;
-	bool mMute;
+	bool mMuteSound;
 };
 
 #endif

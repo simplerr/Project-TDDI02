@@ -55,7 +55,9 @@ void PlayState::init(string initData) // initData will be the filename of the le
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
 		new ButtonImg(Vec2((SCREEN_WIDTH/2)-100, 310), 200, 40, CONTINUE_BUTTON),
-		new ButtonImg(Vec2((SCREEN_WIDTH/2)-60, 370), 120, 40, TOMENU_BUTTON)
+		new ButtonImg(Vec2((SCREEN_WIDTH/2)-60, 370), 120, 40, TOMENU_BUTTON),
+		new ButtonImg(Vec2((SCREEN_WIDTH/2)-24, 430), 48, 48, VOLUME_BUTTON),
+		new ButtonImg(Vec2((SCREEN_WIDTH/2)-24, 430), 48, 48, MUTE_BUTTON)
 		
 	};
 	R = L = false;
@@ -109,9 +111,14 @@ void PlayState::draw(Renderer* renderer)
     mLevel->draw(renderer);
     
     if (mPaused) {
-		for (unsigned int i = 0; i < buttonList.size(); i++){
-			buttonList.at(i)->draw(renderer);
+		for (unsigned int i = 0; i < buttonList.size()-2; i++){
+			if (  buttonList.at(i)->getFilename() != VOLUME_BUTTON || buttonList.at(i)->getFilename() != MUTE_BUTTON )
+				buttonList.at(i)->draw(renderer);
 		}
+		if (!mSoundMuted)
+				buttonList.at(buttonList.size()-2)->draw(renderer);
+		else if ( mSoundMuted )
+				buttonList.at(buttonList.size()-1)->draw(renderer);
     }
 
     // draw timer progress
@@ -133,8 +140,9 @@ void PlayState::draw(Renderer* renderer)
 	
 }
 
-void PlayState::handleEvent(SDL_Event e, bool& exit)
+void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 {
+	mSoundMuted = muteSound;
     if(!mPaused)
     {
 		//If a key was pressed
@@ -208,7 +216,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 			    mTimer.start();
 				L = R = false;
 			}
-
+		
 		if(e.type == SDL_MOUSEBUTTONDOWN) // Kolla musknappnedtryck
 		{
 			SDL_GetMouseState(&mousePos.x, &mousePos.y);
@@ -223,6 +231,11 @@ void PlayState::handleEvent(SDL_Event e, bool& exit)
 						break;
 					case 2:
 						setNextState(BaseState::MENU_STATE);
+						break;
+					case 3:
+						muteSound = !muteSound;
+					case 4:
+						muteSound = !muteSound;
 						break;
 					default:
 						break;

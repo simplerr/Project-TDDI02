@@ -171,7 +171,7 @@ void EditorState::draw(Renderer* renderer)
 	
 }
 
-void EditorState::handleEvent(SDL_Event e, bool& exit)
+void EditorState::handleEvent(SDL_Event e, bool& exit, bool& mMuteSound)
 {
 	if ( currentObject != nullptr )
 	{
