@@ -26,10 +26,14 @@ Highscores::Highscores(string filename)
 void Highscores::save()
 {
     ofstream fout(mFilename);
-
-    for(unsigned int i = 0; i < mHighscores.size(); i++)
-		fout << mHighscores.at(i).level << " " <<  mHighscores.at(i).time << " " << mHighscores.at(i).score << endl;
-
+	
+	if (fout.is_open())
+	{
+		for(unsigned int i = 0; i < mHighscores.size(); i++)
+			fout << mHighscores.at(i).level << " " <<  mHighscores.at(i).time << " " << mHighscores.at(i).score << endl;
+	}
+	else
+		std::cerr << "Could not open: " << mFilename << "\n";
     fout.close();
 }
 
