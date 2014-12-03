@@ -257,16 +257,30 @@ void Level::update(float dt)
 	if(mPlayer->getTimer() > mPowerupTime)
 	    mPlayer->powerDown();
     }
-    
-    for(unsigned int i = 0; i < mObjects.size()-1; i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
+    for(unsigned int i = 0; i < mObjects.size(); i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
 		
-		if(mPlayer == mObjects[i] || mObjects[i]->getDead()) //Så att den inte kollar kollision med sig själv...
+		if(mObjects[i]->getDead()) //Så att den inte kollar kollision med sig själv...
 			continue;
 		
 		for(unsigned int p = 0; p < mProjectiles.size(); p++)
 		{
 			mProjectiles[p]->handleCollision(mObjects[i]);
+		}
+		
+		if ( mObjects[i]->getId() == Object::ENEMY )
+			{
+				if (rand() % ENEMY_SHOOT_CHANCE == 1)
+				{
+					addProjectile(mObjects[i]);
+				}
+			}
+		mObjects[i]->update(dt);
+		if(mPlayer == mObjects[i]) //Så att den inte kollar kollision med sig själv...
+		{
+			if (mObjects[i]->getDead())
+				mPlayer->setDead();
+			continue;
 		}
 		
 		//##############
@@ -387,14 +401,6 @@ void Level::update(float dt)
 		mProjectiles[p]->update(dt);
 	}
 	
-	//Uppdatering för enskild objekt
-    for(unsigned int i = 0; i < mObjects.size(); i++)
-    {
-	if(!mObjects[i]->getDead())
-	    {
-		mObjects[i]->update(dt);
-	    }
-    }
 } // END OF UPDATE
 
 void Level::draw(Renderer* renderer, bool flags)
@@ -441,10 +447,10 @@ Player* Level::findPlayer()
 	if (mObjects[i]->getId() == Object::PLAYER)
 		{
 			mPlayer = dynamic_cast<Player*>(mObjects[i]);
-			break;
+			return mPlayer;
 		}
     }
-    return mPlayer;
+    return nullptr;
 }
 
 void Level::clearList()
@@ -461,8 +467,10 @@ void Level::clearList()
 
 void Level::addProjectile(Object* shooter)
 {
+
 	if(shooter->directionRight)
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight ));
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId() ));
 	else
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight ));
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId() ));
+	
 }

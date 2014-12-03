@@ -21,7 +21,7 @@ void Finish::draw(Renderer* renderer)
     Object::draw(renderer);
 }
 
-void Finish::handleCollision(Object* object)
+void Finish::handleCollision(Object* &object)
 {
 
 }

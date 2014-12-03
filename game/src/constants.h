@@ -40,6 +40,7 @@ static const Vec2 PLAYER_CLIP_LEFT[] {
   {44,118,44,55}, //RUNNING
   {0,118,44,55} //RUNNING
 };
+static const int ENEMY_SHOOT_CHANCE = 600; // ca. 1 på ENEMY_SHOOT_CHANCE per framerate
 static const Vec2 ENEMY_CLIPS[] {
   {0,0,390,454},
   {390,0,390,454},

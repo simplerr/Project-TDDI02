@@ -23,7 +23,7 @@ void Powerup::draw(Renderer* renderer)
         Object::draw(renderer);
 }
 
-void Powerup::handleCollision(Object* object)
+void Powerup::handleCollision(Object* &object)
 {
 
 }

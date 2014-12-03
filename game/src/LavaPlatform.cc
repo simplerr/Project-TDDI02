@@ -22,9 +22,9 @@ void LavaPlatform::draw(Renderer* renderer)
     Object::draw(renderer);
 }
 
-void LavaPlatform::handleCollision(Object* object)
+void LavaPlatform::handleCollision(Object* &object)
 {
-    std::cout << "collision!" << std::endl;
+    ;
 }
 
 Object* LavaPlatform::clone()

@@ -15,6 +15,6 @@ public:
     
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleCollision(Object* collider);
+    void handleCollision(Object* &collider);
 private:
 };

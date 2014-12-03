@@ -15,7 +15,7 @@ public:
     
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleCollision(Object* collider);
+    void handleCollision(Object* &collider);
     void addVel(int VelX, int VelY);
     void setjump(int i);
     void setfall(int i);

@@ -94,7 +94,9 @@ void PlayState::update(float dt)
 			mHighscores->save();		       
 		} 
 		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y || mPlayer->getDead()) // Trillar spelaren ned, ladda om banan
+		{
 		    init(mLevel->getCurrentLevel()); // (Kan behövas ändras)
+		}
 	}
 
     //cout << "timer: " << mTimer.getTimer() << endl;

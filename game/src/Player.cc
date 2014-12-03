@@ -62,7 +62,7 @@ void Player::draw(Renderer* renderer)
       mTexture = renderer->loadTexture(getFilename());
 }
 
-void Player::handleCollision(Object* object)
+void Player::handleCollision(Object* &object)
 {
     ;
 }

@@ -1,12 +1,13 @@
 #include "Projectile.h"
 #include <iostream>
 
-Projectile::Projectile(Vec2 pos, bool dir)
+Projectile::Projectile(Vec2 pos, bool dir, int id)
     : Object(pos, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_FILEPATH)
 {
     setId(Object::PLATFORM);
     mDir = dir;
     mStartPosX = pos.x;
+    mId = id;
 }
 
 Projectile::~Projectile()
@@ -22,17 +23,6 @@ void Projectile::update(float dt)
             setPosition(getPosition().x-PROJECTILE_SPEED, getPosition().y);
         else
             setPosition(getPosition().x+PROJECTILE_SPEED, getPosition().y);
-        
-        //Animation
-        ++mClipDelay;
-         if (mClipDelay > 1)
-         {
-            ++mCurrentClip;
-            mClipDelay = 0;
-            if (mCurrentClip >= PROJECTILE_NUM_CLIPS)
-                mCurrentClip = 0;
-        }   
-         // Animation slut
     }
     
 }
@@ -44,9 +34,11 @@ void Projectile::draw(Renderer* renderer)
         if(mTexture != nullptr)
 		{
             if (!mDir)
-                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip], true);
+                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip++], true);
             else
-                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip], false);
+                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip++], false);
+            if (mCurrentClip >= PROJECTILE_NUM_CLIPS)
+                mCurrentClip = 0;
 		}
 		else
             mTexture = renderer->loadTexture(getFilename());
@@ -69,13 +61,13 @@ void Projectile::draw(Renderer* renderer)
     //PROJECTILE_WIDTH
 }
 
-void Projectile::handleCollision(Object* object)
+void Projectile::handleCollision(Object* &object)
 {
-    if ( !getDead() )
+    if ( !getDead() && mId != object->getId())
     {
         if(collision(this, object))
         {
-            if (object->getId() == Object::ENEMY )
+            if (object->getId() == Object::ENEMY || object->getId() == Object::PLAYER )
             {
                 object->setDead();
                 setDead();
@@ -92,6 +84,6 @@ void Projectile::handleCollision(Object* object)
 
 Object* Projectile::clone()
     {
-        Object* NewObject = new Projectile(getPosition(), mDir);
+        Object* NewObject = new Projectile(getPosition(), mDir, mId);
         return NewObject;
     }

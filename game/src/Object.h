@@ -19,7 +19,7 @@ public:
     virtual void update(float dt) = 0;
     virtual void draw(Renderer* renderer);
     void draw(Renderer* renderer, Vec2 mousePos);
-    virtual void handleCollision(Object* collider) = 0;
+    virtual void handleCollision(Object* &collider) = 0;
     virtual bool collision(Object* objectA, Object* objectB);
     virtual Object* clone() = 0;
     

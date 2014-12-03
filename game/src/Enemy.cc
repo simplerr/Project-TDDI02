@@ -37,11 +37,13 @@ void Enemy::update(float dt)
     { 
 	setVel(-mMoveSpeed, getVel().y);
 	mDirection = LEFT;
+	directionRight = false;
     }
     else if(mDirection == LEFT && getPosition().x < mLeftX)
     {
 	setVel(mMoveSpeed, getVel().y);
 	mDirection = RIGHT;
+	directionRight = true;
     }
 
     // tmp
@@ -87,7 +89,7 @@ void Enemy::draw(Renderer* renderer)
 	}
 }
 
-void Enemy::handleCollision(Object* object)
+void Enemy::handleCollision(Object* &object)
 {
 	object->setPosition(Vec2(0, 0));
 }
