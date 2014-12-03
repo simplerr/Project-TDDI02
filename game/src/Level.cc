@@ -35,6 +35,8 @@ Level::~Level()
 		delete mProjectiles[i];
     }
 	delete mFlagTexture;
+	delete mProjectile;
+	delete mExplosion;
 }
 
 void Level::addObject(Object* object)
@@ -405,6 +407,12 @@ void Level::update(float dt)
 
 void Level::draw(Renderer* renderer, bool flags)
 {
+	if (mProjectile == nullptr)
+		mProjectile = renderer->loadTexture(PROJECTILE_FILEPATH);
+		
+	if (mExplosion == nullptr)
+		mExplosion = renderer->loadTexture(EXPLOSION_FILEPATH);
+		
 	if ( mPlayer != nullptr )
 		renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), mLEVEL_WIDTH, mLEVEL_HEIGHT);
 	else{
@@ -467,10 +475,9 @@ void Level::clearList()
 
 void Level::addProjectile(Object* shooter)
 {
-
 	if(shooter->directionRight)
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId() ));
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), mProjectile, mExplosion ));
 	else
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId() ));
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), mProjectile, mExplosion ));
 	
 }

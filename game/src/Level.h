@@ -56,6 +56,8 @@ private:
   bool mKeyPressed = false;
   bool mLevelFinish;
   const int mPowerupTime = 5; //5 seconds powerup
+  Texture* mProjectile{nullptr};
+  Texture* mExplosion{nullptr};
 };
 
 #endif

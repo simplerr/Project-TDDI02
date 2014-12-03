@@ -1,8 +1,8 @@
 #include "Projectile.h"
 #include <iostream>
 
-Projectile::Projectile(Vec2 pos, bool dir, int id)
-    : Object(pos, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_FILEPATH)
+Projectile::Projectile(Vec2 pos, bool dir, int id, Texture* projectile, Texture* explosion)
+    : Object(pos, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_FILEPATH), mProjectile(projectile), mExplosion(explosion)
 {
     setId(Object::PLATFORM);
     mDir = dir;
@@ -12,7 +12,7 @@ Projectile::Projectile(Vec2 pos, bool dir, int id)
 
 Projectile::~Projectile()
 {
-    delete mExplosionTexture;
+    ;
 }
 
 void Projectile::update(float dt)
@@ -31,31 +31,22 @@ void Projectile::draw(Renderer* renderer)
 {
     if ( !getDead() )
     {
-        if(mTexture != nullptr)
-		{
-            if (!mDir)
-                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip++], true);
-            else
-                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip++], false);
-            if (mCurrentClip >= PROJECTILE_NUM_CLIPS)
-                mCurrentClip = 0;
-		}
-		else
-            mTexture = renderer->loadTexture(getFilename());
+        if (!mDir)
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mProjectile, PROJECTILE_CLIPS[mCurrentClip++], true );
+        else
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mProjectile, PROJECTILE_CLIPS[mCurrentClip++], false );
+        
+        if (mCurrentClip >= PROJECTILE_NUM_CLIPS)
+            mCurrentClip = 0;
     }
     else
     {
         if(mExplosionCountdown <= EXPLOSION_NUM_CLIPS)
         {
-            if(mExplosionTexture != nullptr)
-            {
-                if (!mDir)
-                    renderer->drawTextureAnimation(Vec2( getPosition().x-40, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosionTexture, EXPLOSION_CLIPS[mExplosionCountdown++], false);
-                else
-                    renderer->drawTextureAnimation(Vec2( getPosition().x+40, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosionTexture, EXPLOSION_CLIPS[mExplosionCountdown++], false);
-            }
+            if (!mDir)
+                renderer->drawTextureAnimation(Vec2( getPosition().x-20, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosion, EXPLOSION_CLIPS[mExplosionCountdown++], false);
             else
-                mExplosionTexture = renderer->loadTexture(EXPLOSION_FILEPATH);
+                renderer->drawTextureAnimation(Vec2( getPosition().x+30, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosion, EXPLOSION_CLIPS[mExplosionCountdown++], false);
         }
     }
     //PROJECTILE_WIDTH
@@ -84,6 +75,6 @@ void Projectile::handleCollision(Object* &object)
 
 Object* Projectile::clone()
     {
-        Object* NewObject = new Projectile(getPosition(), mDir, mId);
+        Object* NewObject = new Projectile(getPosition(), mDir, mId, mProjectile, mExplosion );
         return NewObject;
     }
