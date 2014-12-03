@@ -1,5 +1,4 @@
 #include "Projectile.h"
-#include "constants.h"
 #include <iostream>
 
 Projectile::Projectile(Vec2 pos, bool dir)
@@ -12,7 +11,7 @@ Projectile::Projectile(Vec2 pos, bool dir)
 
 Projectile::~Projectile()
 {
-
+    delete mExplosionTexture;
 }
 
 void Projectile::update(float dt)
@@ -20,9 +19,9 @@ void Projectile::update(float dt)
     if( !getDead() )
     {
         if (mDir == 0)
-            setPosition(getPosition().x-mProjectileSpeed, getPosition().y);
+            setPosition(getPosition().x-PROJECTILE_SPEED, getPosition().y);
         else
-            setPosition(getPosition().x+mProjectileSpeed, getPosition().y);
+            setPosition(getPosition().x+PROJECTILE_SPEED, getPosition().y);
         
         //Animation
         ++mClipDelay;
@@ -51,6 +50,21 @@ void Projectile::draw(Renderer* renderer)
 		}
 		else
             mTexture = renderer->loadTexture(getFilename());
+    }
+    else
+    {
+        if(mExplosionCountdown <= EXPLOSION_NUM_CLIPS)
+        {
+            if(mExplosionTexture != nullptr)
+            {
+                if (!mDir)
+                    renderer->drawTextureAnimation(Vec2( getPosition().x-40, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosionTexture, EXPLOSION_CLIPS[mExplosionCountdown++], false);
+                else
+                    renderer->drawTextureAnimation(Vec2( getPosition().x+40, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosionTexture, EXPLOSION_CLIPS[mExplosionCountdown++], false);
+            }
+            else
+                mExplosionTexture = renderer->loadTexture(EXPLOSION_FILEPATH);
+        }
     }
     //PROJECTILE_WIDTH
 }

@@ -462,7 +462,7 @@ void Level::clearList()
 void Level::addProjectile(Object* shooter)
 {
 	if(shooter->directionRight)
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+20 ), shooter->directionRight ));
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight ));
 	else
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+20 ), shooter->directionRight ));
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight ));
 }

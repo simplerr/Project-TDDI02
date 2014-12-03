@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include "Vec2.h"
+#include "constants.h"
 
 class Renderer;
 
@@ -18,12 +19,12 @@ public:
     void draw(Renderer* renderer);
     void handleCollision(Object* collider);
 private:
-  int mProjectileSpeed{15};
   bool mDir;
   int mStartPosX;
   int mClipDelay{};
   int mCurrentClip{6};
-  
+  int mExplosionCountdown{};
+  Texture* mExplosionTexture{nullptr};
 };
 
 #endif
