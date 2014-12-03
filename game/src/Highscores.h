@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "Netscores.h"
 using namespace std;
 
 struct scoremap {
@@ -15,8 +16,10 @@ class Highscores
 {
 public:
     Highscores(string filename);
-    ~Highscores() {};
+    ~Highscores();
     
+	int init(string);
+	void loadscores();
     void save();
     float getHighscoreTime(string level);
 	int getHighscoreScore(string level);
@@ -25,6 +28,8 @@ public:
 private:
     vector<scoremap> mHighscores;
     string mFilename;
+	string netscores;
+	Netscores *ns;
 };
 
 #endif

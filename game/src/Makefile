@@ -6,7 +6,7 @@ CCC	= g++ -std=c++11 -Wall -pedantic
 WIN	= i586-mingw32msvc-g++ -std=c++11 -Wall -pedantic
 LFLAGS	= -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 
-OFILES	= Game.o Enemy.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o Decoration.o Powerup.o Credit.o Timer.o Highscores.o Finish.o LavaPlatform.o Projectile.o
+OFILES	= Game.o Enemy.o PlayState.o Renderer.o Level.o Platform.o Object.o Player.o Texture.o MenuState.o PauseState.o EditorState.o Sound.o Button.o Background.o Decoration.o Powerup.o Credit.o Timer.o Highscores.o Finish.o LavaPlatform.o Projectile.o Netscores.o
 
 
 all: main.cc $(OFILES)
@@ -83,6 +83,9 @@ Finish.o: Finish.cc Finish.h constants.h
 
 Projectile.o: Projectile.cc Projectile.h constants.h
 	$(CCC) -c Projectile.cc
+
+Netscores.o: Netscores.cc Netscores.h constants.h
+	$(CCC) -c Netscores.cc
 
 clean:
 	@ \rm -rf *.o *.gch core
