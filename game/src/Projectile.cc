@@ -43,7 +43,7 @@ void Projectile::draw(Renderer* renderer)
             renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mProjectile, PROJECTILE_CLIPS[mCurrentClip++], false );
         
         if (mCurrentClip >= PROJECTILE_NUM_CLIPS)
-            mCurrentClip = 0;
+            mCurrentClip = 2;
     }
     else
     {
