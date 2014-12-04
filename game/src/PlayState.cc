@@ -92,10 +92,6 @@ void PlayState::update(float dt)
 
 			mHighscores->updateHighscore(mLevel->getCurrentLevel(), mTimer.getSeconds(), mPlayer->getScore());
 			mHighscores->save();		       
-		} 
-		else if (mPlayer->getPosition().y + mPlayer->getHeight() > mLevel->getLevelSize().y || mPlayer->getDead()) // Trillar spelaren ned, ladda om banan
-		{
-		    init(mLevel->getCurrentLevel()); // (Kan behövas ändras)
 		}
 	}
 
@@ -133,7 +129,7 @@ void PlayState::draw(Renderer* renderer)
 	
 	if (mPlayer->getPowerUp())
 	{
-		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << -1*(mPlayer->getTimer()-mLevel->getPowerupTime());
+		currentPowerupTime << fixed << setw(7) << std::setprecision(1) << left  << -1*(mPlayer->getTimer()- POWERUP_TIME);
 		PowerupTimer->draw( renderer, currentPowerupTime.str() );
 	}
 	
@@ -156,7 +152,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 			case SDLK_UP:
 			    if(!mPlayer->getjump() && !mPlayer->getfall())
 			    {
-					mPlayer->setjump(1);
+					mPlayer->setjump(true);
 			    }
 			break;
 			case SDLK_LEFT:

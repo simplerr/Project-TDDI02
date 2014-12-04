@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Texture.h"
 #include "Projectile.h"
+#include "Finish.h"
 using namespace std;
 
 class Object;
@@ -27,8 +28,7 @@ public:
     void setCam(int x, int y);
     Vec2 getCam(){ return Vec2(camX, camY); }
     void clearList();
-    Vec2 getLevelSize(){ return Vec2(mLEVEL_WIDTH, mLEVEL_HEIGHT); }
-
+    void reloadLevel();
     
   Player* findPlayer();
   bool loadLevel(string filename, int k = 1);
@@ -39,7 +39,6 @@ public:
   string getCurrentLevel() { return mFilename; }
   Object* getObjectAt(float x, float y);
   bool getLevelFinish(){ return mLevelFinish; }
-  int getPowerupTime(){return mPowerupTime;}
   void addProjectile(Object* shooter);
  
 private:
@@ -47,6 +46,8 @@ private:
   vector<Object*> mBackgrounds;
   vector<Projectile*> mProjectiles;
   Player* mPlayer = nullptr;
+  Vec2 mPlayerStartPos;
+  Finish* mFinish = nullptr;
   string mFilename;
   int mLEVEL_WIDTH;
   int mLEVEL_HEIGHT;
@@ -55,7 +56,6 @@ private:
   Texture* mFlagTexture;
   bool mKeyPressed = false;
   bool mLevelFinish;
-  const int mPowerupTime = 5; //5 seconds powerup
   Texture* mProjectile{nullptr};
   Texture* mExplosion{nullptr};
 };

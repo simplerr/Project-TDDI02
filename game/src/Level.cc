@@ -60,8 +60,16 @@ bool Level::loadLevel(string filename, int mode)
 		{
 			input >> posx >> posy >> width >> height;
 			input >> path;
-			if (index == Object::PLAYER) // Player 
-			    mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );		    
+			if (index == Object::PLAYER) // Player
+			{
+				if (mode == 2)
+					mObjects.push_back( new Player(Vec2(posx, posy), width, height, path) );
+				else
+				{
+					mPlayer = new Player(Vec2(posx, posy), width, height, path);
+					mPlayerStartPos = Vec2(posx, posy);
+				}
+			}
 			else if (index == Object::PLATFORM) // Platformar
 			    mObjects.push_back( new Platform(Vec2(posx, posy), width, height, path) );
 			else if (index == Object::ENEMY) // Fiender
@@ -75,7 +83,12 @@ bool Level::loadLevel(string filename, int mode)
 			else if(index == Object::LAVA_PLATFORM)			
 			    mObjects.push_back(new LavaPlatform(Vec2(posx, posy), width, height, path));      
 			else if (index == Object::FINISH) // Powerups
-			    mObjects.push_back( new Finish(Vec2(posx, posy), width, height, path) );
+			{
+				if (mode == 2)
+					mObjects.push_back( new Finish(Vec2(posx, posy), width, height, path) );
+				else
+					mFinish = new Finish(Vec2(posx, posy), width, height, path);
+			}
 			else if ( mode == 1 ) // Play 
 			{
 			    if (index == Object::DECORATION) // Decoration
@@ -95,6 +108,7 @@ bool Level::loadLevel(string filename, int mode)
 		}
 	
 	input.close();
+
 	return true;
     }
     else
@@ -102,6 +116,7 @@ bool Level::loadLevel(string filename, int mode)
 	cerr << "Error, kunde inte hitta eller öppna kartan. Filnamn som söktes: " << mFilename << "\n";
 	return false;
     }
+	
 }
 
 bool Level::saveLevel(string filename)
@@ -248,21 +263,19 @@ void Level::setCam(int x, int y)
 }
 
 void Level::update(float dt)
-{	
+{
+	if (mPlayer->getPosition().y + mPlayer->getHeight() > mLEVEL_HEIGHT || mPlayer->getDead()) // Trillar spelaren ned, ladda om banan
+	{
+		reloadLevel(); // (Kan behövas ändras)
+	}
+	
     // collision
-	bool x, y = false;
-	Object* objectColliedY;
-	Object* objectColliedX;
+	Object* colliedX{nullptr};
+	Object* colliedY{nullptr};
 
-    if(mPlayer->getPowerUp())
-    {
-	if(mPlayer->getTimer() > mPowerupTime)
-	    mPlayer->powerDown();
-    }
     for(unsigned int i = 0; i < mObjects.size(); i++) //Börjar på 1 eftersom att Player ligger på 0 (ändra om det ändras)
     {
-		
-		if(mObjects[i]->getDead()) //Så att den inte kollar kollision med sig själv...
+		if(mObjects[i]->getDead())
 			continue;
 		
 		for(unsigned int p = 0; p < mProjectiles.size(); p++)
@@ -270,161 +283,62 @@ void Level::update(float dt)
 			mProjectiles[p]->handleCollision(mObjects[i]);
 		}
 		
-		if ( mObjects[i]->getId() == Object::ENEMY )
+		if ( mObjects[i]->getId() == Object::ENEMY ) // FIENDERS PROJEKTILER
 			{
 				if (rand() % ENEMY_SHOOT_CHANCE == 1)
 				{
 					addProjectile(mObjects[i]);
 				}
 			}
+		
+		if( mPlayer->checkCollisionX(mObjects[i]) )
+			colliedX = mObjects[i];
+		
+		if ( mPlayer->checkCollisionY(mObjects[i]) )
+			colliedY = mObjects[i];
+		
 		mObjects[i]->update(dt);
-		if(mPlayer == mObjects[i]) //Så att den inte kollar kollision med sig själv...
-		{
-			if (mObjects[i]->getDead())
-				mPlayer->setDead();
-			continue;
-		}
-		
-		//##############
-		// KOLLA OM KOLLISION FÖR PLAYER X-LED3
-		mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, mObjects[i]) || mPlayer->getPosition().x < 0 ) //KOLLA COLLISION
-		{
-			x = true;
-			objectColliedX = mObjects[i];
-		}
-		mPlayer->setPosition(mPlayer->getPosition().x - mPlayer->getVel().x, mPlayer->getPosition().y); //FLYTTA TBX
-		// KOLLA OM KOLLISION FÖR PLAYER Y-LED
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y); //FLYTTA FRAM
-		if ( mPlayer->collision(mPlayer, mObjects[i])) //KOLLA COLLISION
-		{
-			y = true;
-			objectColliedY = mObjects[i];
-		}
-		mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y - mPlayer->getVel().y );//FLYTTA TBX
-		//##############
-    }
-	if ( !x ) // OM INGEN KOLLISION MED PLAYER X-LED, UPPDATERA POS X-LED
-	{
-	    mPlayer->setPosition(mPlayer->getPosition().x + mPlayer->getVel().x, mPlayer->getPosition().y);
-	}
-	else
-	{
-	    
-	    if(objectColliedX->getId() == Object::ENEMY || objectColliedX->getId() == Object::LAVA_PLATFORM)
-	    {
-			mPlayer->setDead();
-	    }
-	    else if(objectColliedX->getId() == Object::POWERUP)
-	    {
-			objectColliedX->setDead();
-			mPlayer->powerUp();
-	    }
-	    else if(objectColliedX->getId() == Object::FINISH)
-		{
-			mLevelFinish = true;
-		}
-			
-	    mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y);
-	    
-	}
+	} // END OF OBJECT LOOP
 	
-	if ( !y ) // OM INGEN KOLLISION MED PLAYER Y-LED, UPPDATERA POS Y-LED
-	{		
-	    if(mPlayer->getjump()) //Hanterar ifall spelaren är inuti ett hopp
-	    {
-			mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y +1);
-			mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
-	    }
-	    else //Hanterar ifall spelaren faller eller ej
-	    {
-			if(!mPlayer->getfall())
-			{
-				mPlayer->setfall(1);
-			}
-			else if(mPlayer->getfall())
-			{
-				mPlayer->setVel(mPlayer->getVel().x, mPlayer->getVel().y + 1);
-				mPlayer->setPosition(mPlayer->getPosition().x, mPlayer->getPosition().y + mPlayer->getVel().y);
-			}
-	    }
-	}
-	else
-	{
-	    if (objectColliedY->getId() == Object::FINISH)
-		{
-			mLevelFinish = true;
-		}
-		
-		// OBS! Temp, flytta till handleCollision()
-		if(objectColliedY->getId() == Object::LAVA_PLATFORM)
-		    mPlayer->setDead();
-
-		mPlayer->setjump(2); //Sätter jump till false
-
-		
-		if( mPlayer->getVel().y >= 0 ) //Fixar så att man inte fastnar i platformar men fortrafande buggigt
-		{
-		    if(objectColliedY->getId() == Object::ENEMY)
-			{
-			    objectColliedY->setDead();
-			    mPlayer->incScore();
-			    mPlayer->setjump(1);
-			}
-		    else if(objectColliedY->getId() == Object::POWERUP)
-			{
-			    objectColliedY->setDead();
-			    mPlayer->powerUp();
-			}
-			else
-			{
-			    mPlayer->setfall(2); //Sätter fall till false
-			    mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y-mPlayer->getHeight()-1); //om du ska hamna över
-			}
-		}
-		else
-		{
-		    if(objectColliedY->getId() == Object::ENEMY)
-		    {
-			mPlayer->setDead();
-		    }
-		    else if(objectColliedY->getId() == Object::POWERUP)
-		    {
-			objectColliedY->setDead();
-			mPlayer->powerUp();
-		    }    
-			mPlayer->setPosition(mPlayer->getPosition().x, objectColliedY->getPosition().y+objectColliedY->getHeight()+1); // om du ska hamna under
-			mPlayer->setfall(1); //Sätter hopp till true
-		}
-	}
+	mPlayer->handleCollisionX(colliedX);
+	mPlayer->handleCollisionY(colliedY);
+	mPlayer->update(dt);
+	
+	mLevelFinish = mFinish->checkFinish(mPlayer);
 	
 	for(unsigned int p = 0; p < mProjectiles.size(); p++)
 	{
 		mProjectiles[p]->update(dt);
+		mProjectiles[p]->handleCollision(mPlayer);
 	}
 	
 } // END OF UPDATE
 
 void Level::draw(Renderer* renderer, bool flags)
 {
-	if (mProjectile == nullptr)
-		mProjectile = renderer->loadTexture(PROJECTILE_FILEPATH);
-		
-	if (mExplosion == nullptr)
-		mExplosion = renderer->loadTexture(EXPLOSION_FILEPATH);
-		
+	// UPPDATERAR SMART-KAMERA
 	if ( mPlayer != nullptr )
 		renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), mLEVEL_WIDTH, mLEVEL_HEIGHT);
-	else{
+	else
 		renderer->updateCamera(camX, camY, 0, 0, 10000, 10000);
-	}
-	for(unsigned int i = 0; i < mBackgrounds.size(); i++)
-		mBackgrounds[i]->draw(renderer);
+		
+	if (!flags)
+	{
+		// LADDAR TEXTURER FÖR PROJEKTILER
+		if (mProjectile == nullptr)
+			mProjectile = renderer->loadTexture(PROJECTILE_FILEPATH);
+		if (mExplosion == nullptr)
+			mExplosion = renderer->loadTexture(EXPLOSION_FILEPATH);
+		
+		// RITAR UT BAKGRUNDER OCH DEKORATIONER
+		for(unsigned int i = 0; i < mBackgrounds.size(); i++)
+			mBackgrounds[i]->draw(renderer);
+	}		
+	// RITAR UT ALLA PLATFORMAR OCH FIENDER SAMT POWERUPS
     for(unsigned int i = 0; i < mObjects.size(); i++)
 	{
-		
 		mObjects[i]->draw(renderer);
-		if (mObjects[i]->getId() == Object::ENEMY && flags == true)
+		if (mObjects[i]->getId() == Object::ENEMY && flags == true) // SPECIALFALL: OM flags = sant, RITAR UT SLUTPOS FÖR FIENDER...(för EDITOR)
 		{
 			Enemy* enemy = dynamic_cast<Enemy*>(mObjects[i]);
 			if (enemy->getEndX() != enemy->getPosition().x)
@@ -436,9 +350,15 @@ void Level::draw(Renderer* renderer, bool flags)
 			}
 		}
     }
-	for(unsigned int p = 0; p < mProjectiles.size(); p++)
+	if (!flags)
 	{
-		mProjectiles[p]->draw(renderer);
+		// RITAR UT PROJEKTILER
+		for(unsigned int p = 0; p < mProjectiles.size(); p++)
+		{
+			mProjectiles[p]->draw(renderer);
+		}
+		mFinish->draw(renderer); 
+		mPlayer->draw(renderer);
 	}
 	
 } // END OF DRAW()
@@ -450,15 +370,7 @@ Object* Level::getObjectAt(float x, float y)
 
 Player* Level::findPlayer()
 {
-    for(unsigned int i{}; i < mObjects.size(); ++i)
-    {
-	if (mObjects[i]->getId() == Object::PLAYER)
-		{
-			mPlayer = dynamic_cast<Player*>(mObjects[i]);
-			return mPlayer;
-		}
-    }
-    return nullptr;
+	return mPlayer;
 }
 
 void Level::clearList()
@@ -479,5 +391,20 @@ void Level::addProjectile(Object* shooter)
 		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), mProjectile, mExplosion ));
 	else
 		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), mProjectile, mExplosion ));
+	
+}
+
+void Level::reloadLevel()
+{
+	for(unsigned int i{}; i < mProjectiles.size(); ++i)
+    {
+		delete mProjectiles[i];
+    }
+	mProjectiles.resize(0);
+	for(unsigned int i{}; i < mObjects.size(); ++i)
+	{
+		mObjects[i]->setAlive();
+	}
+	mPlayer->setPosition(mPlayerStartPos);
 	
 }

@@ -19,10 +19,16 @@ void Projectile::update(float dt)
 {
     if( !getDead() )
     {
-        if (mDir == 0)
-            setPosition(getPosition().x-PROJECTILE_SPEED, getPosition().y);
+        int speed;
+        if ( mId == 0 )
+            speed = PLAYER_PROJECTILE_SPEED;
         else
-            setPosition(getPosition().x+PROJECTILE_SPEED, getPosition().y);
+            speed = ENEMY_PROJECTILE_SPEED;
+            
+        if (mDir == 0)
+            setPosition(getPosition().x-speed, getPosition().y);
+        else
+            setPosition(getPosition().x+speed, getPosition().y);
     }
     
 }
@@ -50,6 +56,22 @@ void Projectile::draw(Renderer* renderer)
         }
     }
     //PROJECTILE_WIDTH
+}
+
+void Projectile::handleCollision(Player* &object)
+{
+    if ( !getDead() && mId != object->getId())
+    {
+        if(collision(this, dynamic_cast<Object*>(object)))
+        {
+                object->setDead();
+                setDead();
+        }
+        else if ( mDir && getPosition().x > mStartPosX+PROJECTILE_LENGTH )
+            setDead();
+        else if ( !mDir && getPosition().x < mStartPosX-PROJECTILE_LENGTH )
+            setDead();
+    }
 }
 
 void Projectile::handleCollision(Object* &object)

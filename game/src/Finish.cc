@@ -31,3 +31,8 @@ Object* Finish::clone()
         Object* NewObject = new Finish(getPosition(), getWidth(), getHeight(), getFilename());
         return NewObject;
     }
+
+bool Finish::checkFinish(Player* collider)
+{
+    return collision(dynamic_cast<Object*>(this), dynamic_cast<Object*>(collider));
+}   

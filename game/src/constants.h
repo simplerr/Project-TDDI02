@@ -27,6 +27,7 @@ static const std::string TOEDITOR_BUTTON = "../imgs/buttons/menu/toEditor.png";
 
 //###### PLAY //#####
 
+static const int POWERUP_TIME = 5;
  // Animation för player
 static const Vec2 PLAYER_CLIP_LEFT[] {
   {36,0,37,55}, // STANDING
@@ -40,7 +41,6 @@ static const Vec2 PLAYER_CLIP_LEFT[] {
   {44,118,44,55}, //RUNNING
   {0,118,44,55} //RUNNING
 };
-static const int ENEMY_SHOOT_CHANCE = 600; // ca. 1 på ENEMY_SHOOT_CHANCE per framerate
 static const Vec2 ENEMY_CLIPS[] {
   {0,0,390,454},
   {390,0,390,454},
@@ -53,7 +53,9 @@ static const int PROJECTILE_WIDTH = 60;
 static const int PROJECTILE_HEIGHT = 30;
 static const int PROJECTILE_LENGTH = 350;
 static const int PROJECTILE_NUM_CLIPS = 15;
-static const int PROJECTILE_SPEED = 10;
+static const int PLAYER_PROJECTILE_SPEED = 12;
+static const int ENEMY_PROJECTILE_SPEED = 4;
+static const int ENEMY_SHOOT_CHANCE = 400; // ca. 1 på ENEMY_SHOOT_CHANCE per framerate
 static const Vec2 PROJECTILE_CLIPS[] {
   {0,0,30,15},
   {30,0,30,15},

@@ -5,6 +5,7 @@
 #include "Vec2.h"
 #include "constants.h"
 #include "Texture.h"
+#include "Player.h"
 
 class Renderer;
 
@@ -19,6 +20,7 @@ public:
     void update(float dt);
     void draw(Renderer* renderer);
     void handleCollision(Object* &collider);
+    void handleCollision(Player* &collider);
 private:
   Texture* mProjectile;
   Texture* mExplosion;

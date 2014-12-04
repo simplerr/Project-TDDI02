@@ -31,6 +31,7 @@ public:
     void setHeight( int newH){ mHeight = newH; }
     string getFilename() { return mFilename; }
     void setDead() { mDead = true; }
+    void setAlive() { mDead = false; }
     bool getDead() { return mDead; }
     int getDeadAnimationCounter() { return mDeadAnimationCounter; }
     void decDeadAnimationCounter() { --mDeadAnimationCounter; }
