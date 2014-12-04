@@ -19,7 +19,7 @@ public:
     virtual void update(float dt) = 0;
     virtual void draw(Renderer* renderer);
     void draw(Renderer* renderer, Vec2 mousePos);
-    virtual void handleCollision(Object* collider) = 0;
+    virtual void handleCollision(Object* &collider) = 0;
     virtual bool collision(Object* objectA, Object* objectB);
     virtual Object* clone() = 0;
     
@@ -31,9 +31,11 @@ public:
     void setHeight( int newH){ mHeight = newH; }
     string getFilename() { return mFilename; }
     void setDead() { mDead = true; }
+    void setAlive() { mDead = false; }
     bool getDead() { return mDead; }
     int getDeadAnimationCounter() { return mDeadAnimationCounter; }
     void decDeadAnimationCounter() { --mDeadAnimationCounter; }
+    void resetDeadAnimationCounter(){ mDeadAnimationCounter = 40; }
     
     void setPosition(Vec2 pos);
     void setPosition(float x, float y);

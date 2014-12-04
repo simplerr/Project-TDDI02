@@ -107,8 +107,7 @@ void EditorState::init(string initData)
 	
 	mLevel = new Level();
 	mLevel->setCurrentLevel(FILEPATH_LVL1);
-	mLevel->loadLevel(mLevel->getCurrentLevel(), 2);
-	
+	mLevel->loadLevel(mLevel->getCurrentLevel(), 2);	
 }
 
 void EditorState::cleanup()
@@ -137,6 +136,7 @@ void EditorState::draw(Renderer* renderer)
 	//Ritar ut alla object (platformar osv....)
 	mLevel->draw(renderer, true); //Rita ut alla skapade objekt
 
+		std::cout << "HÄR\n"; 
 	//Ritar ut markerat objekt om det inte är en bakgrund
 	if (currentObject != nullptr && currentObject->getId() != Object::BACKGROUND && setEnemyFlag == false)
 	    currentObject->draw(renderer, gridPos);

@@ -15,10 +15,10 @@ public:
     
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleCollision(Object* collider);
+    void handleCollision(Object* &collider);
     void addVel(int VelX, int VelY);
-    void setjump(int i);
-    void setfall(int i);
+    void setjump(bool i);
+    void setfall(bool i);
     bool getfall();
     bool getjump();
     void setVel(int x, int y);
@@ -29,10 +29,13 @@ public:
     bool getDead() { return mDead; }
     bool getPowerUp() { return mPowerUp; }
     float getTimer() { return mPowerUptime.getSeconds(); }
-    
-    //void playerJump(int speed)
+    bool checkCollisionX(Object* &object);
+    bool checkCollisionY(Object* &object);
+    void handleCollisionX(Object* &collider);
+    void handleCollisionY(Object* &collider);
 	void incScore();
 	int getScore();
+    void reset();
 
     Vec2 getVel();
 private:
@@ -47,6 +50,8 @@ private:
     Timer mPowerUptime;
     int mClipcounter{}; // == EN DELAY FÖR ANIMATIONEN
     int mPlayerClip;
+    bool colliedX{false};
+    bool colliedY{false};
     
 };
 

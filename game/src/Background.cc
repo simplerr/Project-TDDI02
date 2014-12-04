@@ -21,7 +21,7 @@ void Background::draw(Renderer* renderer)
     Object::draw(renderer);
 }
 
-void Background::handleCollision(Object* object)
+void Background::handleCollision(Object* &object)
 {
 
 }

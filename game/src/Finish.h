@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include "Vec2.h"
+#include "Player.h"
 
 class Renderer;
 
@@ -16,7 +17,8 @@ public:
     
     void update(float dt);
     void draw(Renderer* renderer);
-    void handleCollision(Object* collider);
+    void handleCollision(Object* &collider);
+    bool checkFinish(Player* collider);
 private:
 };
 

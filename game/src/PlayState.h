@@ -37,8 +37,6 @@ public:
 
 	void setSpeed(float);
 	float getSpeed();
-	void setTimer(Uint32);
-	void speedUp();
 
     StateId getStateId() { return PLAY_STATE; }
 private:
@@ -56,7 +54,6 @@ private:
     Vec2 mousePos;
     int boostSeconds;
     bool boostEnable;
-    Timer mTimer;
     bool R, L; //Används för Vel bugg...
     Highscores* mHighscores;
     bool mSoundMuted{true};

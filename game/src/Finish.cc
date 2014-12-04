@@ -21,7 +21,7 @@ void Finish::draw(Renderer* renderer)
     Object::draw(renderer);
 }
 
-void Finish::handleCollision(Object* object)
+void Finish::handleCollision(Object* &object)
 {
 
 }
@@ -31,3 +31,8 @@ Object* Finish::clone()
         Object* NewObject = new Finish(getPosition(), getWidth(), getHeight(), getFilename());
         return NewObject;
     }
+
+bool Finish::checkFinish(Player* collider)
+{
+    return collision(dynamic_cast<Object*>(this), dynamic_cast<Object*>(collider));
+}   

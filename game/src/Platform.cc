@@ -21,7 +21,7 @@ void Platform::draw(Renderer* renderer)
     Object::draw(renderer);
 }
 
-void Platform::handleCollision(Object* object)
+void Platform::handleCollision(Object* &object)
 {
 
 }

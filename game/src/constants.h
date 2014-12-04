@@ -27,6 +27,7 @@ static const std::string TOEDITOR_BUTTON = "../imgs/buttons/menu/toEditor.png";
 
 //###### PLAY //#####
 
+static const int POWERUP_TIME = 5;
  // Animation för player
 static const Vec2 PLAYER_CLIP_LEFT[] {
   {36,0,37,55}, // STANDING
@@ -52,6 +53,9 @@ static const int PROJECTILE_WIDTH = 60;
 static const int PROJECTILE_HEIGHT = 30;
 static const int PROJECTILE_LENGTH = 350;
 static const int PROJECTILE_NUM_CLIPS = 15;
+static const int PLAYER_PROJECTILE_SPEED = 12;
+static const int ENEMY_PROJECTILE_SPEED = 4;
+static const int ENEMY_SHOOT_CHANCE = 400; // ca. 1 på ENEMY_SHOOT_CHANCE per framerate
 static const Vec2 PROJECTILE_CLIPS[] {
   {0,0,30,15},
   {30,0,30,15},
@@ -68,6 +72,60 @@ static const Vec2 PROJECTILE_CLIPS[] {
   {0,60,30,15},
   {30,60,30,15},
   {60,60,30,15}
+};
+static const std::string EXPLOSION_FILEPATH = "../imgs/textures/explosion.png";
+static const int EXPLOSION_DIAMETER = 40;
+static const int EXPLOSION_NUM_CLIPS = 45;
+static const Vec2 EXPLOSION_CLIPS[] {
+  {0,0,100,100},
+  {100,0,100,100},
+  {200,0,100,100},
+  {300,0,100,100},
+  {400,0,100,100},
+  {500,0,100,100},
+  {600,0,100,100},
+  {700,0,100,100},
+  {800,0,100,100},
+  
+    {0,100,100,100},
+  {100,100,100,100},
+  {200,100,100,100},
+  {300,100,100,100},
+  {400,100,100,100},
+  {500,100,100,100},
+  {600,100,100,100},
+  {700,100,100,100},
+  {800,100,100,100},
+  
+    {0,200,100,100},
+  {100,200,100,100},
+  {200,200,100,100},
+  {300,200,100,100},
+  {400,200,100,100},
+  {500,200,100,100},
+  {600,200,100,100},
+  {700,200,100,100},
+  {800,200,100,100},
+  
+    {0,300,100,100},
+  {100,300,100,100},
+  {200,300,100,100},
+  {300,300,100,100},
+  {400,300,100,100},
+  {500,300,100,100},
+  {600,300,100,100},
+  {700,300,100,100},
+  {800,300,100,100},
+  
+  {0,400,100,100},
+  {100,400,100,100},
+  {200,400,100,100},
+  {300,400,100,100},
+  {400,400,100,100},
+  {500,400,100,100},
+  {600,400,100,100},
+  {700,400,100,100},
+  {800,400,100,100}
 };
 /*
 static const Vec2 PROJECTILE_CLIPS[] {

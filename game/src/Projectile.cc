@@ -1,39 +1,34 @@
 #include "Projectile.h"
-#include "constants.h"
 #include <iostream>
 
-Projectile::Projectile(Vec2 pos, bool dir)
-    : Object(pos, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_FILEPATH)
+Projectile::Projectile(Vec2 pos, bool dir, int id, Texture* projectile, Texture* explosion)
+    : Object(pos, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_FILEPATH), mProjectile(projectile), mExplosion(explosion)
 {
     setId(Object::PLATFORM);
     mDir = dir;
     mStartPosX = pos.x;
+    mId = id;
 }
 
 Projectile::~Projectile()
 {
-
+    ;
 }
 
 void Projectile::update(float dt)
 {
     if( !getDead() )
     {
-        if (mDir == 0)
-            setPosition(getPosition().x-mProjectileSpeed, getPosition().y);
+        int speed;
+        if ( mId == 0 )
+            speed = PLAYER_PROJECTILE_SPEED;
         else
-            setPosition(getPosition().x+mProjectileSpeed, getPosition().y);
-        
-        //Animation
-        ++mClipDelay;
-         if (mClipDelay > 1)
-         {
-            ++mCurrentClip;
-            mClipDelay = 0;
-            if (mCurrentClip >= PROJECTILE_NUM_CLIPS)
-                mCurrentClip = 0;
-        }   
-         // Animation slut
+            speed = ENEMY_PROJECTILE_SPEED;
+            
+        if (mDir == 0)
+            setPosition(getPosition().x-speed, getPosition().y);
+        else
+            setPosition(getPosition().x+speed, getPosition().y);
     }
     
 }
@@ -42,26 +37,50 @@ void Projectile::draw(Renderer* renderer)
 {
     if ( !getDead() )
     {
-        if(mTexture != nullptr)
-		{
+        if (!mDir)
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mProjectile, PROJECTILE_CLIPS[mCurrentClip++], true );
+        else
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mProjectile, PROJECTILE_CLIPS[mCurrentClip++], false );
+        
+        if (mCurrentClip >= PROJECTILE_NUM_CLIPS)
+            mCurrentClip = 0;
+    }
+    else
+    {
+        if(mExplosionCountdown <= EXPLOSION_NUM_CLIPS)
+        {
             if (!mDir)
-                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip], true);
+                renderer->drawTextureAnimation(Vec2( getPosition().x-20, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosion, EXPLOSION_CLIPS[mExplosionCountdown++], false);
             else
-                renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PROJECTILE_CLIPS[mCurrentClip], false);
-		}
-		else
-            mTexture = renderer->loadTexture(getFilename());
+                renderer->drawTextureAnimation(Vec2( getPosition().x+30, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosion, EXPLOSION_CLIPS[mExplosionCountdown++], false);
+        }
     }
     //PROJECTILE_WIDTH
 }
 
-void Projectile::handleCollision(Object* object)
+void Projectile::handleCollision(Player* &object)
 {
-    if ( !getDead() )
+    if ( !getDead() && mId != object->getId())
+    {
+        if(collision(this, dynamic_cast<Object*>(object)))
+        {
+                object->setDead();
+                setDead();
+        }
+        else if ( mDir && getPosition().x > mStartPosX+PROJECTILE_LENGTH )
+            setDead();
+        else if ( !mDir && getPosition().x < mStartPosX-PROJECTILE_LENGTH )
+            setDead();
+    }
+}
+
+void Projectile::handleCollision(Object* &object)
+{
+    if ( !getDead() && mId != object->getId())
     {
         if(collision(this, object))
         {
-            if (object->getId() == Object::ENEMY )
+            if (object->getId() == Object::ENEMY || object->getId() == Object::PLAYER )
             {
                 object->setDead();
                 setDead();
@@ -78,6 +97,6 @@ void Projectile::handleCollision(Object* object)
 
 Object* Projectile::clone()
     {
-        Object* NewObject = new Projectile(getPosition(), mDir);
+        Object* NewObject = new Projectile(getPosition(), mDir, mId, mProjectile, mExplosion );
         return NewObject;
     }
