@@ -5,6 +5,9 @@
 
 using namespace std;
 
+#define NODE "127.0.0.1" // to be updated
+#define SERVICE "5151"
+
 class Netscores {
  public:
 
@@ -13,6 +16,7 @@ class Netscores {
 
 	int dial(const char *, const char *);
 	std::string getnetscore();
+	int updatenetscores(const string &);
 
  private:
 	int fd;

@@ -6,7 +6,7 @@ Highscores::Highscores(string filename)
 {
 	ns = new Netscores;
 
-	init(mFilename);
+	init(filename);
 	loadscores();
 }
 
@@ -17,20 +17,23 @@ Highscores::~Highscores()
 
 int Highscores::init(string filename)
 {
-	// ska byta till serverns ip senare
-	if ((ns->dial("127.0.0.1", "5151") != 0) || ((netscores = ns->getnetscore()) == "error")) {
-		cerr << "kunde inte ansluta, laddar lokala highscores\n";
-		mFilename = "highscores.txt";
+	if ((netscores = ns->getnetscore()) == "error") {
+		mFilename = filename;
+		cerr << "Kunde inte ladda higscore från server. Laddar lokala highscores!\n";
+		net = false;
 		return -1;
 	}
 
 	mFilename = "nethighscores.txt";
 	ofstream of(mFilename);
-	if (!of) 
-		return -1;
-	
+	if (!of) {
+		mFilename = filename;
+		cerr << "Kunde inte ladda higscore från server. Laddar lokala highscores!\n";
+		net = false;
+	}
+
 	of << netscores;
-	of.close();	
+	of.close();
 
 	return 0;
 }
@@ -98,6 +101,13 @@ void Highscores::updateHighscore(string level, float time, int score)
 				mHighscores.at(i).time = time;
 			if (mHighscores.at(i).score < score || mHighscores.at(i).score == 0)
 				mHighscores.at(i).score = score;
+			
+			save();
+
+			if (net) 
+				if (ns->updatenetscores(mFilename) != 0)
+					cerr << "error updating net scores\n";
+			
 			
 			return;
 		}

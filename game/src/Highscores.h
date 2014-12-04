@@ -30,6 +30,7 @@ private:
     string mFilename;
 	string netscores;
 	Netscores *ns;
+	bool net;
 };
 
 #endif
