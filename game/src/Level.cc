@@ -405,6 +405,7 @@ void Level::reloadLevel()
 	for(unsigned int i{}; i < mObjects.size(); ++i)
 	{
 		mObjects[i]->setAlive();
+		mObjects[i]->resetDeadAnimationCounter();
 	}
 	mPlayer->setPosition(mPlayerStartPos);
 	mPlayer->reset();

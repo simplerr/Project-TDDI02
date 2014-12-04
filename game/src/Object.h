@@ -35,6 +35,7 @@ public:
     bool getDead() { return mDead; }
     int getDeadAnimationCounter() { return mDeadAnimationCounter; }
     void decDeadAnimationCounter() { --mDeadAnimationCounter; }
+    void resetDeadAnimationCounter(){ mDeadAnimationCounter = 40; }
     
     void setPosition(Vec2 pos);
     void setPosition(float x, float y);
