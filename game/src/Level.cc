@@ -18,6 +18,7 @@ Level::Level()
 	camY=SCREEN_HEIGHT/2;
 	mFlagTexture = nullptr;
 	mLevelFinish = false;
+	mTimer.start();
 }
 
 Level::~Level()
@@ -406,5 +407,7 @@ void Level::reloadLevel()
 		mObjects[i]->setAlive();
 	}
 	mPlayer->setPosition(mPlayerStartPos);
-	
+	mPlayer->reset();
+	mTimer.reset();
+	mReset = true;
 }

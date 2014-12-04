@@ -40,8 +40,13 @@ public:
   Object* getObjectAt(float x, float y);
   bool getLevelFinish(){ return mLevelFinish; }
   void addProjectile(Object* shooter);
- 
+  float getTime(){ return mTimer.getSeconds(); }
+  void pauseTime() { mTimer.pause(); }
+  void startTime() { mTimer.start(); }
+  bool getReset() { return mReset; }
+ void swichoffReset(){ mReset = false; }
 private:
+    Timer mTimer;
   vector<Object*> mObjects;
   vector<Object*> mBackgrounds;
   vector<Projectile*> mProjectiles;
@@ -58,6 +63,7 @@ private:
   bool mLevelFinish;
   Texture* mProjectile{nullptr};
   Texture* mExplosion{nullptr};
+  bool mReset{false};
 };
 
 #endif

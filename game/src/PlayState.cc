@@ -24,7 +24,6 @@ PlayState::PlayState()
 	mKilledCreaturesScreen = nullptr;
 	PowerupTimer = nullptr;
 	FPSTimer = nullptr;
-    mTimer.start();
     mHighscores = new Highscores("highscores.txt");
 }
 
@@ -51,7 +50,6 @@ void PlayState::init(string initData) // initData will be the filename of the le
 	mKilledCreaturesScreen = new ButtonText(Vec2(20, 55), 70, 30, " ", 250,250,250);
 	PowerupTimer = new ButtonText(Vec2((SCREEN_WIDTH/2)-75, 10), 150, 75, " ", 174,0,0);
 	FPSTimer = new ButtonText(Vec2(SCREEN_WIDTH - 90, 10), 70, 25, " ", 250,250,250);
-	mTimer.reset();
 	buttonList = {
 		new ButtonImg(Vec2(0, 0), 1024, 768, PAUSE_BACKGROUND),
 		new ButtonImg(Vec2((SCREEN_WIDTH/2)-100, 310), 200, 40, CONTINUE_BUTTON),
@@ -60,7 +58,6 @@ void PlayState::init(string initData) // initData will be the filename of the le
 		new ButtonImg(Vec2((SCREEN_WIDTH/2)-24, 430), 48, 48, MUTE_BUTTON)
 		
 	};
-	R = L = false;
 }
 
 void PlayState::cleanup()
@@ -69,12 +66,14 @@ void PlayState::cleanup()
 }
 
 void PlayState::update(float dt)
-{	
+{
+	if( mLevel->getReset() )
+	{
+		R = L = false;
+		mLevel->swichoffReset();
+	}
     if(!mPaused) {
 		mLevel->update(dt);
-		
-		if (boostEnable) // Enables when collision with powerup
-			speedUp(); // speedUp varar i SPEEDBOOSTSEC sekunder
 
 		
 		if ( mLevel->getLevelFinish() ) { // Om spelaren klarat banan;
@@ -90,7 +89,7 @@ void PlayState::update(float dt)
 			else
 				setNextState(BaseState::MENU_STATE);
 
-			mHighscores->updateHighscore(mLevel->getCurrentLevel(), mTimer.getSeconds(), mPlayer->getScore());
+			mHighscores->updateHighscore(mLevel->getCurrentLevel(), mLevel->getTime(), mPlayer->getScore());
 			mHighscores->save();		       
 		}
 	}
@@ -121,7 +120,7 @@ void PlayState::draw(Renderer* renderer)
 
     // draw timer progress
     ostringstream currentTime, currentKilledCreatures, currentPowerupTime, currentFPS;
-	currentTime << fixed << setw(7) << std::setprecision(1) << left<< mTimer.getSeconds();
+	currentTime << fixed << setw(7) << std::setprecision(1) << left << mLevel->getTime();
     mTimeOnScreen->draw( renderer, currentTime.str() );
 	
 	currentKilledCreatures << setw(10) << left << "Score:" <<  left << mPlayer->getScore();
@@ -175,7 +174,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 			if(e.key.keysym.sym == SDLK_ESCAPE)
 			{
 			    mPaused = !mPaused;
-			    mTimer.pause();
+			    mLevel->pauseTime();
 				if (L)
 					{
 						mPlayer->move(3);
@@ -216,7 +215,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 			if(e.key.keysym.sym == SDLK_ESCAPE) // GÅ TILLBAKA TILL SPELET VIA ESCAPE
 			{
 			    mPaused = !mPaused;
-			    mTimer.start();
+			    mLevel->startTime();
 				L = R = false;
 			}
 		
@@ -229,7 +228,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 					switch (i) {
 					case 1:
 						mPaused = !mPaused;
-						mTimer.start();
+						mLevel->startTime();
 						L = R = false;
 						break;
 					case 2:
@@ -265,25 +264,4 @@ float PlayState::getSpeed()
 	return speed;
 }
 
-void PlayState::setTimer(Uint32 t)
-{
-    //mTimer = t;
-}
 
-void PlayState::speedUp()
-{
-/*	if (boostSeconds > 0) {
-		setSpeed(BOOSTUPSPEED);
-		mTimer = SDL_GetTicks();
-		if (mTimer > mLastTime + 1000) {
-			boostSeconds--;
-			mLastTime = mTimer;
-		}
-			
-	} else {
-		// Enough with the fun
-		boostEnable = false;
-		speed = DEFAULTSPEED;
-		boostSeconds = SPEEDBOOSTSEC;
-		}*/
-}

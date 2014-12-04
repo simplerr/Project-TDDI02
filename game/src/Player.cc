@@ -21,6 +21,20 @@ Player::~Player()
     ;
 }
 
+void Player::reset()
+{
+    mVelY = 0;
+    mVelX = 0;
+    setId(Object::PLAYER);
+    mSpeed = 6;
+    mScore = 0;
+    mDead = false;
+    mPowerUp = false;
+    mPlayerClip = 0;
+    setjump(false);
+    setfall(true);
+}
+
 void Player::update(float dt)
 {
     

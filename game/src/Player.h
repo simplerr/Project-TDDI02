@@ -35,6 +35,7 @@ public:
     void handleCollisionY(Object* &collider);
 	void incScore();
 	int getScore();
+    void reset();
 
     Vec2 getVel();
 private:
