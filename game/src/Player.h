@@ -36,6 +36,7 @@ public:
 	void incScore();
 	int getScore();
     void reset();
+    void setShooting(){ mShooting = true; }
 
     Vec2 getVel();
 private:
@@ -52,7 +53,7 @@ private:
     int mPlayerClip;
     bool colliedX{false};
     bool colliedY{false};
-    
+    bool mShooting{false};
 };
 
 #endif

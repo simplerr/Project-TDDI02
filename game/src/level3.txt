@@ -26,6 +26,14 @@
 6 1328 160 400 184 ../imgs/textures/decorations/cloud.png
 6 1024 360 400 184 ../imgs/textures/decorations/cloud.png
 6 80 912 400 184 ../imgs/textures/decorations/cloud.png
+6 32 160 64 40 ../imgs/textures/decorations/Grass.png
+6 80 168 64 40 ../imgs/textures/decorations/Grass.png
+6 256 528 64 40 ../imgs/textures/decorations/Grass.png
+6 320 528 32 32 ../imgs/textures/decorations/Grass.png
+6 432 536 32 32 ../imgs/textures/decorations/Grass.png
+6 168 168 32 32 ../imgs/textures/decorations/Grass.png
+6 200 112 112 104 ../imgs/textures/decorations/Grass.png
+6 904 504 112 104 ../imgs/textures/decorations/Grass.png
 5 3704 416 40 40 ../imgs/textures/finish.png
 4 1448 744 792 8 ../imgs/textures/platforms/lava.png
 4 2240 744 776 8 ../imgs/textures/platforms/lava.png
@@ -206,4 +214,4 @@
 1 1928 1376 104 80 ../imgs/textures/platforms/Wall2.png
 1 1928 1456 104 80 ../imgs/textures/platforms/Wall6.png
 1 2032 1456 104 80 ../imgs/textures/platforms/Wall5.png
-0 40 120 48 48 ../imgs/textures/creatures/student.png
+0 64 104 48 48 ../imgs/textures/creatures/megha_knuckles.png

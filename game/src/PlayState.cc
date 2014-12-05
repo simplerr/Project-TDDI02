@@ -165,7 +165,7 @@ void PlayState::handleEvent(SDL_Event e, bool& exit, bool& muteSound)
 			case SDLK_SPACE:
 				//Object* toobject = dynamic_cast<Object*>(mPlayer);
 				mLevel->addProjectile(mPlayer);
-				
+				mPlayer->setShooting();
 			break;
 			default: break;
 			}

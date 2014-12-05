@@ -3,14 +3,12 @@
 #include "constants.h"
 #include "Level.h"
 #include "Object.h"
-#include "Player.h"
 #include "Powerup.h"
 #include "Enemy.h"
 #include "Platform.h"
 #include "Background.h"
 #include "Decoration.h"
 #include "LavaPlatform.h"
-#include "Finish.h"
 
 Level::Level()
 {
@@ -309,6 +307,11 @@ void Level::update(float dt)
 	
 	for(unsigned int p = 0; p < mProjectiles.size(); p++)
 	{
+		if (PROJECTILES_COLLISION_EACHOTHER)
+		{
+			for(unsigned int k = p+1; k < mProjectiles.size(); k++)
+				mProjectiles[p]->handleCollision(mProjectiles[k]);
+		}
 		mProjectiles[p]->update(dt);
 		mProjectiles[p]->handleCollision(mPlayer);
 	}

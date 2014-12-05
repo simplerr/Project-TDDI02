@@ -50,6 +50,11 @@ void Player::update(float dt)
 	    if(jumping) //Hanterar ifall spelaren är inuti ett hopp
 	    {
 			mVelY = mVelY +1;
+            if (mVelY >= 2)
+            {
+                setfall(true);
+                setjump(false);
+            }
 			setPosition(getPosition().x, getPosition().y + mVelY);
 	    }
 	    else //Hanterar ifall spelaren faller eller ej
@@ -67,23 +72,42 @@ void Player::update(float dt)
         if(getTimer() > POWERUP_TIME)
             powerDown();
     
-    //Animation
-    ++mClipcounter;
-    if (jumping)
-        mPlayerClip = 1;
-    else if (mVelX == 0)
-        mPlayerClip = 0;
-    else
+    
+        // Animation slut
+    if (mClipcounter++ > PLAYER_CLIP_DELAY)
     {
-        if (mClipcounter > 1)
-        {
-            ++mPlayerClip;
-            mClipcounter = 0;
-            if (mPlayerClip >= 10)
-                mPlayerClip = 2;
-        }
+        mPlayerClip++;
+        mClipcounter = 0;
     }
-    // Animation slut
+    
+    //Animation
+    if(mShooting)
+    {
+        if (mPlayerClip < PLAYER_SHOOT_START || mPlayerClip > PLAYER_SHOOT_END)
+            mPlayerClip = PLAYER_SHOOT_START;
+        if (mPlayerClip == PLAYER_SHOOT_END)
+            mShooting = false;
+    }
+    else if (falling)
+    {
+        if (mPlayerClip < PLAYER_FALL_START || mPlayerClip > PLAYER_FALL_END)
+            mPlayerClip = PLAYER_FALL_START;
+    }
+    else if (jumping)
+    {
+        if (mPlayerClip < PLAYER_JUMP_START || mPlayerClip > PLAYER_JUMP_END)
+            mPlayerClip = PLAYER_JUMP_START;
+    }
+    else if (mVelX == 0)
+    {
+        if (mPlayerClip < PLAYER_STAND_START || mPlayerClip > PLAYER_STAND_END)
+            mPlayerClip = PLAYER_STAND_START;
+    }
+    else if (mVelX != 0)
+    {
+        if (mPlayerClip < PLAYER_RUN_START || mPlayerClip > PLAYER_RUN_END)
+            mPlayerClip = PLAYER_RUN_START;
+    }
 }
 
 void Player::draw(Renderer* renderer)
@@ -96,9 +120,9 @@ void Player::draw(Renderer* renderer)
             directionRight = true;
        
         if ( !directionRight ) // if moving left
-            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_LEFT[mPlayerClip], false);
-        else // if moving right
             renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_LEFT[mPlayerClip], true);
+        else // if moving right
+            renderer->drawTextureAnimation(getPosition(), getWidth(), getHeight(), mTexture, PLAYER_CLIP_LEFT[mPlayerClip], false);
     }
     else
       mTexture = renderer->loadTexture(getFilename());
@@ -175,7 +199,7 @@ void Player::handleCollisionY(Object* &object)
 			}
 			else
 			{
-			    setPosition(getPosition().x, object->getPosition().y - getHeight()-1); //om du ska hamna över
+			    setPosition(getPosition().x, object->getPosition().y - getHeight()); //om du ska hamna över
 			}
 		}
 		else

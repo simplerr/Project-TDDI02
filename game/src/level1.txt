@@ -82,6 +82,16 @@
 2 2360 432 48 48 ../imgs/textures/creatures/enemy.png 2504
 2 2368 384 48 48 ../imgs/textures/creatures/enemy.png 2512
 2 2424 408 48 48 ../imgs/textures/creatures/enemy.png 2480
+2 824 280 48 48 ../imgs/textures/creatures/enemy.png 736
+2 688 280 48 48 ../imgs/textures/creatures/enemy.png 600
+2 544 280 48 48 ../imgs/textures/creatures/enemy.png 440
+2 1376 584 48 48 ../imgs/textures/creatures/enemy.png 1272
+2 968 520 48 48 ../imgs/textures/creatures/enemy.png 1144
+2 1984 336 48 48 ../imgs/textures/creatures/enemy.png 2032
+2 1768 400 48 48 ../imgs/textures/creatures/enemy.png 1824
+2 1552 488 48 48 ../imgs/textures/creatures/enemy.png 1600
+2 3096 824 48 48 ../imgs/textures/creatures/enemy.png 3208
+2 3704 824 48 48 ../imgs/textures/creatures/enemy.png 3648
 1 1544 536 104 76 ../imgs/textures/platforms/Totem1.png
 1 1768 448 104 76 ../imgs/textures/platforms/Totem1.png
 1 1984 384 104 76 ../imgs/textures/platforms/Totem1.png
@@ -148,4 +158,4 @@
 1 3496 880 104 80 ../imgs/textures/platforms/Wall1.png
 1 3496 960 104 80 ../imgs/textures/platforms/Wall5.png
 1 3392 960 104 80 ../imgs/textures/platforms/Wall6.png
-0 72 264 48 48 ../imgs/textures/creatures/student.png
+0 64 272 48 48 ../imgs/textures/creatures/megha_knuckles.png

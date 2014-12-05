@@ -333,4 +333,4 @@
 1 576 0 32 176 ../imgs/textures/platforms/platform.jpg
 1 576 176 32 176 ../imgs/textures/platforms/platform.jpg
 1 528 344 80 152 ../imgs/textures/platforms/platform.jpg
-0 368 56 48 48 ../imgs/textures/creatures/student.png
+0 368 64 48 48 ../imgs/textures/creatures/megha_knuckles.png

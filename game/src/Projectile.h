@@ -21,6 +21,7 @@ public:
     void draw(Renderer* renderer);
     void handleCollision(Object* &collider);
     void handleCollision(Player* &collider);
+    void handleCollision(Projectile* &object);
 private:
   Texture* mProjectile;
   Texture* mExplosion;

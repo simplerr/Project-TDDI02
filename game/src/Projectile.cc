@@ -58,6 +58,22 @@ void Projectile::draw(Renderer* renderer)
     //PROJECTILE_WIDTH
 }
 
+void Projectile::handleCollision(Projectile* &object)
+{
+    if ( !getDead() && mId != object->getId())
+    {
+        if(collision(this, dynamic_cast<Object*>(object)))
+        {
+                object->setDead();
+                setDead();
+        }
+        else if ( mDir && getPosition().x > mStartPosX+PROJECTILE_LENGTH )
+            setDead();
+        else if ( !mDir && getPosition().x < mStartPosX-PROJECTILE_LENGTH )
+            setDead();
+    }
+}
+
 void Projectile::handleCollision(Player* &object)
 {
     if ( !getDead() && mId != object->getId())

@@ -30,17 +30,42 @@ static const std::string TOEDITOR_BUTTON = "../imgs/buttons/menu/toEditor.png";
 static const int POWERUP_TIME = 5;
  // Animation för player
 static const Vec2 PLAYER_CLIP_LEFT[] {
-  {36,0,37,55}, // STANDING
-  {120,0,37,55}, //Jumping
-  {343,118,44,55}, //RUNNING
-  {298,118,44,55}, //RUNNING
-  {248,118,44,55}, //RUNNING
-  {197,118,44,55}, //RUNNING
-  {145,118,44,55}, //RUNNING
-  {93,118,44,55}, //RUNNING
-  {44,118,44,55}, //RUNNING
-  {0,118,44,55} //RUNNING
+  {2,47,24,37}, // STANDING
+  {62,157,24,40}, //Jumping
+  {162,148,32,49}, //Falling
+  {66,453,31,40}, //Throwing
+  {102,453,31,40}, //Throwing
+  {0,86,34,36}, //RUNNING
+  {34,86,34,36}, //RUNNING
+  {68,86,34,36}, //RUNNING
+  {102,86,34,36}, //RUNNING
+  {136,86,34,36}, //RUNNING
+  {170,86,34,36} //RUNNING
 };
+static const int PLAYER_STAND_START = 0;
+static const int PLAYER_STAND_END = 0;
+static const int PLAYER_JUMP_START = 1;
+static const int PLAYER_JUMP_END = 1;
+static const int PLAYER_FALL_START = 2;
+static const int PLAYER_FALL_END = 2;
+static const int PLAYER_SHOOT_START = 3;
+static const int PLAYER_SHOOT_END = 4;
+static const int PLAYER_RUN_START = 5;
+static const int PLAYER_RUN_END = 10;
+static const int PLAYER_CLIP_DELAY = 2; // 1 = NORMALT TEMPO
+
+//static const Vec2 PLAYER_CLIP_LEFT[] {
+//  {36,0,37,55}, // STANDING
+//  {120,0,37,55}, //Jumping
+//  {343,118,44,55}, //RUNNING
+//  {298,118,44,55}, //RUNNING
+//  {248,118,44,55}, //RUNNING
+//  {197,118,44,55}, //RUNNING
+//  {145,118,44,55}, //RUNNING
+//  {93,118,44,55}, //RUNNING
+//  {44,118,44,55}, //RUNNING
+//  {0,118,44,55} //RUNNING
+//};
 static const Vec2 ENEMY_CLIPS[] {
   {0,0,390,454},
   {390,0,390,454},
@@ -56,6 +81,7 @@ static const int PROJECTILE_NUM_CLIPS = 13;
 static const int PLAYER_PROJECTILE_SPEED = 12;
 static const int ENEMY_PROJECTILE_SPEED = 4;
 static const int ENEMY_SHOOT_CHANCE = 400; // ca. 1 på ENEMY_SHOOT_CHANCE per framerate
+static const bool PROJECTILES_COLLISION_EACHOTHER = true;
 static const Vec2 PROJECTILE_CLIPS[] {
   {0,0,30,15},
   {30,0,30,15},
@@ -147,7 +173,8 @@ static const std::string BACKTOMENU_BUTTON = "../imgs/buttons/credit/creditback.
 
 //###### EDITOR #######
 static const std::string FILEPATH_GRID = "../imgs/backgrounds/grid8px.png";
-static const std::string FILEPATH_PLAYER = "../imgs/textures/creatures/student.png";
+//static const std::string FILEPATH_PLAYER = "../imgs/textures/creatures/student.png";
+static const std::string FILEPATH_PLAYER = "../imgs/textures/creatures/megha_knuckles.png"; 
 static const std::string FILEPATH_ENEMY1 = "../imgs/textures/creatures/enemy.png";
 static const std::string FILEPATH_FINISH = "../imgs/textures/finish.png";
 static const std::string FILEPATH_POWERUP1 = "../imgs/textures/powerups/powerup.png";

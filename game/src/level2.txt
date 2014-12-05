@@ -1,5 +1,4 @@
 5040 1120
-7 0 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
 7 0 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
 7 560 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
 7 560 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
@@ -17,6 +16,7 @@
 7 3920 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
 7 4480 0 560 560 ../imgs/textures/backgrounds/FarBackground.png
 7 4480 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
+7 0 560 560 560 ../imgs/textures/backgrounds/FarBackground.png
 6 112 240 400 264 ../imgs/textures/decorations/CatEyes.png
 6 1176 648 40 32 ../imgs/textures/decorations/Grass.png
 6 1352 648 40 32 ../imgs/textures/decorations/Grass.png
@@ -109,4 +109,4 @@
 1 4128 712 104 80 ../imgs/textures/platforms/Wall7.png
 1 4024 712 104 80 ../imgs/textures/platforms/Wall6.png
 1 4720 376 104 80 ../imgs/textures/platforms/Walkway1.png
-0 88 568 48 48 ../imgs/textures/creatures/student.png
+0 136 496 48 48 ../imgs/textures/creatures/megha_knuckles.png
