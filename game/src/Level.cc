@@ -386,10 +386,16 @@ void Level::clearList()
 
 void Level::addProjectile(Object* shooter)
 {
-	if(shooter->directionRight)
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), mProjectile, mExplosion ));
+	Texture* projectileTexture; 
+	if (shooter->getId() == 2)
+		projectileTexture = mProjectile;
 	else
-		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), mProjectile, mExplosion ));
+		projectileTexture  = mProjectileEnemy;
+		
+	if(shooter->directionRight)
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), projectileTexture, mExplosion ));
+	else
+		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), projectileTexture, mExplosion ));
 	
 }
 
@@ -414,7 +420,8 @@ void Level::initTextures(Renderer* renderer)
 {
 	if(mProjectile == nullptr || mExplosion == nullptr || mEnemy == nullptr || mDeadCreature == nullptr )
 	{
-		mProjectile = renderer->loadTexture(PROJECTILE_FILEPATH);
+		mProjectile = renderer->loadTexture(PROJECTILE_YELLOW_FILEPATH);
+		mProjectileEnemy = renderer->loadTexture(PROJECTILE_RED_FILEPATH);
 		mExplosion = renderer->loadTexture(EXPLOSION_FILEPATH);
 		mEnemy = renderer->loadTexture(FILEPATH_ENEMY1);
 		mDeadCreature = renderer->loadTexture(BLOODSPLATTER);

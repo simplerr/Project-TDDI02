@@ -2,7 +2,7 @@
 #include <iostream>
 
 Projectile::Projectile(Vec2 pos, bool dir, int id, Texture* projectile, Texture* explosion)
-    : Object(pos, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_FILEPATH), mProjectile(projectile), mExplosion(explosion)
+    : Object(pos, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, ""), mProjectile(projectile), mExplosion(explosion)
 {
     setId(Object::PLATFORM);
     mDir = dir;

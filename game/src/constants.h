@@ -73,7 +73,8 @@ static const Vec2 ENEMY_CLIPS[] {
   {1170,0,390,454}
 };
 
-static const std::string PROJECTILE_FILEPATH = "../imgs/textures/projectile1.png";
+static const std::string PROJECTILE_YELLOW_FILEPATH = "../imgs/textures/projectile1.png";
+static const std::string PROJECTILE_RED_FILEPATH = "../imgs/textures/projectile3.png";
 static const int PROJECTILE_WIDTH = 60;
 static const int PROJECTILE_HEIGHT = 30;
 static const int PROJECTILE_LENGTH = 350;

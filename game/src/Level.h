@@ -68,6 +68,7 @@ private:
   Texture* mExplosion{nullptr};
   Texture* mEnemy{nullptr};
   Texture* mDeadCreature{nullptr};
+  Texture* mProjectileEnemy{nullptr};
   bool mReset{false};
 };
 

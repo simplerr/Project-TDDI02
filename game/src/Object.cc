@@ -42,7 +42,7 @@ void Object::draw(Renderer* renderer)
 				if (mDeadClipCounter < BLOODSPLATTER_NUM_CLIPS)
 				{
 						renderer->drawTextureAnimation(Vec2(getPosition().x-15, getPosition().y-15), getWidth()+30, getHeight()+30, mTextureDead, BLOODSPLATTER_CLIPS[mDeadClipCounter] ) ;
-						if ( (mDelayCounter++)%3 == 0 )
+						if ( (mDelayCounter++)%4 == 0 )
 						{
 							++mDeadClipCounter;
 						}
