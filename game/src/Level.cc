@@ -320,6 +320,7 @@ void Level::update(float dt)
 
 void Level::draw(Renderer* renderer, bool flags)
 {
+	initTextures(renderer);
 	// UPPDATERAR SMART-KAMERA
 	if ( mPlayer != nullptr )
 		renderer->updateCamera(mPlayer->getPosition().x, mPlayer->getPosition().y, mPlayer->getWidth(), mPlayer->getHeight(), mLEVEL_WIDTH, mLEVEL_HEIGHT);
@@ -328,12 +329,6 @@ void Level::draw(Renderer* renderer, bool flags)
 		
 	if (!flags)
 	{
-		// LADDAR TEXTURER FÖR PROJEKTILER
-		if (mProjectile == nullptr)
-			mProjectile = renderer->loadTexture(PROJECTILE_FILEPATH);
-		if (mExplosion == nullptr)
-			mExplosion = renderer->loadTexture(EXPLOSION_FILEPATH);
-		
 		// RITAR UT BAKGRUNDER OCH DEKORATIONER
 		for(unsigned int i = 0; i < mBackgrounds.size(); i++)
 			mBackgrounds[i]->draw(renderer);
@@ -408,10 +403,20 @@ void Level::reloadLevel()
 	for(unsigned int i{}; i < mObjects.size(); ++i)
 	{
 		mObjects[i]->setAlive();
-		mObjects[i]->resetDeadAnimationCounter();
+		mObjects[i]->DeadClipCounterReset();
 	}
 	mPlayer->setPosition(mPlayerStartPos);
 	mPlayer->reset();
 	mTimer.reset();
 	mReset = true;
+}
+void Level::initTextures(Renderer* renderer)
+{
+	if(mProjectile == nullptr || mExplosion == nullptr || mEnemy == nullptr || mDeadCreature == nullptr )
+	{
+		mProjectile = renderer->loadTexture(PROJECTILE_FILEPATH);
+		mExplosion = renderer->loadTexture(EXPLOSION_FILEPATH);
+		mEnemy = renderer->loadTexture(FILEPATH_ENEMY1);
+		mDeadCreature = renderer->loadTexture(BLOODSPLATTER);
+	}
 }

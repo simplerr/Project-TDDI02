@@ -70,7 +70,7 @@ static const Vec2 ENEMY_CLIPS[] {
   {0,0,390,454},
   {390,0,390,454},
   {780,0,390,454},
-  {1170,0,390,454}, 
+  {1170,0,390,454}
 };
 
 static const std::string PROJECTILE_FILEPATH = "../imgs/textures/projectile1.png";
@@ -153,16 +153,31 @@ static const Vec2 EXPLOSION_CLIPS[] {
   {700,400,100,100},
   {800,400,100,100}
 };
-/*
-static const Vec2 PROJECTILE_CLIPS[] {
-  {0,0,64,64},
-  {64,0,64,64},
-  {128,0,64,64},
-  {192,0,64,64}
+
+static const int BLOODSPLATTER_NUM_CLIPS = 16;
+
+static const Vec2 BLOODSPLATTER_CLIPS[] {
+    {0,0,256,256},
+  {256,0,256,256},
+  {512,0,256,256},
+  {768,0,256,256},
+    {0,256,256,256},
+  {256,256,256,256},
+  {512,256,256,256},
+  {768,256,256,256},
+    {0,512,256,256},
+  {256,512,256,256},
+  {512,512,256,256},
+  {768,512,256,256},
+    {0,768,256,256},
+  {256,768,256,256},
+  {512,768,256,256},
+  {768,768,256,256}
 };
-*/
+
+
 static const std::string DEAD_SCREEN = "../imgs/backgrounds/yourdead.png";
-static const std::string ENEMY_DEAD = "../imgs/textures/bloodsplatter.png";
+static const std::string BLOODSPLATTER = "../imgs/textures/bloodsplatter2.png";
 static const std::string PAUSE_BACKGROUND = "../imgs/backgrounds/pause.png";
 static const std::string CONTINUE_BUTTON = "../imgs/buttons/pause/continue.png";
 static const std::string TOMENU_BUTTON = "../imgs/buttons/pause/quit.png";

@@ -2,6 +2,8 @@
 
 #include "Object.h"
 #include "Vec2.h"
+#include "Texture.h"
+#include <string>
 
 class Renderer;
 
@@ -10,7 +12,7 @@ class Enemy : public Object
 public:
     enum Direction { LEFT, RIGHT, UP, DOWN };
 
-    Enemy(Vec2 pos, int width, int height, string filename, float endx);
+    Enemy(Vec2 pos, int width, int height, std::string filename, float endx);
     ~Enemy();
 
     Object* clone();

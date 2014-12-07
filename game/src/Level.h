@@ -29,6 +29,7 @@ public:
     Vec2 getCam(){ return Vec2(camX, camY); }
     void clearList();
     void reloadLevel();
+    void initTextures(Renderer* renderer);
     
   Player* findPlayer();
   bool loadLevel(string filename, int k = 1);
@@ -45,6 +46,8 @@ public:
   void startTime() { mTimer.start(); }
   bool getReset() { return mReset; }
  void swichoffReset(){ mReset = false; }
+ Texture* getEnemyTexture(){ return mEnemy; }
+ Texture* getDeadCreatureTexture(){ return mDeadCreature; }
 private:
     Timer mTimer;
   vector<Object*> mObjects;
@@ -63,6 +66,8 @@ private:
   bool mLevelFinish;
   Texture* mProjectile{nullptr};
   Texture* mExplosion{nullptr};
+  Texture* mEnemy{nullptr};
+  Texture* mDeadCreature{nullptr};
   bool mReset{false};
 };
 

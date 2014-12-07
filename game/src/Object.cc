@@ -1,6 +1,6 @@
 #include "Object.h"
 #include "Renderer.h"
-
+#include "constants.h"
 Object::Object(Vec2 pos, int width, int height, string filename)
 {
     // todo : assign mId
@@ -14,6 +14,12 @@ Object::Object(Vec2 pos, int width, int height, string filename)
 	mTextureDead = nullptr;
 }
 
+Object::Object(Vec2 pos, int width, int height, Texture* texture, Texture* textureDead)
+	: mPosition(pos), mWidth(width), mHeight(height), mTexture(texture), mTextureDead(textureDead)
+{
+    mDead = false;
+}
+
 Object::~Object()
 {
     delete mTexture;
@@ -22,10 +28,30 @@ Object::~Object()
 
 void Object::draw(Renderer* renderer)
 {
-    if(mTexture != nullptr)
-	renderer->drawTexture(mPosition, mWidth, mHeight, mTexture);
-    else
-	mTexture = renderer->loadTexture(mFilename);
+	if(!mDead)
+	{
+		if(mTexture != nullptr)
+			renderer->drawTexture(mPosition, mWidth, mHeight, mTexture);
+		else
+			mTexture = renderer->loadTexture(mFilename);
+	}
+	else
+	{
+			if (mTextureDead != nullptr )
+			{
+				if (mDeadClipCounter < BLOODSPLATTER_NUM_CLIPS)
+				{
+						renderer->drawTextureAnimation(Vec2(getPosition().x-15, getPosition().y-15), getWidth()+30, getHeight()+30, mTextureDead, BLOODSPLATTER_CLIPS[mDeadClipCounter] ) ;
+						if ( (mDelayCounter++)%3 == 0 )
+						{
+							++mDeadClipCounter;
+						}
+				}
+			}
+			else
+				mTextureDead = renderer->loadTexture(BLOODSPLATTER);
+		
+	}
 }
 
 void Object::draw(Renderer* renderer, Vec2 mousePos) //EDITORDRAW

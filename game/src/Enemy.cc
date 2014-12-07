@@ -3,7 +3,7 @@
 #include <iostream>
 #include "constants.h"
 
-Enemy::Enemy(Vec2 pos, int width, int height, string filename, float endx)
+Enemy::Enemy(Vec2 pos, int width, int height, std::string filename, float endx)
     : Object(pos, width, height, filename)
 {
     setId(Object::ENEMY);
@@ -72,21 +72,7 @@ void Enemy::draw(Renderer* renderer)
 		  mTexture = renderer->loadTexture(getFilename());
 	}
 	else
-	{
-		
-		if (getDeadAnimationCounter() != 0)
-		{
-			decDeadAnimationCounter();
-			if(mTextureDead != nullptr)
-			{
-				renderer->drawTexture(getPosition(), getWidth(), getHeight(), mTextureDead);
-			}
-			else
-			{
-				 mTextureDead = renderer->loadTexture(ENEMY_DEAD);
-			}
-		}
-	}
+		Object::draw(renderer);
 }
 
 void Enemy::handleCollision(Object* &object)

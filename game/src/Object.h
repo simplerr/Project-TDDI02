@@ -14,6 +14,7 @@ public:
     enum ObjectId { PLAYER, PLATFORM, ENEMY, POWERUP, LAVA_PLATFORM, FINISH, DECORATION, BACKGROUND };
 
     Object(Vec2 pos, int width, int height, std::string filename);
+    Object(Vec2 pos, int width, int height, Texture* texture, Texture* textureDead);
     virtual ~Object();
 
     virtual void update(float dt) = 0;
@@ -33,9 +34,6 @@ public:
     void setDead() { mDead = true; }
     void setAlive() { mDead = false; }
     bool getDead() { return mDead; }
-    int getDeadAnimationCounter() { return mDeadAnimationCounter; }
-    void decDeadAnimationCounter() { --mDeadAnimationCounter; }
-    void resetDeadAnimationCounter(){ mDeadAnimationCounter = 40; }
     
     void setPosition(Vec2 pos);
     void setPosition(float x, float y);
@@ -44,7 +42,7 @@ public:
     void setId(int id){ mId = id;}
     Texture* mTexture;
     Texture* mTextureDead;
-    
+    void DeadClipCounterReset(){ mDeadClipCounter = 0; }
     bool directionRight{false};
 private:
     
@@ -53,7 +51,8 @@ private:
     int mWidth, mHeight;
     int mId;
     bool mDead;
-    int mDeadAnimationCounter{40}; //How long dead object is visable;
+    int mDeadClipCounter{};
+    int mDelayCounter{};
 };
 
 #endif
