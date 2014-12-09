@@ -47,7 +47,7 @@ void Projectile::draw(Renderer* renderer)
     }
     else
     {
-        if(mExplosionCountdown <= EXPLOSION_NUM_CLIPS)
+        if(mExplosionCountdown < EXPLOSION_NUM_CLIPS)
         {
             if (!mDir)
                 renderer->drawTextureAnimation(Vec2( getPosition().x-20, getPosition().y), EXPLOSION_DIAMETER, EXPLOSION_DIAMETER, mExplosion, EXPLOSION_CLIPS[mExplosionCountdown++], false);

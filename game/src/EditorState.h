@@ -46,6 +46,8 @@ private:
     unsigned int currentHeight;
     unsigned int gridSize = 8;
     bool setEnemyFlag;
+    Vec2 mPickupPos;
+    bool mRepickup{false};
 };
 
 #endif

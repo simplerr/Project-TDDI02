@@ -36,6 +36,8 @@ Level::~Level()
 	delete mFlagTexture;
 	delete mProjectile;
 	delete mExplosion;
+	delete mProjectileEnemy;
+	delete mDeadCreature;
 }
 
 void Level::addObject(Object* object)
@@ -391,13 +393,14 @@ void Level::addProjectile(Object* shooter)
 		projectileTexture = mProjectile;
 	else
 		projectileTexture  = mProjectileEnemy;
-		
+	
 	if(shooter->directionRight)
 		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), projectileTexture, mExplosion ));
 	else
 		mProjectiles.push_back(new Projectile(Vec2( shooter->getPosition().x, shooter->getPosition().y+10 ), shooter->directionRight, shooter->getId(), projectileTexture, mExplosion ));
 	
 }
+
 
 void Level::reloadLevel()
 {

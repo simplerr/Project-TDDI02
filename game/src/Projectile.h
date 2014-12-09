@@ -22,6 +22,7 @@ public:
     void handleCollision(Object* &collider);
     void handleCollision(Player* &collider);
     void handleCollision(Projectile* &object);
+    bool getFinished(){ return mExplosionCountdown >= EXPLOSION_NUM_CLIPS; }
 private:
   Texture* mProjectile;
   Texture* mExplosion;
